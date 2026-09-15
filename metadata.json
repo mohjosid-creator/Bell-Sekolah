@@ -1,6 +1,6 @@
 {
-  "name": "Aplikasi Bel Otomatis Sekolah",
-  "description": "Aplikasi bel otomatis sekolah standalone offline dalam satu file HTML dengan Web Audio API, sinkronisasi waktu presisi, manajemen jadwal multi-profil, dan audio kustom.",
+  "name": "Bel Otomatis & Jadwal Pelajaran SMKN 1 MOILONG (07:00 - 15:30)",
+  "description": "Aplikasi Bel Otomatis Sekolah & Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (Jam 07:00 s.d. 15:30) dengan Web Audio API dan sinkronisasi presisi.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
