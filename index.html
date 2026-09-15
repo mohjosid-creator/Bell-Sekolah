@@ -1,0 +1,2419 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Bel Otomatis Sekolah - Standalone Offline</title>
+  <meta name="description" content="Aplikasi Bel Otomatis Sekolah Standalone Offline berbasis Web Audio API, Web Worker Timer presisi, dan IndexedDB." />
+  <!--
+  =============================================================================
+  APLIKASI BEL OTOMATIS SEKOLAH - STANDALONE SINGLE FILE (HTML5, CSS3, ES6+)
+  =============================================================================
+  Petunjuk Penggunaan:
+  1. 100% Offline: Tidak membutuhkan koneksi internet atau server backend.
+  2. Autoplay Audio: Klik tombol "Aktifkan Sistem Bel" di awal untuk mengizinkan
+     browser memutar audio secara otomatis tepat waktu.
+  3. Presisi Waktu: Menggunakan Web Worker (Blob internal) agar timer tetap
+     akurat 1000ms dan tidak melambat saat tab browser diminimize/di latar belakang.
+  4. Nada Bawaan & Kustom: Memiliki synthesizer Web Audio API (Westminster, Ding-Dong,
+     Melodi Sekolah, Bel Elektrik, Sirine, dan TTS) serta mendukung unggah file MP3/WAV
+     ke penyimpanan lokal browser (IndexedDB).
+  5. Backup: Fitur Ekspor/Impor format JSON dan tombol Unduh Berkas HTML mandiri.
+  =============================================================================
+  -->
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-light: #eff6ff;
+      --success: #10b981;
+      --success-light: #ecfdf5;
+      --warning: #f59e0b;
+      --warning-light: #fffbeb;
+      --danger: #ef4444;
+      --danger-light: #fef2f2;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+      --radius: 12px;
+      --radius-sm: 8px;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    [data-theme="dark"] {
+      --bg-main: #090d16;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: #1e293b;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --primary-light: #172554;
+      --success: #10b981;
+      --success-light: #064e3b;
+      --warning: #f59e0b;
+      --warning-light: #78350f;
+      --danger: #ef4444;
+      --danger-light: #7f1d1d;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      min-height: 100vh;
+      line-height: 1.5;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .brand-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+    .btn-primary:hover { background-color: var(--primary-hover); }
+
+    .btn-outline {
+      background-color: var(--bg-card);
+      border-color: var(--border-color);
+      color: var(--text-main);
+    }
+    .btn-outline:hover { background-color: var(--bg-card-hover); }
+
+    .btn-success {
+      background-color: var(--success);
+      color: #ffffff;
+    }
+    .btn-success:hover { opacity: 0.9; }
+
+    .btn-danger {
+      background-color: var(--danger);
+      color: #ffffff;
+    }
+    .btn-danger:hover { opacity: 0.9; }
+
+    .btn-sm { padding: 0.3rem 0.65rem; font-size: 0.8rem; }
+    .btn-lg { padding: 0.75rem 1.5rem; font-size: 1rem; border-radius: var(--radius); }
+
+    /* AUTOPLAY NOTICE BANNER */
+    .banner-autoplay {
+      background-color: var(--warning-light);
+      border: 1px solid var(--warning);
+      color: var(--text-main);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .banner-autoplay.hidden { display: none; }
+
+    /* HERO DASHBOARD */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .dashboard-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    /* CLOCK CARD */
+    .clock-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: center;
+      padding: 1.75rem 1.25rem;
+      background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
+    }
+
+    .date-display {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .clock-digits {
+      font-family: var(--font-mono);
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--text-main);
+      margin: 0.4rem 0;
+      font-variant-numeric: tabular-nums;
+      line-height: 1.1;
+    }
+
+    .clock-digits .colon {
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .clock-digits .colon.blink { opacity: 0.25; }
+
+    .system-status-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .status-badge.active {
+      background-color: var(--success-light);
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+    .status-badge.standby {
+      background-color: var(--warning-light);
+      color: var(--warning);
+      border: 1px solid var(--warning);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: currentColor;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.5; }
+    }
+
+    /* NEXT BELL CARD */
+    .next-bell-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-header-sm {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .next-bell-info {
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      background-color: var(--primary-light);
+      border: 1px dashed var(--primary);
+    }
+
+    .next-bell-time {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: var(--font-mono);
+      line-height: 1.2;
+    }
+
+    .next-bell-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 0.2rem;
+    }
+
+    .countdown-timer {
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .stat-pills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .stat-pill {
+      background-color: var(--bg-card-hover);
+      padding: 0.6rem 0.8rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+    }
+    .stat-pill-label { font-size: 0.75rem; color: var(--text-muted); }
+    .stat-pill-val { font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
+
+    /* SOUNDBOARD SECTION */
+    .soundboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+    }
+
+    .sound-btn {
+      background-color: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--text-main);
+    }
+    .sound-btn:hover {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      transform: translateY(-2px);
+    }
+    .sound-btn:active { transform: translateY(0); }
+    .sound-btn .icon { font-size: 1.4rem; }
+    .sound-btn .label { font-size: 0.8rem; font-weight: 700; line-height: 1.2; }
+    .sound-btn .desc { font-size: 0.7rem; color: var(--text-muted); }
+
+    /* PROFILE & TOOLBAR */
+    .toolbar-section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .profile-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    select, input[type="text"], input[type="time"] {
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    select:focus, input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    /* SCHEDULE TABLE */
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      background-color: var(--bg-card);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+    }
+
+    thead th {
+      background-color: var(--bg-card-hover);
+      padding: 0.85rem 1rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    tbody td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background-color: var(--bg-card-hover); }
+    tbody tr.disabled-row { opacity: 0.5; }
+
+    .badge-time {
+      font-family: var(--font-mono);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.2rem 0.5rem;
+      background-color: var(--bg-card-hover);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .badge-sound {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      background-color: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+    }
+
+    /* TOGGLE SWITCH */
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #cbd5e1;
+      transition: .2s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+    input:checked + .slider { background-color: var(--success); }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    /* ACTION BUTTONS IN TABLE */
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .btn-icon:hover { background-color: var(--bg-card-hover); border-color: var(--primary); }
+
+    /* SECONDARY GRID: CUSTOM AUDIO & LOGS */
+    .sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 860px) {
+      .sub-grid { grid-template-columns: 1fr; }
+    }
+
+    /* CUSTOM AUDIO MANAGER */
+    .dropzone {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      background-color: var(--bg-card-hover);
+      transition: all 0.2s ease;
+      margin-bottom: 1rem;
+    }
+    .dropzone:hover, .dropzone.dragover {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+    }
+    .dropzone p { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+    .audio-list {
+      max-height: 220px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .audio-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card);
+      font-size: 0.85rem;
+    }
+
+    /* LOG LIST */
+    .log-list {
+      max-height: 280px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+    }
+    .log-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.45rem 0.75rem;
+      background-color: var(--bg-card-hover);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--success);
+    }
+    .log-item.manual { border-left-color: var(--primary); }
+
+    /* MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(3px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+    .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    .modal {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 500px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.2s ease;
+    }
+    .modal-backdrop.open .modal { transform: scale(1); }
+    .modal-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-body { padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+    .modal-footer {
+      padding: 0.85rem 1.25rem;
+      background-color: var(--bg-card-hover);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .form-label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+    .days-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .day-chip {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.78rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card-hover);
+      cursor: pointer;
+      user-select: none;
+    }
+    .day-chip.selected {
+      background-color: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* TOAST */
+    #toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 1000;
+    }
+    .toast {
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      animation: slideIn 0.2s ease;
+      min-width: 250px;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="brand">
+        <div class="brand-icon">🔔</div>
+        <div>
+          <h1 class="brand-title" id="school-title-display">Aplikasi Bel Otomatis Sekolah</h1>
+          <p class="brand-subtitle">Sistem Penjadwalan Bel Mandiri & Presisi Waktu (Offline Standalone)</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button class="btn btn-outline btn-sm" id="btn-theme-toggle" title="Ganti Tema Gelap / Terang">
+          <span id="theme-icon">🌙</span> <span id="theme-text">Mode Gelap</span>
+        </button>
+
+        <!-- Ekspor / Impor -->
+        <button class="btn btn-outline btn-sm" id="btn-export-json" title="Simpan Cadangan Jadwal ke File JSON">
+          💾 Cadangan JSON
+        </button>
+        <button class="btn btn-outline btn-sm" id="btn-import-json-trigger" title="Pulihkan Jadwal dari File JSON">
+          📥 Pulihkan JSON
+        </button>
+        <input type="file" id="file-import-json" accept=".json" style="display: none;">
+
+        <!-- Unduh Standalone Single HTML -->
+        <button class="btn btn-primary btn-sm" id="btn-download-html" title="Unduh berkas .html ini ke komputer agar bisa dibuka tanpa server">
+          ⬇️ Unduh Berkas HTML
+        </button>
+      </div>
+    </header>
+
+    <!-- AUTOPLAY ACTIVATION BANNER -->
+    <div class="banner-autoplay" id="banner-autoplay">
+      <div>
+        <strong>⚠️ Kebijakan Browser: Audio Bel Memerlukan Izin Interaksi Awal</strong>
+        <p style="font-size: 0.85rem; margin-top: 0.25rem;">
+          Klik tombol <strong>"Aktifkan Sistem Bel"</strong> agar browser mengizinkan audio otomatis berbunyi tepat waktu saat jam jadwal tiba.
+        </p>
+      </div>
+      <button class="btn btn-success btn-lg" id="btn-activate-audio">
+        🔔 Aktifkan Sistem Bel Sekarang
+      </button>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div class="dashboard-grid">
+      <!-- CLOCK CARD -->
+      <div class="card clock-card">
+        <div class="date-display" id="clock-date">Memuat Tanggal...</div>
+        <div class="clock-digits" id="clock-digits">
+          <span id="c-hh">00</span><span class="colon" id="c-colon1">:</span><span id="c-mm">00</span><span class="colon" id="c-colon2">:</span><span id="c-ss">00</span>
+        </div>
+        
+        <div class="system-status-row">
+          <div class="status-badge standby" id="badge-system-status">
+            <span class="pulse-dot"></span>
+            <span id="text-system-status">Audio Siaga (Klik Aktifkan)</span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.4rem;">
+            <label style="font-size: 0.8rem; font-weight: 600;" for="master-volume">Volume:</label>
+            <input type="range" id="master-volume" min="0" max="1" step="0.05" value="0.85" style="width: 80px;">
+            <span id="vol-percent" style="font-size: 0.8rem; font-family: var(--font-mono); font-weight: 600;">85%</span>
+          </div>
+
+          <button class="btn btn-outline btn-sm" id="btn-stop-audio" title="Hentikan audio yang sedang berbunyi" style="display: none;">
+            ⏹️ Matikan Suara
+          </button>
+        </div>
+      </div>
+
+      <!-- NEXT BELL & METRICS CARD -->
+      <div class="card next-bell-card">
+        <div class="card-header-sm">
+          <span class="card-title">⏱️ Jadwal Bel Berikutnya</span>
+          <span class="badge-sound" id="badge-today-day">Hari Ini</span>
+        </div>
+
+        <div class="next-bell-info" id="next-bell-box">
+          <div class="next-bell-time" id="next-bell-time">--:-- WIB</div>
+          <div class="next-bell-title" id="next-bell-title">Tidak ada jadwal tersisa hari ini</div>
+          <div class="countdown-timer" id="next-bell-countdown">
+            <span>⏳ Menghitung waktu mundur...</span>
+          </div>
+        </div>
+
+        <div class="stat-pills">
+          <div class="stat-pill">
+            <div class="stat-pill-label">Total Jadwal Profil</div>
+            <div class="stat-pill-val" id="stat-total-schedules">0</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-pill-label">Bel Berbunyi Hari Ini</div>
+            <div class="stat-pill-val" id="stat-bell-rung">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUICK SOUNDBOARD / TEST PANEL -->
+    <div class="card" style="margin-bottom: 1.5rem;">
+      <div class="card-header-sm" style="margin-bottom: 0.5rem;">
+        <span class="card-title">🔊 Papan Uji Coba & Bel Manual (Soundboard)</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted);">Klik untuk mengetes nada kapan saja</span>
+      </div>
+      <div class="soundboard-grid">
+        <button class="sound-btn" data-sound="builtin:westminster">
+          <span class="icon">🔔</span>
+          <span class="label">Westminster Chimes</span>
+          <span class="desc">4 Nada Melodik</span>
+        </button>
+        <button class="sound-btn" data-sound="builtin:cheerful">
+          <span class="icon">🎵</span>
+          <span class="label">Melodi Sekolah</span>
+          <span class="desc">8 Nada Ceria</span>
+        </button>
+        <button class="sound-btn" data-sound="builtin:dingdong">
+          <span class="icon">🛎️</span>
+          <span class="label">Ding-Dong 2 Nada</span>
+          <span class="desc">Pengumuman Kelas</span>
+        </button>
+        <button class="sound-btn" data-sound="builtin:tritone">
+          <span class="icon">🎶</span>
+          <span class="label">Tiga Nada Mellow</span>
+          <span class="desc">Pergantian Jam</span>
+        </button>
+        <button class="sound-btn" data-sound="builtin:electric">
+          <span class="icon">⚡</span>
+          <span class="label">Bel Elektrik Tradisional</span>
+          <span class="desc">Buzzer Logam Sekolah</span>
+        </button>
+        <button class="sound-btn" data-sound="builtin:siren">
+          <span class="icon">🚨</span>
+          <span class="label">Sirine Darurat</span>
+          <span class="desc">Alarm Peringatan</span>
+        </button>
+        <button class="sound-btn" data-sound="tts:default">
+          <span class="icon">🗣️</span>
+          <span class="label">Uji Suara Robot (TTS)</span>
+          <span class="desc">Bahasa Indonesia</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- SCHEDULE MANAGEMENT -->
+    <div class="toolbar-section">
+      <div class="profile-select-wrap">
+        <label for="profile-select" style="font-weight: 700; font-size: 0.9rem;">Profil Aktif:</label>
+        <select id="profile-select"></select>
+        <button class="btn btn-outline btn-sm" id="btn-manage-profiles" title="Kelola / Tambah Profil Jadwal">⚙️ Atur Profil</button>
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="btn btn-outline btn-sm" id="btn-sort-schedules">🕒 Urutkan Jam</button>
+        <button class="btn btn-primary btn-sm" id="btn-add-schedule">+ Tambah Jadwal Bel</button>
+      </div>
+    </div>
+
+    <!-- SCHEDULE TABLE -->
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 80px;">Status</th>
+            <th style="width: 110px;">Waktu</th>
+            <th>Keterangan / Nama Bel</th>
+            <th>Jenis Nada / Suara</th>
+            <th>Hari Berlaku</th>
+            <th style="width: 140px; text-align: center;">Aksi</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-tbody">
+          <!-- Rows dynamically rendered -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SUB GRID: CUSTOM AUDIO & ACTIVITY LOGS -->
+    <div class="sub-grid">
+      <!-- CUSTOM AUDIO MANAGER -->
+      <div class="card">
+        <div class="card-header-sm" style="margin-bottom: 0.75rem;">
+          <span class="card-title">📁 Manajer File Audio Kustom (IndexedDB)</span>
+          <span style="font-size: 0.75rem; color: var(--text-muted);" id="audio-count-label">0 file tersimpan</span>
+        </div>
+
+        <div class="dropzone" id="audio-dropzone">
+          <div style="font-size: 1.5rem;">📥</div>
+          <strong>Seret & Lepas file .mp3 / .wav ke sini</strong>
+          <p>atau klik untuk memilih file audio dari perangkat Anda</p>
+          <input type="file" id="audio-file-input" accept="audio/mp3,audio/wav,audio/ogg,audio/mpeg" style="display: none;">
+        </div>
+
+        <div class="audio-list" id="custom-audio-list">
+          <!-- Custom audio list populated by IndexedDB -->
+        </div>
+      </div>
+
+      <!-- ACTIVITY LOG -->
+      <div class="card">
+        <div class="card-header-sm" style="margin-bottom: 0.75rem;">
+          <span class="card-title">📜 Catatan & Riwayat Bel Berbunyi (Hari Ini)</span>
+          <button class="btn btn-outline btn-sm" id="btn-clear-logs" style="padding: 0.2rem 0.5rem; font-size: 0.75rem;">
+            Bersihkan Log
+          </button>
+        </div>
+
+        <div class="log-list" id="activity-log-list">
+          <!-- Activity log items -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ADD / EDIT SCHEDULE -->
+  <div class="modal-backdrop" id="modal-schedule">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;" id="modal-schedule-title">Tambah Jadwal Bel</h3>
+        <button class="btn-icon" id="btn-close-schedule-modal">✕</button>
+      </div>
+      <form id="form-schedule">
+        <input type="hidden" id="sched-id">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="sched-time">Jam Bel (HH:mm 24-jam):</label>
+            <input type="time" id="sched-time" required style="font-family: var(--font-mono); font-size: 1.1rem; width: 150px;">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="sched-title">Nama / Keterangan Bel:</label>
+            <input type="text" id="sched-title" required placeholder="Contoh: Bel Masuk Kelas & Doa Pagi">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="sched-sound">Jenis Suara / Audio:</label>
+            <select id="sched-sound">
+              <optgroup label="Nada Bawaan (Web Audio API)">
+                <option value="builtin:westminster">🔔 Westminster Chimes (4 Nada)</option>
+                <option value="builtin:cheerful">🎵 Melodi Sekolah Ceria (8 Nada)</option>
+                <option value="builtin:dingdong">🛎️ Ding-Dong 2 Nada</option>
+                <option value="builtin:tritone">🎶 Tiga Nada Lembut (Tri-Tone)</option>
+                <option value="builtin:electric">⚡ Bel Elektrik Tradisional (Buzzer)</option>
+                <option value="builtin:siren">🚨 Sirine Peringatan / Siaga</option>
+              </optgroup>
+              <optgroup label="Pengumuman Suara (SpeechSynthesis)">
+                <option value="tts:title">🗣️ Sebutkan Nama Bel (Bahasa Indonesia)</option>
+              </optgroup>
+              <optgroup label="Audio Kustom (Tersimpan di IndexedDB)" id="optgroup-custom-sounds">
+                <!-- Custom audio options dynamically filled -->
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Hari Berlaku:</label>
+            <div class="days-selector" id="days-selector">
+              <div class="day-chip selected" data-day="1">Senin</div>
+              <div class="day-chip selected" data-day="2">Selasa</div>
+              <div class="day-chip selected" data-day="3">Rabu</div>
+              <div class="day-chip selected" data-day="4">Kamis</div>
+              <div class="day-chip selected" data-day="5">Jumat</div>
+              <div class="day-chip selected" data-day="6">Sabtu</div>
+              <div class="day-chip" data-day="0">Minggu</div>
+            </div>
+            <span style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+              Pilih hari di mana bel ini aktif dibunyikan.
+            </span>
+          </div>
+
+          <div class="form-group" style="flex-direction: row; align-items: center; gap: 0.75rem;">
+            <label class="switch">
+              <input type="checkbox" id="sched-enabled" checked>
+              <span class="slider"></span>
+            </label>
+            <label class="form-label" for="sched-enabled" style="margin-bottom: 0;">Status Aktif</label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="btn-cancel-schedule">Batal</button>
+          <button type="submit" class="btn btn-primary" id="btn-save-schedule">Simpan Jadwal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: MANAGE PROFILES -->
+  <div class="modal-backdrop" id="modal-profile">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;">Kelola Profil Jadwal</h3>
+        <button class="btn-icon" id="btn-close-profile-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label class="form-label">Buat Profil Baru:</label>
+          <div style="display: flex; gap: 0.5rem;">
+            <input type="text" id="new-profile-name" placeholder="Misal: Jadwal Ramadhan / Ujian" style="flex: 1;">
+            <button class="btn btn-primary btn-sm" id="btn-create-profile">+ Tambah</button>
+          </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-color); margin: 0.5rem 0;">
+
+        <div class="form-group">
+          <label class="form-label">Daftar Profil Tersedia:</label>
+          <div id="profile-management-list" style="display: flex; flex-direction: column; gap: 0.5rem; max-height: 200px; overflow-y: auto;">
+            <!-- Profile list with delete/rename -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="btn-finish-profile-modal">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-container"></div>
+
+  <!-- APPLICATION JAVASCRIPT (VANILLA ES6+ STANDALONE) -->
+  <script>
+    /**
+     * =========================================================================
+     * APLIKASI BEL OTOMATIS SEKOLAH - INLINE SCRIPT
+     * =========================================================================
+     */
+
+    // --- 1. STATE & STORAGE KEY DEFINITIONS ---
+    const STORAGE_KEY_PROFILES = 'bel_sekolah_profiles_v2';
+    const STORAGE_KEY_ACTIVE_ID = 'bel_sekolah_active_profile_v2';
+    const STORAGE_KEY_THEME = 'bel_sekolah_theme';
+    const STORAGE_KEY_LOGS = 'bel_sekolah_logs';
+    const STORAGE_KEY_VOLUME = 'bel_sekolah_volume';
+    const DB_NAME = 'BelSekolahAudioDB';
+    const DB_STORE_NAME = 'audio_files';
+
+    let dbInstance = null;
+    let audioCtx = null;
+    let masterGainNode = null;
+    let isSystemActive = false;
+    let activeAudioSource = null;
+    let lastTriggeredMinute = ''; // Mencegah bel berbunyi berulang dalam menit yang sama
+    let clockWorker = null;
+
+    // Default Seed Profiles for Indonesian Schools
+    const DEFAULT_PROFILES = [
+      {
+        id: 'prof-reguler',
+        name: 'Jadwal Reguler (Senin - Kamis)',
+        schedules: [
+          { id: 's-1', time: '06:45', title: 'Bel Masuk & Berdoa Bersama', soundType: 'builtin:cheerful', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-2', time: '07:00', title: 'Jam Pelajaran Ke-1', soundType: 'builtin:westminster', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-3', time: '07:45', title: 'Jam Pelajaran Ke-2', soundType: 'builtin:dingdong', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-4', time: '08:30', title: 'Jam Pelajaran Ke-3', soundType: 'builtin:dingdong', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-5', time: '09:15', title: 'Jam Pelajaran Ke-4', soundType: 'builtin:dingdong', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-6', time: '09:55', title: 'Istirahat Pertama (Snack & Refreshing)', soundType: 'builtin:cheerful', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-7', time: '10:20', title: 'Selesai Istirahat, Masuk Pelajaran Ke-5', soundType: 'builtin:tritone', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-8', time: '11:05', title: 'Jam Pelajaran Ke-6', soundType: 'builtin:dingdong', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-9', time: '11:50', title: 'Istirahat Ke-2 & Sholat Dzuhur Berjamaah', soundType: 'builtin:cheerful', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-10', time: '12:30', title: 'Masuk Kembali, Pelajaran Ke-7', soundType: 'builtin:tritone', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-11', time: '13:15', title: 'Jam Pelajaran Ke-8', soundType: 'builtin:dingdong', repeatDays: [1,2,3,4], enabled: true },
+          { id: 's-12', time: '14:00', title: 'Bel Pulang Sekolah (Hati-hati di Jalan)', soundType: 'builtin:westminster', repeatDays: [1,2,3,4], enabled: true }
+        ]
+      },
+      {
+        id: 'prof-jumat',
+        name: 'Jadwal Khusus Hari Jumat',
+        schedules: [
+          { id: 'fj-1', time: '06:45', title: 'Senam Pagi & Literasi Rohani', soundType: 'builtin:cheerful', repeatDays: [5], enabled: true },
+          { id: 'fj-2', time: '07:15', title: 'Jam Pelajaran Ke-1', soundType: 'builtin:westminster', repeatDays: [5], enabled: true },
+          { id: 'fj-3', time: '07:55', title: 'Jam Pelajaran Ke-2', soundType: 'builtin:dingdong', repeatDays: [5], enabled: true },
+          { id: 'fj-4', time: '08:35', title: 'Jam Pelajaran Ke-3', soundType: 'builtin:dingdong', repeatDays: [5], enabled: true },
+          { id: 'fj-5', time: '09:15', title: 'Istirahat Pagi', soundType: 'builtin:cheerful', repeatDays: [5], enabled: true },
+          { id: 'fj-6', time: '09:35', title: 'Jam Pelajaran Ke-4', soundType: 'builtin:tritone', repeatDays: [5], enabled: true },
+          { id: 'fj-7', time: '10:15', title: 'Jam Pelajaran Ke-5', soundType: 'builtin:dingdong', repeatDays: [5], enabled: true },
+          { id: 'fj-8', time: '11:00', title: 'Bel Pulang & Persiapan Sholat Jumat', soundType: 'builtin:westminster', repeatDays: [5], enabled: true }
+        ]
+      },
+      {
+        id: 'prof-ujian',
+        name: 'Jadwal Ujian / Asesmen',
+        schedules: [
+          { id: 'ex-1', time: '07:15', title: 'Bel Masuk Ruang Ujian & Pemeriksaan', soundType: 'builtin:cheerful', repeatDays: [1,2,3,4,5], enabled: true },
+          { id: 'ex-2', time: '07:30', title: 'Pengerjaan Ujian Sesi 1 Dimulai', soundType: 'builtin:westminster', repeatDays: [1,2,3,4,5], enabled: true },
+          { id: 'ex-3', time: '09:00', title: 'Peringatan: Waktu Ujian Tersisa 10 Menit', soundType: 'builtin:dingdong', repeatDays: [1,2,3,4,5], enabled: true },
+          { id: 'ex-4', time: '09:10', title: 'Ujian Sesi 1 Selesai & Waktu Istirahat', soundType: 'builtin:tritone', repeatDays: [1,2,3,4,5], enabled: true },
+          { id: 'ex-5', time: '09:45', title: 'Masuk Ruang Ujian Sesi 2', soundType: 'builtin:cheerful', repeatDays: [1,2,3,4,5], enabled: true },
+          { id: 'ex-6', time: '10:00', title: 'Pengerjaan Ujian Sesi 2 Dimulai', soundType: 'builtin:westminster', repeatDays: [1,2,3,4,5], enabled: true },
+          { id: 'ex-7', time: '11:30', title: 'Ujian Selesai Hari Ini & Bel Pulang', soundType: 'builtin:westminster', repeatDays: [1,2,3,4,5], enabled: true }
+        ]
+      }
+    ];
+
+    let profiles = [];
+    let activeProfileId = '';
+    let activityLogs = [];
+    let cachedCustomAudios = [];
+
+    // --- 2. INDEXED DB HELPER (OFFLINE CUSTOM AUDIO) ---
+    function initIndexedDB() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, 1);
+        req.onupgradeneeded = (e) => {
+          const db = e.target.result;
+          if (!db.objectStoreNames.contains(DB_STORE_NAME)) {
+            db.createObjectStore(DB_STORE_NAME, { keyPath: 'id' });
+          }
+        };
+        req.onsuccess = (e) => {
+          dbInstance = e.target.result;
+          resolve(dbInstance);
+        };
+        req.onerror = (e) => {
+          console.error('IndexedDB Error:', e);
+          reject(e);
+        };
+      });
+    }
+
+    async function loadCustomAudios() {
+      if (!dbInstance) return [];
+      return new Promise((resolve) => {
+        const tx = dbInstance.transaction(DB_STORE_NAME, 'readonly');
+        const store = tx.objectStore(DB_STORE_NAME);
+        const req = store.getAll();
+        req.onsuccess = () => {
+          cachedCustomAudios = req.result || [];
+          resolve(cachedCustomAudios);
+        };
+        req.onerror = () => resolve([]);
+      });
+    }
+
+    async function saveCustomAudio(file) {
+      if (!dbInstance) return null;
+      const id = 'custom_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+      const audioRecord = {
+        id,
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        data: file, // Blob
+        uploadedAt: new Date().toISOString()
+      };
+
+      return new Promise((resolve, reject) => {
+        const tx = dbInstance.transaction(DB_STORE_NAME, 'readwrite');
+        const store = tx.objectStore(DB_STORE_NAME);
+        const req = store.add(audioRecord);
+        req.onsuccess = async () => {
+          await loadCustomAudios();
+          renderCustomAudioList();
+          updateSoundSelectOptions();
+          showToast(`File audio "${file.name}" berhasil disimpan!`);
+          resolve(audioRecord);
+        };
+        req.onerror = (err) => {
+          showToast('Gagal menyimpan file audio!', 'error');
+          reject(err);
+        };
+      });
+    }
+
+    async function deleteCustomAudio(id) {
+      if (!dbInstance) return;
+      return new Promise((resolve) => {
+        const tx = dbInstance.transaction(DB_STORE_NAME, 'readwrite');
+        const store = tx.objectStore(DB_STORE_NAME);
+        const req = store.delete(id);
+        req.onsuccess = async () => {
+          await loadCustomAudios();
+          renderCustomAudioList();
+          updateSoundSelectOptions();
+          renderScheduleTable();
+          showToast('File audio dihapus.');
+          resolve();
+        };
+      });
+    }
+
+    // --- 3. AUDIO ENGINE & SYNTHESIZER (WEB AUDIO API) ---
+    function ensureAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+        masterGainNode = audioCtx.createGain();
+        const savedVol = parseFloat(localStorage.getItem(STORAGE_KEY_VOLUME) || '0.85');
+        masterGainNode.gain.setValueAtTime(savedVol, audioCtx.currentTime);
+        masterGainNode.connect(audioCtx.destination);
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function stopActiveAudio() {
+      if (activeAudioSource) {
+        try {
+          if (activeAudioSource.stop) activeAudioSource.stop();
+          if (activeAudioSource.pause) activeAudioSource.pause();
+        } catch(e) {}
+        activeAudioSource = null;
+      }
+      if (window.speechSynthesis && window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+      }
+      document.getElementById('btn-stop-audio').style.display = 'none';
+    }
+
+    // Westminster Chimes (4 notes: E4, G#4, F#4, B3)
+    function playWestminsterChimes() {
+      const ctx = ensureAudioContext();
+      stopActiveAudio();
+      document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+
+      const notes = [
+        { freq: 329.63, time: 0.0, dur: 1.2 }, // E4
+        { freq: 415.30, time: 0.7, dur: 1.2 }, // G#4
+        { freq: 369.99, time: 1.4, dur: 1.2 }, // F#4
+        { freq: 246.94, time: 2.1, dur: 2.2 }  // B3 (panjang di akhir)
+      ];
+
+      notes.forEach(note => {
+        playBellHarmonic(ctx, note.freq, ctx.currentTime + note.time, note.dur);
+      });
+    }
+
+    // Melodi Sekolah Ceria (8 nada)
+    function playCheerfulMelody() {
+      const ctx = ensureAudioContext();
+      stopActiveAudio();
+      document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+
+      const notes = [
+        { freq: 523.25, time: 0.0, dur: 0.7 }, // C5
+        { freq: 659.25, time: 0.35, dur: 0.7 }, // E5
+        { freq: 783.99, time: 0.7, dur: 0.7 }, // G5
+        { freq: 1046.50, time: 1.05, dur: 0.9 }, // C6
+        { freq: 783.99, time: 1.45, dur: 0.7 }, // G5
+        { freq: 659.25, time: 1.80, dur: 0.7 }, // E5
+        { freq: 587.33, time: 2.15, dur: 0.7 }, // D5
+        { freq: 523.25, time: 2.50, dur: 1.8 }  // C5
+      ];
+
+      notes.forEach(note => {
+        playBellHarmonic(ctx, note.freq, ctx.currentTime + note.time, note.dur);
+      });
+    }
+
+    // Ding Dong 2 Nada
+    function playDingDong() {
+      const ctx = ensureAudioContext();
+      stopActiveAudio();
+      document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+
+      playBellHarmonic(ctx, 698.46, ctx.currentTime, 1.2); // F5
+      playBellHarmonic(ctx, 523.25, ctx.currentTime + 0.6, 2.0); // C5
+    }
+
+    // Tri-Tone Mellow
+    function playTriTone() {
+      const ctx = ensureAudioContext();
+      stopActiveAudio();
+      document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+
+      playBellHarmonic(ctx, 523.25, ctx.currentTime, 0.9); // C5
+      playBellHarmonic(ctx, 659.25, ctx.currentTime + 0.45, 0.9); // E5
+      playBellHarmonic(ctx, 783.99, ctx.currentTime + 0.9, 1.6); // G5
+    }
+
+    // Helper: Sintesis Harmonik Lonceng Akustik (Bell Timbre)
+    function playBellHarmonic(ctx, fundamentalFreq, startTime, duration) {
+      const harmonics = [1, 2.0, 3.01, 4.2];
+      const gains = [0.6, 0.25, 0.12, 0.05];
+
+      harmonics.forEach((mult, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = idx === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(fundamentalFreq * mult, startTime);
+
+        gain.gain.setValueAtTime(0.0001, startTime);
+        gain.gain.exponentialRampToValueAtTime(gains[idx], startTime + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(masterGainNode);
+
+        osc.start(startTime);
+        osc.stop(startTime + duration + 0.1);
+      });
+    }
+
+    // Bel Elektrik Tradisional (Buzzer getar logam sekolah)
+    function playElectricBell() {
+      const ctx = ensureAudioContext();
+      stopActiveAudio();
+      document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+
+      const dur = 3.5;
+      const t = ctx.currentTime;
+
+      // Carrier oscillators
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      osc1.type = 'sawtooth';
+      osc2.type = 'square';
+      osc1.frequency.setValueAtTime(860, t);
+      osc2.frequency.setValueAtTime(867, t); // Detuned for metallic ring
+
+      // Tremolo / Clapper Modulator LFO (22Hz)
+      const lfo = ctx.createOscillator();
+      lfo.frequency.setValueAtTime(22, t);
+      const lfoGain = ctx.createGain();
+      lfoGain.gain.setValueAtTime(0.5, t);
+
+      const ampGain = ctx.createGain();
+      ampGain.gain.setValueAtTime(0.01, t);
+      ampGain.gain.linearRampToValueAtTime(0.7, t + 0.05);
+      ampGain.gain.setValueAtTime(0.7, t + dur - 0.2);
+      ampGain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+
+      // Filter
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1400, t);
+      filter.Q.setValueAtTime(3.0, t);
+
+      osc1.connect(filter);
+      osc2.connect(filter);
+      filter.connect(ampGain);
+      ampGain.connect(masterGainNode);
+
+      osc1.start(t);
+      osc2.start(t);
+      osc1.stop(t + dur);
+      osc2.stop(t + dur);
+    }
+
+    // Sirine Darurat (Siren Alert)
+    function playSiren() {
+      const ctx = ensureAudioContext();
+      stopActiveAudio();
+      document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+
+      const dur = 4.0;
+      const t = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      // 3 siklus naik-turun 450Hz - 950Hz
+      for (let i = 0; i < 4; i++) {
+        const step = t + i * 1.0;
+        osc.frequency.setValueAtTime(450, step);
+        osc.frequency.linearRampToValueAtTime(950, step + 0.5);
+        osc.frequency.linearRampToValueAtTime(450, step + 1.0);
+      }
+
+      gain.gain.setValueAtTime(0.01, t);
+      gain.gain.linearRampToValueAtTime(0.8, t + 0.1);
+      gain.gain.setValueAtTime(0.8, t + dur - 0.2);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+
+      osc.connect(gain);
+      gain.connect(masterGainNode);
+
+      osc.start(t);
+      osc.stop(t + dur);
+      activeAudioSource = osc;
+    }
+
+    // Speech Synthesis TTS Pengumuman
+    function playTTS(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Browser Anda tidak mendukung SpeechSynthesis. Menggunakan nada alternatif.', 'warning');
+        playDingDong();
+        return;
+      }
+      window.speechSynthesis.cancel();
+
+      // Putar nada ding-dong pengantar terlebih dahulu
+      playDingDong();
+
+      setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance();
+        utterance.text = `Perhatian. Saatnya ${text}. Harap tertib.`;
+        utterance.lang = 'id-ID';
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+
+        // Cari suara Bahasa Indonesia jika ada
+        const voices = window.speechSynthesis.getVoices();
+        const idVoice = voices.find(v => v.lang.includes('id') || v.lang.includes('ID'));
+        if (idVoice) utterance.voice = idVoice;
+
+        utterance.onend = () => {
+          document.getElementById('btn-stop-audio').style.display = 'none';
+        };
+
+        window.speechSynthesis.speak(utterance);
+        document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+      }, 1400);
+    }
+
+    // Play Custom Audio File (From IndexedDB Blob)
+    async function playCustomAudioById(customId, fallbackTitle = 'Bel Sekolah') {
+      const audioRec = cachedCustomAudios.find(a => a.id === customId);
+      if (!audioRec || !audioRec.data) {
+        showToast('File audio kustom tidak ditemukan, memutar nada bawaan.', 'warning');
+        playWestminsterChimes();
+        return;
+      }
+
+      ensureAudioContext();
+      stopActiveAudio();
+      document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+
+      try {
+        const objectUrl = URL.createObjectURL(audioRec.data);
+        const audio = new Audio(objectUrl);
+        const source = audioCtx.createMediaElementSource(audio);
+        source.connect(masterGainNode);
+
+        audio.onended = () => {
+          URL.revokeObjectURL(objectUrl);
+          document.getElementById('btn-stop-audio').style.display = 'none';
+        };
+
+        activeAudioSource = audio;
+        await audio.play();
+      } catch (err) {
+        console.error('Audio play error:', err);
+        // Fallback
+        playWestminsterChimes();
+      }
+    }
+
+    // Main Audio Dispatcher
+    function playBellSound(soundType, title = 'Bel Sekolah', triggerSource = 'Manual') {
+      if (!isSystemActive) {
+        activateSystemAudio();
+      }
+
+      if (soundType.startsWith('builtin:')) {
+        const key = soundType.split(':')[1];
+        if (key === 'westminster') playWestminsterChimes();
+        else if (key === 'cheerful') playCheerfulMelody();
+        else if (key === 'dingdong') playDingDong();
+        else if (key === 'tritone') playTriTone();
+        else if (key === 'electric') playElectricBell();
+        else if (key === 'siren') playSiren();
+      } else if (soundType === 'tts:title' || soundType === 'tts:default') {
+        playTTS(title || 'Pergantian Jam Pelajaran');
+      } else if (soundType.startsWith('custom:')) {
+        const customId = soundType.split(':')[1];
+        playCustomAudioById(customId, title);
+      } else {
+        playWestminsterChimes();
+      }
+    }
+
+    // --- 4. ACCURATE CLOCK, WEB WORKER, & TRIGGER LOGIC ---
+    function initClockWorker() {
+      // Inline Web Worker via Blob
+      // Menjaga agar browser tidak men-throttle setInterval menjadi 1x per menit saat tab tidak aktif/minimize
+      const workerCode = `
+        let timer = null;
+        self.onmessage = function(e) {
+          if (e.data === 'start') {
+            if (!timer) {
+              timer = setInterval(function() {
+                self.postMessage('tick');
+              }, 1000);
+            }
+          } else if (e.data === 'stop') {
+            if (timer) {
+              clearInterval(timer);
+              timer = null;
+            }
+          }
+        };
+      `;
+
+      try {
+        const blob = new Blob([workerCode], { type: 'application/javascript' });
+        const workerUrl = URL.createObjectURL(blob);
+        clockWorker = new Worker(workerUrl);
+        clockWorker.onmessage = function(e) {
+          if (e.data === 'tick') {
+            onClockTick();
+          }
+        };
+        clockWorker.postMessage('start');
+      } catch (err) {
+        console.warn('Web Worker creation failed, using precision interval fallback:', err);
+        // Fallback self-adjusting timer
+        function precisionLoop() {
+          onClockTick();
+          const now = Date.now();
+          const next = 1000 - (now % 1000);
+          setTimeout(precisionLoop, next);
+        }
+        precisionLoop();
+      }
+    }
+
+    // Format helpers
+    const DAYS_ID = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+    const MONTHS_ID = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+
+    function onClockTick() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      const timeStr = `${h}:${m}`;
+      const dayIdx = now.getDay();
+
+      // Update Digital Clock UI
+      const hhEl = document.getElementById('c-hh');
+      const mmEl = document.getElementById('c-mm');
+      const ssEl = document.getElementById('c-ss');
+      const col1 = document.getElementById('c-colon1');
+      const col2 = document.getElementById('c-colon2');
+
+      if (hhEl) hhEl.textContent = h;
+      if (mmEl) mmEl.textContent = m;
+      if (ssEl) ssEl.textContent = s;
+
+      if (col1 && col2) {
+        col1.classList.toggle('blink');
+        col2.classList.toggle('blink');
+      }
+
+      // Update Date string
+      const dateEl = document.getElementById('clock-date');
+      if (dateEl) {
+        dateEl.textContent = `${DAYS_ID[dayIdx]}, ${now.getDate()} ${MONTHS_ID[now.getMonth()]} ${now.getFullYear()}`;
+      }
+
+      const todayBadge = document.getElementById('badge-today-day');
+      if (todayBadge) {
+        todayBadge.textContent = DAYS_ID[dayIdx];
+      }
+
+      // CHECK AUTOMATIC BELL TRIGGER
+      checkBellTrigger(now, timeStr, dayIdx, parseInt(s, 10));
+
+      // UPDATE COUNTDOWN TO NEXT BELL
+      updateNextBellCountdown(now, dayIdx);
+    }
+
+    /**
+     * Logic Pemicu Bel Otomatis:
+     * - Hanya dipicu tepat pada detik :00 (atau toleransi :01 jika terjadi lag sistem)
+     * - Menggunakan 'lastTriggeredMinute' agar TIDAK PERNAH memicu ganda dalam menit yang sama.
+     */
+    function checkBellTrigger(now, timeStr, dayIdx, secInt) {
+      if (!isSystemActive) return;
+
+      const minuteKey = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()} ${timeStr}`;
+
+      // Detik :00 dan belum dipicu untuk menit ini
+      if (secInt <= 1 && lastTriggeredMinute !== minuteKey) {
+        const activeProfile = getActiveProfile();
+        if (!activeProfile || !activeProfile.schedules) return;
+
+        // Cari jadwal yang cocok
+        const matchingSchedules = activeProfile.schedules.filter(item => {
+          if (!item.enabled) return false;
+          if (item.time !== timeStr) return false;
+          // Validasi hari berlaku
+          if (item.repeatDays && item.repeatDays.length > 0) {
+            if (!item.repeatDays.includes(dayIdx)) return false;
+          }
+          return true;
+        });
+
+        if (matchingSchedules.length > 0) {
+          lastTriggeredMinute = minuteKey; // KUNCI pemicu agar tidak berulang!
+          matchingSchedules.forEach(sched => {
+            playBellSound(sched.soundType, sched.title, 'Otomatis');
+            addActivityLog(sched.title, timeStr, sched.soundType, 'Otomatis');
+            showToast(`🔔 Bel Berbunyi Otomatis: ${sched.title} (${sched.time})`, 'success');
+          });
+        }
+      }
+    }
+
+    // Menghitung hitung mundur ke bel berikutnya
+    function updateNextBellCountdown(now, dayIdx) {
+      const activeProfile = getActiveProfile();
+      if (!activeProfile || !activeProfile.schedules || activeProfile.schedules.length === 0) {
+        setNextBellEmpty();
+        return;
+      }
+
+      const currentMinutesToday = now.getHours() * 60 + now.getMinutes();
+      const currentSecondsNow = currentMinutesToday * 60 + now.getSeconds();
+
+      // Ambil jadwal yang aktif hari ini
+      const todaySchedules = activeProfile.schedules
+        .filter(s => s.enabled && (!s.repeatDays || s.repeatDays.length === 0 || s.repeatDays.includes(dayIdx)))
+        .map(s => {
+          const parts = s.time.split(':');
+          const totalSec = (parseInt(parts[0], 10) * 60 + parseInt(parts[1], 10)) * 60;
+          return { ...s, totalSec };
+        })
+        .sort((a, b) => a.totalSec - b.totalSec);
+
+      // Cari jadwal berikutnya setelah detik sekarang
+      const nextSchedule = todaySchedules.find(s => s.totalSec > currentSecondsNow);
+
+      const timeEl = document.getElementById('next-bell-time');
+      const titleEl = document.getElementById('next-bell-title');
+      const cdEl = document.getElementById('next-bell-countdown');
+      const rungEl = document.getElementById('stat-bell-rung');
+
+      // Hitung berapa bel yang sudah lewat hari ini
+      const rungCount = todaySchedules.filter(s => s.totalSec <= currentSecondsNow).length;
+      if (rungEl) rungEl.textContent = rungCount;
+
+      if (nextSchedule) {
+        const diffSec = nextSchedule.totalSec - currentSecondsNow;
+        const hRemaining = Math.floor(diffSec / 3600);
+        const mRemaining = Math.floor((diffSec % 3600) / 60);
+        const sRemaining = diffSec % 60;
+
+        const cdString = `${String(hRemaining).padStart(2, '0')}:${String(mRemaining).padStart(2, '0')}:${String(sRemaining).padStart(2, '0')}`;
+
+        if (timeEl) timeEl.textContent = `${nextSchedule.time} WIB`;
+        if (titleEl) titleEl.textContent = nextSchedule.title;
+        if (cdEl) cdEl.innerHTML = `<span>⏳ <strong>${cdString}</strong> menuju bel berikutnya</span>`;
+      } else {
+        if (timeEl) timeEl.textContent = '--:-- WIB';
+        if (titleEl) titleEl.textContent = todaySchedules.length > 0 ? 'Semua bel hari ini telah selesai' : 'Tidak ada jadwal aktif untuk hari ini';
+        if (cdEl) cdEl.innerHTML = '<span>✅ Selesai untuk hari ini</span>';
+      }
+    }
+
+    function setNextBellEmpty() {
+      const timeEl = document.getElementById('next-bell-time');
+      const titleEl = document.getElementById('next-bell-title');
+      const cdEl = document.getElementById('next-bell-countdown');
+      if (timeEl) timeEl.textContent = '--:-- WIB';
+      if (titleEl) titleEl.textContent = 'Belum ada jadwal tersimpan';
+      if (cdEl) cdEl.innerHTML = '<span>Silakan tambah jadwal di bawah</span>';
+    }
+
+    // --- 5. STATE MANAGEMENT & LOCAL STORAGE ---
+    function loadState() {
+      try {
+        const savedProfiles = localStorage.getItem(STORAGE_KEY_PROFILES);
+        profiles = savedProfiles ? JSON.parse(savedProfiles) : DEFAULT_PROFILES;
+      } catch(e) {
+        profiles = DEFAULT_PROFILES;
+      }
+
+      activeProfileId = localStorage.getItem(STORAGE_KEY_ACTIVE_ID) || profiles[0].id;
+      if (!profiles.some(p => p.id === activeProfileId)) {
+        activeProfileId = profiles[0].id;
+      }
+
+      try {
+        const savedLogs = localStorage.getItem(STORAGE_KEY_LOGS);
+        activityLogs = savedLogs ? JSON.parse(savedLogs) : [];
+      } catch(e) {
+        activityLogs = [];
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY_PROFILES, JSON.stringify(profiles));
+      localStorage.setItem(STORAGE_KEY_ACTIVE_ID, activeProfileId);
+      localStorage.setItem(STORAGE_KEY_LOGS, JSON.stringify(activityLogs));
+      updateMetrics();
+    }
+
+    function getActiveProfile() {
+      return profiles.find(p => p.id === activeProfileId) || profiles[0];
+    }
+
+    function updateMetrics() {
+      const active = getActiveProfile();
+      const totalEl = document.getElementById('stat-total-schedules');
+      if (totalEl && active) {
+        totalEl.textContent = active.schedules.length;
+      }
+    }
+
+    // --- 6. USER INTERFACE RENDERING ---
+    function renderProfileSelect() {
+      const select = document.getElementById('profile-select');
+      select.innerHTML = '';
+      profiles.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = p.name;
+        if (p.id === activeProfileId) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    function getSoundLabel(soundType) {
+      if (soundType === 'builtin:westminster') return '🔔 Westminster Chimes';
+      if (soundType === 'builtin:cheerful') return '🎵 Melodi Ceria';
+      if (soundType === 'builtin:dingdong') return '🛎️ Ding-Dong 2-Tone';
+      if (soundType === 'builtin:tritone') return '🎶 Tiga Nada';
+      if (soundType === 'builtin:electric') return '⚡ Bel Elektrik';
+      if (soundType === 'builtin:siren') return '🚨 Sirine Siaga';
+      if (soundType === 'tts:title' || soundType === 'tts:default') return '🗣️ Suara Robot (TTS)';
+      if (soundType.startsWith('custom:')) {
+        const customId = soundType.split(':')[1];
+        const found = cachedCustomAudios.find(a => a.id === customId);
+        return `📁 Kustom: ${found ? found.name : 'Audio Kustom'}`;
+      }
+      return '🔔 Nada Bawaan';
+    }
+
+    function renderScheduleTable() {
+      const active = getActiveProfile();
+      const tbody = document.getElementById('schedule-tbody');
+      tbody.innerHTML = '';
+
+      if (!active || active.schedules.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+              Belum ada jadwal bel pada profil ini. Klik tombol <strong>"+ Tambah Jadwal Bel"</strong> untuk membuat jadwal baru.
+            </td>
+          </tr>
+        `;
+        updateMetrics();
+        return;
+      }
+
+      active.schedules.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        if (!item.enabled) tr.classList.add('disabled-row');
+
+        // Render days badge
+        const dayNames = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
+        let daysHtml = '';
+        if (!item.repeatDays || item.repeatDays.length === 7 || item.repeatDays.length === 0) {
+          daysHtml = '<span class="badge-sound">Setiap Hari</span>';
+        } else {
+          daysHtml = item.repeatDays.map(d => `<span class="badge-sound" style="margin-right:2px;">${dayNames[d]}</span>`).join('');
+        }
+
+        tr.innerHTML = `
+          <td>
+            <label class="switch">
+              <input type="checkbox" class="toggle-schedule" data-id="${item.id}" ${item.enabled ? 'checked' : ''}>
+              <span class="slider"></span>
+            </label>
+          </td>
+          <td><span class="badge-time">${item.time}</span></td>
+          <td><strong>${escapeHtml(item.title)}</strong></td>
+          <td><span class="badge-sound">${getSoundLabel(item.soundType)}</span></td>
+          <td>${daysHtml}</td>
+          <td style="text-align: center;">
+            <div class="action-group" style="justify-content: center;">
+              <button class="btn-icon btn-test-sched" data-id="${item.id}" title="Uji Coba Nada Ini">🔊</button>
+              <button class="btn-icon btn-edit-sched" data-id="${item.id}" title="Edit Jadwal">✏️</button>
+              <button class="btn-icon btn-delete-sched" data-id="${item.id}" title="Hapus Jadwal" style="color: var(--danger);">🗑️</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      updateMetrics();
+    }
+
+    function renderCustomAudioList() {
+      const container = document.getElementById('custom-audio-list');
+      const countLabel = document.getElementById('audio-count-label');
+      container.innerHTML = '';
+
+      if (countLabel) {
+        countLabel.textContent = `${cachedCustomAudios.length} file tersimpan`;
+      }
+
+      if (cachedCustomAudios.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding: 1rem;">
+            Belum ada audio kustom. Unggah file .mp3 atau .wav untuk digunakan sebagai bel.
+          </div>
+        `;
+        return;
+      }
+
+      cachedCustomAudios.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'audio-item';
+        const sizeMb = (item.size / (1024 * 1024)).toFixed(2);
+        div.innerHTML = `
+          <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 65%;">
+            <strong>${escapeHtml(item.name)}</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">${sizeMb} MB</div>
+          </div>
+          <div style="display: flex; gap: 0.35rem;">
+            <button class="btn btn-outline btn-sm btn-play-custom" data-id="${item.id}" title="Putar">▶️</button>
+            <button class="btn btn-outline btn-sm btn-del-custom" data-id="${item.id}" title="Hapus" style="color: var(--danger);">🗑️</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function updateSoundSelectOptions() {
+      const optgroup = document.getElementById('optgroup-custom-sounds');
+      if (!optgroup) return;
+      optgroup.innerHTML = '';
+      if (cachedCustomAudios.length === 0) {
+        const emptyOpt = document.createElement('option');
+        emptyOpt.disabled = true;
+        emptyOpt.textContent = '(Belum ada audio kustom diunggah)';
+        optgroup.appendChild(emptyOpt);
+      } else {
+        cachedCustomAudios.forEach(item => {
+          const opt = document.createElement('option');
+          opt.value = `custom:${item.id}`;
+          opt.textContent = `📁 ${item.name}`;
+          optgroup.appendChild(opt);
+        });
+      }
+    }
+
+    function addActivityLog(title, time, soundType, triggerType) {
+      const log = {
+        id: 'log-' + Date.now(),
+        title,
+        time,
+        soundType,
+        triggerType,
+        timestamp: new Date().toLocaleTimeString('id-ID')
+      };
+      activityLogs.unshift(log);
+      if (activityLogs.length > 50) activityLogs.pop();
+      saveState();
+      renderActivityLogs();
+    }
+
+    function renderActivityLogs() {
+      const container = document.getElementById('activity-log-list');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (activityLogs.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; color: var(--text-muted); font-size: 0.8rem; padding: 1.5rem;">
+            Belum ada catatan aktivitas bel untuk sesi ini.
+          </div>
+        `;
+        return;
+      }
+
+      activityLogs.forEach(log => {
+        const item = document.createElement('div');
+        item.className = `log-item ${log.triggerType === 'Manual' ? 'manual' : ''}`;
+        item.innerHTML = `
+          <div>
+            <strong>${escapeHtml(log.title)}</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">
+              ${log.time} WIB • ${getSoundLabel(log.soundType)}
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 0.72rem; font-weight: 700; color: var(--primary);">${log.triggerType}</span>
+            <div style="font-size: 0.7rem; color: var(--text-muted);">${log.timestamp}</div>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // --- 7. EVENT HANDLERS & MODALS ---
+    function setupEventListeners() {
+      // Tombol Aktivasi Audio Utama
+      const btnActivate = document.getElementById('btn-activate-audio');
+      if (btnActivate) {
+        btnActivate.addEventListener('click', () => {
+          activateSystemAudio();
+          showToast('Sistem bel telah aktif! Browser mengizinkan audio otomatis.', 'success');
+        });
+      }
+
+      // Master Volume Slider
+      const volSlider = document.getElementById('master-volume');
+      const volLabel = document.getElementById('vol-percent');
+      if (volSlider) {
+        volSlider.addEventListener('input', (e) => {
+          const val = parseFloat(e.target.value);
+          localStorage.setItem(STORAGE_KEY_VOLUME, val.toString());
+          if (masterGainNode && audioCtx) {
+            masterGainNode.gain.setValueAtTime(val, audioCtx.currentTime);
+          }
+          if (volLabel) volLabel.textContent = `${Math.round(val * 100)}%`;
+        });
+      }
+
+      // Tombol Stop Suara
+      document.getElementById('btn-stop-audio').addEventListener('click', stopActiveAudio);
+
+      // Soundboard Buttons (Uji Coba Cepat)
+      document.querySelectorAll('.sound-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const sound = btn.getAttribute('data-sound');
+          playBellSound(sound, 'Uji Coba Bel Manual', 'Manual');
+          addActivityLog('Uji Coba Bel (' + btn.querySelector('.label').textContent + ')', '--:--', sound, 'Manual');
+        });
+      });
+
+      // Profil Switcher
+      document.getElementById('profile-select').addEventListener('change', (e) => {
+        activeProfileId = e.target.value;
+        saveState();
+        renderScheduleTable();
+        showToast(`Profil aktif diubah ke: ${getActiveProfile().name}`);
+      });
+
+      // Urutkan Jam
+      document.getElementById('btn-sort-schedules').addEventListener('click', () => {
+        const active = getActiveProfile();
+        active.schedules.sort((a, b) => a.time.localeCompare(b.time));
+        saveState();
+        renderScheduleTable();
+        showToast('Daftar jadwal diurutkan berdasarkan jam.');
+      });
+
+      // Buka Modal Tambah Jadwal
+      document.getElementById('btn-add-schedule').addEventListener('click', () => {
+        openScheduleModal();
+      });
+
+      // Form Submit Jadwal
+      document.getElementById('form-schedule').addEventListener('submit', (e) => {
+        e.preventDefault();
+        saveScheduleFromModal();
+      });
+
+      // Batal / Tutup Modal Jadwal
+      document.getElementById('btn-close-schedule-modal').addEventListener('click', closeScheduleModal);
+      document.getElementById('btn-cancel-schedule').addEventListener('click', closeScheduleModal);
+
+      // Day chips selector in modal
+      document.querySelectorAll('#days-selector .day-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          chip.classList.toggle('selected');
+        });
+      });
+
+      // Schedule Table Action Delegations
+      const tbody = document.getElementById('schedule-tbody');
+      tbody.addEventListener('click', (e) => {
+        const toggleEl = e.target.closest('.toggle-schedule');
+        if (toggleEl) {
+          const id = toggleEl.getAttribute('data-id');
+          const active = getActiveProfile();
+          const item = active.schedules.find(s => s.id === id);
+          if (item) {
+            item.enabled = toggleEl.checked;
+            saveState();
+            renderScheduleTable();
+            showToast(`Status "${item.title}" diubah.`);
+          }
+          return;
+        }
+
+        const btnTest = e.target.closest('.btn-test-sched');
+        if (btnTest) {
+          const id = btnTest.getAttribute('data-id');
+          const active = getActiveProfile();
+          const item = active.schedules.find(s => s.id === id);
+          if (item) {
+            playBellSound(item.soundType, item.title, 'Manual');
+            addActivityLog(item.title, item.time, item.soundType, 'Manual');
+          }
+          return;
+        }
+
+        const btnEdit = e.target.closest('.btn-edit-sched');
+        if (btnEdit) {
+          const id = btnEdit.getAttribute('data-id');
+          const active = getActiveProfile();
+          const item = active.schedules.find(s => s.id === id);
+          if (item) openScheduleModal(item);
+          return;
+        }
+
+        const btnDel = e.target.closest('.btn-delete-sched');
+        if (btnDel) {
+          const id = btnDel.getAttribute('data-id');
+          const active = getActiveProfile();
+          const item = active.schedules.find(s => s.id === id);
+          if (item && confirm(`Hapus jadwal "${item.title}" (${item.time})?`)) {
+            active.schedules = active.schedules.filter(s => s.id !== id);
+            saveState();
+            renderScheduleTable();
+            showToast('Jadwal berhasil dihapus.');
+          }
+        }
+      });
+
+      // Profil Management Modal
+      document.getElementById('btn-manage-profiles').addEventListener('click', openProfileModal);
+      document.getElementById('btn-close-profile-modal').addEventListener('click', closeProfileModal);
+      document.getElementById('btn-finish-profile-modal').addEventListener('click', closeProfileModal);
+
+      document.getElementById('btn-create-profile').addEventListener('click', () => {
+        const nameInput = document.getElementById('new-profile-name');
+        const name = nameInput.value.trim();
+        if (!name) {
+          showToast('Nama profil tidak boleh kosong.', 'warning');
+          return;
+        }
+        const newId = 'prof-' + Date.now();
+        profiles.push({
+          id: newId,
+          name,
+          schedules: []
+        });
+        activeProfileId = newId;
+        nameInput.value = '';
+        saveState();
+        renderProfileSelect();
+        renderProfileModalList();
+        renderScheduleTable();
+        showToast(`Profil "${name}" berhasil dibuat.`);
+      });
+
+      // Clear Logs
+      document.getElementById('btn-clear-logs').addEventListener('click', () => {
+        activityLogs = [];
+        saveState();
+        renderActivityLogs();
+        showToast('Riwayat bel dibersihkan.');
+      });
+
+      // Theme Toggle
+      document.getElementById('btn-theme-toggle').addEventListener('click', toggleTheme);
+
+      // Export JSON
+      document.getElementById('btn-export-json').addEventListener('click', exportBackupJSON);
+
+      // Import JSON
+      document.getElementById('btn-import-json-trigger').addEventListener('click', () => {
+        document.getElementById('file-import-json').click();
+      });
+      document.getElementById('file-import-json').addEventListener('change', importBackupJSON);
+
+      // Download Standalone HTML Single File
+      document.getElementById('btn-download-html').addEventListener('click', downloadSingleHTML);
+
+      // Custom Audio Upload (Dropzone + Input)
+      const dropzone = document.getElementById('audio-dropzone');
+      const audioInput = document.getElementById('audio-file-input');
+
+      dropzone.addEventListener('click', () => audioInput.click());
+      audioInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          saveCustomAudio(e.target.files[0]);
+          e.target.value = '';
+        }
+      });
+
+      dropzone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropzone.classList.add('dragover');
+      });
+      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+      dropzone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          saveCustomAudio(e.dataTransfer.files[0]);
+        }
+      });
+
+      // Custom Audio List Play & Delete
+      const audioList = document.getElementById('custom-audio-list');
+      audioList.addEventListener('click', (e) => {
+        const btnPlay = e.target.closest('.btn-play-custom');
+        if (btnPlay) {
+          const id = btnPlay.getAttribute('data-id');
+          playCustomAudioById(id);
+          return;
+        }
+
+        const btnDel = e.target.closest('.btn-del-custom');
+        if (btnDel) {
+          const id = btnDel.getAttribute('data-id');
+          if (confirm('Hapus file audio kustom ini dari penyimpanan browser?')) {
+            deleteCustomAudio(id);
+          }
+        }
+      });
+
+      // Resinkronisasi waktu ketika tab browser aktif kembali
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          onClockTick();
+        }
+      });
+    }
+
+    function activateSystemAudio() {
+      ensureAudioContext();
+      isSystemActive = true;
+      const banner = document.getElementById('banner-autoplay');
+      if (banner) banner.classList.add('hidden');
+
+      const badge = document.getElementById('badge-system-status');
+      const text = document.getElementById('text-system-status');
+      if (badge && text) {
+        badge.className = 'status-badge active';
+        text.textContent = 'Sistem Bel Aktif & Otomatis';
+      }
+    }
+
+    // Modal Add / Edit Schedule
+    function openScheduleModal(item = null) {
+      const modal = document.getElementById('modal-schedule');
+      const title = document.getElementById('modal-schedule-title');
+      const form = document.getElementById('form-schedule');
+
+      updateSoundSelectOptions();
+
+      if (item) {
+        title.textContent = 'Edit Jadwal Bel';
+        document.getElementById('sched-id').value = item.id;
+        document.getElementById('sched-time').value = item.time;
+        document.getElementById('sched-title').value = item.title;
+        document.getElementById('sched-sound').value = item.soundType;
+        document.getElementById('sched-enabled').checked = item.enabled;
+
+        // Set day chips
+        const days = item.repeatDays || [1,2,3,4,5,6];
+        document.querySelectorAll('#days-selector .day-chip').forEach(chip => {
+          const d = parseInt(chip.getAttribute('data-day'), 10);
+          chip.classList.toggle('selected', days.includes(d));
+        });
+      } else {
+        title.textContent = 'Tambah Jadwal Bel';
+        form.reset();
+        document.getElementById('sched-id').value = '';
+        document.getElementById('sched-enabled').checked = true;
+
+        // Default: Senin - Jumat terpilih
+        document.querySelectorAll('#days-selector .day-chip').forEach(chip => {
+          const d = parseInt(chip.getAttribute('data-day'), 10);
+          chip.classList.toggle('selected', d >= 1 && d <= 5);
+        });
+      }
+
+      modal.classList.add('open');
+    }
+
+    function closeScheduleModal() {
+      document.getElementById('modal-schedule').classList.remove('open');
+    }
+
+    function saveScheduleFromModal() {
+      const id = document.getElementById('sched-id').value;
+      const time = document.getElementById('sched-time').value;
+      const title = document.getElementById('sched-title').value.trim();
+      const soundType = document.getElementById('sched-sound').value;
+      const enabled = document.getElementById('sched-enabled').checked;
+
+      // Ambil hari terpilih
+      const selectedDays = [];
+      document.querySelectorAll('#days-selector .day-chip.selected').forEach(chip => {
+        selectedDays.push(parseInt(chip.getAttribute('data-day'), 10));
+      });
+
+      if (!time || !title) {
+        showToast('Jam dan nama bel wajib diisi!', 'warning');
+        return;
+      }
+
+      const active = getActiveProfile();
+
+      if (id) {
+        // Edit existing
+        const item = active.schedules.find(s => s.id === id);
+        if (item) {
+          item.time = time;
+          item.title = title;
+          item.soundType = soundType;
+          item.enabled = enabled;
+          item.repeatDays = selectedDays;
+        }
+        showToast('Jadwal berhasil diperbarui.');
+      } else {
+        // Create new
+        const newSchedule = {
+          id: 's-' + Date.now(),
+          time,
+          title,
+          soundType,
+          enabled,
+          repeatDays: selectedDays
+        };
+        active.schedules.push(newSchedule);
+        showToast('Jadwal baru berhasil ditambahkan.');
+      }
+
+      saveState();
+      renderScheduleTable();
+      closeScheduleModal();
+    }
+
+    // Modal Profiles Management
+    function openProfileModal() {
+      renderProfileModalList();
+      document.getElementById('modal-profile').classList.add('open');
+    }
+
+    function closeProfileModal() {
+      document.getElementById('modal-profile').classList.remove('open');
+    }
+
+    function renderProfileModalList() {
+      const container = document.getElementById('profile-management-list');
+      container.innerHTML = '';
+      profiles.forEach(p => {
+        const div = document.createElement('div');
+        div.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0.75rem; border:1px solid var(--border-color); border-radius:var(--radius-sm);';
+        const isCurrent = p.id === activeProfileId;
+
+        div.innerHTML = `
+          <div>
+            <strong>${escapeHtml(p.name)}</strong>
+            <span style="font-size:0.75rem; color:var(--text-muted); margin-left:0.5rem;">(${p.schedules.length} bel)</span>
+            ${isCurrent ? '<span class="status-badge active" style="font-size:0.7rem; padding:0.1rem 0.4rem; margin-left:0.5rem;">Aktif</span>' : ''}
+          </div>
+          <div style="display:flex; gap:0.4rem;">
+            ${profiles.length > 1 ? `<button class="btn btn-outline btn-sm btn-del-prof" data-id="${p.id}" style="color:var(--danger);" title="Hapus Profil">🗑️</button>` : ''}
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      // Delete Profile Event
+      container.querySelectorAll('.btn-del-prof').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          if (confirm('Yakin ingin menghapus profil ini beserta seluruh jadwal di dalamnya?')) {
+            profiles = profiles.filter(p => p.id !== id);
+            if (activeProfileId === id) {
+              activeProfileId = profiles[0].id;
+            }
+            saveState();
+            renderProfileSelect();
+            renderProfileModalList();
+            renderScheduleTable();
+            showToast('Profil berhasil dihapus.');
+          }
+        });
+      });
+    }
+
+    // --- 8. BACKUP, RESTORE & DOWNLOAD STANDALONE SINGLE FILE ---
+    function exportBackupJSON() {
+      const backupData = {
+        appName: 'Aplikasi Bel Otomatis Sekolah',
+        exportedAt: new Date().toISOString(),
+        activeProfileId,
+        profiles
+      };
+      const jsonString = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(backupData, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute('href', jsonString);
+      downloadAnchor.setAttribute('download', `backup-jadwal-bel-sekolah-${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+      showToast('Cadangan data berhasil diekspor.');
+    }
+
+    function importBackupJSON(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const parsed = JSON.parse(event.target.result);
+          if (parsed && parsed.profiles && Array.isArray(parsed.profiles)) {
+            profiles = parsed.profiles;
+            if (parsed.activeProfileId && profiles.some(p => p.id === parsed.activeProfileId)) {
+              activeProfileId = parsed.activeProfileId;
+            } else {
+              activeProfileId = profiles[0].id;
+            }
+            saveState();
+            renderProfileSelect();
+            renderScheduleTable();
+            showToast('Data jadwal berhasil dipulihkan dari file JSON!', 'success');
+          } else {
+            showToast('Format file JSON tidak valid.', 'error');
+          }
+        } catch(err) {
+          showToast('Gagal membaca file JSON.', 'error');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    }
+
+    function downloadSingleHTML() {
+      // Mengambil seluruh dokumen HTML saat ini sebagai single file mandiri
+      const htmlContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'aplikasi-bel-sekolah-standalone.html';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      showToast('Berkas HTML mandiri berhasil diunduh. Anda dapat membukanya kapan saja secara offline!');
+    }
+
+    // --- 9. THEME & UTILITIES ---
+    function initTheme() {
+      const savedTheme = localStorage.getItem(STORAGE_KEY_THEME) || 'light';
+      applyTheme(savedTheme);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem(STORAGE_KEY_THEME, next);
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      const icon = document.getElementById('theme-icon');
+      const text = document.getElementById('theme-text');
+      if (theme === 'dark') {
+        if (icon) icon.textContent = '☀️';
+        if (text) text.textContent = 'Mode Terang';
+      } else {
+        if (icon) icon.textContent = '🌙';
+        if (text) text.textContent = 'Mode Gelap';
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      const icons = { info: 'ℹ️', success: '✅', warning: '⚠️', error: '❌' };
+      toast.innerHTML = `<span>${icons[type] || '🔔'}</span> <span>${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // --- 10. BOOTSTRAP INITIALIZATION ---
+    window.addEventListener('DOMContentLoaded', async () => {
+      initTheme();
+      loadState();
+
+      try {
+        await initIndexedDB();
+        await loadCustomAudios();
+      } catch(err) {
+        console.warn('IndexedDB unavailable in sandbox:', err);
+      }
+
+      renderProfileSelect();
+      renderScheduleTable();
+      renderCustomAudioList();
+      renderActivityLogs();
+      updateMetrics();
+      setupEventListeners();
+
+      // Mulai Web Worker Clock Timer
+      initClockWorker();
+      // Tick awal seketika
+      onClockTick();
+    });
+  </script>
+</body>
+</html>

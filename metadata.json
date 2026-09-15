@@ -1,0 +1,6 @@
+{
+  "name": "Aplikasi Bel Otomatis Sekolah",
+  "description": "Aplikasi bel otomatis sekolah standalone offline dalam satu file HTML dengan Web Audio API, sinkronisasi waktu presisi, manajemen jadwal multi-profil, dan audio kustom.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
