@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bel Otomatis & Jadwal Pelajaran SMKN 1 MOILONG (07:00 - 15:30)</title>
-  <meta name="description" content="Sistem Bel Otomatis Sekolah & Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (Jam 07:00 s.d. 15:30) dengan Web Audio API dan sinkronisasi presisi." />
+  <meta name="description" content="Aplikasi Bel Otomatis Sekolah, Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (AKL, DKV, TL 07:00 - 15:30), Dashboard Monitoring KBM Live, Banner Slider 5 Foto, Tulisan Berjalan, dan Manajemen Penambahan Jadwal Guru & Mapel." />
   <!--
   =============================================================================
   APLIKASI BEL OTOMATIS SEKOLAH - STANDALONE SINGLE FILE (HTML5, CSS3, ES6+)
@@ -961,6 +961,636 @@
       font-size: 0.75rem;
     }
 
+    /* --- RUNNING TEXT MARQUEE --- */
+    .running-text-wrapper {
+      display: flex;
+      align-items: center;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.25rem;
+      padding: 0.35rem 0.65rem;
+      box-shadow: var(--shadow);
+      gap: 0.75rem;
+      overflow: hidden;
+      position: relative;
+    }
+    .running-text-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.65rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      transition: all 0.2s ease;
+    }
+    .running-text-badge.theme-blue { background-color: var(--primary-light); color: var(--primary); border-color: rgba(37, 99, 235, 0.3); }
+    .running-text-badge.theme-green { background-color: var(--success-light); color: var(--success); border-color: rgba(16, 185, 129, 0.3); }
+    .running-text-badge.theme-amber { background-color: var(--warning-light); color: var(--warning); border-color: rgba(245, 158, 11, 0.3); }
+    .running-text-badge.theme-red { background-color: var(--danger-light); color: var(--danger); border-color: rgba(239, 68, 68, 0.3); }
+
+    .marquee-track-container {
+      flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      mask-image: linear-gradient(to right, transparent, black 1.5%, black 98.5%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 1.5%, black 98.5%, transparent);
+    }
+    .marquee-content {
+      display: inline-block;
+      white-space: nowrap;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+      padding-left: 100%;
+      animation: marqueeScroll 25s linear infinite;
+    }
+    .marquee-content:hover {
+      animation-play-state: paused;
+    }
+    @keyframes marqueeScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+    .btn-ticker-edit {
+      padding: 0.3rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card-hover);
+      color: var(--text-main);
+      cursor: pointer;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .btn-ticker-edit:hover {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    /* --- SLIDESHOW 5 FOTO BANNER --- */
+    .banner-slider-container {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      background-color: #0b1120;
+      border: 1px solid var(--border-color);
+      user-select: none;
+    }
+    .slider-viewport {
+      position: relative;
+      width: 100%;
+      height: 330px;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) {
+      .slider-viewport { height: 230px; }
+    }
+    .slide-item {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0;
+      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .slide-item.active {
+      opacity: 1;
+      z-index: 2;
+      pointer-events: auto;
+    }
+    .slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1);
+      transition: transform 6s ease-out;
+    }
+    .slide-item.active .slide-img {
+      transform: scale(1.05);
+    }
+    .slide-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0; top: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.45) 45%, rgba(0, 0, 0, 0.15) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem 1.75rem;
+      color: #ffffff;
+      pointer-events: none;
+    }
+    .slide-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      background-color: var(--primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border-radius: 9999px;
+      margin-bottom: 0.45rem;
+      width: fit-content;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .slide-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+      margin-bottom: 0.35rem;
+      max-width: 800px;
+    }
+    .slide-desc {
+      font-size: 0.88rem;
+      opacity: 0.92;
+      line-height: 1.4;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+      max-width: 750px;
+    }
+    .slider-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.2s ease;
+    }
+    .slider-arrow-btn:hover {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .slider-prev-btn { left: 1rem; }
+    .slider-next-btn { right: 1rem; }
+
+    .slider-bottom-bar {
+      position: absolute;
+      bottom: 0.75rem;
+      left: 1.75rem;
+      right: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+    .slider-indicators {
+      display: flex;
+      gap: 0.4rem;
+      pointer-events: auto;
+    }
+    .slider-dot {
+      width: 28px;
+      height: 6px;
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .slider-dot.active {
+      width: 45px;
+      background-color: var(--primary);
+      box-shadow: 0 0 8px rgba(59, 130, 246, 0.8);
+    }
+    .btn-manage-slider {
+      pointer-events: auto;
+      background-color: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(6px);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 0.35rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.2s ease;
+    }
+    .btn-manage-slider:hover {
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    /* --- DASHBOARD LIVE KBM MONITOR --- */
+    .dashboard-monitor-section {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+    .monitor-header-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .monitor-clock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 0.9rem;
+      background-color: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .monitor-mode-btn {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-card);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .monitor-mode-btn.active {
+      background-color: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* Simulation Control Panel */
+    .sim-control-panel {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1rem;
+      background-color: var(--warning-light);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: var(--radius-sm);
+      margin-bottom: 1.15rem;
+    }
+    .sim-quick-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      align-items: center;
+    }
+
+    /* Metrics Summary Bar */
+    .monitor-metrics-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+    .metric-card-kbm {
+      background-color: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .metric-icon-kbm {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      flex-shrink: 0;
+    }
+    .metric-val-kbm {
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.1;
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+    .metric-lbl-kbm {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    /* Filters for Live Grid */
+    .monitor-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* 15 Classroom Live Cards Grid */
+    .live-classes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1rem;
+    }
+    @media (max-width: 480px) {
+      .live-classes-grid { grid-template-columns: 1fr; }
+    }
+    .live-class-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+      position: relative;
+    }
+    .live-class-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+    .live-class-card.status-active {
+      border-color: var(--success);
+      box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.3), var(--shadow);
+    }
+    .live-class-card.status-break {
+      border-color: var(--warning);
+      background-color: var(--warning-light);
+    }
+    .live-class-card.status-waiting {
+      border-color: var(--primary);
+    }
+    .live-class-card.status-completed {
+      opacity: 0.85;
+    }
+
+    .live-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+    .live-class-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .live-class-major {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+
+    .live-status-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 9999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .live-status-tag.active {
+      background-color: var(--success-light);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .live-status-tag.break {
+      background-color: var(--warning-light);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .live-status-tag.idle {
+      background-color: var(--bg-card-hover);
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    /* Live Subject & Teacher Box */
+    .live-current-box {
+      background-color: var(--bg-card-hover);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.85rem;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .live-current-subject {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .live-teacher-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .live-room-badge {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .live-time-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* Progress bar for ongoing session */
+    .live-progress-container {
+      height: 4px;
+      background-color: var(--border-color);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 0.2rem;
+    }
+    .live-progress-bar {
+      height: 100%;
+      background-color: var(--success);
+      border-radius: 2px;
+      transition: width 0.3s linear;
+    }
+
+    .live-next-box {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding-top: 0.25rem;
+      border-top: 1px dashed var(--border-color);
+    }
+
+    /* Conflict Warning in Modal */
+    .conflict-warning-box {
+      background-color: var(--danger-light);
+      border: 1px solid var(--danger);
+      color: var(--danger);
+      padding: 0.65rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Slide Manager Cards in Modal */
+    .slide-edit-card {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      background-color: var(--bg-card-hover);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Conflict Detection & Status Styling */
+    .conflict-warning-box {
+      margin-top: 0.75rem;
+      padding: 0.75rem 1rem;
+      background-color: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: var(--radius-sm);
+      color: #ef4444;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+    .conflict-safe-box {
+      margin-top: 0.75rem;
+      padding: 0.6rem 0.9rem;
+      background-color: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--radius-sm);
+      color: #10b981;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .badge-conflict-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      transition: all 0.2s ease;
+    }
+    .badge-conflict-status.safe {
+      color: #10b981;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .badge-conflict-status.conflict {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* SITE FOOTER */
+    .site-footer {
+      margin-top: 3rem;
+      padding: 1.75rem 0 1.25rem;
+      border-top: 1px solid var(--border-color);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .footer-icon {
+      font-size: 1.75rem;
+      line-height: 1;
+    }
+    .footer-title {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+    .footer-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.15rem;
+    }
+    .footer-copyright {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--bg-card);
+      padding: 0.5rem 1.1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+
     @media print {
       body { background-color: #fff !important; color: #000 !important; }
       header, .banner-autoplay, .main-nav, .toolbar-section, .soundboard-grid,
@@ -1009,18 +1639,270 @@
       </div>
     </header>
 
+    <!-- RUNNING TEXT / TULISAN BERJALAN PENGUMUMAN (BISA DIEDIT) -->
+    <div class="running-text-wrapper no-print" id="running-text-wrapper">
+      <div class="running-text-badge theme-blue" id="ticker-badge">
+        <span style="font-size: 0.95rem;">📢</span>
+        <span id="ticker-label-text">PENGUMUMAN SEKOLAH</span>
+      </div>
+      <div class="marquee-track-container" id="marquee-track-container">
+        <div class="marquee-content" id="marquee-content-text">
+          Selamat Datang di Portal Monitoring KBM & Bel Otomatis SMKN 1 MOILONG • Jam Pelajaran Efektif: 07:00 - 15:30 WITA (10 Jam Pelajaran) • Seluruh peserta didik wajib berada di ruang kelas, laboratorium komputer, dan bengkel kejuruan masing-masing • Utamakan kedisiplinan, keselamatan kerja (K3LH), dan budaya 5R industri!
+        </div>
+      </div>
+      <button type="button" class="btn-ticker-edit" onclick="openRunningTextModal()" title="Edit Teks Berjalan Pengumuman">
+        ✏️ Edit Pengumuman
+      </button>
+    </div>
+
     <!-- MAIN NAVIGATION TABS -->
     <nav class="main-nav no-print">
-      <button class="main-nav-btn active" id="tab-btn-bel" onclick="switchMainTab('bel')">
-        🔔 Bel Otomatis Sekolah
+      <button class="main-nav-btn active" id="tab-btn-dashboard" onclick="switchMainTab('dashboard')">
+        🖥️ Dashboard Monitoring (15 Kelas Live)
       </button>
       <button class="main-nav-btn" id="tab-btn-jadwal" onclick="switchMainTab('jadwal')">
-        📚 Jadwal Pelajaran SMKN 1 MOILONG (15 Kelas • 07:00 - 15:30)
+        📚 Jadwal Pelajaran (15 Rombel)
       </button>
+      <button class="main-nav-btn" id="tab-btn-bel" onclick="switchMainTab('bel')">
+        🔔 Bel Otomatis Sekolah
+      </button>
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <button type="button" class="btn btn-primary btn-sm" onclick="openAddScheduleTeacherSubjectModal()" title="Tambah Jadwal Pelajaran Masing-Masing Kelas Berdasarkan Guru & Mapel">
+          ➕ Tambah Jadwal Guru & Mapel
+        </button>
+      </div>
     </nav>
 
-    <!-- TAB 1: BEL OTOMATIS SEKOLAH -->
-    <div id="tab-bel-sekolah" class="tab-content active">
+    <!-- TAB 1: DASHBOARD MONITORING (15 KELAS LIVE & SLIDESHOW 5 FOTO) -->
+    <div id="tab-dashboard" class="tab-content active">
+
+      <!-- BANNER SLIDESHOW 5 FOTO (BISA DIGANTI-GANTI) -->
+      <div class="banner-slider-container" id="banner-slider-container">
+        <div class="slider-viewport" id="slider-viewport">
+          <!-- Slide 1 -->
+          <div class="slide-item active" data-index="0" id="slide-item-0">
+            <img class="slide-img" id="slide-img-0" src="https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80" alt="Kampus SMKN 1 Moilong" onerror="handleSlideImageError(this, 0)">
+            <div class="slide-overlay">
+              <span class="slide-tag" id="slide-tag-0">🏫 SMKN 1 MOILONG • UNGGUL & BERKARAKTER</span>
+              <h2 class="slide-title" id="slide-title-0">Selamat Datang di Portal Terpadu SMKN 1 MOILONG</h2>
+              <p class="slide-desc" id="slide-desc-0">Pusat Informasi Jadwal Pelajaran 15 Rombongan Belajar, Sistem Bel Sekolah Otomatis, dan Monitoring KBM Berbasis Digital.</p>
+            </div>
+          </div>
+          <!-- Slide 2 -->
+          <div class="slide-item" data-index="1" id="slide-item-1">
+            <img class="slide-img" id="slide-img-1" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80" alt="Praktik Akuntansi Keuangan" onerror="handleSlideImageError(this, 1)">
+            <div class="slide-overlay">
+              <span class="slide-tag" id="slide-tag-1">📊 KONSENTRASI KEAHLIAN AKL</span>
+              <h2 class="slide-title" id="slide-title-1">Laboratorium Komputerisasi Akuntansi & Keuangan Lembaga</h2>
+              <p class="slide-desc" id="slide-desc-1">Penguasaan siklus akuntansi perusahaan, aplikasi MYOB Accounting terstandar, dan manajemen administrasi perpajakan modern.</p>
+            </div>
+          </div>
+          <!-- Slide 3 -->
+          <div class="slide-item" data-index="2" id="slide-item-2">
+            <img class="slide-img" id="slide-img-2" src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=1400&q=80" alt="Studio DKV SMKN 1 Moilong" onerror="handleSlideImageError(this, 2)">
+            <div class="slide-overlay">
+              <span class="slide-tag" id="slide-tag-2">🎨 KONSENTRASI KEAHLIAN DKV</span>
+              <h2 class="slide-title" id="slide-title-2">Studio Kreatif Desain Komunikasi Visual & Multimedia</h2>
+              <p class="slide-desc" id="slide-desc-2">Eksplorasi estetika desain grafis komputer, teknik fotografi komersial, videografi sinematik, dan produksi kemasan industri kreatif.</p>
+            </div>
+          </div>
+          <!-- Slide 4 -->
+          <div class="slide-item" data-index="3" id="slide-item-3">
+            <img class="slide-img" id="slide-img-3" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=80" alt="Bengkel Teknik Pengelasan (Teknik Las)" onerror="handleSlideImageError(this, 3)">
+            <div class="slide-overlay">
+              <span class="slide-tag" id="slide-tag-3">🔥 KONSENTRASI KEAHLIAN TEKNIK LAS (TL)</span>
+              <h2 class="slide-title" id="slide-title-3">Bengkel Fabrikasi Logam & Pengelasan Terstandar Industri (TL)</h2>
+              <p class="slide-desc" id="slide-desc-3">Keahlian pengelasan SMAW, GMAW/MIG/MAG, GTAW/TIG, fabrikasi konstruksi baja presisi, pengujian sambungan las NDT, dan penerapan K3LH industri.</p>
+            </div>
+          </div>
+          <!-- Slide 5 -->
+          <div class="slide-item" data-index="4" id="slide-item-4">
+            <img class="slide-img" id="slide-img-4" src="https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80" alt="Profil Pelajar Pancasila & Ekskul" onerror="handleSlideImageError(this, 4)">
+            <div class="slide-overlay">
+              <span class="slide-tag" id="slide-tag-4">🌟 PROJEK P5 & PENGEMBANGAN DIRI</span>
+              <h2 class="slide-title" id="slide-title-4">Pembentukan Karakter Pelajar Pancasila & Budaya Industri 5R</h2>
+              <p class="slide-desc" id="slide-desc-4">Membangun generasi tangguh beriman, bertaqwa, berjiwa wirausaha, gotong royong, dan menjunjung tinggi keselamatan kerja (K3LH).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slider Arrows -->
+        <button type="button" class="slider-arrow-btn slider-prev-btn" onclick="prevSlide()" title="Slide Sebelumnya">‹</button>
+        <button type="button" class="slider-arrow-btn slider-next-btn" onclick="nextSlide()" title="Slide Selanjutnya">›</button>
+
+        <!-- Slider Bottom Bar (Dots & Manage Button) -->
+        <div class="slider-bottom-bar">
+          <div class="slider-indicators" id="slider-indicators">
+            <div class="slider-dot active" onclick="goToSlide(0)" title="Slide 1"></div>
+            <div class="slider-dot" onclick="goToSlide(1)" title="Slide 2"></div>
+            <div class="slider-dot" onclick="goToSlide(2)" title="Slide 3"></div>
+            <div class="slider-dot" onclick="goToSlide(3)" title="Slide 4"></div>
+            <div class="slider-dot" onclick="goToSlide(4)" title="Slide 5"></div>
+          </div>
+          <button type="button" class="btn-manage-slider" onclick="openSliderManagerModal()">
+            🖼️ Ganti / Kelola 5 Foto Slide
+          </button>
+        </div>
+      </div>
+
+      <!-- DASHBOARD MONITORING KBM LIVE (15 KELAS PADA JAM BERLANGSUNG) -->
+      <section class="dashboard-monitor-section">
+        <!-- HEADER ROW: LIVE CLOCK & MODE SELECTOR -->
+        <div class="monitor-header-row">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">
+                🖥️ Monitor KBM 15 Kelas SMKN 1 MOILONG
+              </h2>
+              <span class="live-status-tag active" id="monitor-live-badge">
+                🟢 Live Real-Time
+              </span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem;">
+              Menampilkan mata pelajaran dan guru yang sedang mengajar di masing-masing kelas pada saat jam berlangsung (07:00 - 15:30).
+            </p>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <!-- Live Clock Display -->
+            <div class="monitor-clock-badge" id="monitor-clock-display">
+              <span id="mon-day-name">Senin</span>, <span id="mon-date-str">--/--/----</span> • <span id="mon-time-str" style="color: var(--primary);">00:00:00</span> WITA
+            </div>
+
+            <!-- Mode Switcher -->
+            <div style="display: flex; background-color: var(--bg-card-hover); padding: 0.2rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <button type="button" class="monitor-mode-btn active" id="btn-mode-live" onclick="setMonitorMode('live')">
+                🔴 Waktu Asli
+              </button>
+              <button type="button" class="monitor-mode-btn" id="btn-mode-sim" onclick="setMonitorMode('sim')">
+                ⏱️ Simulasi Jam
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SIMULATION CONTROL PANEL (Tampil saat mode Simulasi Jam aktif) -->
+        <div class="sim-control-panel" id="sim-control-panel" style="display: none;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <strong style="font-size: 0.84rem;">⏱️ Uji Coba / Simulasi Waktu:</strong>
+            
+            <label style="font-size: 0.78rem; font-weight: 600;">Hari:</label>
+            <select id="sim-day-select" onchange="onSimParamChange()" style="padding: 0.3rem 0.6rem; font-size: 0.82rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card); color: var(--text-main);">
+              <option value="1">Senin</option>
+              <option value="2">Selasa</option>
+              <option value="3">Rabu</option>
+              <option value="4">Kamis</option>
+              <option value="5">Jumat</option>
+              <option value="6">Sabtu</option>
+            </select>
+
+            <label style="font-size: 0.78rem; font-weight: 600;">Jam:</label>
+            <input type="time" id="sim-time-input" value="08:30" onchange="onSimParamChange()" style="padding: 0.3rem 0.6rem; font-size: 0.82rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card); color: var(--text-main);">
+          </div>
+
+          <div class="sim-quick-chips">
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Pilih Cepat Jam:</span>
+            <button type="button" class="btn btn-outline btn-xs" onclick="setSimTime('07:15', 'Jam Ke-1 (KBM Mulai)')">07:15 Pagi</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="setSimTime('08:30', 'Jam Ke-3')">08:30 Jam 3</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="setSimTime('10:05', 'Istirahat Pertama')">10:05 Istirahat 1</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="setSimTime('10:45', 'Jam Ke-5')">10:45 Jam 5</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="setSimTime('12:00', 'Istirahat Sholat Dzuhur')">12:00 Dzuhur</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="setSimTime('13:30', 'Jam Ke-8')">13:30 Jam 8</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="setSimTime('15:00', 'Jam Ke-10')">15:00 Jam 10</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="setSimTime('15:30', 'Bel Pulang')">15:30 Pulang</button>
+            <button type="button" class="btn btn-primary btn-xs" onclick="setMonitorMode('live')">Kembali ke Waktu Asli</button>
+          </div>
+        </div>
+
+        <!-- METRICS SUMMARY BAR -->
+        <div class="monitor-metrics-bar">
+          <div class="metric-card-kbm">
+            <div class="metric-icon-kbm">🏫</div>
+            <div>
+              <div class="metric-val-kbm">15</div>
+              <div class="metric-lbl-kbm">Total Rombel</div>
+            </div>
+          </div>
+          <div class="metric-card-kbm">
+            <div class="metric-icon-kbm" style="color: var(--success);">🟢</div>
+            <div>
+              <div class="metric-val-kbm" id="metric-kbm-active" style="color: var(--success);">0</div>
+              <div class="metric-lbl-kbm">Kelas KBM Aktif</div>
+            </div>
+          </div>
+          <div class="metric-card-kbm">
+            <div class="metric-icon-kbm" style="color: var(--primary);">👨‍🏫</div>
+            <div>
+              <div class="metric-val-kbm" id="metric-teachers-active" style="color: var(--primary);">0</div>
+              <div class="metric-lbl-kbm">Guru Mengajar</div>
+            </div>
+          </div>
+          <div class="metric-card-kbm">
+            <div class="metric-icon-kbm">📍</div>
+            <div>
+              <div class="metric-val-kbm" id="metric-rooms-active">0</div>
+              <div class="metric-lbl-kbm">Lab & Bengkel Terpakai</div>
+            </div>
+          </div>
+          <div class="metric-card-kbm">
+            <div class="metric-icon-kbm" style="color: var(--warning);">☕</div>
+            <div>
+              <div class="metric-val-kbm" id="metric-kbm-idle" style="color: var(--warning);">0</div>
+              <div class="metric-lbl-kbm">Istirahat / Kosong</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FILTER & SEARCH BAR -->
+        <div class="monitor-filter-bar">
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <!-- Filter Jurusan -->
+            <select id="filter-monitor-major" onchange="renderLiveDashboardCards()" style="padding: 0.4rem 0.75rem; font-size: 0.84rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card); color: var(--text-main);">
+              <option value="all">Semua Jurusan (AKL, DKV, TL)</option>
+              <option value="AKL">Akuntansi & Keuangan Lembaga (AKL)</option>
+              <option value="DKV">Desain Komunikasi Visual (DKV)</option>
+              <option value="TL">Teknik Las (TL)</option>
+            </select>
+
+            <!-- Filter Tingkat -->
+            <select id="filter-monitor-grade" onchange="renderLiveDashboardCards()" style="padding: 0.4rem 0.75rem; font-size: 0.84rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card); color: var(--text-main);">
+              <option value="all">Semua Tingkat (X, XI, XII)</option>
+              <option value="X">Kelas X Saja (5 Rombel)</option>
+              <option value="XI">Kelas XI Saja (5 Rombel)</option>
+              <option value="XII">Kelas XII Saja (5 Rombel)</option>
+            </select>
+
+            <!-- Filter Status -->
+            <select id="filter-monitor-status" onchange="renderLiveDashboardCards()" style="padding: 0.4rem 0.75rem; font-size: 0.84rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card); color: var(--text-main);">
+              <option value="all">Semua Status KBM</option>
+              <option value="active">Sedang Belajar (Aktif) 🟢</option>
+              <option value="break">Waktu Istirahat ☕</option>
+              <option value="idle">Belum Mulai / Selesai ⚪</option>
+            </select>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+            <!-- Search Input -->
+            <div style="position: relative;">
+              <input type="text" id="search-monitor-input" oninput="renderLiveDashboardCards()" placeholder="🔍 Cari Guru, Mapel, atau Kelas..." style="padding: 0.4rem 0.75rem; font-size: 0.84rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card); color: var(--text-main); width: 230px;">
+            </div>
+
+            <!-- Action: Tambah Jadwal Guru & Mapel -->
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddScheduleTeacherSubjectModal()">
+              ➕ Tambah Jadwal Guru
+            </button>
+          </div>
+        </div>
+
+        <!-- 15 KELAS LIVE CARDS CONTAINER -->
+        <div class="live-classes-grid" id="dashboard-live-classes-container">
+          <!-- Populated dynamically by renderLiveDashboardCards() -->
+        </div>
+      </section>
+    </div> <!-- END OF TAB 1: tab-dashboard -->
+
+    <!-- TAB 2: BEL OTOMATIS SEKOLAH -->
+    <div id="tab-bel-sekolah" class="tab-content">
 
     <!-- AUTOPLAY ACTIVATION BANNER -->
     <div class="banner-autoplay" id="banner-autoplay">
@@ -1276,6 +2158,7 @@
         <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
           <span class="class-meta-title" id="class-title-display">Kelas X AK 1</span>
           <span class="badge-sound" id="class-major-display">Akuntansi & Keuangan Lembaga</span>
+          <span class="badge-conflict-status safe" id="class-conflict-status-badge">✓ Bebas Bentrok</span>
         </div>
         <div class="class-meta-sub" id="class-details-display">
           Wali Kelas: Dra. Hj. Siti Aminah, M.Pd • Ruang: R. Teori X AK 1
@@ -1289,6 +2172,9 @@
         </div>
 
         <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;" class="no-print">
+          <button type="button" class="btn btn-outline btn-sm" onclick="auditAllSchedulesUI()" title="Audit dan deteksi apakah ada guru, ruangan, atau jam bentrok di seluruh 15 kelas">
+            🛡️ Audit Bentrok
+          </button>
           <button type="button" class="btn btn-outline btn-sm" onclick="openSubjectModal()" title="Tambah mata pelajaran baru ke kelas ini">
             ➕ Tambah Mapel
           </button>
@@ -1315,10 +2201,13 @@
         <button type="button" class="day-filter-btn" data-day="6" onclick="filterTimetableDay(6)">Sabtu</button>
       </div>
 
-      <div style="display: flex; align-items: center; gap: 0.4rem;">
-        <input type="text" id="search-subject-input" placeholder="🔍 Cari mapel / guru..." style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background-color: var(--bg-card); color: var(--text-main); width: 180px;" oninput="onSearchTimetable(this.value)">
+      <div style="display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap;">
+        <input type="text" id="search-subject-input" placeholder="🔍 Cari mapel / guru..." style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background-color: var(--bg-card); color: var(--text-main); width: 170px;" oninput="onSearchTimetable(this.value)">
         <button type="button" class="btn btn-outline btn-sm" onclick="resetClassTimetableToDefault()" title="Kembalikan jadwal kelas ini ke bawaan SMKN 1 Moilong">
-          🔄 Reset Jadwal
+          🔄 Reset Kelas Ini
+        </button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="resetAllClassesToMasterConflictFree()" title="Kembalikan seluruh 15 kelas ke master jadwal standar 100% bebas bentrok">
+          ⚡ Reset Semua Kelas
         </button>
       </div>
     </div>
@@ -1328,6 +2217,22 @@
       <!-- Rendered dynamically -->
     </div>
   </div> <!-- END OF TAB 2: tab-jadwal-pelajaran -->
+
+  <!-- MAIN SITE FOOTER -->
+  <footer class="site-footer no-print" id="main-site-footer">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <span class="footer-icon">🏫</span>
+        <div>
+          <div class="footer-title">SMKN 1 MOILONG</div>
+          <div class="footer-subtitle">Sistem Bel Otomatis & Monitoring Jadwal Pelajaran (07:00 - 15:30 WITA) • 15 Rombel Terintegrasi</div>
+        </div>
+      </div>
+      <div class="footer-copyright" id="footer-copyright-text">
+        TIM IT SMKN 1 MOILONG @Asiacomptech 2026
+      </div>
+    </div>
+  </footer>
 
   </div> <!-- END OF CONTAINER -->
 
@@ -1519,6 +2424,255 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" id="btn-finish-profile-modal">Selesai</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: EDIT TULISAN BERJALAN / RUNNING TEXT -->
+  <div class="modal-backdrop" id="modal-running-text">
+    <div class="modal" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; display: flex; align-items: center; gap: 0.4rem;">
+          📢 Edit Tulisan Berjalan (Pengumuman Sekolah)
+        </h3>
+        <button class="btn-icon" onclick="closeRunningTextModal()">✕</button>
+      </div>
+      <form onsubmit="return saveRunningText(event)">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="input-running-text">Isi Teks Pengumuman Berjalan:</label>
+            <textarea id="input-running-text" rows="4" style="width: 100%; padding: 0.6rem 0.8rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-family: inherit; font-size: 0.9rem; line-height: 1.4;" required placeholder="Ketik isi pengumuman atau informasi sekolah di sini..."></textarea>
+            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">
+              <span>Teks akan otomatis berjalan berulang di layar utama.</span>
+              <span id="running-text-char-count">0 karakter</span>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="form-group">
+              <label class="form-label" for="select-running-speed">Kecepatan Teks Berjalan:</label>
+              <select id="select-running-speed" style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main);">
+                <option value="35">Lambat (35 detik)</option>
+                <option value="25" selected>Normal (25 detik)</option>
+                <option value="15">Cepat (15 detik)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="select-running-theme">Tema Warna Label:</label>
+              <select id="select-running-theme" style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main);">
+                <option value="theme-blue">Biru (Informasi Umum)</option>
+                <option value="theme-green">Hijau (Pengumuman Resmi)</option>
+                <option value="theme-amber">Kuning / Emas (Perhatian)</option>
+                <option value="theme-red">Merah (Penting / Ujian)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Template Pengumuman Cepat:</label>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyRunningTextTemplate(0)">KBM 07:00 - 15:30</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyRunningTextTemplate(1)">Asesmen / Ujian Semester</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyRunningTextTemplate(2)">Jumat Bersih & Karakter</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyRunningTextTemplate(3)">Budaya 5R Industri & K3LH</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeRunningTextModal()">Batal</button>
+          <button type="submit" class="btn btn-primary">💾 Simpan Tulisan Berjalan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: KELOLA 5 FOTO BANNER SLIDESHOW -->
+  <div class="modal-backdrop" id="modal-banner-slides">
+    <div class="modal" style="max-width: 680px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; display: flex; align-items: center; gap: 0.4rem;">
+          🖼️ Kelola & Ganti 5 Foto Banner Slideshow
+        </h3>
+        <button class="btn-icon" onclick="closeSliderManagerModal()">✕</button>
+      </div>
+      <div class="modal-body" style="overflow-y: auto; flex: 1;">
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Anda dapat mengganti foto, judul, dan keterangan untuk 5 slide banner sekolah. Anda dapat memasukkan URL gambar web atau langsung mengunggah foto dari HP/komputer Anda.
+        </p>
+
+        <!-- Tabs Slide 1 - 5 -->
+        <div style="display: flex; gap: 0.4rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; overflow-x: auto;">
+          <button type="button" class="class-btn active" id="btn-slide-tab-0" onclick="switchSlideEditTab(0)">Slide 1 (Utama)</button>
+          <button type="button" class="class-btn" id="btn-slide-tab-1" onclick="switchSlideEditTab(1)">Slide 2 (AKL)</button>
+          <button type="button" class="class-btn" id="btn-slide-tab-2" onclick="switchSlideEditTab(2)">Slide 3 (DKV)</button>
+          <button type="button" class="class-btn" id="btn-slide-tab-3" onclick="switchSlideEditTab(3)">Slide 4 (TL)</button>
+          <button type="button" class="class-btn" id="btn-slide-tab-4" onclick="switchSlideEditTab(4)">Slide 5 (P5)</button>
+        </div>
+
+        <!-- Slide Edit Forms Container -->
+        <div id="slide-edit-forms-container">
+          <!-- Populated by renderSlideEditTab(index) -->
+        </div>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <button type="button" class="btn btn-outline btn-sm" onclick="resetSliderToDefaults()">
+          🔄 Reset 5 Foto Standar Sekolah
+        </button>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn btn-outline" onclick="closeSliderManagerModal()">Tutup</button>
+          <button type="button" class="btn btn-primary" onclick="saveSliderPhotosFromModal()">💾 Terapkan Perubahan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PENAMBAHAN JADWAL PELAJARAN BERDASARKAN GURU & MAPEL -->
+  <div class="modal-backdrop" id="modal-add-schedule-teacher-subject">
+    <div class="modal" style="max-width: 680px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; display: flex; align-items: center; gap: 0.4rem;">
+          ➕ Tambah Jadwal Pelajaran (Berdasarkan Guru & Mata Pelajaran)
+        </h3>
+        <button class="btn-icon" onclick="closeAddScheduleTeacherSubjectModal()">✕</button>
+      </div>
+      <form onsubmit="return saveScheduleByTeacherSubject(event)" style="display: flex; flex-direction: column; overflow: hidden; flex: 1;">
+        <div class="modal-body" style="overflow-y: auto; flex: 1;">
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.9rem;">
+            Atur jadwal kegiatan belajar mengajar (KBM) untuk kelas terpilih. Sistem akan mendeteksi otomatis jika terjadi bentrok jam mengajar pada guru atau ruangan yang sama.
+          </p>
+
+          <!-- Pilih Kelas Target -->
+          <div class="form-group">
+            <label class="form-label" for="add-sched-class-target"><strong>1. Pilih Kelas Target:</strong></label>
+            <select id="add-sched-class-target" onchange="onAddSchedFormParamChange()" required style="width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-weight: 600;">
+              <!-- 15 Classes Options -->
+              <optgroup label="Tingkat X (Kelas 10)">
+                <option value="x-ak-1">Kelas X AK 1 (Akuntansi & Keuangan Lembaga)</option>
+                <option value="x-ak-2">Kelas X AK 2 (Akuntansi & Keuangan Lembaga)</option>
+                <option value="x-dkv">Kelas X DKV (Desain Komunikasi Visual)</option>
+                <option value="x-tl-1">Kelas X TL 1 (Teknik Las)</option>
+                <option value="x-tl-2">Kelas X TL 2 (Teknik Las)</option>
+              </optgroup>
+              <optgroup label="Tingkat XI (Kelas 11)">
+                <option value="xi-ak-1">Kelas XI AK 1 (Akuntansi & Keuangan Lembaga)</option>
+                <option value="xi-ak-2">Kelas XI AK 2 (Akuntansi & Keuangan Lembaga)</option>
+                <option value="xi-dkv">Kelas XI DKV (Desain Komunikasi Visual)</option>
+                <option value="xi-tl-1">Kelas XI TL 1 (Teknik Las)</option>
+                <option value="xi-tl-2">Kelas XI TL 2 (Teknik Las)</option>
+              </optgroup>
+              <optgroup label="Tingkat XII (Kelas 12)">
+                <option value="xii-ak-1">Kelas XII AK 1 (Akuntansi & Keuangan Lembaga)</option>
+                <option value="xii-ak-2">Kelas XII AK 2 (Akuntansi & Keuangan Lembaga)</option>
+                <option value="xii-dkv">Kelas XII DKV (Desain Komunikasi Visual)</option>
+                <option value="xii-tl-1">Kelas XII TL 1 (Teknik Las)</option>
+                <option value="xii-tl-2">Kelas XII TL 2 (Teknik Las)</option>
+              </optgroup>
+            </select>
+          </div>
+
+          <!-- Pilih Hari -->
+          <div class="form-group">
+            <label class="form-label" for="add-sched-day"><strong>2. Pilih Hari Pembelajaran:</strong></label>
+            <select id="add-sched-day" onchange="onAddSchedFormParamChange()" required style="width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main);">
+              <option value="1">Senin</option>
+              <option value="2">Selasa</option>
+              <option value="3">Rabu</option>
+              <option value="4">Kamis</option>
+              <option value="5">Jumat</option>
+              <option value="6">Sabtu</option>
+            </select>
+          </div>
+
+          <!-- Pilih Guru Pengampu -->
+          <div class="form-group">
+            <label class="form-label" for="add-sched-teacher-select"><strong>3. Pilih Guru Pengampu:</strong></label>
+            <select id="add-sched-teacher-select" onchange="onTeacherSelectChange()" required style="width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main);">
+              <!-- Populated by populateTeacherAndSubjectDropdowns() -->
+            </select>
+            <input type="text" id="add-sched-teacher-custom" placeholder="Ketik Nama & Gelar Guru Baru..." style="display: none; margin-top: 0.4rem; width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--primary); background-color: var(--bg-card); color: var(--text-main);">
+          </div>
+
+          <!-- Pilih Mata Pelajaran -->
+          <div class="form-group">
+            <label class="form-label" for="add-sched-subject-select"><strong>4. Pilih Mata Pelajaran:</strong></label>
+            <select id="add-sched-subject-select" onchange="onSubjectSelectChange()" required style="width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main);">
+              <!-- Populated by populateTeacherAndSubjectDropdowns() -->
+            </select>
+            <input type="text" id="add-sched-subject-custom" placeholder="Ketik Nama Mata Pelajaran Baru..." style="display: none; margin-top: 0.4rem; width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--primary); background-color: var(--bg-card); color: var(--text-main);">
+          </div>
+
+          <!-- Slot Waktu Pelajaran (07:00 - 15:30) -->
+          <div class="form-group">
+            <label class="form-label"><strong>5. Waktu & Jam Pelajaran (07:00 - 15:30):</strong></label>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: 0.5rem;">
+              <span style="font-size: 0.75rem; color: var(--text-muted); width: 100%; margin-bottom: 0.15rem;">Pilihan Cepat Slot Jam:</span>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyTimeSlotPreset('Jam 1 - 2', '07:00', '08:30')">07:00 - 08:30 (Jam 1-2)</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyTimeSlotPreset('Jam 3 - 4', '08:30', '10:00')">08:30 - 10:00 (Jam 3-4)</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyTimeSlotPreset('Jam 5 - 6', '10:20', '11:50')">10:20 - 11:50 (Jam 5-6)</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyTimeSlotPreset('Jam 7 - 8', '12:35', '14:05')">12:35 - 14:05 (Jam 7-8)</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyTimeSlotPreset('Jam 9 - 10', '14:05', '15:30')">14:05 - 15:30 (Jam 9-10)</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyTimeSlotPreset('Jam Praktik 1-4', '07:00', '10:00')">07:00 - 10:00 (Praktik Pagi)</button>
+              <button type="button" class="btn btn-outline btn-xs" onclick="applyTimeSlotPreset('Jam Praktik 5-8', '10:20', '14:05')">10:20 - 14:05 (Praktik Siang)</button>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 0.6rem;">
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted);">Label Slot:</label>
+                <input type="text" id="add-sched-slot" value="Jam 1 - 2" required style="width: 100%; padding: 0.45rem 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-size: 0.85rem;">
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted);">Jam Mulai:</label>
+                <input type="time" id="add-sched-time-start" value="07:00" onchange="onAddSchedFormParamChange()" required style="width: 100%; padding: 0.45rem 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-size: 0.85rem;">
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted);">Jam Selesai:</label>
+                <input type="time" id="add-sched-time-end" value="08:30" onchange="onAddSchedFormParamChange()" required style="width: 100%; padding: 0.45rem 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-size: 0.85rem;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Ruangan / Lab / Bengkel -->
+          <div class="form-group">
+            <label class="form-label" for="add-sched-room-select"><strong>6. Ruangan / Lab / Bengkel:</strong></label>
+            <select id="add-sched-room-select" onchange="onRoomSelectChange()" required style="width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main);">
+              <!-- Populated by populateTeacherAndSubjectDropdowns() -->
+            </select>
+            <input type="text" id="add-sched-room-custom" placeholder="Ketik Nama Ruangan / Tempat Lain..." style="display: none; margin-top: 0.4rem; width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--primary); background-color: var(--bg-card); color: var(--text-main);">
+          </div>
+
+          <!-- Conflict Warning Banner (Deteksi Otomatis Real-time) -->
+          <div id="add-sched-conflict-warning" style="display: none;" class="conflict-warning-box">
+            <span>⚠️</span>
+            <div id="add-sched-conflict-text" style="font-size: 0.8rem; line-height: 1.35;"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+          <button type="button" class="btn btn-outline" onclick="closeAddScheduleTeacherSubjectModal()">Batal</button>
+          <button type="submit" class="btn btn-primary">💾 Simpan Jadwal Pelajaran</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: AUDIT & DETEKSI BENTROK JADWAL PELAJARAN -->
+  <div class="modal-backdrop" id="modal-audit-schedule">
+    <div class="modal" style="max-width: 680px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.15rem; display: flex; align-items: center; gap: 0.4rem;">
+          🛡️ Hasil Audit Sinkronisasi Jadwal Bebas Bentrok
+        </h3>
+        <button class="btn-icon" onclick="closeAuditScheduleModal()">✕</button>
+      </div>
+      <div class="modal-body" style="overflow-y: auto; flex: 1;" id="audit-modal-body">
+        <!-- Rendered dynamically -->
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <button type="button" class="btn btn-outline" onclick="closeAuditScheduleModal()">Tutup</button>
+        <button type="button" class="btn btn-primary" onclick="resetAllClassesToMasterConflictFree(); closeAuditScheduleModal();">
+          ⚡ Terapkan Master Jadwal Bebas Bentrok (15 Kelas)
+        </button>
       </div>
     </div>
   </div>
@@ -2069,6 +3223,11 @@
       // UPDATE LIVE STATUS PELAJARAN SMKN 1 MOILONG
       if (typeof updateClassLiveStatus === 'function') {
         updateClassLiveStatus(now, dayIdx, timeStr);
+      }
+
+      // UPDATE DASHBOARD MONITOR 15 KELAS LIVE
+      if (typeof updateDashboardLiveMonitor === 'function') {
+        updateDashboardLiveMonitor(now, dayIdx, timeStr);
       }
     }
 
@@ -3087,86 +4246,86 @@
       'x-tl-1': {
         name: 'Kelas X TL 1',
         grade: 'X',
-        major: 'Teknik Ketenagalistrikan (TITL)',
+        major: 'Teknik Las (TL)',
         teacher: 'Ir. Bambang Sutrisno',
-        room: 'Bengkel Instalasi Listrik Dasar 1'
+        room: 'R. Teori X TL 1'
       },
       'x-tl-2': {
         name: 'Kelas X TL 2',
         grade: 'X',
-        major: 'Teknik Ketenagalistrikan (TITL)',
+        major: 'Teknik Las (TL)',
         teacher: 'Agus Prasetyo, S.T',
-        room: 'Bengkel Instalasi Listrik Dasar 2'
+        room: 'R. Teori X TL 2'
       },
       'xi-ak-1': {
         name: 'Kelas XI AK 1',
         grade: 'XI',
         major: 'Akuntansi & Keuangan Lembaga (AKL)',
         teacher: 'Sri Wahyuni, S.E',
-        room: 'Lab Komputer Akuntansi MYOB 1'
+        room: 'R. Teori XI AK 1'
       },
       'xi-ak-2': {
         name: 'Kelas XI AK 2',
         grade: 'XI',
         major: 'Akuntansi & Keuangan Lembaga (AKL)',
         teacher: 'Nurul Fadilah, S.Pd',
-        room: 'Lab Komputer Akuntansi MYOB 2'
+        room: 'R. Teori XI AK 2'
       },
       'xi-dkv': {
         name: 'Kelas XI DKV',
         grade: 'XI',
         major: 'Desain Komunikasi Visual (DKV)',
         teacher: 'Reza Pratama, M.Ds',
-        room: 'Studio Fotografi & Desain Vektor'
+        room: 'Studio Grafis XI DKV'
       },
       'xi-tl-1': {
         name: 'Kelas XI TL 1',
         grade: 'XI',
-        major: 'Teknik Ketenagalistrikan (TITL)',
+        major: 'Teknik Las (TL)',
         teacher: 'Hendra Gunawan, S.Pd.T',
-        room: 'Lab Instalasi Tenaga & Daya Listrik'
+        room: 'R. Teori XI TL 1'
       },
       'xi-tl-2': {
         name: 'Kelas XI TL 2',
         grade: 'XI',
-        major: 'Teknik Ketenagalistrikan (TITL)',
+        major: 'Teknik Las (TL)',
         teacher: 'Joko Susilo, S.T',
-        room: 'Bengkel Motor Listrik & Trafo'
+        room: 'R. Teori XI TL 2'
       },
       'xii-ak-1': {
         name: 'Kelas XII AK 1',
         grade: 'XII',
         major: 'Akuntansi & Keuangan Lembaga (AKL)',
         teacher: 'Dra. Endang Lestari',
-        room: 'R. Akuntansi & Pajak XII-1'
+        room: 'R. Teori XII AK 1'
       },
       'xii-ak-2': {
         name: 'Kelas XII AK 2',
         grade: 'XII',
         major: 'Akuntansi & Keuangan Lembaga (AKL)',
         teacher: 'Ahmad Fauzi, S.E',
-        room: 'R. Akuntansi & Pajak XII-2'
+        room: 'R. Teori XII AK 2'
       },
       'xii-dkv': {
         name: 'Kelas XII DKV',
         grade: 'XII',
         major: 'Desain Komunikasi Visual (DKV)',
         teacher: 'Dimas Arya, S.Kom',
-        room: 'Lab Desain Publikasi & Percetakan Digital'
+        room: 'Studio Produksi XII DKV'
       },
       'xii-tl-1': {
         name: 'Kelas XII TL 1',
         grade: 'XII',
-        major: 'Teknik Ketenagalistrikan (TITL)',
+        major: 'Teknik Las (TL)',
         teacher: 'Budi Santoso, S.T',
-        room: 'Lab Otomasi Industri & PLC'
+        room: 'R. Teori XII TL 1'
       },
       'xii-tl-2': {
         name: 'Kelas XII TL 2',
         grade: 'XII',
-        major: 'Teknik Ketenagalistrikan (TITL)',
+        major: 'Teknik Las (TL)',
         teacher: 'M. Taufik, S.Pd',
-        room: 'Bengkel Instalasi Pabrik & Industri'
+        room: 'R. Teori XII TL 2'
       }
     };
 
@@ -3175,161 +4334,750 @@
     let currentTimetableDayFilter = 'all';
     let currentTimetableSearch = '';
 
-    function generateMoilongScheduleSeed(classId) {
-      const info = MOILONG_CLASSES[classId];
-      if (!info) return [];
 
-      const isAK = classId.includes('ak');
-      const isDKV = classId.includes('dkv');
-      const isTL = classId.includes('tl');
-      const grade = info.grade;
 
-      const schedule = [];
+    // =========================================================================
+    // MASTER JADWAL SMKN 1 MOILONG (100% BEBAS BENTROK)
+    // 15 Rombel • 36 Guru • 6 Hari Pembelajaran • 07:00 - 15:30 WITA
+    // =========================================================================
+    const MOILONG_CLASS_IDS = [
+      'x-ak-1', 'x-ak-2', 'x-dkv', 'x-tl-1', 'x-tl-2',
+      'xi-ak-1', 'xi-ak-2', 'xi-dkv', 'xi-tl-1', 'xi-tl-2',
+      'xii-ak-1', 'xii-ak-2', 'xii-dkv', 'xii-tl-1', 'xii-tl-2'
+    ];
 
-      const makeItem = (day, slot, start, end, name, teacher, room) => ({
-        id: `subj-${classId}-${day}-${start.replace(':', '')}`,
+    // 36 Teachers
+const T = {
+  // AKL Kejuruan (6)
+  ak1: 'Dra. Hj. Siti Aminah, M.Pd',
+  ak2: 'Rahmat Hidayat, S.Pd',
+  ak3: 'Sri Wahyuni, S.E',
+  ak4: 'Nurul Fadilah, S.Pd',
+  ak5: 'Dra. Endang Lestari',
+  ak6: 'Ahmad Fauzi, S.E',
+
+  // DKV Kejuruan (5)
+  dk1: 'Fajar Kurniawan, S.Sn',
+  dk2: 'Reza Pratama, M.Ds',
+  dk3: 'Dimas Arya, S.Kom',
+  dk4: 'Putri Andini, S.Sn',
+  dk5: 'Ilham Pratama, M.Kom',
+
+  // TL Kejuruan (6)
+  tl1: 'Ir. Bambang Sutrisno',
+  tl2: 'Agus Prasetyo, S.T',
+  tl3: 'Hendra Gunawan, S.Pd.T',
+  tl4: 'Joko Susilo, S.T',
+  tl5: 'Budi Santoso, S.T',
+  tl6: 'M. Taufik, S.Pd',
+
+  // Normatif & Adaptif (19)
+  ag1: 'Ust. Mansyur, S.Pd.I',
+  ag2: 'Hj. Maryam, S.Ag',
+  pk1: 'Drs. Wahyu Hidayat',
+  pk2: 'Bambang Irawan, S.Pd',
+  bi1: 'Siti Rahmawati, M.Pd',
+  bi2: 'Dewi Sartika, S.Pd',
+  mt1: 'Irwan Setiawan, S.Pd',
+  mt2: 'Arif Budiman, S.Pd',
+  en1: 'Linda Kartika, M.Pd',
+  en2: 'Rian Kusuma, S.Pd',
+  or1: 'Erwin Pratama, S.Pd',
+  or2: 'Farhan Ramadhan, S.Pd',
+  kw1: 'H. Syamsuddin, S.E',
+  kw2: 'Nurlina, S.E',
+  sj1: 'Yuliana, S.Pd',
+  sj2: 'Mulyadi, S.Pd',
+  if1: 'Dedi Kusuma, S.Kom',
+  if2: 'Rina Melati, S.Kom',
+  bk1: 'Dra. Nurhayati'
+};
+
+// Labs / Special workshops
+const LABS = {
+  ak1: 'Lab Komputer Akuntansi 1',
+  ak2: 'Lab Komputer Akuntansi 2',
+  dkMul: 'Lab Multimedia DKV',
+  dkStudio: 'Studio Foto & Video DKV',
+  tlSmaw: 'Bengkel Pengelasan SMAW',
+  tlGmaw: 'Bengkel Pengelasan GMAW',
+  tlGtaw: 'Bengkel Pengelasan GTAW (TIG)',
+  tlFab: 'Bengkel Fabrikasi Logam',
+  tlBench: 'Bengkel Kerja Bangku',
+  tlNdt: 'Lab Uji Cacat Las NDT',
+  tlPipe: 'Bengkel Pengelasan Pipa',
+  tlCad: 'R. Gambar Manufaktur'
+};
+
+// Structure: define daily slots for Days 1..6
+// Day 1: Senin
+// Day 2: Selasa
+// Day 3: Rabu
+// Day 4: Kamis
+// Day 5: Jumat
+// Day 6: Sabtu
+
+function buildAllSchedules() {
+  const S = {};
+  MOILONG_CLASS_IDS.forEach(cid => { S[cid] = []; });
+
+  const setSlot = (day, slotName, start, end, assignments) => {
+    // assignments is array of 15 items: { classId, name, teacher, room }
+    assignments.forEach(item => {
+      const cls = MOILONG_CLASSES[item.classId];
+      const room = item.room || (cls ? cls.room : "Ruang Teori");
+      S[item.classId].push({
+        id: `subj-${item.classId}-${day}-${start.replace(':', '')}`,
         day,
-        slot,
+        slot: slotName,
         timeStart: start,
         timeEnd: end,
-        name,
-        teacher: teacher || info.teacher,
-        room: room || info.room
+        name: item.name,
+        teacher: item.teacher,
+        room
       });
+    });
+  };
 
-      // Senin: Upacara & Mapel Umum + Kejuruan (07:00 - 15:30)
-      schedule.push(makeItem(1, 'Upacara Bendera', '07:00', '07:45', 'Upacara Bendera & Apel Pagi', 'Pembina Upacara', 'Lapangan Utama SMKN 1 Moilong'));
-      schedule.push(makeItem(1, 'Jam 1 - 2', '07:45', '09:15', 'Pendidikan Agama & Budi Pekerti', 'Ust. Mansyur, S.Pd.I', info.room));
-      schedule.push(makeItem(1, 'Jam 3 - 4', '09:15', '10:00', 'Pendidikan Pancasila & Kewarganegaraan', 'Drs. Wahyu Hidayat', info.room));
-      // Istirahat 1: 10:00 - 10:20
-      schedule.push(makeItem(1, 'Jam 5 - 6', '10:20', '11:50', 'Bahasa Indonesia', 'Siti Rahmawati, M.Pd', info.room));
-      // Istirahat 2 (Dzuhur): 11:50 - 12:35
-      schedule.push(makeItem(1, 'Jam 7 - 8', '12:35', '14:05', 'Matematika Terapan SMK', 'Irwan Setiawan, S.Pd', info.room));
-      schedule.push(makeItem(1, 'Jam 9 - 10', '14:05', '15:30', 'Bahasa Daerah & Literasi Digital Terapan', 'Dedi Kusuma, S.Kom', info.room));
+  // ==========================================
+  // HARI 1: SENIN
+  // ==========================================
+  MOILONG_CLASS_IDS.forEach(cid => {
+    S[cid].push({
+      id: `subj-${cid}-1-0700`,
+      day: 1,
+      slot: 'Upacara Bendera',
+      timeStart: '07:00',
+      timeEnd: '07:45',
+      name: 'Upacara Bendera & Apel Pagi Terpadu',
+      teacher: 'Pembina Upacara',
+      room: 'Lapangan Utama SMKN 1 Moilong'
+    });
+  });
 
-      // Selasa: Kejuruan Konsentrasi (07:00 - 15:30)
-      if (isAK) {
-        if (grade === 'X') {
-          schedule.push(makeItem(2, 'Jam 1 - 3', '07:00', '09:15', 'Dasar-dasar Akuntansi & Keuangan Lembaga', info.teacher, info.room));
-          schedule.push(makeItem(2, 'Jam 4', '09:15', '10:00', 'Etika Profesi & K3LH Bidang Akuntansi', 'Rahmat Hidayat, S.Pd', info.room));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Aplikasi Pengolah Angka (Spreadsheet)', 'Nurul Fadilah, S.Pd', 'Lab Komputer Akuntansi'));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Praktik Siklus Akuntansi Perusahaan Jasa', info.teacher, info.room));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Penyusunan Kertas Kerja & Neraca Lajur', 'Dra. Hj. Siti Aminah, M.Pd', info.room));
-        } else if (grade === 'XI') {
-          schedule.push(makeItem(2, 'Jam 1 - 4', '07:00', '10:00', 'Praktikum Akuntansi Perusahaan Dagang', 'Sri Wahyuni, S.E', 'Lab Komputer 1'));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Komputer Akuntansi (MYOB Accounting)', 'Nurul Fadilah, S.Pd', 'Lab Komputer 1'));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Administrasi Transaksi & Kas Perbankan', 'Dra. Endang Lestari', info.room));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Praktik Akuntansi Perpajakan PPh 21', 'Ahmad Fauzi, S.E', info.room));
-        } else {
-          schedule.push(makeItem(2, 'Jam 1 - 4', '07:00', '10:00', 'Praktikum Akuntansi Perusahaan Manufaktur', 'Dra. Endang Lestari', 'R. Akuntansi XII'));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Administrasi Pajak & e-SPT Perpajakan', 'Ahmad Fauzi, S.E', 'Lab Komputer 2'));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Akuntansi Lembaga & Instansi Pemerintah', 'Sri Wahyuni, S.E', info.room));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Audit Kas & Simulasi Uji Kompetensi Keahlian (UKK)', 'Dra. Endang Lestari', info.room));
-        }
-      } else if (isDKV) {
-        if (grade === 'X') {
-          schedule.push(makeItem(2, 'Jam 1 - 3', '07:00', '09:15', 'Dasar-dasar Desain Komunikasi Visual', info.teacher, info.room));
-          schedule.push(makeItem(2, 'Jam 4', '09:15', '10:00', 'Gambar Sketsa & Ilustrasi Manual', 'Reza Pratama, M.Ds', 'Studio Gambar DKV'));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Komposisi Pola Warna & Prinsip Nirmana', 'Dimas Arya, S.Kom', info.room));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Desain Grafis Komputer Vektor Dasar', info.teacher, 'Lab Multimedia DKV'));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Portofolio Desain Grafis & Presentasi Visual', 'Reza Pratama, M.Ds', info.room));
-        } else if (grade === 'XI') {
-          schedule.push(makeItem(2, 'Jam 1 - 4', '07:00', '10:00', 'Perangkat Lunak Desain Grafis (Photoshop & Illustrator)', 'Reza Pratama, M.Ds', 'Lab Multimedia DKV'));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Tipografi Artistik & Layout Publikasi Visual', info.teacher, 'Lab Multimedia DKV'));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Fotografi Komersil & Studio Lighting', 'Dimas Arya, S.Kom', 'Studio Foto SMKN 1'));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Digital Imaging & Color Grading Fotografi', 'Dimas Arya, S.Kom', 'Studio Foto SMKN 1'));
-        } else {
-          schedule.push(makeItem(2, 'Jam 1 - 4', '07:00', '10:00', 'Desain Publikasi & Percetakan Digital Offset', 'Dimas Arya, S.Kom', 'Lab Percetakan DKV'));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Videografi Digital & Pascaproduksi Video', 'Reza Pratama, M.Ds', 'Studio Audio Visual'));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Desain Kemasan (Packaging) & Branding Produk', info.teacher, info.room));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Pameran Karya Akhir & Portofolio UKK Kejuruan DKV', 'Reza Pratama, M.Ds', 'Studio Multimedia'));
-        }
-      } else { // TL
-        if (grade === 'X') {
-          schedule.push(makeItem(2, 'Jam 1 - 3', '07:00', '09:15', 'Dasar Listrik dan Elektronika (DLE)', info.teacher, info.room));
-          schedule.push(makeItem(2, 'Jam 4', '09:15', '10:00', 'Gambar Teknik Listrik & Simbol Kelistrikan', 'Ir. Bambang Sutrisno', 'R. Gambar Listrik'));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Pekerjaan Dasar Elektromekanik (PDE)', 'Agus Prasetyo, S.T', 'Bengkel Kerja Bangku'));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Pengukuran Komponen & Rangkaian Listrik', 'Hendra Gunawan, S.Pd.T', 'Bengkel Listrik'));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Keselamatan Kerja Listrik & Budaya K3 Bengkel', 'Joko Susilo, S.T', info.room));
-        } else if (grade === 'XI') {
-          schedule.push(makeItem(2, 'Jam 1 - 4', '07:00', '10:00', 'Instalasi Penerangan Listrik (IPL) Bangunan', 'Agus Prasetyo, S.T', 'Bengkel Instalasi 1'));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Instalasi Tenaga Listrik (ITL) 3 Fasa', 'Hendra Gunawan, S.Pd.T', 'Lab Tenaga Listrik'));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Perbaikan Peralatan Rumah Tangga Listrik', 'Joko Susilo, S.T', 'Bengkel Perbaikan'));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Pengujian Panel Distribusi & Tahanan Pembumian', 'Agus Prasetyo, S.T', 'Bengkel Instalasi'));
-        } else {
-          schedule.push(makeItem(2, 'Jam 1 - 4', '07:00', '10:00', 'Sistem Kendali PLC & Otomasi Elektropneumatik', 'Budi Santoso, S.T', 'Lab Otomasi PLC'));
-          schedule.push(makeItem(2, 'Jam 5 - 6', '10:20', '11:50', 'Instalasi Motor Listrik & Inverter Industri', 'M. Taufik, S.Pd', 'Bengkel Listrik Industri'));
-          schedule.push(makeItem(2, 'Jam 7 - 8', '12:35', '14:05', 'Pemeliharaan Panel Distribusi Tegangan Rendah', 'Hendra Gunawan, S.Pd.T', 'Lab Tenaga Listrik'));
-          schedule.push(makeItem(2, 'Jam 9 - 10', '14:05', '15:30', 'Proyek Perakitan Otomasi Industri & Standarisasi UKK', 'Budi Santoso, S.T', 'Lab Otomasi PLC'));
-        }
-      }
+  // Slot 1 (07:45 - 09:15)
+  setSlot(1, 'Jam 1 - 2', '07:45', '09:15', [
+    { classId: 'x-ak-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'x-ak-2', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 },
+    { classId: 'x-dkv',  name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'x-tl-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'x-tl-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'xi-ak-1', name: 'Bahasa Inggris Kejuruan', teacher: T.en1 },
+    { classId: 'xi-ak-2', name: 'Bahasa Inggris Kejuruan', teacher: T.en2 },
+    { classId: 'xi-dkv',  name: 'Perangkat Lunak Desain Grafis', teacher: T.dk2, room: LABS.dkMul },
+    { classId: 'xi-tl-1', name: 'Teknik Pengelasan Busur SMAW 2G', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Konstruksi Logam Baja', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Praktikum Akuntansi Manufaktur', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Administrasi Perpajakan & e-SPT', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Desain Percetakan Digital Offset', teacher: T.dk3 },
+    { classId: 'xii-tl-1', name: 'Teknik Pengelasan GTAW / TIG Presisi', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengelasan Pipa SMAW & GTAW 5G', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
 
-      // Rabu: Bahasa Inggris Kejuruan + Kewirausahaan (07:00 - 15:30)
-      schedule.push(makeItem(3, 'Jam 1 - 2', '07:00', '08:30', 'Bahasa Inggris Kejuruan & Komunikasi Bisnis', 'Linda Kartika, M.Pd', info.room));
-      schedule.push(makeItem(3, 'Jam 3 - 4', '08:30', '10:00', 'Informatika & Literasi Digital SMK', 'Dedi Kusuma, S.Kom', 'Lab Komputer Dasar'));
-      // Istirahat 1: 10:00 - 10:20
-      schedule.push(makeItem(3, 'Jam 5 - 6', '10:20', '11:50', 'Projek Kreatif & Kewirausahaan (PKK)', 'H. Syamsuddin, S.E', info.room));
-      // Istirahat 2 (Dzuhur): 11:50 - 12:35
-      schedule.push(makeItem(3, 'Jam 7 - 8', '12:35', '14:05', 'Praktik Produksi Produk Inovatif Kejuruan', 'H. Syamsuddin, S.E', info.room));
-      schedule.push(makeItem(3, 'Jam 9 - 10', '14:05', '15:30', 'Pemasaran Digital & Manajemen Toko Sekolah', 'H. Syamsuddin, S.E', info.room));
+  // Slot 2 (09:15 - 10:00)
+  setSlot(1, 'Jam 3 - 4', '09:15', '10:00', [
+    { classId: 'x-ak-1', name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'x-ak-2', name: 'Pendidikan Pancasila', teacher: T.pk2 },
+    { classId: 'x-dkv',  name: 'Dasar Sketsa & Nirmana', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'Gambar Teknik & Simbol Las WPS', teacher: T.tl1, room: LABS.tlCad },
+    { classId: 'x-tl-2', name: 'Kerja Bangku & Pemotongan Logam', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Praktikum Akuntansi Perusahaan Dagang', teacher: T.ak3 },
+    { classId: 'xi-ak-2', name: 'Komputer Akuntansi Spreadsheet', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-dkv',  name: 'Tipografi Artistik Publikasi', teacher: T.dk4 },
+    { classId: 'xi-tl-1', name: 'Pemeriksaan Visual Cacat Las', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'K3LH & Ergonomi Pengelasan', teacher: T.tl4 },
+    { classId: 'xii-ak-1', name: 'Audit Keuangan & Neraca', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Simulasi Uji Kompetensi UKK AKL', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Videografi & Editing Sinematik', teacher: T.dk2, room: LABS.dkStudio },
+    { classId: 'xii-tl-1', name: 'Fabrikasi Konstruksi Baja Berat', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengujian Cacat Las NDT Penetrant', teacher: T.tl6, room: LABS.tlNdt }
+  ]);
 
-      // Kamis: Praktik Kejuruan Lanjutan & Sejarah (07:00 - 15:30)
-      if (isAK) {
-        schedule.push(makeItem(4, 'Jam 1 - 4', '07:00', '10:00', 'Simulasi Siklus Akuntansi & Pembukuan Kas', info.teacher, 'Lab Akuntansi'));
-        schedule.push(makeItem(4, 'Jam 5 - 6', '10:20', '11:50', 'Analisis Laporan Keuangan Kejuruan', 'Ahmad Fauzi, S.E', info.room));
-        schedule.push(makeItem(4, 'Jam 7 - 8', '12:35', '14:05', 'Sejarah Indonesia & Wawasan Kebangsaan', 'Yuliana, S.Pd', info.room));
-        schedule.push(makeItem(4, 'Jam 9 - 10', '14:05', '15:30', 'Literasi Keuangan Syariah & Perbankan Digital', 'Ahmad Fauzi, S.E', info.room));
-      } else if (isDKV) {
-        schedule.push(makeItem(4, 'Jam 1 - 4', '07:00', '10:00', 'Praktik Desain Grafis Komersil & Portofolio', info.teacher, 'Lab Multimedia DKV'));
-        schedule.push(makeItem(4, 'Jam 5 - 6', '10:20', '11:50', 'Animasi 2D & Motion Graphic', 'Dimas Arya, S.Kom', 'Lab Multimedia DKV'));
-        schedule.push(makeItem(4, 'Jam 7 - 8', '12:35', '14:05', 'Sejarah Seni Rupa Nusantara & Estetika', 'Yuliana, S.Pd', info.room));
-        schedule.push(makeItem(4, 'Jam 9 - 10', '14:05', '15:30', 'Desain Antarmuka Aplikasi (UI/UX) & Web Layout', 'Reza Pratama, M.Ds', 'Lab Multimedia DKV'));
-      } else {
-        schedule.push(makeItem(4, 'Jam 1 - 4', '07:00', '10:00', 'Praktik Bengkel Instalasi & Pengukuran Listrik', 'Hendra Gunawan, S.Pd.T', 'Bengkel Tenaga Listrik'));
-        schedule.push(makeItem(4, 'Jam 5 - 6', '10:20', '11:50', 'K3 & Keselamatan Instalasi Tegangan Menengah', 'Agus Prasetyo, S.T', info.room));
-        schedule.push(makeItem(4, 'Jam 7 - 8', '12:35', '14:05', 'Sejarah Perkembangan Revolusi Industri', 'Yuliana, S.Pd', info.room));
-        schedule.push(makeItem(4, 'Jam 9 - 10', '14:05', '15:30', 'Pemanfaatan Energi Baru Terbarukan (Solar Cell)', 'Agus Prasetyo, S.T', 'Lab Tenaga Listrik'));
-      }
+  // Slot 3 (10:20 - 11:50)
+  setSlot(1, 'Jam 5 - 6', '10:20', '11:50', [
+    { classId: 'x-ak-1', name: 'Dasar-dasar Akuntansi Lembaga', teacher: T.ak1 },
+    { classId: 'x-ak-2', name: 'Etika Profesi Akuntansi', teacher: T.ak2 },
+    { classId: 'x-dkv',  name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'x-tl-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'x-tl-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'xi-ak-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'xi-ak-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'xi-dkv',  name: 'Fotografi Komersial & Tata Cahaya', teacher: T.dk3, room: LABS.dkStudio },
+    { classId: 'xi-tl-1', name: 'Teknik Pengelasan GMAW / MIG', teacher: T.tl3, room: LABS.tlGmaw },
+    { classId: 'xi-tl-2', name: 'Dasar Fabrikasi Plat Logam', teacher: T.tl1 },
+    { classId: 'xii-ak-1', name: 'Bahasa Inggris Kejuruan', teacher: T.en1 },
+    { classId: 'xii-ak-2', name: 'Bahasa Inggris Kejuruan', teacher: T.en2 },
+    { classId: 'xii-dkv',  name: 'Portofolio Akhir & Branding', teacher: T.dk1 },
+    { classId: 'xii-tl-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'xii-tl-2', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 }
+  ]);
 
-      // Jumat: Senam, Rohani, PJOK, P5 & Ekstrakurikuler (06:45 - 15:30)
-      schedule.push(makeItem(5, 'Senam/Rohani', '06:45', '07:15', 'Senam Pagi / Pembinaan Rohani SMKN 1 Moilong', 'Tim Kesiswaan SMKN 1', 'Lapangan Upacara'));
-      schedule.push(makeItem(5, 'Jam 1 - 2', '07:15', '08:35', 'Bimbingan Konseling & Karir Industri', 'Dra. Nurhayati', info.room));
-      schedule.push(makeItem(5, 'Jam 3 - 4', '08:35', '09:55', 'Pendidikan Jasmani, Olahraga & Kesehatan (PJOK)', 'Erwin Pratama, S.Pd', 'Lapangan Olahraga'));
-      schedule.push(makeItem(5, 'Jam 5', '10:15', '11:15', 'Kajian Karakter & Penguatan Akhlak Mulia', 'Ust. Mansyur, S.Pd.I', info.room));
-      // Istirahat & Sholat Jumat: 11:15 - 13:00
-      schedule.push(makeItem(5, 'Jam 6 - 7', '13:00', '14:15', 'Projek Penguatan Profil Pelajar Pancasila (P5)', 'Tim Fasilitator P5', 'Aula / Ruang Kelas'));
-      schedule.push(makeItem(5, 'Jam 8 - 9', '14:15', '15:30', 'Ekstrakurikuler Wajib & Minat Bakat Siswa SMKN 1', 'Pembina Ekstrakurikuler', 'Lapangan & Lingkungan Sekolah'));
+  // Slot 4 (12:35 - 14:05)
+  setSlot(1, 'Jam 7 - 8', '12:35', '14:05', [
+    { classId: 'x-ak-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'x-ak-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'x-dkv',  name: 'Dasar DKV Komputer Grafis', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'x-tl-2', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 },
+    { classId: 'xi-ak-1', name: 'Komputer Akuntansi MYOB', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-ak-2', name: 'Praktikum Akuntansi Dagang', teacher: T.ak3 },
+    { classId: 'xi-dkv',  name: 'Desain Antarmuka UI/UX', teacher: T.dk2, room: LABS.dkMul },
+    { classId: 'xi-tl-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'xi-tl-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'xii-ak-1', name: 'Akuntansi Sektor Publik', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'e-Faktur & Perpajakan Lanjutan', teacher: T.ak6 },
+    { classId: 'xii-dkv',  name: 'Pendidikan Pancasila', teacher: T.pk2 },
+    { classId: 'xii-tl-1', name: 'Standarisasi WPS & Uji Tarik', teacher: T.tl5 },
+    { classId: 'xii-tl-2', name: 'Pengelasan Pipa Posisi 6G', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
 
-      // Sabtu: Pengembangan Diri, Karakter & 5R Industri (07:00 - 15:30)
-      schedule.push(makeItem(6, 'Jam 1 - 2', '07:00', '08:30', 'Kepramukaan Wajib / Paskibra / PMR', 'Pembina Ekstrakurikuler', 'Lapangan & Aula SMKN 1'));
-      schedule.push(makeItem(6, 'Jam 3 - 4', '08:30', '10:00', 'Klub Keahlian (Skill Club) & Pembinaan LKS SMK', info.teacher, info.room));
-      // Istirahat 1: 10:00 - 10:20
-      schedule.push(makeItem(6, 'Jam 5 - 6', '10:20', '11:50', 'Literasi Numerasi & Pengayaan Asesmen Standar', 'Irwan Setiawan, S.Pd', info.room));
-      // Istirahat 2 (Dzuhur): 11:50 - 12:35
-      schedule.push(makeItem(6, 'Jam 7 - 8', '12:35', '14:05', 'Inovasi Terapan & Praktik Bengkel Mandiri Terbimbing', info.teacher, info.room));
-      schedule.push(makeItem(6, 'Jam 9 - 10', '14:05', '15:30', 'Kebersihan Lingkungan, Budaya 5R Industri & Evaluasi', 'Wali Kelas & OSIS', info.room));
+  // Slot 5 (14:05 - 15:30)
+  setSlot(1, 'Jam 9 - 10', '14:05', '15:30', [
+    { classId: 'x-ak-1', name: 'Informatika & Literasi Digital', teacher: T.if1 },
+    { classId: 'x-ak-2', name: 'Informatika & Literasi Digital', teacher: T.if2 },
+    { classId: 'x-dkv',  name: 'Karakter & Etika Industri DKV', teacher: T.dk4 },
+    { classId: 'x-tl-1', name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'x-tl-2', name: 'Pendidikan Pancasila', teacher: T.pk2 },
+    { classId: 'xi-ak-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'xi-ak-2', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 },
+    { classId: 'xi-dkv',  name: 'Bahasa Inggris Kejuruan', teacher: T.en1 },
+    { classId: 'xi-tl-1', name: 'Bahasa Inggris Kejuruan', teacher: T.en2 },
+    { classId: 'xi-tl-2', name: 'Teknik Pemotongan Plasma Arc', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Projek Kewirausahaan PKK Akuntansi', teacher: T.kw1 },
+    { classId: 'xii-ak-2', name: 'Projek Kewirausahaan PKK Akuntansi', teacher: T.kw2 },
+    { classId: 'xii-dkv',  name: 'Digital Imaging & Efek Visual', teacher: T.dk3 },
+    { classId: 'xii-tl-1', name: 'Simulasi Sertifikasi Las BNSP', teacher: T.tl5 },
+    { classId: 'xii-tl-2', name: 'Metalurgi Fisik & Perlakuan Panas', teacher: T.tl1 }
+  ]);
 
-      return schedule;
+  // ==========================================
+  // HARI 2: SELASA
+  // ==========================================
+  setSlot(2, 'Jam 1 - 2', '07:00', '08:30', [
+    { classId: 'x-ak-1', name: 'Praktik Siklus Akuntansi Jasa', teacher: T.ak1 },
+    { classId: 'x-ak-2', name: 'Etika Profesi & K3LH Akuntansi', teacher: T.ak2 },
+    { classId: 'x-dkv',  name: 'Gambar Sketsa & Ilustrasi Pensil', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'Gambar Manufaktur & Simbol WPS', teacher: T.tl1, room: LABS.tlCad },
+    { classId: 'x-tl-2', name: 'Dasar Pengelasan Logam OAW', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Akuntansi Dagang Kartu Persediaan', teacher: T.ak3 },
+    { classId: 'xi-ak-2', name: 'Komputer Akuntansi Keuangan', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-dkv',  name: 'Desain Vektor Adobe Illustrator', teacher: T.dk2, room: LABS.dkMul },
+    { classId: 'xi-tl-1', name: 'Pengelasan Busur Manual SMAW 3G', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Perakitan Konstruksi Rangka Baja', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Akuntansi Manufaktur Biaya Produksi', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Simulasi e-Billing & e-Filing Pajak', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Fotografi Model & Tata Cahaya', teacher: T.dk3, room: LABS.dkStudio },
+    { classId: 'xii-tl-1', name: 'Pengelasan Argon GTAW Stainless', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengelasan Pipa Sambungan 6G', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(2, 'Jam 3 - 4', '08:30', '10:00', [
+    { classId: 'x-ak-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'x-ak-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'x-dkv',  name: 'Komposisi Bentuk Nirmana Ruang', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'Keselamatan Kerja K3LH Las Listrik', teacher: T.tl2 },
+    { classId: 'x-tl-2', name: 'Pekerjaan Kikir & Gergaji Logam', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Administrasi Kas & Perbankan', teacher: T.ak3 },
+    { classId: 'xi-ak-2', name: 'Spreadsheet Neraca Lajur', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-dkv',  name: 'Layout Buku & Tipografi Visual', teacher: T.dk4 },
+    { classId: 'xi-tl-1', name: 'Pengelasan SMAW Sambungan T-Joint', teacher: T.tl1, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Pengelasan GMAW Besi Hollow', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Audit Laporan Arus Kas Manufaktur', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Penyusunan SPT Tahunan Badan', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Editing Sinematik Premiere Pro', teacher: T.dk2, room: LABS.dkStudio },
+    { classId: 'xii-tl-1', name: 'Pengelasan GTAW Aluminium Presisi', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Uji Ultrasonik & Radiografi Las', teacher: T.tl6, room: LABS.tlNdt }
+  ]);
+
+  setSlot(2, 'Jam 5 - 6', '10:20', '11:50', [
+    { classId: 'x-ak-1', name: 'Spreadsheet Tabel Akuntansi', teacher: T.ak1, room: LABS.ak1 },
+    { classId: 'x-ak-2', name: 'Jurnal Umum & Buku Besar', teacher: T.ak2 },
+    { classId: 'x-dkv',  name: 'Informatika & Literasi Digital', teacher: T.if1 },
+    { classId: 'x-tl-1', name: 'Kerja Bangku Alat Ukur Presisi', teacher: T.tl1, room: LABS.tlBench },
+    { classId: 'x-tl-2', name: 'Gambar Proyeksi Orthogonal Mesin', teacher: T.tl3, room: LABS.tlCad },
+    { classId: 'xi-ak-1', name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'xi-ak-2', name: 'Pendidikan Pancasila', teacher: T.pk2 },
+    { classId: 'xi-dkv',  name: 'Motion Graphic & Animasi 2D', teacher: T.dk4, room: LABS.dkMul },
+    { classId: 'xi-tl-1', name: 'Teknik Pengelasan GMAW CO2', teacher: T.tl2, room: LABS.tlGmaw },
+    { classId: 'xi-tl-2', name: 'Pengelasan Titik (Spot Welding)', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Praktik Siklus Akuntansi UKK', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Akuntansi Pajak Penghasilan Pasal 22', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Desain Kemasan 3D Mockup', teacher: T.dk3 },
+    { classId: 'xii-tl-1', name: 'Inspeksi Visual & Pengujian Tekuk', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengelasan Sambungan Bevel Pipa', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(2, 'Jam 7 - 8', '12:35', '14:05', [
+    { classId: 'x-ak-1', name: 'Bahasa Inggris Kejuruan', teacher: T.en1 },
+    { classId: 'x-ak-2', name: 'Bahasa Inggris Kejuruan', teacher: T.en2 },
+    { classId: 'x-dkv',  name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'x-tl-1', name: 'Dasar Mesin Bor & Bubut Kayu', teacher: T.tl1, room: LABS.tlBench },
+    { classId: 'x-tl-2', name: 'Informatika & Literasi Digital', teacher: T.if2 },
+    { classId: 'xi-ak-1', name: 'Akuntansi Lembaga Pemerintah', teacher: T.ak3 },
+    { classId: 'xi-ak-2', name: 'Etika Profesi Akuntan Publik', teacher: T.ak2 },
+    { classId: 'xi-dkv',  name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'xi-tl-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 },
+    { classId: 'xi-tl-2', name: 'Teknik Las Busur Rendam (SAW)', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Simulasi Komputer Akuntansi MYOB', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xii-ak-2', name: 'Studi Kasus Pajak Daerah', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Produksi Konten Iklan Televisi', teacher: T.dk2, room: LABS.dkStudio },
+    { classId: 'xii-tl-1', name: 'Konstruksi Tangki Tekan Baja', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Laporan Uji Mutu Sambungan Las', teacher: T.tl6, room: LABS.tlNdt }
+  ]);
+
+  setSlot(2, 'Jam 9 - 10', '14:05', '15:30', [
+    { classId: 'x-ak-1', name: 'Projek IPAS (Sains Terapan Akuntansi)', teacher: T.ip1 },
+    { classId: 'x-ak-2', name: 'Projek Kewirausahaan PKK', teacher: T.kw1 },
+    { classId: 'x-dkv',  name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'x-tl-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 },
+    { classId: 'x-tl-2', name: 'Projek IPAS (Fisika Logam Las)', teacher: T.tl3 },
+    { classId: 'xi-ak-1', name: 'Projek Kewirausahaan PKK Akuntansi', teacher: T.kw2 },
+    { classId: 'xi-ak-2', name: 'Penyusunan Anggaran Kas Keuangan', teacher: T.ak3 },
+    { classId: 'xi-dkv',  name: 'Fotografi Eksplorasi Luar Ruang', teacher: T.dk3 },
+    { classId: 'xi-tl-1', name: 'Distorsi Pengelasan & Pencegahannya', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Pengujian Sambungan Las Bending', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Persiapan Portofolio Magang PKL', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Konsultasi Pajak Mandiri', teacher: T.ak6 },
+    { classId: 'xii-dkv',  name: 'Kurasi Portofolio Pameran Karya', teacher: T.dk1 },
+    { classId: 'xii-tl-1', name: 'Kajian Gambar Proyek Konstruksi Las', teacher: T.tl1 },
+    { classId: 'xii-tl-2', name: 'Simulasi Tes Sertifikasi Las Migas', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  // ==========================================
+  // HARI 3: RABU
+  // ==========================================
+  setSlot(3, 'Jam 1 - 2', '07:00', '08:30', [
+    { classId: 'x-ak-1', name: 'Bahasa Inggris Kejuruan', teacher: T.en1 },
+    { classId: 'x-ak-2', name: 'Bahasa Inggris Kejuruan', teacher: T.en2 },
+    { classId: 'x-dkv',  name: 'Perangkat Lunak Desain Dasar', teacher: T.dk2, room: LABS.dkMul },
+    { classId: 'x-tl-1', name: 'Teknik Pemotongan OAW Logam', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'x-tl-2', name: 'Simbol WPS & Sambungan Las', teacher: T.tl1, room: LABS.tlCad },
+    { classId: 'xi-ak-1', name: 'Praktikum Akuntansi Jasa & Dagang', teacher: T.ak3 },
+    { classId: 'xi-ak-2', name: 'Komputer Akuntansi Spreadsheet', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-dkv',  name: 'Fotografi Studio & Still Life', teacher: T.dk3, room: LABS.dkStudio },
+    { classId: 'xi-tl-1', name: 'Pengelasan Busur Listrik SMAW 1G', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Struktur Baja Ringan', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'xii-ak-2', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 },
+    { classId: 'xii-dkv',  name: 'Animasi 2D & Motion Graphics', teacher: T.dk4 },
+    { classId: 'xii-tl-1', name: 'Pengelasan TIG Paduan Nikel', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengujian Cacat Las NDT Ultrasonic', teacher: T.tl6, room: LABS.tlNdt }
+  ]);
+
+  setSlot(3, 'Jam 3 - 4', '08:30', '10:00', [
+    { classId: 'x-ak-1', name: 'Etika Profesi & Komunikasi Bisnis', teacher: T.ak2 },
+    { classId: 'x-ak-2', name: 'Dasar Keuangan & Akuntansi Lembaga', teacher: T.ak1 },
+    { classId: 'x-dkv',  name: 'Prinsip Desain & Tata Letak Dasar', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'Kerja Bangku Pembentukan Plat', teacher: T.tl2, room: LABS.tlBench },
+    { classId: 'x-tl-2', name: 'Keselamatan Kerja Bengkel Las K3LH', teacher: T.tl4 },
+    { classId: 'xi-ak-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'xi-ak-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'xi-dkv',  name: 'Perangkat Lunak Desain Vector', teacher: T.dk2, room: LABS.dkMul },
+    { classId: 'xi-tl-1', name: 'Pengelasan GMAW Gas Argon/CO2', teacher: T.tl3, room: LABS.tlGmaw },
+    { classId: 'xi-tl-2', name: 'Perakitan Konstruksi Tralis Baja', teacher: T.tl1, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Praktikum Akuntansi Manufaktur', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Administrasi Pajak Pertambahan Nilai (PPN)', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Desain Kemasan Packaging Kreatif', teacher: T.dk3 },
+    { classId: 'xii-tl-1', name: 'Inspeksi & Pengujian Sambungan Las', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengelasan Pipa Sambungan 2G & 5G', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(3, 'Jam 5 - 6', '10:20', '11:50', [
+    { classId: 'x-ak-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'x-ak-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'x-dkv',  name: 'Sejarah Seni Rupa & Visual', teacher: T.sj1 },
+    { classId: 'x-tl-1', name: 'Dasar Pengelasan Busur SMAW', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'x-tl-2', name: 'Peralatan Kerja Bangku Logam', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Komputer Akuntansi MYOB Dagang', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-ak-2', name: 'Praktik Transaksi Kas Bank', teacher: T.ak3 },
+    { classId: 'xi-dkv',  name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'xi-tl-1', name: 'Pendidikan Pancasila', teacher: T.pk2 },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Plat Besi Konstruksi', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Simulasi Ujian Kompetensi UKK', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Akuntansi Pajak Badan Usaha', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Videografi Dokumenter Sekolah', teacher: T.dk2, room: LABS.dkStudio },
+    { classId: 'xii-tl-1', name: 'Pengelasan GTAW Paduan Aluminium', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengelasan Root Run & Hot Pass Pipa', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(3, 'Jam 7 - 8', '12:35', '14:05', [
+    { classId: 'x-ak-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'x-ak-2', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 },
+    { classId: 'x-dkv',  name: 'Bahasa Inggris Komunikasi Visual', teacher: T.en1 },
+    { classId: 'x-tl-1', name: 'Bahasa Inggris Kejuruan Manufaktur', teacher: T.en2 },
+    { classId: 'x-tl-2', name: 'Bimbingan Konseling & Karir Vokasi', teacher: T.bk1 },
+    { classId: 'xi-ak-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'xi-ak-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'xi-dkv',  name: 'Fotografi Editing Lightroom & Photoshop', teacher: T.dk3, room: LABS.dkMul },
+    { classId: 'xi-tl-1', name: 'Pengelasan Busur SMAW Posisi 4G', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Baja Canai Dingin', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Projek Kewirausahaan PKK Akuntansi', teacher: T.kw1 },
+    { classId: 'xii-ak-2', name: 'Projek Kewirausahaan PKK Akuntansi', teacher: T.kw2 },
+    { classId: 'xii-dkv',  name: 'Portofolio Digital & Showreel', teacher: T.dk1 },
+    { classId: 'xii-tl-1', name: 'Kaji Cacat Las Macrograph & Bending', teacher: T.tl5, room: LABS.tlNdt },
+    { classId: 'xii-tl-2', name: 'Pengelasan Sambungan Flange Pipa', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(3, 'Jam 9 - 10', '14:05', '15:30', [
+    { classId: 'x-ak-1', name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or1, room: 'Lapangan Olahraga SMKN 1' },
+    { classId: 'x-ak-2', name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or2, room: 'GOR Indoor SMKN 1 Moilong' },
+    { classId: 'x-dkv',  name: 'Dasar Animasi Tradisional & Stopmotion', teacher: T.dk4 },
+    { classId: 'x-tl-1', name: 'Sejarah Indonesia & Kebangsaan', teacher: T.sj1 },
+    { classId: 'x-tl-2', name: 'Seni Rupa & Kriya Terapan', teacher: T.sj2 },
+    { classId: 'xi-ak-1', name: 'Etika Profesi Akuntansi Finansial', teacher: T.ak3 },
+    { classId: 'xi-ak-2', name: 'Administrasi Piutang & Utang Dagang', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-dkv',  name: 'Desain Sablon & Cetak Saring', teacher: T.dk2 },
+    { classId: 'xi-tl-1', name: 'Metalurgi Las & Pengaruh Suhu', teacher: T.tl1 },
+    { classId: 'xi-tl-2', name: 'Pengelasan GMAW Plat Sambungan Sudut', teacher: T.tl3, room: LABS.tlGmaw },
+    { classId: 'xii-ak-1', name: 'Akuntansi Lembaga Non-Profit', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Praktikum Pajak Internasional Dasar', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Karya Tugas Akhir DKV Mandiri', teacher: T.dk3 },
+    { classId: 'xii-tl-1', name: 'Perencanaan WPS Pengelasan Bejana', teacher: T.tl5 },
+    { classId: 'xii-tl-2', name: 'Simulasi Sertifikasi Las Migas 6G', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  // ==========================================
+  // HARI 4: KAMIS
+  // ==========================================
+  setSlot(4, 'Jam 1 - 2', '07:00', '08:30', [
+    { classId: 'x-ak-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'x-ak-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'x-dkv',  name: 'Dasar Fotografi Komposisi Rule of Thirds', teacher: T.dk3, room: LABS.dkStudio },
+    { classId: 'x-tl-1', name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or1, room: 'Lapangan Olahraga SMKN 1' },
+    { classId: 'x-tl-2', name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or2, room: 'GOR Indoor SMKN 1 Moilong' },
+    { classId: 'xi-ak-1', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag1 },
+    { classId: 'xi-ak-2', name: 'Pendidikan Agama & Budi Pekerti', teacher: T.ag2 },
+    { classId: 'xi-dkv',  name: 'Tipografi & Identitas Visual Logo', teacher: T.dk4 },
+    { classId: 'xi-tl-1', name: 'Pengelasan Busur Listrik Plat Baja Karbon', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Tangki Air & Pipa Baja', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Praktikum Akuntansi Lembaga Perbankan', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Administrasi e-Faktur Pajak Keluaran', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Periklanan Komersial & Copywriting', teacher: T.dk1 },
+    { classId: 'xii-tl-1', name: 'Pengelasan Sambungan Sudut GTAW 3F', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengelasan Pipa Gas Bertekanan Tinggi', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(4, 'Jam 3 - 4', '08:30', '10:00', [
+    { classId: 'x-ak-1', name: 'Dasar Perbankan Syariah & Konvensional', teacher: T.ak1 },
+    { classId: 'x-ak-2', name: 'Akuntansi Transaksi Keuangan Dasar', teacher: T.ak2 },
+    { classId: 'x-dkv',  name: 'Ilustrasi Karakter Kartun & Manga', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'Dasar Pemeliharaan Mesin Las Listrik', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'x-tl-2', name: 'Kerja Bangku Pembentukan Ulir & Tap', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or1, room: 'Lapangan Olahraga SMKN 1' },
+    { classId: 'xi-ak-2', name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or2, room: 'GOR Indoor SMKN 1 Moilong' },
+    { classId: 'xi-dkv',  name: 'Desain Infografis & Data Visual', teacher: T.dk2, room: LABS.dkMul },
+    { classId: 'xi-tl-1', name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'xi-tl-2', name: 'Pendidikan Pancasila', teacher: T.pk2 },
+    { classId: 'xii-ak-1', name: 'Audit Kas Kecil & Rekonsiliasi Bank', teacher: T.ak3 },
+    { classId: 'xii-ak-2', name: 'Simulasi Sistem Akuntansi Terpadu', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xii-dkv',  name: 'Teknik Tata Suara & Audio Video', teacher: T.dk3, room: LABS.dkStudio },
+    { classId: 'xii-tl-1', name: 'Inspeksi Visual Mutu Sambungan Las', teacher: T.tl1 },
+    { classId: 'xii-tl-2', name: 'Uji Radiografi Sinar X Sambungan Las', teacher: T.tl5, room: LABS.tlNdt }
+  ]);
+
+  setSlot(4, 'Jam 5 - 6', '10:20', '11:50', [
+    { classId: 'x-ak-1', name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or1, room: 'Lapangan Olahraga SMKN 1' },
+    { classId: 'x-ak-2', name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or2, room: 'GOR Indoor SMKN 1 Moilong' },
+    { classId: 'x-dkv',  name: 'Tipografi Anatomi Huruf Huruf Latin', teacher: T.dk4 },
+    { classId: 'x-tl-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'x-tl-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'xi-ak-1', name: 'Praktikum Akuntansi Biaya Standar', teacher: T.ak5 },
+    { classId: 'xi-ak-2', name: 'Perpajakan PPh Pasal 21 Karyawan', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xi-dkv',  name: 'Teknik Cetak Offset & Screen Printing', teacher: T.dk1 },
+    { classId: 'xi-tl-1', name: 'Pengelasan Busur Listrik Sambungan Lap', teacher: T.tl3, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Tangga & Railing Besi Hollow', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'xii-ak-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'xii-dkv',  name: 'Manajemen Produksi Studio Desain', teacher: T.dk2 },
+    { classId: 'xii-tl-1', name: 'Pengelasan Busur Terendam Otomatis', teacher: T.tl2, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Kualifikasi Juru Las Standar ASME IX', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(4, 'Jam 7 - 8', '12:35', '14:05', [
+    { classId: 'x-ak-1', name: 'Sejarah Indonesia', teacher: T.sj1 },
+    { classId: 'x-ak-2', name: 'Seni Budaya & Kearifan Lokal', teacher: T.sj2 },
+    { classId: 'x-dkv',  name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'x-tl-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'x-tl-2', name: 'Gambar Konstruksi Rangka Las CAD', teacher: T.tl1, room: LABS.tlCad },
+    { classId: 'xi-ak-1', name: 'Informatika Bisnis & E-Commerce', teacher: T.if1 },
+    { classId: 'xi-ak-2', name: 'Aplikasi Komputer Keuangan Terpadu', teacher: T.if2, room: LABS.ak1 },
+    { classId: 'xi-dkv',  name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'xi-tl-1', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'xi-tl-2', name: 'Pengelasan Busur Manual SMAW 4G', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xii-ak-1', name: 'Simulasi Sidang Laporan UKK Akuntansi', teacher: T.ak3 },
+    { classId: 'xii-ak-2', name: 'Penyusunan Anggaran Investasi Bisnis', teacher: T.ak4, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Kewirausahaan Sablon Digital & Merchandise', teacher: T.kw1 },
+    { classId: 'xii-tl-1', name: 'Kewirausahaan Fabrikasi Bengkel Las', teacher: T.kw2 },
+    { classId: 'xii-tl-2', name: 'Evaluasi Mutu Hasil Las Standar AWS D1.1', teacher: T.tl5, room: LABS.tlNdt }
+  ]);
+
+  setSlot(4, 'Jam 9 - 10', '14:05', '15:30', [
+    { classId: 'x-ak-1', name: 'Bimbingan Konseling & Minat Karir', teacher: T.bk1 },
+    { classId: 'x-ak-2', name: 'Projek IPAS (Ekologi & Bisnis)', teacher: T.ip1 },
+    { classId: 'x-dkv',  name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or1, room: 'Lapangan Olahraga SMKN 1' },
+    { classId: 'x-tl-1', name: 'Informatika & Komputer Industri', teacher: T.if1 },
+    { classId: 'x-tl-2', name: 'Informatika & Komputer Industri', teacher: T.if2 },
+    { classId: 'xi-ak-1', name: 'Bahasa Inggris Lanjutan Perbankan', teacher: T.en1 },
+    { classId: 'xi-ak-2', name: 'Bahasa Inggris Lanjutan Perbankan', teacher: T.en2 },
+    { classId: 'xi-dkv',  name: 'Pendidikan Jasmani, Olahraga & Kesehatan', teacher: T.or2, room: 'GOR Indoor SMKN 1 Moilong' },
+    { classId: 'xi-tl-1', name: 'Dasar-dasar Fabrikasi & Distorsi Logam', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Dasar Perlakuan Panas Sambungan Las', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xii-ak-1', name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'xii-ak-2', name: 'Pendidikan Pancasila', teacher: T.pk2 },
+    { classId: 'xii-dkv',  name: 'Desain Merchandise & Packaging Event', teacher: T.dk3 },
+    { classId: 'xii-tl-1', name: 'Pengujian Metalurgi Makro Sambungan', teacher: T.tl1, room: LABS.tlNdt },
+    { classId: 'xii-tl-2', name: 'Praktik Fabrikasi Tangki Stainless Steel', teacher: T.tl4, room: LABS.tlFab }
+  ]);
+
+  // ==========================================
+  // HARI 5: JUMAT
+  // ==========================================
+  // 06:45 - 07:15 (Senam Pagi & Pembinaan Rohani)
+  MOILONG_CLASS_IDS.forEach(cid => {
+    S[cid].push({
+      id: `subj-${cid}-5-0645`,
+      day: 5,
+      slot: 'Senam / Rohani',
+      timeStart: '06:45',
+      timeEnd: '07:15',
+      name: 'Senam Pagi Kebugaran & Pembinaan Karakter Siswa',
+      teacher: 'Tim Kesiswaan SMKN 1',
+      room: 'Lapangan Utama SMKN 1 Moilong'
+    });
+  });
+
+  // Slot 1 (07:15 - 08:35)
+  setSlot(5, 'Jam 1 - 2', '07:15', '08:35', [
+    { classId: 'x-ak-1', name: 'Etika Keuangan & Literasi Finansial', teacher: T.ak1 },
+    { classId: 'x-ak-2', name: 'Akuntansi Transaksi Keuangan Digital', teacher: T.ak2 },
+    { classId: 'x-dkv',  name: 'Eksplorasi Warna Nirmana Dwimatra', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'Pengantar Bahan & Metalurgi Pengelasan', teacher: T.tl1 },
+    { classId: 'x-tl-2', name: 'Pemeliharaan Alat Las & K3 Bengkel', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Akuntansi Keuangan Perusahaan Jasa', teacher: T.ak3 },
+    { classId: 'xi-ak-2', name: 'Spreadsheet Pengolahan Gaji Karyawan', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-dkv',  name: 'Desain Banner & Media Sosial Kreatif', teacher: T.dk2, room: LABS.dkMul },
+    { classId: 'xi-tl-1', name: 'Pengelasan Busur Manual SMAW Posisi 1F', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Rangka Meja & Kursi Sekolah', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Penyusunan Laporan Keuangan Neraca', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Simulasi Ujian UKK Mandiri Akuntansi', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Review Portofolio Video Iklan Sekolah', teacher: T.dk3, room: LABS.dkStudio },
+    { classId: 'xii-tl-1', name: 'Pengelasan Sambungan Pipa TIG 1G', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengelasan Sambungan Pipa SMAW 2G', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  // Slot 2 (08:35 - 09:55)
+  setSlot(5, 'Jam 3 - 4', '08:35', '09:55', [
+    { classId: 'x-ak-1', name: 'Pendidikan Agama & Budi Pekerti Islam/Kristen', teacher: T.ag1 },
+    { classId: 'x-ak-2', name: 'Pendidikan Agama & Budi Pekerti Islam/Kristen', teacher: T.ag2 },
+    { classId: 'x-dkv',  name: 'Bimbingan Konseling & Karir Kreatif', teacher: T.bk1 },
+    { classId: 'x-tl-1', name: 'Sejarah Indonesia & Peradaban Logam', teacher: T.sj1 },
+    { classId: 'x-tl-2', name: 'Seni Rupa & Kriya Ornamen Terapan', teacher: T.sj2 },
+    { classId: 'xi-ak-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'xi-ak-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'xi-dkv',  name: 'Bahasa Inggris Komunikasi Industri Kreatif', teacher: T.en1 },
+    { classId: 'xi-tl-1', name: 'Bahasa Inggris Kejuruan Manufaktur', teacher: T.en2 },
+    { classId: 'xi-tl-2', name: 'Pengelasan GMAW Posisi 2G Plat', teacher: T.tl3, room: LABS.tlGmaw },
+    { classId: 'xii-ak-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'xii-ak-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'xii-dkv',  name: 'Kewirausahaan Merchandise DKV', teacher: T.kw1 },
+    { classId: 'xii-tl-1', name: 'Kewirausahaan Jasa Bengkel Las', teacher: T.kw2 },
+    { classId: 'xii-tl-2', name: 'Inspeksi Sambungan Las Fluorescent Penetrant', teacher: T.tl1, room: LABS.tlNdt }
+  ]);
+
+  // Slot 3 (10:15 - 11:15)
+  setSlot(5, 'Jam 5', '10:15', '11:15', [
+    { classId: 'x-ak-1', name: 'Literasi Keuangan & Tabungan Syariah', teacher: T.ak1 },
+    { classId: 'x-ak-2', name: 'Etika Komunikasi Surat Bisnis', teacher: T.ak2 },
+    { classId: 'x-dkv',  name: 'Apresiasi Seni & Desain Indonesia', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'K3 Kebisingan & Radiasi Sinar Las', teacher: T.tl2 },
+    { classId: 'x-tl-2', name: 'Pengenalan Alat Potong Plasma Torch', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Bimbingan Konseling & Kesiapan Magang', teacher: T.bk1 },
+    { classId: 'xi-ak-2', name: 'Perpajakan Badan Usaha Koperasi', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xi-dkv',  name: 'Fotografi Jurnalistik Lingkungan', teacher: T.dk3 },
+    { classId: 'xi-tl-1', name: 'Dasar Pemilihan Kawat Las Elektroda', teacher: T.tl1 },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Rak Alat Bengkel Mandiri', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Konsultasi Karir Lulusan SMK Akuntansi', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Penyusunan Bukti Transaksi Digital', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xii-dkv',  name: 'Evaluasi Portofolio Visual DKV', teacher: T.dk2 },
+    { classId: 'xii-tl-1', name: 'Review Standar WPS Pengelasan AWS', teacher: T.tl5 },
+    { classId: 'xii-tl-2', name: 'Persiapan Uji Kompetensi BNSP Pengelasan', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  // Slot 4 (13:00 - 14:15) - Projek P5 (Projek Penguatan Profil Pelajar Pancasila)
+  // Each class has its own class homeroom facilitator
+  MOILONG_CLASS_IDS.forEach(cid => {
+    S[cid].push({
+      id: `subj-${cid}-5-1300`,
+      day: 5,
+      slot: 'Projek P5',
+      timeStart: '13:00',
+      timeEnd: '14:15',
+      name: 'Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)',
+      teacher: MOILONG_CLASSES[cid].teacher,
+      room: MOILONG_CLASSES[cid].room
+    });
+  });
+
+  // Slot 5 (14:15 - 15:30) - Ekstrakurikuler Wajib & Minat Bakat
+  // Distinct Pembina for each major/grade cohort
+  setSlot(5, 'Ekstrakurikuler', '14:15', '15:30', [
+    { classId: 'x-ak-1', name: 'Pramuka Penegak Gugus Depan SMKN 1', teacher: 'Pembina Pramuka Putera' },
+    { classId: 'x-ak-2', name: 'Pramuka Penegak Gugus Depan SMKN 1', teacher: 'Pembina Pramuka Puteri' },
+    { classId: 'x-dkv',  name: 'Klub Fotografi & Seni Visual Moilong', teacher: T.dk4 },
+    { classId: 'x-tl-1', name: 'Klub Robotika & Mekatronika Pengelasan', teacher: T.tl3 },
+    { classId: 'x-tl-2', name: 'Klub Olahraga Bola Voli & Futsal', teacher: T.or1 },
+    { classId: 'xi-ak-1', name: 'Palang Merah Remaja (PMR Wira)', teacher: 'Pembina PMR Unit SMKN 1' },
+    { classId: 'xi-ak-2', name: 'Klub Debat & Literasi Finansial', teacher: T.ak2 },
+    { classId: 'xi-dkv',  name: 'Klub Sinematografi Moilong Creative', teacher: T.dk2 },
+    { classId: 'xi-tl-1', name: 'Klub Inovasi Teknologi Tepat Guna Logam', teacher: T.tl4 },
+    { classId: 'xi-tl-2', name: 'Klub Bulutangkis & Tenis Meja', teacher: T.or2 },
+    { classId: 'xii-ak-1', name: 'Klub Akuntansi & Persiapan Karir BUMN', teacher: T.ak1 },
+    { classId: 'xii-ak-2', name: 'Klub Pajak Sahabat UMKM Moilong', teacher: T.ak3 },
+    { classId: 'xii-dkv',  name: 'Klub Pameran Kreatif & Kurasi Galeri', teacher: T.dk1 },
+    { classId: 'xii-tl-1', name: 'Klub Juru Las Profesional Moilong Welding', teacher: T.tl2 },
+    { classId: 'xii-tl-2', name: 'Klub Otomotif & Fabrikasi Kustom', teacher: T.tl1 }
+  ]);
+
+  // ==========================================
+  // HARI 6: SABTU
+  // ==========================================
+  setSlot(6, 'Jam 1 - 2', '07:00', '08:30', [
+    { classId: 'x-ak-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'x-ak-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'x-dkv',  name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'x-tl-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'x-tl-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'xi-ak-1', name: 'Praktikum Komputer Akuntansi MYOB', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-ak-2', name: 'Administrasi Piutang Dagang Kejuruan', teacher: T.ak3 },
+    { classId: 'xi-dkv',  name: 'Fotografi Produk Komersial DKV', teacher: T.dk3, room: LABS.dkStudio },
+    { classId: 'xi-tl-1', name: 'Pengelasan GMAW Besi Hollow 1F', teacher: T.tl3, room: LABS.tlGmaw },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Tangga & Tralis Baja', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Bahasa Inggris Kejuruan Akuntansi', teacher: T.en1 },
+    { classId: 'xii-ak-2', name: 'Bahasa Inggris Kejuruan Akuntansi', teacher: T.en2 },
+    { classId: 'xii-dkv',  name: 'Portofolio Branding Kampanye Visual', teacher: T.dk1 },
+    { classId: 'xii-tl-1', name: 'Pengelasan GTAW Pipa Posisi 2G', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Pengelasan Pipa Sambungan 5G SMAW', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(6, 'Jam 3 - 4', '08:30', '10:00', [
+    { classId: 'x-ak-1', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi1 },
+    { classId: 'x-ak-2', name: 'Bahasa Indonesia Kejuruan', teacher: T.bi2 },
+    { classId: 'x-dkv',  name: 'Dasar Animasi Tradisional Flipbook', teacher: T.dk4 },
+    { classId: 'x-tl-1', name: 'Keselamatan Kerja Lingkungan Hidup K3LH', teacher: T.tl2 },
+    { classId: 'x-tl-2', name: 'Kerja Bangku Pembuatan Pola Logam', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Matematika Terapan SMK', teacher: T.mt1 },
+    { classId: 'xi-ak-2', name: 'Matematika Terapan SMK', teacher: T.mt2 },
+    { classId: 'xi-dkv',  name: 'Pengantar Sinematografi & Kamera', teacher: T.dk2, room: LABS.dkStudio },
+    { classId: 'xi-tl-1', name: 'Pengelasan SMAW Sambungan Plat Sudut 2F', teacher: T.tl1, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Perakitan Rangka Pintu Pagar Besi', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Praktikum Akuntansi Manufaktur', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Administrasi Pajak Ekspor Impor PPh 22', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Kurasi Display Galeri Pameran DKV', teacher: T.dk3 },
+    { classId: 'xii-tl-1', name: 'Pengujian Mutu Sambungan Las Bending', teacher: T.tl5, room: LABS.tlNdt },
+    { classId: 'xii-tl-2', name: 'Pengelasan Pipa Sambungan Posisi 6G', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(6, 'Jam 5 - 6', '10:20', '11:50', [
+    { classId: 'x-ak-1', name: 'Etika Profesi & Komunikasi Bisnis', teacher: T.ak2 },
+    { classId: 'x-ak-2', name: 'Dasar-dasar Keuangan & Akuntansi', teacher: T.ak1 },
+    { classId: 'x-dkv',  name: 'Informatika & Literasi Digital Grafis', teacher: T.if1 },
+    { classId: 'x-tl-1', name: 'Gambar Proyeksi Benda Manufaktur CAD', teacher: T.tl1, room: LABS.tlCad },
+    { classId: 'x-tl-2', name: 'Peralatan Tangan Bengkel Kerja Bangku', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Pendidikan Pancasila', teacher: T.pk1 },
+    { classId: 'xi-ak-2', name: 'Pendidikan Pancasila', teacher: T.pk2 },
+    { classId: 'xi-dkv',  name: 'Desain Merchandise Promosi Kreatif', teacher: T.dk4 },
+    { classId: 'xi-tl-1', name: 'Teknik Pengelasan Busur Listrik 3F', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'xi-tl-2', name: 'Fabrikasi Dudukan Motor Listrik Baja', teacher: T.tl4, room: LABS.tlFab },
+    { classId: 'xii-ak-1', name: 'Akuntansi Keuangan Daerah & Desa', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Simulasi Perhitungan Pajak Restoran & Hotel', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Pengarahan Seni (Art Directing)', teacher: T.dk2 },
+    { classId: 'xii-tl-1', name: 'Fabrikasi Konstruksi Baja Berat IWF', teacher: T.tl5, room: LABS.tlGtaw },
+    { classId: 'xii-tl-2', name: 'Laporan Analisis Cacat Las Radiografi', teacher: T.tl6, room: LABS.tlNdt }
+  ]);
+
+  setSlot(6, 'Jam 7 - 8', '12:35', '14:05', [
+    { classId: 'x-ak-1', name: 'Bahasa Inggris Kejuruan', teacher: T.en1 },
+    { classId: 'x-ak-2', name: 'Bahasa Inggris Kejuruan', teacher: T.en2 },
+    { classId: 'x-dkv',  name: 'Ilustrasi Komik & Visual Storytelling', teacher: T.dk1 },
+    { classId: 'x-tl-1', name: 'Pengenalan Mesin Las SMAW Inverter', teacher: T.tl2, room: LABS.tlSmaw },
+    { classId: 'x-tl-2', name: 'Pengukuran Benda Kerja Menggunakan Micrometer', teacher: T.tl3, room: LABS.tlBench },
+    { classId: 'xi-ak-1', name: 'Praktikum Akuntansi Jasa Konsultasi', teacher: T.ak3 },
+    { classId: 'xi-ak-2', name: 'Spreadsheet Pengolahan Pajak Karyawan', teacher: T.ak4, room: LABS.ak1 },
+    { classId: 'xi-dkv',  name: 'Desain Kemasan Makanan Ramah Lingkungan', teacher: T.dk4 },
+    { classId: 'xi-tl-1', name: 'Pengelasan GMAW Sambungan Plat T-Joint', teacher: T.tl1, room: LABS.tlGmaw },
+    { classId: 'xi-tl-2', name: 'Peralatan Keselamatan Gas Bertekanan K3', teacher: T.tl4 },
+    { classId: 'xii-ak-1', name: 'Projek Kreatif PKK: Jasa Pembukuan UMKM', teacher: T.kw1 },
+    { classId: 'xii-ak-2', name: 'Projek Kreatif PKK: Layanan Pelaporan Pajak', teacher: T.kw2 },
+    { classId: 'xii-dkv',  name: 'Desain Portofolio Behance & Dribbble', teacher: T.dk3 },
+    { classId: 'xii-tl-1', name: 'Projek Kreatif PKK: Fabrikasi Pagar Ornamen', teacher: T.tl5, room: LABS.tlFab },
+    { classId: 'xii-tl-2', name: 'Projek Kreatif PKK: Fabrikasi Tangki Stainless', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  setSlot(6, 'Jam 9 - 10', '14:05', '15:30', [
+    { classId: 'x-ak-1', name: 'Projek IPAS (Energi Terbarukan Bisnis)', teacher: T.ip1 },
+    { classId: 'x-ak-2', name: 'Bimbingan Konseling & Karir Vokasi', teacher: T.bk1 },
+    { classId: 'x-dkv',  name: 'Apresiasi Budaya Visual Sulawesi Tengah', teacher: T.sj1 },
+    { classId: 'x-tl-1', name: 'Seni Budaya & Desain Ornamen Logam', teacher: T.sj2 },
+    { classId: 'x-tl-2', name: 'Projek IPAS (Reaksi Oksidasi Logam Las)', teacher: T.tl3 },
+    { classId: 'xi-ak-1', name: 'Etika Penagihan Piutang & Surat Teguran', teacher: T.ak1 },
+    { classId: 'xi-ak-2', name: 'Analisis Kelayakan Usaha UMKM Moilong', teacher: T.ak2 },
+    { classId: 'xi-dkv',  name: 'Fotografi Konseptual & Eksperimental', teacher: T.dk2, room: LABS.dkStudio },
+    { classId: 'xi-tl-1', name: 'Projek Fabrikasi Dudukan Mesin Gerinda', teacher: T.tl2, room: LABS.tlFab },
+    { classId: 'xi-tl-2', name: 'Teknik Pemotongan Plat Gas Oksigen-Asetilin', teacher: T.tl4, room: LABS.tlBench },
+    { classId: 'xii-ak-1', name: 'Uji Coba Try Out Teori Kejuruan UKK', teacher: T.ak5 },
+    { classId: 'xii-ak-2', name: 'Evaluasi Pembukuan Badan Usaha Milik Desa', teacher: T.ak6, room: LABS.ak2 },
+    { classId: 'xii-dkv',  name: 'Penyusunan Anggaran Biaya Desain (RAB)', teacher: T.dk1 },
+    { classId: 'xii-tl-1', name: 'Analisis Biaya Material Pengelasan Fabrikasi', teacher: T.tl5 },
+    { classId: 'xii-tl-2', name: 'Sertifikasi BNSP Pengelasan Pipa Final', teacher: T.tl6, room: LABS.tlPipe }
+  ]);
+
+  return S;
+}
+
+    let _moilongMasterSeedCache = null;
+
+    function generateMoilongMasterSchedule() {
+      return buildAllSchedules();
     }
 
+    function generateMoilongScheduleSeed(classId) {
+      if (!_moilongMasterSeedCache) {
+        _moilongMasterSeedCache = generateMoilongMasterSchedule();
+      }
+      const list = _moilongMasterSeedCache[classId] || [];
+      return JSON.parse(JSON.stringify(list));
+    }
+
+
+    const TIMETABLE_VERSION = '2026_MASTER_NO_CONFLICT_V1';
+
     function initClassTimetables() {
+      let needsMasterSeed = false;
       try {
+        const savedVer = localStorage.getItem('MOILONG_TIMETABLES_VER');
         const saved = localStorage.getItem(STORAGE_KEY_MOILONG_TIMETABLES);
-        if (saved) {
+        if (saved && savedVer === TIMETABLE_VERSION) {
           allClassTimetables = JSON.parse(saved);
         } else {
+          needsMasterSeed = true;
           allClassTimetables = {};
         }
       } catch(e) {
+        needsMasterSeed = true;
         allClassTimetables = {};
       }
 
-      // Pastikan ke-15 kelas selalu memiliki jadwal
-      Object.keys(MOILONG_CLASSES).forEach(classId => {
-        if (!allClassTimetables[classId] || !Array.isArray(allClassTimetables[classId]) || allClassTimetables[classId].length === 0) {
-          allClassTimetables[classId] = generateMoilongScheduleSeed(classId);
-        }
-      });
+      if (needsMasterSeed || Object.keys(allClassTimetables).length < 15) {
+        allClassTimetables = generateMoilongMasterSchedule();
+        localStorage.setItem('MOILONG_TIMETABLES_VER', TIMETABLE_VERSION);
+      } else {
+        // Pastikan ke-15 rombel selalu lengkap
+        MOILONG_CLASS_IDS.forEach(classId => {
+          if (!allClassTimetables[classId] || !Array.isArray(allClassTimetables[classId]) || allClassTimetables[classId].length === 0) {
+            allClassTimetables[classId] = generateMoilongScheduleSeed(classId);
+          }
+        });
+      }
 
       const savedClass = localStorage.getItem(STORAGE_KEY_SELECTED_CLASS);
       if (savedClass && MOILONG_CLASSES[savedClass]) {
@@ -3339,6 +5087,19 @@
       }
 
       saveClassTimetables();
+    }
+
+    function resetAllClassesToMasterConflictFree() {
+      if (!confirm('Terapkan Master Jadwal Standar SMKN 1 Moilong (100% Bebas Bentrok untuk ke-15 Kelas)?')) {
+        return;
+      }
+      allClassTimetables = generateMoilongMasterSchedule();
+      localStorage.setItem('MOILONG_TIMETABLES_VER', TIMETABLE_VERSION);
+      saveClassTimetables();
+      renderClassTimetable();
+      renderLiveDashboardCards();
+      updateClassConflictBadge();
+      showToast('Master Jadwal Bebas Bentrok berhasil diterapkan ke 15 kelas!', 'success');
     }
 
     function saveClassTimetables() {
@@ -3354,17 +5115,25 @@
       document.querySelectorAll('.main-nav-btn').forEach(btn => btn.classList.remove('active'));
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-      if (tab === 'bel') {
-        const btn = document.getElementById('tab-btn-bel');
-        const content = document.getElementById('tab-bel-sekolah');
+      if (tab === 'dashboard') {
+        const btn = document.getElementById('tab-btn-dashboard');
+        const content = document.getElementById('tab-dashboard');
         if (btn) btn.classList.add('active');
         if (content) content.classList.add('active');
+        if (typeof renderLiveDashboardCards === 'function') {
+          renderLiveDashboardCards();
+        }
       } else if (tab === 'jadwal') {
         const btn = document.getElementById('tab-btn-jadwal');
         const content = document.getElementById('tab-jadwal-pelajaran');
         if (btn) btn.classList.add('active');
         if (content) content.classList.add('active');
         renderClassTimetable();
+      } else if (tab === 'bel') {
+        const btn = document.getElementById('tab-btn-bel');
+        const content = document.getElementById('tab-bel-sekolah');
+        if (btn) btn.classList.add('active');
+        if (content) content.classList.add('active');
       }
     }
 
@@ -3381,6 +5150,7 @@
       renderClassHeader();
       renderClassTimetable();
       updateClassLiveStatus();
+      updateClassConflictBadge();
       showToast(`Membuka Jadwal: ${MOILONG_CLASSES[classId].name}`);
     }
 
@@ -3569,6 +5339,18 @@
         return false;
       }
 
+      if (timeStart >= timeEnd) {
+        showToast('Jam selesai harus lebih besar dari jam mulai!', 'warning');
+        return false;
+      }
+
+      // Validasi Bentrok Jadwal Antar Kelas & Guru
+      const conflict = validateScheduleConflict(currentSelectedClassId, teacher, room, day, timeStart, timeEnd, id || null);
+      if (conflict) {
+        showToast(`Gagal Simpan! Terdeteksi bentrok: ${conflict.message}`, 'warning');
+        return false;
+      }
+
       if (!allClassTimetables[currentSelectedClassId]) {
         allClassTimetables[currentSelectedClassId] = [];
       }
@@ -3599,11 +5381,18 @@
           room
         };
         list.push(newSubj);
-        showToast(`Mapel "${name}" berhasil ditambahkan ke ${MOILONG_CLASSES[currentSelectedClassId].name}!`, 'success');
+        showToast(`Mapel "${name}" berhasil ditambahkan ke ${MOILONG_CLASSES[currentSelectedClassId].name}! (Bebas Bentrok)`, 'success');
       }
+
+      list.sort((a, b) => {
+        if (a.day !== b.day) return a.day - b.day;
+        return a.timeStart.localeCompare(b.timeStart);
+      });
 
       saveClassTimetables();
       renderClassTimetable();
+      renderLiveDashboardCards();
+      updateClassConflictBadge();
       closeSubjectModal();
       return false;
     }
@@ -3725,6 +5514,1451 @@
       }
     }
 
+    // --- 12. RUNNING TEXT, 5-PHOTO SLIDESHOW, DASHBOARD MONITOR 15 KELAS LIVE & MENU TAMBAH JADWAL GURU ---
+
+    // 12.1. RUNNING TEXT (TULISAN BERJALAN PENGUMUMAN)
+    const STORAGE_KEY_RUNNING_TEXT = 'smkn1_moilong_running_text_v2';
+    let runningTextConfig = {
+      text: 'Selamat Datang di Portal Monitoring KBM & Bel Otomatis SMKN 1 MOILONG • Jam Pelajaran Efektif: 07:00 - 15:30 WITA (10 Jam Pelajaran) • Seluruh peserta didik wajib berada di ruang kelas, laboratorium komputer, dan bengkel kejuruan masing-masing • Utamakan kedisiplinan, keselamatan kerja (K3LH), dan budaya 5R industri!',
+      speed: 25,
+      theme: 'theme-blue'
+    };
+
+    const RUNNING_TEXT_TEMPLATES = [
+      'Selamat Datang di Portal Terpadu SMKN 1 MOILONG • Jam Pelajaran Efektif Berlangsung Pukul 07:00 s.d. 15:30 WITA (10 Jam Pelajaran per Hari) • Seluruh siswa wajib berada di kelas atau bengkel praktik masing-masing sebelum bel tanda masuk berbunyi • Budayakan 5R (Ringkas, Rapi, Resik, Rawat, Rajin) dan K3LH!',
+      'PEMBERITAHUAN ASESMEN SUMATIF / UJIAN SEMESTER: Kepada seluruh siswa-siswi SMKN 1 Moilong, dilarang membawa HP dan catatan ke ruang ujian tanpa instruksi pengawas • Ujian sesi 1 dimulai tepat pukul 07:30 WITA • Jaga kejujuran dan integritas sekolah!',
+      'KEGIATAN JUMAT BERSIH & IMTAQ: Setiap hari Jumat dimulai pukul 07:00 WITA dengan Pengajian/Pembacaan Doa bersama di Musholla/Lapangan dan dilanjutkan Kerja Bakti Pembersihan Lingkungan Kelas, Studio DKV, Bengkel Pengelasan TL, serta Lab AKL.',
+      'GERAKAN BUDAYA INDUSTRI 5R & K3LH: Keselamatan dan kesehatan kerja adalah prioritas utama civitas akademika SMKN 1 Moilong • Pastikan mesin las listrik, tabung gas asetilin/argon, dan komputer lab dimatikan sebelum jam pulang (15:30 WITA)!'
+    ];
+
+    function loadRunningText() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_RUNNING_TEXT);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (parsed && parsed.text) {
+            runningTextConfig = Object.assign(runningTextConfig, parsed);
+          }
+        }
+      } catch (e) {
+        console.warn('Error reading running text storage:', e);
+      }
+      applyRunningTextToDOM();
+    }
+
+    function applyRunningTextToDOM() {
+      const textEl = document.getElementById('marquee-content-text');
+      const badgeEl = document.getElementById('ticker-badge');
+      if (textEl) {
+        // Tampilkan teks dengan separator agar berulang mulus
+        const cleanText = runningTextConfig.text.trim();
+        textEl.textContent = cleanText + '   ✦✦✦   ' + cleanText;
+        textEl.style.animationDuration = `${runningTextConfig.speed || 25}s`;
+      }
+      if (badgeEl) {
+        badgeEl.className = `running-text-badge ${runningTextConfig.theme || 'theme-blue'}`;
+      }
+    }
+
+    function openRunningTextModal() {
+      const modal = document.getElementById('modal-running-text');
+      const textInput = document.getElementById('input-running-text');
+      const speedSelect = document.getElementById('select-running-speed');
+      const themeSelect = document.getElementById('select-running-theme');
+      const countEl = document.getElementById('running-text-char-count');
+
+      if (textInput) {
+        textInput.value = runningTextConfig.text || '';
+        if (countEl) countEl.textContent = `${textInput.value.length} karakter`;
+        textInput.oninput = () => {
+          if (countEl) countEl.textContent = `${textInput.value.length} karakter`;
+        };
+      }
+      if (speedSelect) speedSelect.value = String(runningTextConfig.speed || 25);
+      if (themeSelect) themeSelect.value = runningTextConfig.theme || 'theme-blue';
+
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeRunningTextModal() {
+      const modal = document.getElementById('modal-running-text');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function applyRunningTextTemplate(index) {
+      const textInput = document.getElementById('input-running-text');
+      const countEl = document.getElementById('running-text-char-count');
+      if (textInput && RUNNING_TEXT_TEMPLATES[index]) {
+        textInput.value = RUNNING_TEXT_TEMPLATES[index];
+        if (countEl) countEl.textContent = `${textInput.value.length} karakter`;
+        showToast('Template pengumuman diterapkan!', 'info');
+      }
+    }
+
+    function saveRunningText(e) {
+      if (e) {
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+      }
+
+      const textInput = document.getElementById('input-running-text');
+      const speedSelect = document.getElementById('select-running-speed');
+      const themeSelect = document.getElementById('select-running-theme');
+
+      const text = textInput ? textInput.value.trim() : '';
+      if (!text) {
+        showToast('Teks pengumuman tidak boleh kosong!', 'warning');
+        return false;
+      }
+
+      runningTextConfig.text = text;
+      runningTextConfig.speed = parseInt(speedSelect ? speedSelect.value : '25', 10) || 25;
+      runningTextConfig.theme = themeSelect ? themeSelect.value : 'theme-blue';
+
+      try {
+        localStorage.setItem(STORAGE_KEY_RUNNING_TEXT, JSON.stringify(runningTextConfig));
+      } catch (err) {
+        console.warn('Gagal menyimpan running text ke localStorage:', err);
+      }
+
+      applyRunningTextToDOM();
+      closeRunningTextModal();
+      showToast('Tulisan berjalan pengumuman berhasil diperbarui!', 'success');
+      return false;
+    }
+
+
+    // 12.2. BANNER SLIDESHOW 5 FOTO (BISA DIGANTI-GANTI)
+    const STORAGE_KEY_SLIDER_PHOTOS = 'smkn1_moilong_slider_photos_v2';
+    const DEFAULT_SLIDER_PHOTOS = [
+      {
+        tag: '🏫 SMKN 1 MOILONG • UNGGUL & BERKARAKTER',
+        title: 'Selamat Datang di Portal Terpadu SMKN 1 MOILONG',
+        desc: 'Pusat Informasi Jadwal Pelajaran 15 Rombongan Belajar, Sistem Bel Sekolah Otomatis, dan Monitoring KBM Berbasis Digital.',
+        image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=1400&q=80'
+      },
+      {
+        tag: '📊 KONSENTRASI KEAHLIAN AKL',
+        title: 'Laboratorium Komputerisasi Akuntansi & Keuangan Lembaga',
+        desc: 'Penguasaan siklus akuntansi perusahaan, aplikasi MYOB Accounting terstandar, dan manajemen administrasi perpajakan modern.',
+        image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80'
+      },
+      {
+        tag: '🎨 KONSENTRASI KEAHLIAN DKV',
+        title: 'Studio Kreatif Desain Komunikasi Visual & Multimedia',
+        desc: 'Eksplorasi estetika desain grafis komputer, teknik fotografi komersial, videografi sinematik, dan produksi kemasan industri kreatif.',
+        image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=1400&q=80'
+      },
+      {
+        tag: '🔥 KONSENTRASI KEAHLIAN TEKNIK LAS (TL)',
+        title: 'Bengkel Fabrikasi Logam & Pengelasan Terstandar Industri (TL)',
+        desc: 'Keahlian pengelasan SMAW, GMAW/MIG/MAG, GTAW/TIG, fabrikasi konstruksi baja presisi, pengujian sambungan las NDT, dan penerapan K3LH industri.',
+        image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=80'
+      },
+      {
+        tag: '🌟 PROJEK P5 & PENGEMBANGAN DIRI',
+        title: 'Pembentukan Karakter Pelajar Pancasila & Budaya Industri 5R',
+        desc: 'Membangun generasi tangguh beriman, bertaqwa, berjiwa wirausaha, gotong royong, dan menjunjung tinggi keselamatan kerja (K3LH).',
+        image: 'https://images.unsplash.com/photo-1529390079861-591de354faf5?w=1400&q=80'
+      }
+    ];
+
+    let sliderPhotos = JSON.parse(JSON.stringify(DEFAULT_SLIDER_PHOTOS));
+    let currentSlideIdx = 0;
+    let sliderAutoplayTimer = null;
+    let currentEditSlideTab = 0;
+
+    function loadSliderPhotos() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_SLIDER_PHOTOS);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length === 5) {
+            sliderPhotos = parsed;
+            // Auto-migrasi jika slide 4 masih versi lama TITL
+            if (sliderPhotos[3] && (sliderPhotos[3].tag?.includes('TITL') || sliderPhotos[3].title?.includes('Listrik'))) {
+              sliderPhotos[3] = JSON.parse(JSON.stringify(DEFAULT_SLIDER_PHOTOS[3]));
+              saveSliderPhotos();
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Gagal membaca slider photos dari storage:', e);
+      }
+      renderSliderUI();
+      startSliderAutoplay();
+    }
+
+    function renderSliderUI() {
+      sliderPhotos.forEach((slide, idx) => {
+        const imgEl = document.getElementById(`slide-img-${idx}`);
+        const tagEl = document.getElementById(`slide-tag-${idx}`);
+        const titleEl = document.getElementById(`slide-title-${idx}`);
+        const descEl = document.getElementById(`slide-desc-${idx}`);
+
+        if (imgEl && slide.image) imgEl.src = slide.image;
+        if (tagEl && slide.tag) tagEl.textContent = slide.tag;
+        if (titleEl && slide.title) titleEl.textContent = slide.title;
+        if (descEl && slide.desc) descEl.textContent = slide.desc;
+      });
+      goToSlide(currentSlideIdx);
+    }
+
+    function goToSlide(idx) {
+      if (idx < 0) idx = sliderPhotos.length - 1;
+      if (idx >= sliderPhotos.length) idx = 0;
+      currentSlideIdx = idx;
+
+      // Update slide elements
+      document.querySelectorAll('.slide-item').forEach((el, i) => {
+        el.classList.toggle('active', i === currentSlideIdx);
+      });
+
+      // Update indicators
+      document.querySelectorAll('#slider-indicators .slider-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlideIdx);
+      });
+    }
+
+    function nextSlide() {
+      goToSlide(currentSlideIdx + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlideIdx - 1);
+    }
+
+    function startSliderAutoplay() {
+      stopSliderAutoplay();
+      sliderAutoplayTimer = setInterval(() => {
+        nextSlide();
+      }, 5500);
+    }
+
+    function stopSliderAutoplay() {
+      if (sliderAutoplayTimer) {
+        clearInterval(sliderAutoplayTimer);
+        sliderAutoplayTimer = null;
+      }
+    }
+
+    function handleSlideImageError(imgEl, index) {
+      console.warn(`Slide image ${index} failed to load, applying graceful fallback.`);
+      const fallbacks = [
+        'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1400&q=80',
+        'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80',
+        'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1400&q=80',
+        'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=1400&q=80',
+        'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80'
+      ];
+      if (imgEl) {
+        imgEl.src = fallbacks[index % fallbacks.length];
+      }
+    }
+
+    // Modal Kelola 5 Foto Slide
+    function openSliderManagerModal() {
+      stopSliderAutoplay();
+      currentEditSlideTab = 0;
+      switchSlideEditTab(0);
+      const modal = document.getElementById('modal-banner-slides');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeSliderManagerModal() {
+      const modal = document.getElementById('modal-banner-slides');
+      if (modal) modal.classList.remove('open');
+      startSliderAutoplay();
+    }
+
+    function switchSlideEditTab(idx) {
+      currentEditSlideTab = idx;
+      document.querySelectorAll('#modal-banner-slides .class-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+      renderSlideEditTab(idx);
+    }
+
+    function renderSlideEditTab(idx) {
+      const container = document.getElementById('slide-edit-forms-container');
+      if (!container) return;
+
+      const slide = sliderPhotos[idx] || DEFAULT_SLIDER_PHOTOS[idx];
+
+      container.innerHTML = `
+        <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; align-items: center;">
+            <div style="width: 160px; height: 100px; border-radius: var(--radius-sm); overflow: hidden; background: #000; border: 1px solid var(--border-color); flex-shrink: 0;">
+              <img id="edit-slide-preview-${idx}" src="${slide.image}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1562774053-701939374585?w=600'">
+            </div>
+            <div style="flex: 1; min-width: 220px;">
+              <strong style="display: block; font-size: 0.95rem; margin-bottom: 0.25rem;">Slide #${idx + 1}</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                Ganti gambar dengan memasukkan link URL gambar atau unggah langsung foto dari galeri/penyimpanan perangkat Anda.
+              </p>
+              <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <label class="btn btn-outline btn-xs" style="cursor: pointer; display: inline-flex; align-items: center; gap: 0.25rem;">
+                  📤 Unggah Foto dari Perangkat
+                  <input type="file" accept="image/*" style="display: none;" onchange="onSlidePhotoUpload(event, ${idx})">
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Link / URL Gambar Foto Slide:</label>
+            <input type="url" id="input-slide-url-${idx}" value="${escapeHtml(slide.image)}" onchange="updateSlidePreview(${idx})" placeholder="https://..." style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-size: 0.85rem;">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Label / Tag Atas:</label>
+            <input type="text" id="input-slide-tag-${idx}" value="${escapeHtml(slide.tag)}" placeholder="Contoh: 🏫 SMKN 1 MOILONG" style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-size: 0.85rem;">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Judul Utama Slide:</label>
+            <input type="text" id="input-slide-title-${idx}" value="${escapeHtml(slide.title)}" placeholder="Judul slide banner..." style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-size: 0.85rem; font-weight: 600;">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Deskripsi / Penjelasan Singkat:</label>
+            <textarea id="input-slide-desc-${idx}" rows="2" placeholder="Deskripsi informasi slide..." style="width: 100%; padding: 0.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background-color: var(--bg-card-hover); color: var(--text-main); font-size: 0.85rem;">${escapeHtml(slide.desc)}</textarea>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateSlidePreview(idx) {
+      const urlInput = document.getElementById(`input-slide-url-${idx}`);
+      const previewImg = document.getElementById(`edit-slide-preview-${idx}`);
+      if (urlInput && previewImg && urlInput.value.trim()) {
+        previewImg.src = urlInput.value.trim();
+      }
+    }
+
+    function onSlidePhotoUpload(event, idx) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      if (!file.type.startsWith('image/')) {
+        showToast('Berkas yang dipilih harus berupa file gambar.', 'warning');
+        return;
+      }
+
+      // Gunakan FileReader untuk konversi ke Base64 dataURL
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target.result;
+        const urlInput = document.getElementById(`input-slide-url-${idx}`);
+        const previewImg = document.getElementById(`edit-slide-preview-${idx}`);
+
+        if (urlInput) urlInput.value = dataUrl;
+        if (previewImg) previewImg.src = dataUrl;
+        showToast(`Foto untuk Slide #${idx + 1} berhasil dimuat! Klik "Terapkan Perubahan" untuk menyimpan.`, 'info');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function saveSliderPhotosFromModal() {
+      // Simpan nilai dari form tab saat ini terlebih dahulu
+      const idx = currentEditSlideTab;
+      const urlEl = document.getElementById(`input-slide-url-${idx}`);
+      const tagEl = document.getElementById(`input-slide-tag-${idx}`);
+      const titleEl = document.getElementById(`input-slide-title-${idx}`);
+      const descEl = document.getElementById(`input-slide-desc-${idx}`);
+
+      if (urlEl && titleEl) {
+        sliderPhotos[idx] = {
+          image: urlEl.value.trim() || DEFAULT_SLIDER_PHOTOS[idx].image,
+          tag: tagEl ? tagEl.value.trim() : DEFAULT_SLIDER_PHOTOS[idx].tag,
+          title: titleEl ? titleEl.value.trim() : DEFAULT_SLIDER_PHOTOS[idx].title,
+          desc: descEl ? descEl.value.trim() : DEFAULT_SLIDER_PHOTOS[idx].desc
+        };
+      }
+
+      try {
+        localStorage.setItem(STORAGE_KEY_SLIDER_PHOTOS, JSON.stringify(sliderPhotos));
+      } catch (err) {
+        console.warn('Gagal menyimpan slider photos:', err);
+      }
+
+      renderSliderUI();
+      closeSliderManagerModal();
+      showToast('5 Foto Slide Banner Sekolah berhasil diperbarui!', 'success');
+    }
+
+    function resetSliderToDefaults() {
+      if (!confirm('Kembalikan seluruh 5 slide foto banner ke foto dan teks standar SMKN 1 Moilong?')) return;
+      sliderPhotos = JSON.parse(JSON.stringify(DEFAULT_SLIDER_PHOTOS));
+      try {
+        localStorage.removeItem(STORAGE_KEY_SLIDER_PHOTOS);
+      } catch (e) {}
+      renderSliderUI();
+      switchSlideEditTab(0);
+      showToast('5 Foto banner telah direset ke format standar.', 'success');
+    }
+
+
+    // 12.3. DASHBOARD MONITORING KBM 15 KELAS LIVE (PADA SAAT JAM BERLANGSUNG)
+    let monitorMode = 'live'; // 'live' (real-time) or 'sim' (simulated time)
+    let simDay = 1; // Senin
+    let simTime = '08:30';
+    let lastRenderedMonitorMinute = '';
+
+    function setMonitorMode(mode) {
+      monitorMode = mode;
+      const btnLive = document.getElementById('btn-mode-live');
+      const btnSim = document.getElementById('btn-mode-sim');
+      const simPanel = document.getElementById('sim-control-panel');
+      const liveBadge = document.getElementById('monitor-live-badge');
+
+      if (mode === 'live') {
+        if (btnLive) btnLive.classList.add('active');
+        if (btnSim) btnSim.classList.remove('active');
+        if (simPanel) simPanel.style.display = 'none';
+        if (liveBadge) {
+          liveBadge.className = 'live-status-tag active';
+          liveBadge.textContent = '🟢 Live Real-Time';
+        }
+        showToast('Mode pemantauan beralih ke Waktu Asli (Real-time)', 'info');
+      } else {
+        if (btnLive) btnLive.classList.remove('active');
+        if (btnSim) btnSim.classList.add('active');
+        if (simPanel) simPanel.style.display = 'block';
+        if (liveBadge) {
+          liveBadge.className = 'live-status-tag break';
+          liveBadge.textContent = '⏱️ Mode Simulasi Jam';
+        }
+        showToast('Mode Simulasi Jam aktif. Anda dapat menguji jadwal pada jam berapa pun!', 'info');
+      }
+      renderLiveDashboardCards();
+    }
+
+    function setSimTime(timeStr, label = '') {
+      simTime = timeStr;
+      const inputEl = document.getElementById('sim-time-input');
+      if (inputEl) inputEl.value = timeStr;
+      if (monitorMode !== 'sim') {
+        setMonitorMode('sim');
+      } else {
+        renderLiveDashboardCards();
+      }
+      if (label) {
+        showToast(`Simulasi waktu diatur ke: ${timeStr} (${label})`);
+      }
+    }
+
+    function onSimParamChange() {
+      const daySelect = document.getElementById('sim-day-select');
+      const timeInput = document.getElementById('sim-time-input');
+
+      if (daySelect) simDay = parseInt(daySelect.value, 10);
+      if (timeInput) simTime = timeInput.value;
+
+      renderLiveDashboardCards();
+    }
+
+    function updateDashboardLiveMonitor(now, dayIdx, timeStr) {
+      // Perbarui label jam header monitor
+      const dayNameEl = document.getElementById('mon-day-name');
+      const dateStrEl = document.getElementById('mon-date-str');
+      const timeStrEl = document.getElementById('mon-time-str');
+
+      if (dayNameEl) dayNameEl.textContent = DAYS_ID[dayIdx];
+      if (dateStrEl) dateStrEl.textContent = `${now.getDate()} ${MONTHS_ID[now.getMonth()]} ${now.getFullYear()}`;
+      if (timeStrEl) timeStrEl.textContent = `${timeStr}:${String(now.getSeconds()).padStart(2, '0')}`;
+
+      // Dalam mode live, render ulang kartu jika menit berubah
+      if (monitorMode === 'live') {
+        const currentMinuteKey = `${dayIdx}-${timeStr}`;
+        if (lastRenderedMonitorMinute !== currentMinuteKey) {
+          lastRenderedMonitorMinute = currentMinuteKey;
+          renderLiveDashboardCards();
+        }
+      }
+    }
+
+    function renderLiveDashboardCards() {
+      const container = document.getElementById('dashboard-live-classes-container');
+      if (!container) return;
+
+      // Tentukan hari dan waktu target
+      let targetDay = 1;
+      let targetTime = '08:30';
+
+      if (monitorMode === 'live') {
+        const now = new Date();
+        targetDay = now.getDay();
+        targetTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+      } else {
+        targetDay = simDay;
+        targetTime = simTime;
+      }
+
+      // Ambil filter
+      const majorFilterEl = document.getElementById('filter-monitor-major');
+      const gradeFilterEl = document.getElementById('filter-monitor-grade');
+      const statusFilterEl = document.getElementById('filter-monitor-status');
+      const searchInputEl = document.getElementById('search-monitor-input');
+
+      const majorFilter = majorFilterEl ? majorFilterEl.value : 'all';
+      const gradeFilter = gradeFilterEl ? gradeFilterEl.value : 'all';
+      const statusFilter = statusFilterEl ? statusFilterEl.value : 'all';
+      const searchQuery = searchInputEl ? searchInputEl.value.toLowerCase().trim() : '';
+
+      // Statistik akumulator
+      let countActive = 0;
+      let countIdle = 0;
+      const activeTeachersSet = new Set();
+      const activeRoomsSet = new Set();
+
+      const classEntries = Object.keys(MOILONG_CLASSES).map(classId => {
+        const info = MOILONG_CLASSES[classId];
+        const currentList = allClassTimetables[classId] || [];
+        const todaySubjects = currentList.filter(item => item.day === targetDay);
+        todaySubjects.sort((a, b) => a.timeStart.localeCompare(b.timeStart));
+
+        let status = 'idle'; // 'active', 'break', 'waiting', 'completed', 'sunday', 'idle'
+        let currentSubject = null;
+        let nextSubject = null;
+        let progressPercent = 0;
+        let timeRemainingStr = '';
+
+        if (targetDay === 0) {
+          status = 'sunday';
+        } else if (todaySubjects.length > 0) {
+          // Cari mapel aktif
+          currentSubject = todaySubjects.find(item => {
+            return targetTime >= item.timeStart && targetTime < item.timeEnd;
+          });
+
+          // Cari mapel berikutnya
+          nextSubject = todaySubjects.find(item => item.timeStart > targetTime);
+
+          if (currentSubject) {
+            status = 'active';
+            countActive++;
+            if (currentSubject.teacher && currentSubject.teacher !== '-') {
+              activeTeachersSet.add(currentSubject.teacher);
+            }
+            if (currentSubject.room && (currentSubject.room.includes('Lab') || currentSubject.room.includes('Bengkel') || currentSubject.room.includes('Studio'))) {
+              activeRoomsSet.add(currentSubject.room);
+            }
+
+            // Hitung persentase progress jam KBM
+            const [startH, startM] = currentSubject.timeStart.split(':').map(Number);
+            const [endH, endM] = currentSubject.timeEnd.split(':').map(Number);
+            const [curH, curM] = targetTime.split(':').map(Number);
+
+            const startTotal = startH * 60 + startM;
+            const endTotal = endH * 60 + endM;
+            const curTotal = curH * 60 + curM;
+
+            const duration = endTotal - startTotal;
+            const elapsed = curTotal - startTotal;
+            if (duration > 0) {
+              progressPercent = Math.min(100, Math.max(0, Math.round((elapsed / duration) * 100)));
+              const remMinutes = endTotal - curTotal;
+              timeRemainingStr = `${remMinutes} menit tersisa`;
+            }
+          } else {
+            const firstStart = todaySubjects[0].timeStart;
+            const lastEnd = todaySubjects[todaySubjects.length - 1].timeEnd;
+
+            if (targetTime < firstStart) {
+              status = 'waiting';
+              countIdle++;
+            } else if (targetTime >= lastEnd) {
+              status = 'completed';
+              countIdle++;
+            } else {
+              status = 'break';
+              countIdle++;
+            }
+          }
+        } else {
+          status = 'idle';
+          countIdle++;
+        }
+
+        return {
+          classId,
+          info,
+          status,
+          currentSubject,
+          nextSubject,
+          progressPercent,
+          timeRemainingStr,
+          firstSubject: todaySubjects[0] || null
+        };
+      });
+
+      // Update Metrik Ringkasan di atas
+      const mActiveEl = document.getElementById('metric-kbm-active');
+      const mTeachersEl = document.getElementById('metric-teachers-active');
+      const mRoomsEl = document.getElementById('metric-rooms-active');
+      const mIdleEl = document.getElementById('metric-kbm-idle');
+
+      if (mActiveEl) mActiveEl.textContent = countActive;
+      if (mTeachersEl) mTeachersEl.textContent = activeTeachersSet.size;
+      if (mRoomsEl) mRoomsEl.textContent = activeRoomsSet.size;
+      if (mIdleEl) mIdleEl.textContent = countIdle;
+
+      // Filter daftar kelas
+      const filtered = classEntries.filter(item => {
+        // Filter Jurusan
+        if (majorFilter === 'AKL' && !item.classId.includes('ak')) return false;
+        if (majorFilter === 'DKV' && !item.classId.includes('dkv')) return false;
+        if ((majorFilter === 'TL' || majorFilter === 'TITL') && !item.classId.includes('tl')) return false;
+
+        // Filter Tingkat
+        if (gradeFilter !== 'all' && item.info.grade !== gradeFilter) return false;
+
+        // Filter Status
+        if (statusFilter === 'active' && item.status !== 'active') return false;
+        if (statusFilter === 'break' && item.status !== 'break') return false;
+        if (statusFilter === 'idle' && (item.status === 'active' || item.status === 'break')) return false;
+
+        // Search Query
+        if (searchQuery) {
+          const matchClassName = item.info.name.toLowerCase().includes(searchQuery);
+          const matchTeacher = item.currentSubject && item.currentSubject.teacher && item.currentSubject.teacher.toLowerCase().includes(searchQuery);
+          const matchSubject = item.currentSubject && item.currentSubject.name && item.currentSubject.name.toLowerCase().includes(searchQuery);
+          const matchWali = item.info.teacher.toLowerCase().includes(searchQuery);
+          const matchRoom = (item.currentSubject && item.currentSubject.room && item.currentSubject.room.toLowerCase().includes(searchQuery)) || item.info.room.toLowerCase().includes(searchQuery);
+
+          if (!matchClassName && !matchTeacher && !matchSubject && !matchWali && !matchRoom) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+
+      // Render Cards
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="card" style="grid-column: 1 / -1; text-align: center; padding: 3rem 1.5rem; color: var(--text-muted);">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔍</div>
+            <h3 style="font-size: 1.1rem; color: var(--text-main); font-weight: 700;">Tidak ada kelas yang cocok dengan filter</h3>
+            <p style="font-size: 0.85rem; margin-top: 0.25rem;">Coba sesuaikan pilihan filter jurusan, tingkat, status, atau kata kunci pencarian Anda.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(c => {
+        let cardStatusClass = '';
+        let badgeHtml = '';
+        let contentHtml = '';
+
+        if (c.status === 'active' && c.currentSubject) {
+          cardStatusClass = 'status-active';
+          badgeHtml = `<span class="live-status-tag active">🟢 Sedang KBM</span>`;
+          contentHtml = `
+            <div class="ongoing-subj-name">
+              ${escapeHtml(c.currentSubject.name)}
+            </div>
+
+            <div class="teacher-info-row">
+              <div class="teacher-avatar">👨‍🏫</div>
+              <div class="teacher-details">
+                <span class="teacher-label">Guru Pengampu Jam Ini:</span>
+                <span class="teacher-name-live">${escapeHtml(c.currentSubject.teacher || c.info.teacher)}</span>
+              </div>
+            </div>
+
+            <div class="kbm-meta-row">
+              <div class="kbm-meta-chip">
+                <span>📍</span> <span>${escapeHtml(c.currentSubject.room || c.info.room)}</span>
+              </div>
+              <div class="kbm-meta-chip">
+                <span>⏰</span> <span>${c.currentSubject.timeStart} - ${c.currentSubject.timeEnd} WITA</span>
+              </div>
+            </div>
+
+            <div class="kbm-progress-wrap">
+              <div class="kbm-progress-bar" style="width: ${c.progressPercent}%;"></div>
+            </div>
+            <div class="kbm-progress-label">
+              <span>${c.currentSubject.slot || 'Jam Pelajaran'}</span>
+              <span><strong>${c.progressPercent}%</strong> (${c.timeRemainingStr})</span>
+            </div>
+
+            ${c.nextSubject ? `
+              <div class="next-subj-preview">
+                ⏭️ <strong>Berikutnya:</strong> ${escapeHtml(c.nextSubject.name)} (${c.nextSubject.timeStart}) • Guru: ${escapeHtml(c.nextSubject.teacher || '-')}
+              </div>
+            ` : `
+              <div class="next-subj-preview">
+                🏁 <strong>Sesi Terakhir:</strong> Dilanjutkan bel pulang sekolah (15:30 WITA)
+              </div>
+            `}
+          `;
+        } else if (c.status === 'break') {
+          cardStatusClass = 'status-break';
+          badgeHtml = `<span class="live-status-tag break">☕ Waktu Istirahat</span>`;
+          contentHtml = `
+            <div style="padding: 0.75rem 0; text-align: center;">
+              <div style="font-size: 1.6rem; margin-bottom: 0.25rem;">☕</div>
+              <strong style="font-size: 0.95rem; color: var(--warning); display: block;">Istirahat & Pergantian Jam</strong>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Peserta didik istirahat / sholat / mempersiapkan materi pelajaran berikutnya.</p>
+            </div>
+
+            ${c.nextSubject ? `
+              <div class="next-subj-preview" style="background-color: var(--bg-card);">
+                ⏭️ <strong>Masuk Jam Berikutnya (${c.nextSubject.timeStart}):</strong><br>
+                <span style="font-weight: 700; color: var(--text-main);">${escapeHtml(c.nextSubject.name)}</span><br>
+                <span>👨‍🏫 ${escapeHtml(c.nextSubject.teacher || '-')} • 📍 ${escapeHtml(c.nextSubject.room || '-')}</span>
+              </div>
+            ` : ''}
+          `;
+        } else if (c.status === 'waiting') {
+          cardStatusClass = 'status-idle';
+          badgeHtml = `<span class="live-status-tag waiting">⏳ Belum Mulai</span>`;
+          contentHtml = `
+            <div style="padding: 0.75rem 0; text-align: center;">
+              <div style="font-size: 1.6rem; margin-bottom: 0.25rem;">🏫</div>
+              <strong style="font-size: 0.92rem; color: var(--text-main); display: block;">Menunggu Bel Masuk Jam Ke-1</strong>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">KBM reguler SMKN 1 Moilong dimulai tepat pukul 07:00 WITA.</p>
+            </div>
+
+            ${c.firstSubject ? `
+              <div class="next-subj-preview" style="background-color: var(--bg-card);">
+                🔔 <strong>Mulai Pukul ${c.firstSubject.timeStart}:</strong><br>
+                <span style="font-weight: 700; color: var(--text-main);">${escapeHtml(c.firstSubject.name)}</span><br>
+                <span>👨‍🏫 ${escapeHtml(c.firstSubject.teacher || '-')}</span>
+              </div>
+            ` : ''}
+          `;
+        } else if (c.status === 'completed') {
+          cardStatusClass = 'status-idle';
+          badgeHtml = `<span class="live-status-tag waiting">🏁 Selesai (15:30)</span>`;
+          contentHtml = `
+            <div style="padding: 1rem 0; text-align: center;">
+              <div style="font-size: 1.6rem; margin-bottom: 0.25rem;">🏠</div>
+              <strong style="font-size: 0.92rem; color: var(--text-main); display: block;">Pelajaran Hari Ini Telah Selesai</strong>
+              <p style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">Bel pulang berbunyi pukul 15:30 WITA. Seluruh siswa telah meninggalkan ruang kelas.</p>
+            </div>
+          `;
+        } else if (c.status === 'sunday') {
+          cardStatusClass = 'status-idle';
+          badgeHtml = `<span class="live-status-tag waiting">📅 Libur Hari Minggu</span>`;
+          contentHtml = `
+            <div style="padding: 1.25rem 0; text-align: center;">
+              <div style="font-size: 1.8rem; margin-bottom: 0.25rem;">🏖️</div>
+              <strong style="font-size: 0.95rem; color: var(--text-main); display: block;">Hari Libur Sekolah</strong>
+              <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem;">Tidak ada aktivitas kegiatan belajar mengajar pada hari Minggu.</p>
+            </div>
+          `;
+        } else {
+          cardStatusClass = 'status-idle';
+          badgeHtml = `<span class="live-status-tag waiting">⚪ Kosong</span>`;
+          contentHtml = `
+            <div style="padding: 1rem 0; text-align: center;">
+              <p style="font-size: 0.8rem; color: var(--text-muted);">Tidak ada jadwal pelajaran terdaftar untuk hari ini.</p>
+            </div>
+          `;
+        }
+
+        return `
+          <div class="live-class-card ${cardStatusClass}" id="card-live-${c.classId}">
+            <div class="live-class-header">
+              <div class="live-class-title-group">
+                <span class="live-class-code">${escapeHtml(c.info.name)}</span>
+                <span class="live-class-major-pill">${escapeHtml(c.info.grade)} • ${escapeHtml(c.info.major.split('(')[1] ? c.info.major.split('(')[1].replace(')', '') : c.info.major)}</span>
+              </div>
+              ${badgeHtml}
+            </div>
+
+            <div class="live-class-body">
+              ${contentHtml}
+            </div>
+
+            <div class="live-class-footer">
+              <button type="button" class="btn btn-outline btn-xs" onclick="viewClassTimetableDetail('${c.classId}')" title="Lihat Jadwal Lengkap Kelas Ini">
+                📖 Jadwal Kelas
+              </button>
+              <button type="button" class="btn btn-primary btn-xs" onclick="openAddScheduleTeacherSubjectModal('${c.classId}', ${targetDay})" title="Tambah Jadwal Mapel untuk Kelas Ini">
+                ➕ Tambah Mapel
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function viewClassTimetableDetail(classId) {
+      selectClass(classId);
+      switchMainTab('jadwal');
+    }
+
+
+    // 12.4. MENU PENAMBAHAN JADWAL BERDASARKAN GURU DAN MATA PELAJARAN
+    const MOILONG_TEACHERS = [
+      "Dra. Hj. Siti Aminah, M.Pd (Akuntansi & Keuangan)",
+      "Rahmat Hidayat, S.Pd (Akuntansi & K3LH)",
+      "Sri Wahyuni, S.E (Akuntansi Dagang & Lembaga)",
+      "Nurul Fadilah, S.Pd (MYOB Accounting & Spreadsheet)",
+      "Dra. Endang Lestari (Manufaktur & Audit)",
+      "Ahmad Fauzi, S.E (Perpajakan & Akuntansi Keuangan)",
+      "Fajar Kurniawan, S.Sn (Dasar DKV & Nirmana)",
+      "Reza Pratama, M.Ds (Software Multimedia & Video)",
+      "Dimas Arya, S.Kom (Fotografi, Percetakan & UI/UX)",
+      "Ir. Bambang Sutrisno (Gambar Manufaktur & Simbol Las)",
+      "Agus Prasetyo, S.T (Pengelasan SMAW Busur Manual)",
+      "Hendra Gunawan, S.Pd.T (Pengelasan GMAW MIG/MAG)",
+      "Joko Susilo, S.T (Fabrikasi Baja & K3LH Bengkel Las)",
+      "Budi Santoso, S.T (Pengelasan GTAW / TIG Presisi)",
+      "M. Taufik, S.Pd (Pengelasan Pipa & Uji Cacat NDT)",
+      "Linda Kartika, M.Pd (Bahasa Inggris Kejuruan)",
+      "Siti Rahmawati, M.Pd (Bahasa Indonesia)",
+      "Irwan Setiawan, S.Pd (Matematika Terapan SMK)",
+      "Drs. Wahyu Hidayat (Pendidikan Pancasila)",
+      "Ust. Mansyur, S.Pd.I (Pendidikan Agama Islam)",
+      "Erwin Pratama, S.Pd (PJOK & Olahraga)",
+      "H. Syamsuddin, S.E (Projek Kreatif & Kewirausahaan)",
+      "Yuliana, S.Pd (Sejarah Indonesia)",
+      "Dedi Kusuma, S.Kom (Informatika & Literasi Digital)",
+      "Dra. Nurhayati (Bimbingan Konseling)"
+    ];
+
+    const MOILONG_SUBJECTS_CATALOG = {
+      "Muatan Nasional & Umum (Semua Jurusan)": [
+        "Pendidikan Agama dan Budi Pekerti",
+        "Pendidikan Pancasila & Kewarganegaraan",
+        "Bahasa Indonesia",
+        "Matematika Terapan SMK",
+        "Bahasa Inggris & Komunikasi Bisnis",
+        "Pendidikan Jasmani, Olahraga dan Kesehatan (PJOK)",
+        "Sejarah Indonesia",
+        "Seni Budaya & Muatan Lokal",
+        "Informatika & Literasi Digital",
+        "Projek IPAS (Ilmu Pengetahuan Alam dan Sosial)",
+        "Projek Penguatan Profil Pelajar Pancasila (P5)",
+        "Bimbingan Konseling & Karir"
+      ],
+      "Konsentrasi Keahlian Akuntansi (AKL)": [
+        "Dasar-dasar Akuntansi dan Keuangan Lembaga",
+        "Etika Profesi & Keselamatan Kerja (K3LH) Akuntansi",
+        "Aplikasi Pengolah Angka (Spreadsheet)",
+        "Praktikum Akuntansi Perusahaan Jasa",
+        "Praktikum Akuntansi Perusahaan Dagang",
+        "Praktikum Akuntansi Perusahaan Manufaktur",
+        "Komputer Akuntansi (MYOB Accounting)",
+        "Administrasi Pajak & e-SPT Perpajakan",
+        "Akuntansi Lembaga dan Instansi Pemerintah",
+        "Administrasi Transaksi dan Kas Perbankan",
+        "Praktik Uji Kompetensi Keahlian (UKK Akuntansi)",
+        "Projek Kreatif dan Kewirausahaan (PKK Akuntansi)"
+      ],
+      "Konsentrasi Keahlian Desain Komunikasi Visual (DKV)": [
+        "Dasar-dasar Desain Komunikasi Visual",
+        "Gambar Sketsa dan Ilustrasi Manual",
+        "Komposisi Pola Warna & Prinsip Nirmana",
+        "Perangkat Lunak Desain Grafis (Photoshop & Illustrator)",
+        "Tipografi Artistik & Layout Publikasi Visual",
+        "Fotografi Digital & Pengaturan Tata Cahaya Studio",
+        "Videografi Kreatif & Teknik Editing Sinematik",
+        "Desain Kemasan Produk & Mockup 3D Komersial",
+        "Desain Antarmuka Pengguna (UI/UX Design)",
+        "Produksi Media Informasi & Percetakan Digital",
+        "Praktik Uji Kompetensi Keahlian (UKK DKV)",
+        "Projek Kreatif dan Kewirausahaan (PKK Desain Visual)"
+      ],
+      "Konsentrasi Keahlian Teknik Las (TL)": [
+        "Dasar-dasar Teknik Mesin & Pengelasan Logam",
+        "Gambar Teknik Manufaktur & Simbol Pengelasan (WPS)",
+        "Pekerjaan Dasar Teknik Mesin & Kerja Bangku",
+        "Teknik Pengelasan Oksi-Asetilin (OAW)",
+        "Teknik Pengelasan Busur Manual (SMAW 1F - 4G)",
+        "Teknik Pengelasan Gas Metal (GMAW / MIG / MAG)",
+        "Teknik Pengelasan Gas Tungsten (GTAW / TIG Presisi)",
+        "Teknik Pengelasan Pipa SMAW & GTAW (Posisi 5G - 6G)",
+        "Fabrikasi Logam, Perakitan & Konstruksi Baja",
+        "Pemeriksaan Hasil Las Visual & Cacat Las Sambungan",
+        "Uji Kualitas Sambungan Las NDT (Non-Destructive Testing)",
+        "Praktik Uji Kompetensi Keahlian (UKK Teknik Las)",
+        "Projek Kreatif dan Kewirausahaan (PKK Fabrikasi Las)"
+      ]
+    };
+
+    const MOILONG_ROOMS = [
+      "Ruang Teori Kelas Masing-Masing",
+      "Lab Komputer Akuntansi 1 (MYOB & Spreadsheet)",
+      "Lab Komputer Akuntansi 2 (Perpajakan & Administrasi)",
+      "Studio Fotografi & Videografi Kreatif DKV",
+      "Lab Multimedia & Komputer Desain Grafis DKV",
+      "Studio Gambar & Sketsa Manual DKV",
+      "Bengkel Pengelasan SMAW (Booth Las 1-12)",
+      "Bengkel Pengelasan GMAW (MIG/MAG)",
+      "Bengkel Pengelasan GTAW (TIG Presisi)",
+      "Bengkel Fabrikasi Logam & Konstruksi Baja",
+      "Bengkel Kerja Bangku & Pemotongan Logam",
+      "Lab Uji Cacat Las NDT & Metalurgi Bahan",
+      "R. Gambar Manufaktur & Desain CAD",
+      "Lapangan Upacara & Olahraga SMKN 1 Moilong",
+      "Musholla / Ruang Ibadah SMKN 1 Moilong",
+      "Perpustakaan & Ruang Literasi Digital",
+      "Aula Pertemuan Utama SMKN 1 Moilong"
+    ];
+
+    function populateTeacherAndSubjectDropdowns() {
+      // 1. Dropdown Guru
+      const teacherSelect = document.getElementById('add-sched-teacher-select');
+      if (teacherSelect) {
+        teacherSelect.innerHTML = `
+          <option value="" disabled selected>-- Pilih Guru Pengampu --</option>
+          ${MOILONG_TEACHERS.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('')}
+          <option value="CUSTOM">➕ Ketik Nama Guru Lainnya...</option>
+        `;
+      }
+
+      // 2. Dropdown Mata Pelajaran
+      const subjectSelect = document.getElementById('add-sched-subject-select');
+      if (subjectSelect) {
+        let optionsHtml = `<option value="" disabled selected>-- Pilih Mata Pelajaran --</option>`;
+        for (const [groupName, subjects] of Object.entries(MOILONG_SUBJECTS_CATALOG)) {
+          optionsHtml += `<optgroup label="${escapeHtml(groupName)}">`;
+          subjects.forEach(s => {
+            optionsHtml += `<option value="${escapeHtml(s)}">${escapeHtml(s)}</option>`;
+          });
+          optionsHtml += `</optgroup>`;
+        }
+        optionsHtml += `<option value="CUSTOM">➕ Ketik Nama Mapel Baru Lainnya...</option>`;
+        subjectSelect.innerHTML = optionsHtml;
+      }
+
+      // 3. Dropdown Ruangan
+      const roomSelect = document.getElementById('add-sched-room-select');
+      if (roomSelect) {
+        roomSelect.innerHTML = `
+          ${MOILONG_ROOMS.map(r => `<option value="${escapeHtml(r)}">${escapeHtml(r)}</option>`).join('')}
+          <option value="CUSTOM">➕ Ketik Nama Ruangan Lainnya...</option>
+        `;
+      }
+    }
+
+    function openAddScheduleTeacherSubjectModal(presetClassId = null, presetDay = null) {
+      const modal = document.getElementById('modal-add-schedule-teacher-subject');
+      const classSelect = document.getElementById('add-sched-class-target');
+      const daySelect = document.getElementById('add-sched-day');
+
+      if (classSelect && presetClassId && MOILONG_CLASSES[presetClassId]) {
+        classSelect.value = presetClassId;
+      } else if (classSelect && currentSelectedClassId) {
+        classSelect.value = currentSelectedClassId;
+      }
+
+      if (daySelect && presetDay && presetDay >= 1 && presetDay <= 6) {
+        daySelect.value = String(presetDay);
+      }
+
+      // Pastikan dropdown terisi
+      populateTeacherAndSubjectDropdowns();
+      onTeacherSelectChange();
+      onSubjectSelectChange();
+      onRoomSelectChange();
+      onAddSchedFormParamChange();
+
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeAddScheduleTeacherSubjectModal() {
+      const modal = document.getElementById('modal-add-schedule-teacher-subject');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function onTeacherSelectChange() {
+      const select = document.getElementById('add-sched-teacher-select');
+      const customInput = document.getElementById('add-sched-teacher-custom');
+      if (select && customInput) {
+        if (select.value === 'CUSTOM') {
+          customInput.style.display = 'block';
+          customInput.required = true;
+          customInput.focus();
+        } else {
+          customInput.style.display = 'none';
+          customInput.required = false;
+        }
+      }
+      onAddSchedFormParamChange();
+    }
+
+    function onSubjectSelectChange() {
+      const select = document.getElementById('add-sched-subject-select');
+      const customInput = document.getElementById('add-sched-subject-custom');
+      if (select && customInput) {
+        if (select.value === 'CUSTOM') {
+          customInput.style.display = 'block';
+          customInput.required = true;
+          customInput.focus();
+        } else {
+          customInput.style.display = 'none';
+          customInput.required = false;
+        }
+      }
+    }
+
+    function onRoomSelectChange() {
+      const select = document.getElementById('add-sched-room-select');
+      const customInput = document.getElementById('add-sched-room-custom');
+      if (select && customInput) {
+        if (select.value === 'CUSTOM') {
+          customInput.style.display = 'block';
+          customInput.required = true;
+          customInput.focus();
+        } else {
+          customInput.style.display = 'none';
+          customInput.required = false;
+        }
+      }
+      onAddSchedFormParamChange();
+    }
+
+    function applyTimeSlotPreset(slot, start, end) {
+      const slotEl = document.getElementById('add-sched-slot');
+      const startEl = document.getElementById('add-sched-time-start');
+      const endEl = document.getElementById('add-sched-time-end');
+
+      if (slotEl) slotEl.value = slot;
+      if (startEl) startEl.value = start;
+      if (endEl) endEl.value = end;
+
+      onAddSchedFormParamChange();
+    }
+
+    function getTeacherSelectedValue() {
+      const select = document.getElementById('add-sched-teacher-select');
+      const custom = document.getElementById('add-sched-teacher-custom');
+      if (select && select.value === 'CUSTOM' && custom) {
+        return custom.value.trim();
+      }
+      return select ? select.value.trim() : '';
+    }
+
+    function getSubjectSelectedValue() {
+      const select = document.getElementById('add-sched-subject-select');
+      const custom = document.getElementById('add-sched-subject-custom');
+      if (select && select.value === 'CUSTOM' && custom) {
+        return custom.value.trim();
+      }
+      return select ? select.value.trim() : '';
+    }
+
+    function getRoomSelectedValue() {
+      const select = document.getElementById('add-sched-room-select');
+      const custom = document.getElementById('add-sched-room-custom');
+      if (select && select.value === 'CUSTOM' && custom) {
+        return custom.value.trim();
+      }
+      return select ? select.value.trim() : '';
+    }
+
+
+    // =========================================================================
+    // MODUL VALIDASI & AUDIT BENTROK JADWAL PELAJARAN (SMKN 1 MOILONG)
+    // Memastikan: 1) Guru tidak mengajar di 2 kelas bersamaan
+    //             2) Ruang/Lab/Bengkel tidak dipakai 2 kelas bersamaan
+    //             3) Siswa kelas tidak dijadwalkan 2 mapel bersamaan
+    // =========================================================================
+
+    const COMMON_EXEMPT_ROOMS = [
+      'Lapangan Utama SMKN 1 Moilong',
+      'Lapangan Olahraga SMKN 1',
+      'Lapangan Upacara',
+      'Aula Utama SMKN 1 Moilong',
+      'Musholla / Masjid Sekolah'
+    ];
+
+    const COMMON_EXEMPT_TEACHERS = [
+      'Pembina Upacara',
+      'Tim Kesiswaan SMKN 1',
+      'Tim Fasilitator P5',
+      'Pembina Ekstrakurikuler',
+      'Wali Kelas & OSIS'
+    ];
+
+    function validateScheduleConflict(targetClassId, teacher, room, day, start, end, excludeItemId = null) {
+      if (!start || !end || start >= end) return null;
+
+      const dayNum = parseInt(day, 10);
+      const isExemptTeacher = !teacher || teacher === '-' || teacher === 'CUSTOM' || COMMON_EXEMPT_TEACHERS.includes(teacher);
+      const isExemptRoom = !room || room === '-' || room === 'CUSTOM' || COMMON_EXEMPT_ROOMS.includes(room);
+
+      // 1. Cek bentrok di internal kelas target (siswa tidak boleh double-booking waktu)
+      const currentList = allClassTimetables[targetClassId] || [];
+      for (const item of currentList) {
+        if (excludeItemId && item.id === excludeItemId) continue;
+        if (item.day !== dayNum) continue;
+
+        // Overlap condition: NOT (end <= item.timeStart OR start >= item.timeEnd)
+        if (!(end <= item.timeStart || start >= item.timeEnd)) {
+          const targetClassName = MOILONG_CLASSES[targetClassId] ? MOILONG_CLASSES[targetClassId].name : targetClassId;
+          return {
+            type: 'class',
+            message: `Waktu bentrok dengan mapel "${item.name}" (${item.timeStart} - ${item.timeEnd}) di ${targetClassName}`,
+            detail: {
+              classId: targetClassId,
+              className: targetClassName,
+              subject: item.name,
+              teacher: item.teacher,
+              timeStart: item.timeStart,
+              timeEnd: item.timeEnd
+            }
+          };
+        }
+      }
+
+      // 2. Cek bentrok Guru dan Ruangan ke seluruh kelas lain
+      for (const [classId, list] of Object.entries(allClassTimetables)) {
+        if (!Array.isArray(list)) continue;
+
+        for (const item of list) {
+          if (excludeItemId && item.id === excludeItemId) continue;
+          if (item.day !== dayNum) continue;
+
+          // Cek overlap waktu
+          if (!(end <= item.timeStart || start >= item.timeEnd)) {
+            const otherClassName = MOILONG_CLASSES[classId] ? MOILONG_CLASSES[classId].name : classId;
+
+            // Bentrok Guru
+            if (!isExemptTeacher && item.teacher && (item.teacher === teacher || teacher.includes(item.teacher) || item.teacher.includes(teacher))) {
+              return {
+                type: 'teacher',
+                message: `Guru "${teacher}" sudah mengajar di ${otherClassName} (${item.name}, pukul ${item.timeStart} - ${item.timeEnd} WITA)`,
+                detail: {
+                  classId,
+                  className: otherClassName,
+                  subject: item.name,
+                  teacher: item.teacher,
+                  timeStart: item.timeStart,
+                  timeEnd: item.timeEnd
+                }
+              };
+            }
+
+            // Bentrok Ruang / Bengkel / Laboratorium
+            if (!isExemptRoom && item.room && item.room === room) {
+              return {
+                type: 'room',
+                message: `Ruang / Bengkel "${room}" sedang digunakan oleh ${otherClassName} (${item.name}, pukul ${item.timeStart} - ${item.timeEnd} WITA)`,
+                detail: {
+                  classId,
+                  className: otherClassName,
+                  subject: item.name,
+                  room: item.room,
+                  timeStart: item.timeStart,
+                  timeEnd: item.timeEnd
+                }
+              };
+            }
+          }
+        }
+      }
+
+      return null;
+    }
+
+    // Kompatibilitas fungsi terdahulu
+    function checkTeacherScheduleConflict(teacher, day, start, end, targetClassId) {
+      const res = validateScheduleConflict(targetClassId, teacher, '', day, start, end);
+      if (res && res.type === 'teacher') {
+        return res.detail;
+      }
+      return null;
+    }
+
+    function onAddSchedFormParamChange() {
+      const dayEl = document.getElementById('add-sched-day');
+      const startEl = document.getElementById('add-sched-time-start');
+      const endEl = document.getElementById('add-sched-time-end');
+      const classEl = document.getElementById('add-sched-class-target');
+      const warningBox = document.getElementById('add-sched-conflict-warning');
+      const warningText = document.getElementById('add-sched-conflict-text');
+
+      if (!dayEl || !startEl || !endEl || !warningBox || !warningText) return;
+
+      const day = parseInt(dayEl.value, 10);
+      const start = startEl.value;
+      const end = endEl.value;
+      const classId = classEl ? classEl.value : currentSelectedClassId;
+      const teacher = getTeacherSelectedValue();
+      const room = getRoomSelectedValue();
+
+      if (!start || !end || start >= end) {
+        warningBox.style.display = 'none';
+        return;
+      }
+
+      const conflict = validateScheduleConflict(classId, teacher, room, day, start, end);
+      if (conflict) {
+        warningBox.style.display = 'flex';
+        warningBox.className = 'conflict-warning-box';
+        let icon = '⚠️';
+        let heading = 'Peringatan Bentrok Jadwal:';
+        if (conflict.type === 'teacher') {
+          icon = '👨‍🏫';
+          heading = 'Bentrok Jadwal Guru:';
+        } else if (conflict.type === 'room') {
+          icon = '🏛️';
+          heading = 'Bentrok Ruang / Bengkel:';
+        } else if (conflict.type === 'class') {
+          icon = '⏱️';
+          heading = 'Bentrok Jam di Kelas Ini:';
+        }
+        warningText.innerHTML = `<div style="font-weight: 700; margin-bottom: 0.15rem;">${icon} ${heading}</div><div>${escapeHtml(conflict.message)}</div><div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem;">Ubah jam atau pilih guru/ruang lain untuk mencegah jadwal ganda.</div>`;
+      } else {
+        warningBox.style.display = 'flex';
+        warningBox.className = 'conflict-safe-box';
+        warningText.innerHTML = '<span>✓</span> <span>Jadwal Tersedia & Bebas Bentrok (Guru, Ruangan, dan Jam Siap Digunakan)</span>';
+      }
+    }
+
+    function saveScheduleByTeacherSubject(e) {
+      if (e) {
+        if (typeof e.preventDefault === 'function') e.preventDefault();
+        if (typeof e.stopPropagation === 'function') e.stopPropagation();
+      }
+
+      const classSelect = document.getElementById('add-sched-class-target');
+      const daySelect = document.getElementById('add-sched-day');
+      const slotInput = document.getElementById('add-sched-slot');
+      const startInput = document.getElementById('add-sched-time-start');
+      const endInput = document.getElementById('add-sched-time-end');
+
+      const targetClassId = classSelect ? classSelect.value : currentSelectedClassId;
+      const day = parseInt(daySelect ? daySelect.value : '1', 10);
+      const slot = slotInput ? slotInput.value.trim() : 'Jam Pelajaran';
+      const timeStart = startInput ? startInput.value : '';
+      const timeEnd = endInput ? endInput.value : '';
+      const teacher = getTeacherSelectedValue();
+      const subjectName = getSubjectSelectedValue();
+      const room = getRoomSelectedValue();
+
+      if (!targetClassId || !subjectName || !timeStart || !timeEnd) {
+        showToast('Kelas target, mata pelajaran, jam mulai, dan jam selesai wajib diisi!', 'warning');
+        return false;
+      }
+
+      if (timeStart >= timeEnd) {
+        showToast('Jam selesai harus lebih besar dari jam mulai!', 'warning');
+        return false;
+      }
+
+      // VALIDASI BENTROK JADWAL KETAT (MENCEGAH BENTROK ANTAR GURU, RUANG, & KELAS)
+      const conflict = validateScheduleConflict(targetClassId, teacher, room, day, timeStart, timeEnd);
+      if (conflict) {
+        showToast(`Gagal Simpan! Terdeteksi bentrok: ${conflict.message}`, 'warning');
+        onAddSchedFormParamChange();
+        return false;
+      }
+
+      if (!allClassTimetables[targetClassId]) {
+        allClassTimetables[targetClassId] = [];
+      }
+
+      const list = allClassTimetables[targetClassId];
+      const newId = `subj-${targetClassId}-${day}-${Date.now().toString().slice(-4)}`;
+
+      const newSubjectItem = {
+        id: newId,
+        day,
+        slot,
+        timeStart,
+        timeEnd,
+        name: subjectName,
+        teacher: teacher || (MOILONG_CLASSES[targetClassId] ? MOILONG_CLASSES[targetClassId].teacher : 'Guru Mapel'),
+        room: room || (MOILONG_CLASSES[targetClassId] ? MOILONG_CLASSES[targetClassId].room : 'Ruang Teori')
+      };
+
+      list.push(newSubjectItem);
+      list.sort((a, b) => {
+        if (a.day !== b.day) return a.day - b.day;
+        return a.timeStart.localeCompare(b.timeStart);
+      });
+
+      saveClassTimetables();
+
+      if (currentSelectedClassId === targetClassId) {
+        renderClassTimetable();
+      }
+      renderLiveDashboardCards();
+      updateClassConflictBadge();
+      closeAddScheduleTeacherSubjectModal();
+
+      const className = MOILONG_CLASSES[targetClassId] ? MOILONG_CLASSES[targetClassId].name : targetClassId;
+      showToast(`Jadwal "${subjectName}" (${timeStart} - ${timeEnd}) untuk guru ${teacher || '-'} berhasil ditambahkan ke ${className} tanpa bentrok!`, 'success');
+      return false;
+    }
+
+    // AUDIT TOTAL SELURUH JADWAL 15 KELAS
+    function auditAllTimetablesForConflicts() {
+      const issues = [];
+      const classIds = Object.keys(allClassTimetables);
+      const dayNames = ['', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+
+      for (let d = 1; d <= 6; d++) {
+        for (let i = 0; i < classIds.length; i++) {
+          const cidA = classIds[i];
+          const listA = (allClassTimetables[cidA] || []).filter(x => x.day === d);
+
+          // 1. Cek overlap di dalam kelas yang sama
+          for (let m = 0; m < listA.length; m++) {
+            for (let n = m + 1; n < listA.length; n++) {
+              const a = listA[m];
+              const b = listA[n];
+              if (!(a.timeEnd <= b.timeStart || a.timeStart >= b.timeEnd)) {
+                issues.push({
+                  type: 'class_overlap',
+                  day: d,
+                  dayName: dayNames[d],
+                  timeStart: a.timeStart,
+                  timeEnd: a.timeEnd,
+                  classA: MOILONG_CLASSES[cidA] ? MOILONG_CLASSES[cidA].name : cidA,
+                  classB: MOILONG_CLASSES[cidA] ? MOILONG_CLASSES[cidA].name : cidA,
+                  subjectA: a.name,
+                  subjectB: b.name,
+                  teacher: a.teacher,
+                  detail: `Dua pelajaran tumpang tindih di ${MOILONG_CLASSES[cidA]?.name || cidA}: "${a.name}" (${a.timeStart}-${a.timeEnd}) dan "${b.name}" (${b.timeStart}-${b.timeEnd})`
+                });
+              }
+            }
+          }
+
+          // 2. Cek overlap antar kelas (Guru & Ruangan)
+          for (let j = i + 1; j < classIds.length; j++) {
+            const cidB = classIds[j];
+            const listB = (allClassTimetables[cidB] || []).filter(x => x.day === d);
+
+            for (const a of listA) {
+              for (const b of listB) {
+                if (!(a.timeEnd <= b.timeStart || a.timeStart >= b.timeEnd)) {
+                  // Cek guru
+                  if (a.teacher && b.teacher && a.teacher === b.teacher && !COMMON_EXEMPT_TEACHERS.includes(a.teacher)) {
+                    issues.push({
+                      type: 'teacher_conflict',
+                      day: d,
+                      dayName: dayNames[d],
+                      timeStart: a.timeStart,
+                      timeEnd: a.timeEnd,
+                      classA: MOILONG_CLASSES[cidA] ? MOILONG_CLASSES[cidA].name : cidA,
+                      classB: MOILONG_CLASSES[cidB] ? MOILONG_CLASSES[cidB].name : cidB,
+                      subjectA: a.name,
+                      subjectB: b.name,
+                      teacher: a.teacher,
+                      detail: `Guru "${a.teacher}" mengajar di 2 kelas bersamaan: ${MOILONG_CLASSES[cidA]?.name} ("${a.name}") dan ${MOILONG_CLASSES[cidB]?.name} ("${b.name}") pukul ${a.timeStart}-${a.timeEnd} WITA`
+                    });
+                  }
+
+                  // Cek ruangan
+                  if (a.room && b.room && a.room === b.room && !COMMON_EXEMPT_ROOMS.includes(a.room)) {
+                    issues.push({
+                      type: 'room_conflict',
+                      day: d,
+                      dayName: dayNames[d],
+                      timeStart: a.timeStart,
+                      timeEnd: a.timeEnd,
+                      classA: MOILONG_CLASSES[cidA] ? MOILONG_CLASSES[cidA].name : cidA,
+                      classB: MOILONG_CLASSES[cidB] ? MOILONG_CLASSES[cidB].name : cidB,
+                      room: a.room,
+                      detail: `Ruang / Bengkel "${a.room}" dipakai oleh 2 kelas bersamaan: ${MOILONG_CLASSES[cidA]?.name} dan ${MOILONG_CLASSES[cidB]?.name} pukul ${a.timeStart}-${a.timeEnd} WITA`
+                    });
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      return {
+        valid: issues.length === 0,
+        totalIssues: issues.length,
+        issues
+      };
+    }
+
+    function auditAllSchedulesUI() {
+      const report = auditAllTimetablesForConflicts();
+      const modal = document.getElementById('modal-audit-schedule');
+      const body = document.getElementById('audit-modal-body');
+      if (!modal || !body) return;
+
+      if (report.valid) {
+        body.innerHTML = `
+          <div style="text-align: center; padding: 2rem 1rem;">
+            <div style="font-size: 3.5rem; margin-bottom: 0.75rem;">🛡️</div>
+            <h4 style="color: #10b981; font-size: 1.3rem; margin-bottom: 0.5rem; font-weight: 700;">
+              Status 100% Bebas Bentrok Terverifikasi!
+            </h4>
+            <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 1.25rem; font-size: 0.9rem; line-height: 1.5;">
+              Sistem telah mengaudit seluruh matriks jadwal (15 Rombel, 36 Guru, 6 Hari Pembelajaran). Tidak ditemukan tumpang tindih waktu guru maupun ruang laboratorium/bengkel.
+            </p>
+            <div style="display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center; background-color: var(--bg-card-hover); padding: 0.85rem 1.25rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+              <div><strong style="color: var(--primary);">15</strong> Kelas Terhubung</div>
+              <div>•</div>
+              <div><strong style="color: var(--primary);">36</strong> Guru Terjadwal</div>
+              <div>•</div>
+              <div><strong style="color: #10b981;">0</strong> Bentrok Waktu</div>
+            </div>
+          </div>
+        `;
+      } else {
+        let issuesHtml = report.issues.map((iss, idx) => `
+          <div style="padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid rgba(239, 68, 68, 0.35); background-color: rgba(239, 68, 68, 0.08); margin-bottom: 0.6rem;">
+            <div style="font-weight: 700; color: #ef4444; font-size: 0.85rem; margin-bottom: 0.25rem;">
+              #${idx + 1} Hari ${iss.dayName} (${iss.timeStart} - ${iss.timeEnd} WITA) - ${iss.type === 'teacher_conflict' ? 'Bentrok Guru' : (iss.type === 'room_conflict' ? 'Bentrok Ruangan' : 'Bentrok Siswa')}
+            </div>
+            <div style="font-size: 0.82rem; line-height: 1.4;">${escapeHtml(iss.detail)}</div>
+          </div>
+        `).join('');
+
+        body.innerHTML = `
+          <div style="padding: 1rem 0;">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;">
+              <span style="font-size: 1.75rem;">⚠️</span>
+              <div>
+                <h4 style="color: #ef4444; margin: 0; font-size: 1.1rem; font-weight: 700;">
+                  Ditemukan ${report.totalIssues} Potensi Bentrok
+                </h4>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">
+                  Silakan perbaiki jam bentrok di bawah ini atau klik "Terapkan Master Jadwal Bebas Bentrok" untuk memperbaiki otomatis.
+                </div>
+              </div>
+            </div>
+            <div style="max-height: 380px; overflow-y: auto;">
+              ${issuesHtml}
+            </div>
+          </div>
+        `;
+      }
+
+      modal.classList.add('open');
+      updateClassConflictBadge();
+    }
+
+    function closeAuditScheduleModal() {
+      const modal = document.getElementById('modal-audit-schedule');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function updateClassConflictBadge() {
+      const badge = document.getElementById('class-conflict-status-badge');
+      if (!badge) return;
+
+      const report = auditAllTimetablesForConflicts();
+      if (report.valid) {
+        badge.className = 'badge-conflict-status safe';
+        badge.innerHTML = '✓ 100% Bebas Bentrok';
+        badge.title = 'Seluruh 15 kelas dan 36 guru terjadwal rapi tanpa tumpang tindih';
+      } else {
+        badge.className = 'badge-conflict-status conflict';
+        badge.innerHTML = `⚠️ ${report.totalIssues} Bentrok Terdeteksi`;
+        badge.title = 'Klik tombol "Audit Bentrok" untuk melihat rincian tumpang tindih';
+      }
+    }
+
     // --- 11. BOOTSTRAP INITIALIZATION ---
     window.addEventListener('DOMContentLoaded', async () => {
       initTheme();
@@ -3747,6 +6981,27 @@
 
       // Render Timetable SMKN 1 Moilong
       renderClassTimetable();
+      updateClassConflictBadge();
+
+      // Inisialisasi Tulisan Berjalan & Banner Slider 5 Foto
+      loadRunningText();
+      loadSliderPhotos();
+
+      // Dropdown Guru & Mapel
+      populateTeacherAndSubjectDropdowns();
+
+      // Pause slider saat hover
+      const sliderContainer = document.querySelector('.banner-slider-container');
+      if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', stopSliderAutoplay);
+        sliderContainer.addEventListener('mouseleave', startSliderAutoplay);
+      }
+
+      // Render Live Dashboard Monitoring 15 Kelas
+      renderLiveDashboardCards();
+
+      // Tampilkan tab Dashboard secara default sesuai permintaan pengguna
+      switchMainTab('dashboard');
 
       // Mulai Web Worker Clock Timer
       initClockWorker();

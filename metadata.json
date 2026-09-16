@@ -1,6 +1,6 @@
 {
   "name": "Bel Otomatis & Jadwal Pelajaran SMKN 1 MOILONG (07:00 - 15:30)",
-  "description": "Aplikasi Bel Otomatis Sekolah & Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (Jam 07:00 s.d. 15:30) dengan Web Audio API dan sinkronisasi presisi.",
+  "description": "Aplikasi Bel Otomatis Sekolah, Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (AKL, DKV, TL 07:00 - 15:30), Dashboard Monitoring KBM Live, Banner Slider 5 Foto, Tulisan Berjalan, dan Manajemen Penambahan Jadwal Guru & Mapel.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

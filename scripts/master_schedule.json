@@ -1,0 +1,4829 @@
+{
+  "x-ak-1": [
+    {
+      "id": "subj-x-ak-1-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-ak-1-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Dasar-dasar Akuntansi Lembaga",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Informatika & Literasi Digital",
+      "teacher": "Dedi Kusuma, S.Kom",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Praktik Siklus Akuntansi Jasa",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Spreadsheet Tabel Akuntansi",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-x-ak-1-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek IPAS (Sains Terapan Akuntansi)",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Etika Profesi & Komunikasi Bisnis",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Erwin Pratama, S.Pd",
+      "room": "Lapangan Olahraga SMKN 1"
+    },
+    {
+      "id": "subj-x-ak-1-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Dasar Perbankan Syariah & Konvensional",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Erwin Pratama, S.Pd",
+      "room": "Lapangan Olahraga SMKN 1"
+    },
+    {
+      "id": "subj-x-ak-1-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Sejarah Indonesia",
+      "teacher": "Yuliana, S.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Bimbingan Konseling & Minat Karir",
+      "teacher": "Dra. Nurhayati",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-ak-1-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Etika Keuangan & Literasi Finansial",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Pendidikan Agama & Budi Pekerti Islam/Kristen",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Literasi Keuangan & Tabungan Syariah",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Pramuka Penegak Gugus Depan SMKN 1",
+      "teacher": "Pembina Pramuka Putera",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Etika Profesi & Komunikasi Bisnis",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "R. Teori X AK 1"
+    },
+    {
+      "id": "subj-x-ak-1-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek IPAS (Energi Terbarukan Bisnis)",
+      "room": "R. Teori X AK 1"
+    }
+  ],
+  "x-ak-2": [
+    {
+      "id": "subj-x-ak-2-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-ak-2-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Bambang Irawan, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Etika Profesi Akuntansi",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Informatika & Literasi Digital",
+      "teacher": "Rina Melati, S.Kom",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Etika Profesi & K3LH Akuntansi",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Jurnal Umum & Buku Besar",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek Kewirausahaan PKK",
+      "teacher": "H. Syamsuddin, S.E",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Dasar Keuangan & Akuntansi Lembaga",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Farhan Ramadhan, S.Pd",
+      "room": "GOR Indoor SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-ak-2-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Akuntansi Transaksi Keuangan Dasar",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Farhan Ramadhan, S.Pd",
+      "room": "GOR Indoor SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-ak-2-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Seni Budaya & Kearifan Lokal",
+      "teacher": "Mulyadi, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek IPAS (Ekologi & Bisnis)",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-ak-2-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Akuntansi Transaksi Keuangan Digital",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Pendidikan Agama & Budi Pekerti Islam/Kristen",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Etika Komunikasi Surat Bisnis",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Pramuka Penegak Gugus Depan SMKN 1",
+      "teacher": "Pembina Pramuka Puteri",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Dasar-dasar Keuangan & Akuntansi",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori X AK 2"
+    },
+    {
+      "id": "subj-x-ak-2-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Bimbingan Konseling & Karir Vokasi",
+      "teacher": "Dra. Nurhayati",
+      "room": "R. Teori X AK 2"
+    }
+  ],
+  "x-dkv": [
+    {
+      "id": "subj-x-dkv-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-dkv-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Dasar Sketsa & Nirmana",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Dasar DKV Komputer Grafis",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Karakter & Etika Industri DKV",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Gambar Sketsa & Ilustrasi Pensil",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Komposisi Bentuk Nirmana Ruang",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Informatika & Literasi Digital",
+      "teacher": "Dedi Kusuma, S.Kom",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Perangkat Lunak Desain Dasar",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-x-dkv-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Prinsip Desain & Tata Letak Dasar",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Sejarah Seni Rupa & Visual",
+      "teacher": "Yuliana, S.Pd",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Inggris Komunikasi Visual",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Dasar Animasi Tradisional & Stopmotion",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Dasar Fotografi Komposisi Rule of Thirds",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-x-dkv-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Ilustrasi Karakter Kartun & Manga",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Tipografi Anatomi Huruf Huruf Latin",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Erwin Pratama, S.Pd",
+      "room": "Lapangan Olahraga SMKN 1"
+    },
+    {
+      "id": "subj-x-dkv-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-dkv-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Eksplorasi Warna Nirmana Dwimatra",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Bimbingan Konseling & Karir Kreatif",
+      "teacher": "Dra. Nurhayati",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Apresiasi Seni & Desain Indonesia",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Fotografi & Seni Visual Moilong",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Dasar Animasi Tradisional Flipbook",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Informatika & Literasi Digital Grafis",
+      "teacher": "Dedi Kusuma, S.Kom",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Ilustrasi Komik & Visual Storytelling",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Gambar X DKV"
+    },
+    {
+      "id": "subj-x-dkv-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Apresiasi Budaya Visual Sulawesi Tengah",
+      "teacher": "Yuliana, S.Pd",
+      "room": "Studio Gambar X DKV"
+    }
+  ],
+  "x-tl-1": [
+    {
+      "id": "subj-x-tl-1-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-tl-1-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Gambar Teknik & Simbol Las WPS",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Gambar Manufaktur"
+    },
+    {
+      "id": "subj-x-tl-1-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Gambar Manufaktur & Simbol WPS",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Gambar Manufaktur"
+    },
+    {
+      "id": "subj-x-tl-1-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Keselamatan Kerja K3LH Las Listrik",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Kerja Bangku Alat Ukur Presisi",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-1-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Dasar Mesin Bor & Bubut Kayu",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-1-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Teknik Pemotongan OAW Logam",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-1-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Kerja Bangku Pembentukan Plat",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-1-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Dasar Pengelasan Busur SMAW",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-x-tl-1-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Inggris Kejuruan Manufaktur",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Sejarah Indonesia & Kebangsaan",
+      "teacher": "Yuliana, S.Pd",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Erwin Pratama, S.Pd",
+      "room": "Lapangan Olahraga SMKN 1"
+    },
+    {
+      "id": "subj-x-tl-1-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Dasar Pemeliharaan Mesin Las Listrik",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-x-tl-1-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Informatika & Komputer Industri",
+      "teacher": "Dedi Kusuma, S.Kom",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-tl-1-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Pengantar Bahan & Metalurgi Pengelasan",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Sejarah Indonesia & Peradaban Logam",
+      "teacher": "Yuliana, S.Pd",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "K3 Kebisingan & Radiasi Sinar Las",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Robotika & Mekatronika Pengelasan",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Keselamatan Kerja Lingkungan Hidup K3LH",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "R. Teori X TL 1"
+    },
+    {
+      "id": "subj-x-tl-1-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Gambar Proyeksi Benda Manufaktur CAD",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Gambar Manufaktur"
+    },
+    {
+      "id": "subj-x-tl-1-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pengenalan Mesin Las SMAW Inverter",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-x-tl-1-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Seni Budaya & Desain Ornamen Logam",
+      "teacher": "Mulyadi, S.Pd",
+      "room": "R. Teori X TL 1"
+    }
+  ],
+  "x-tl-2": [
+    {
+      "id": "subj-x-tl-2-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-tl-2-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Kerja Bangku & Pemotongan Logam",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Bambang Irawan, S.Pd",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Dasar Pengelasan Logam OAW",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pekerjaan Kikir & Gergaji Logam",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Gambar Proyeksi Orthogonal Mesin",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "R. Gambar Manufaktur"
+    },
+    {
+      "id": "subj-x-tl-2-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Informatika & Literasi Digital",
+      "teacher": "Rina Melati, S.Kom",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek IPAS (Fisika Logam Las)",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Simbol WPS & Sambungan Las",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Gambar Manufaktur"
+    },
+    {
+      "id": "subj-x-tl-2-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Keselamatan Kerja Bengkel Las K3LH",
+      "teacher": "Joko Susilo, S.T",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Peralatan Kerja Bangku Logam",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bimbingan Konseling & Karir Vokasi",
+      "teacher": "Dra. Nurhayati",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Seni Rupa & Kriya Terapan",
+      "teacher": "Mulyadi, S.Pd",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Farhan Ramadhan, S.Pd",
+      "room": "GOR Indoor SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-tl-2-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Kerja Bangku Pembentukan Ulir & Tap",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Gambar Konstruksi Rangka Las CAD",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Gambar Manufaktur"
+    },
+    {
+      "id": "subj-x-tl-2-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Informatika & Komputer Industri",
+      "teacher": "Rina Melati, S.Kom",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-x-tl-2-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Pemeliharaan Alat Las & K3 Bengkel",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Seni Rupa & Kriya Ornamen Terapan",
+      "teacher": "Mulyadi, S.Pd",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Pengenalan Alat Potong Plasma Torch",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Olahraga Bola Voli & Futsal",
+      "teacher": "Erwin Pratama, S.Pd",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori X TL 2"
+    },
+    {
+      "id": "subj-x-tl-2-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Kerja Bangku Pembuatan Pola Logam",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Peralatan Tangan Bengkel Kerja Bangku",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pengukuran Benda Kerja Menggunakan Micrometer",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-x-tl-2-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek IPAS (Reaksi Oksidasi Logam Las)",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "R. Teori X TL 2"
+    }
+  ],
+  "xi-ak-1": [
+    {
+      "id": "subj-xi-ak-1-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-ak-1-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Praktikum Akuntansi Perusahaan Dagang",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Komputer Akuntansi MYOB",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-1-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Akuntansi Dagang Kartu Persediaan",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Administrasi Kas & Perbankan",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Akuntansi Lembaga Pemerintah",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek Kewirausahaan PKK Akuntansi",
+      "teacher": "Nurlina, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Praktikum Akuntansi Jasa & Dagang",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Komputer Akuntansi MYOB Dagang",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-1-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Etika Profesi Akuntansi Finansial",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Erwin Pratama, S.Pd",
+      "room": "Lapangan Olahraga SMKN 1"
+    },
+    {
+      "id": "subj-xi-ak-1-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Praktikum Akuntansi Biaya Standar",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Informatika Bisnis & E-Commerce",
+      "teacher": "Dedi Kusuma, S.Kom",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Bahasa Inggris Lanjutan Perbankan",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-ak-1-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Akuntansi Keuangan Perusahaan Jasa",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Bimbingan Konseling & Kesiapan Magang",
+      "teacher": "Dra. Nurhayati",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Palang Merah Remaja (PMR Wira)",
+      "teacher": "Pembina PMR Unit SMKN 1",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Praktikum Komputer Akuntansi MYOB",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-1-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Praktikum Akuntansi Jasa Konsultasi",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 1"
+    },
+    {
+      "id": "subj-xi-ak-1-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Etika Penagihan Piutang & Surat Teguran",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori XI AK 1"
+    }
+  ],
+  "xi-ak-2": [
+    {
+      "id": "subj-xi-ak-2-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-ak-2-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Komputer Akuntansi Spreadsheet",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-2-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Praktikum Akuntansi Dagang",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Komputer Akuntansi Keuangan",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-2-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Spreadsheet Neraca Lajur",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-2-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Bambang Irawan, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Etika Profesi Akuntan Publik",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Penyusunan Anggaran Kas Keuangan",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Komputer Akuntansi Spreadsheet",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-2-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Praktik Transaksi Kas Bank",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Administrasi Piutang & Utang Dagang",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-2-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Farhan Ramadhan, S.Pd",
+      "room": "GOR Indoor SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-ak-2-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Perpajakan PPh Pasal 21 Karyawan",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xi-ak-2-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Aplikasi Komputer Keuangan Terpadu",
+      "teacher": "Rina Melati, S.Kom",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-2-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Bahasa Inggris Lanjutan Perbankan",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-ak-2-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Spreadsheet Pengolahan Gaji Karyawan",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-2-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Perpajakan Badan Usaha Koperasi",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xi-ak-2-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Debat & Literasi Finansial",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Administrasi Piutang Dagang Kejuruan",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Bambang Irawan, S.Pd",
+      "room": "R. Teori XI AK 2"
+    },
+    {
+      "id": "subj-xi-ak-2-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Spreadsheet Pengolahan Pajak Karyawan",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xi-ak-2-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Analisis Kelayakan Usaha UMKM Moilong",
+      "teacher": "Rahmat Hidayat, S.Pd",
+      "room": "R. Teori XI AK 2"
+    }
+  ],
+  "xi-dkv": [
+    {
+      "id": "subj-xi-dkv-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-dkv-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Perangkat Lunak Desain Grafis",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-xi-dkv-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Tipografi Artistik Publikasi",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Fotografi Komersial & Tata Cahaya",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xi-dkv-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Desain Antarmuka UI/UX",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-xi-dkv-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Desain Vektor Adobe Illustrator",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-xi-dkv-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Layout Buku & Tipografi Visual",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Motion Graphic & Animasi 2D",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-xi-dkv-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Fotografi Eksplorasi Luar Ruang",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Fotografi Studio & Still Life",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xi-dkv-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Perangkat Lunak Desain Vector",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-xi-dkv-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Fotografi Editing Lightroom & Photoshop",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-xi-dkv-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Desain Sablon & Cetak Saring",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Tipografi & Identitas Visual Logo",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Desain Infografis & Data Visual",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-xi-dkv-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Teknik Cetak Offset & Screen Printing",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Jasmani, Olahraga & Kesehatan",
+      "teacher": "Farhan Ramadhan, S.Pd",
+      "room": "GOR Indoor SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-dkv-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-dkv-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Desain Banner & Media Sosial Kreatif",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Lab Multimedia DKV"
+    },
+    {
+      "id": "subj-xi-dkv-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Bahasa Inggris Komunikasi Industri Kreatif",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Fotografi Jurnalistik Lingkungan",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Sinematografi Moilong Creative",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Fotografi Produk Komersial DKV",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xi-dkv-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengantar Sinematografi & Kamera",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xi-dkv-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Desain Merchandise Promosi Kreatif",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Desain Kemasan Makanan Ramah Lingkungan",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Grafis XI DKV"
+    },
+    {
+      "id": "subj-xi-dkv-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Fotografi Konseptual & Eksperimental",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Foto & Video DKV"
+    }
+  ],
+  "xi-tl-1": [
+    {
+      "id": "subj-xi-tl-1-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-tl-1-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Teknik Pengelasan Busur SMAW 2G",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Pemeriksaan Visual Cacat Las",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Teknik Pengelasan GMAW / MIG",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Pengelasan GMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan Busur Manual SMAW 3G",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengelasan SMAW Sambungan T-Joint",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Teknik Pengelasan GMAW CO2",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan GMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Distorsi Pengelasan & Pencegahannya",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan Busur Listrik SMAW 1G",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengelasan GMAW Gas Argon/CO2",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Pengelasan GMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Bambang Irawan, S.Pd",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pengelasan Busur SMAW Posisi 4G",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Metalurgi Las & Pengaruh Suhu",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan Busur Listrik Plat Baja Karbon",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pengelasan Busur Listrik Sambungan Lap",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Dasar-dasar Fabrikasi & Distorsi Logam",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-tl-1-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Pengelasan Busur Manual SMAW Posisi 1F",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Bahasa Inggris Kejuruan Manufaktur",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Dasar Pemilihan Kawat Las Elektroda",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Inovasi Teknologi Tepat Guna Logam",
+      "teacher": "Joko Susilo, S.T",
+      "room": "R. Teori XI TL 1"
+    },
+    {
+      "id": "subj-xi-tl-1-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan GMAW Besi Hollow 1F",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Pengelasan GMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengelasan SMAW Sambungan Plat Sudut 2F",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Teknik Pengelasan Busur Listrik 3F",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pengelasan GMAW Sambungan Plat T-Joint",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "Bengkel Pengelasan GMAW"
+    },
+    {
+      "id": "subj-xi-tl-1-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek Fabrikasi Dudukan Mesin Gerinda",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    }
+  ],
+  "xi-tl-2": [
+    {
+      "id": "subj-xi-tl-2-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-tl-2-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Fabrikasi Konstruksi Logam Baja",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "K3LH & Ergonomi Pengelasan",
+      "teacher": "Joko Susilo, S.T",
+      "room": "R. Teori XI TL 2"
+    },
+    {
+      "id": "subj-xi-tl-2-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Dasar Fabrikasi Plat Logam",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori XI TL 2"
+    },
+    {
+      "id": "subj-xi-tl-2-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori XI TL 2"
+    },
+    {
+      "id": "subj-xi-tl-2-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Teknik Pemotongan Plasma Arc",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Perakitan Konstruksi Rangka Baja",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengelasan GMAW Besi Hollow",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pengelasan Titik (Spot Welding)",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Teknik Las Busur Rendam (SAW)",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pengujian Sambungan Las Bending",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Fabrikasi Struktur Baja Ringan",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Perakitan Konstruksi Tralis Baja",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Fabrikasi Plat Besi Konstruksi",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Fabrikasi Baja Canai Dingin",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pengelasan GMAW Plat Sambungan Sudut",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Pengelasan GMAW"
+    },
+    {
+      "id": "subj-xi-tl-2-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Fabrikasi Tangki Air & Pipa Baja",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Bambang Irawan, S.Pd",
+      "room": "R. Teori XI TL 2"
+    },
+    {
+      "id": "subj-xi-tl-2-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Fabrikasi Tangga & Railing Besi Hollow",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pengelasan Busur Manual SMAW 4G",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan SMAW"
+    },
+    {
+      "id": "subj-xi-tl-2-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Dasar Perlakuan Panas Sambungan Las",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Kerja Bangku"
+    },
+    {
+      "id": "subj-xi-tl-2-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xi-tl-2-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Fabrikasi Rangka Meja & Kursi Sekolah",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Pengelasan GMAW Posisi 2G Plat",
+      "teacher": "Hendra Gunawan, S.Pd.T",
+      "room": "Bengkel Pengelasan GMAW"
+    },
+    {
+      "id": "subj-xi-tl-2-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Fabrikasi Rak Alat Bengkel Mandiri",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Joko Susilo, S.T",
+      "room": "R. Teori XI TL 2"
+    },
+    {
+      "id": "subj-xi-tl-2-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Bulutangkis & Tenis Meja",
+      "teacher": "Farhan Ramadhan, S.Pd",
+      "room": "R. Teori XI TL 2"
+    },
+    {
+      "id": "subj-xi-tl-2-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Fabrikasi Tangga & Tralis Baja",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Perakitan Rangka Pintu Pagar Besi",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Fabrikasi Dudukan Motor Listrik Baja",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xi-tl-2-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Peralatan Keselamatan Gas Bertekanan K3",
+      "teacher": "Joko Susilo, S.T",
+      "room": "R. Teori XI TL 2"
+    },
+    {
+      "id": "subj-xi-tl-2-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Teknik Pemotongan Plat Gas Oksigen-Asetilin",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Kerja Bangku"
+    }
+  ],
+  "xii-ak-1": [
+    {
+      "id": "subj-xii-ak-1-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-ak-1-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Praktikum Akuntansi Manufaktur",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Audit Keuangan & Neraca",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Akuntansi Sektor Publik",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek Kewirausahaan PKK Akuntansi",
+      "teacher": "H. Syamsuddin, S.E",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Akuntansi Manufaktur Biaya Produksi",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Audit Laporan Arus Kas Manufaktur",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Praktik Siklus Akuntansi UKK",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Simulasi Komputer Akuntansi MYOB",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xii-ak-1-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Persiapan Portofolio Magang PKL",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Praktikum Akuntansi Manufaktur",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Simulasi Ujian Kompetensi UKK",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Projek Kewirausahaan PKK Akuntansi",
+      "teacher": "H. Syamsuddin, S.E",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Akuntansi Lembaga Non-Profit",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Praktikum Akuntansi Lembaga Perbankan",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Audit Kas Kecil & Rekonsiliasi Bank",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Siti Rahmawati, M.Pd",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Simulasi Sidang Laporan UKK Akuntansi",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Drs. Wahyu Hidayat",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-ak-1-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Penyusunan Laporan Keuangan Neraca",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Irwan Setiawan, S.Pd",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Konsultasi Karir Lulusan SMK Akuntansi",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Akuntansi & Persiapan Karir BUMN",
+      "teacher": "Dra. Hj. Siti Aminah, M.Pd",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Bahasa Inggris Kejuruan Akuntansi",
+      "teacher": "Linda Kartika, M.Pd",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Praktikum Akuntansi Manufaktur",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Akuntansi Keuangan Daerah & Desa",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Projek Kreatif PKK: Jasa Pembukuan UMKM",
+      "teacher": "H. Syamsuddin, S.E",
+      "room": "R. Teori XII AK 1"
+    },
+    {
+      "id": "subj-xii-ak-1-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Uji Coba Try Out Teori Kejuruan UKK",
+      "teacher": "Dra. Endang Lestari",
+      "room": "R. Teori XII AK 1"
+    }
+  ],
+  "xii-ak-2": [
+    {
+      "id": "subj-xii-ak-2-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-ak-2-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Administrasi Perpajakan & e-SPT",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Simulasi Uji Kompetensi UKK AKL",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Bahasa Inggris Kejuruan",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "e-Faktur & Perpajakan Lanjutan",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Projek Kewirausahaan PKK Akuntansi",
+      "teacher": "Nurlina, S.E",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Simulasi e-Billing & e-Filing Pajak",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Penyusunan SPT Tahunan Badan",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Akuntansi Pajak Penghasilan Pasal 22",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Studi Kasus Pajak Daerah",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Konsultasi Pajak Mandiri",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Administrasi Pajak Pertambahan Nilai (PPN)",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Akuntansi Pajak Badan Usaha",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Projek Kewirausahaan PKK Akuntansi",
+      "teacher": "Nurlina, S.E",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Praktikum Pajak Internasional Dasar",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Administrasi e-Faktur Pajak Keluaran",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Simulasi Sistem Akuntansi Terpadu",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xii-ak-2-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Bahasa Indonesia Kejuruan",
+      "teacher": "Dewi Sartika, S.Pd",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Penyusunan Anggaran Investasi Bisnis",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Bambang Irawan, S.Pd",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-ak-2-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Simulasi Ujian UKK Mandiri Akuntansi",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Matematika Terapan SMK",
+      "teacher": "Arif Budiman, S.Pd",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Penyusunan Bukti Transaksi Digital",
+      "teacher": "Nurul Fadilah, S.Pd",
+      "room": "Lab Komputer Akuntansi 1"
+    },
+    {
+      "id": "subj-xii-ak-2-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Pajak Sahabat UMKM Moilong",
+      "teacher": "Sri Wahyuni, S.E",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Bahasa Inggris Kejuruan Akuntansi",
+      "teacher": "Rian Kusuma, S.Pd",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Administrasi Pajak Ekspor Impor PPh 22",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Simulasi Perhitungan Pajak Restoran & Hotel",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    },
+    {
+      "id": "subj-xii-ak-2-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Projek Kreatif PKK: Layanan Pelaporan Pajak",
+      "teacher": "Nurlina, S.E",
+      "room": "R. Teori XII AK 2"
+    },
+    {
+      "id": "subj-xii-ak-2-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Evaluasi Pembukuan Badan Usaha Milik Desa",
+      "teacher": "Ahmad Fauzi, S.E",
+      "room": "Lab Komputer Akuntansi 2"
+    }
+  ],
+  "xii-dkv": [
+    {
+      "id": "subj-xii-dkv-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-dkv-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Desain Percetakan Digital Offset",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Videografi & Editing Sinematik",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xii-dkv-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Portofolio Akhir & Branding",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pendidikan Pancasila",
+      "teacher": "Bambang Irawan, S.Pd",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Digital Imaging & Efek Visual",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Fotografi Model & Tata Cahaya",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xii-dkv-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Editing Sinematik Premiere Pro",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xii-dkv-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Desain Kemasan 3D Mockup",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Produksi Konten Iklan Televisi",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xii-dkv-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Kurasi Portofolio Pameran Karya",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Animasi 2D & Motion Graphics",
+      "teacher": "Putri Andini, S.Sn",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Desain Kemasan Packaging Kreatif",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Videografi Dokumenter Sekolah",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xii-dkv-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Portofolio Digital & Showreel",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Karya Tugas Akhir DKV Mandiri",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Periklanan Komersial & Copywriting",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Teknik Tata Suara & Audio Video",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xii-dkv-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Manajemen Produksi Studio Desain",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Kewirausahaan Sablon Digital & Merchandise",
+      "teacher": "H. Syamsuddin, S.E",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Desain Merchandise & Packaging Event",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-dkv-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Review Portofolio Video Iklan Sekolah",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Foto & Video DKV"
+    },
+    {
+      "id": "subj-xii-dkv-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Kewirausahaan Merchandise DKV",
+      "teacher": "H. Syamsuddin, S.E",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Evaluasi Portofolio Visual DKV",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Pameran Kreatif & Kurasi Galeri",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Portofolio Branding Kampanye Visual",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Kurasi Display Galeri Pameran DKV",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pengarahan Seni (Art Directing)",
+      "teacher": "Reza Pratama, M.Ds",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Desain Portofolio Behance & Dribbble",
+      "teacher": "Dimas Arya, S.Kom",
+      "room": "Studio Produksi XII DKV"
+    },
+    {
+      "id": "subj-xii-dkv-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Penyusunan Anggaran Biaya Desain (RAB)",
+      "teacher": "Fajar Kurniawan, S.Sn",
+      "room": "Studio Produksi XII DKV"
+    }
+  ],
+  "xii-tl-1": [
+    {
+      "id": "subj-xii-tl-1-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-tl-1-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Teknik Pengelasan GTAW / TIG Presisi",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Fabrikasi Konstruksi Baja Berat",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Ust. Mansyur, S.Pd.I",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Standarisasi WPS & Uji Tarik",
+      "teacher": "Budi Santoso, S.T",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Simulasi Sertifikasi Las BNSP",
+      "teacher": "Budi Santoso, S.T",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan Argon GTAW Stainless",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengelasan GTAW Aluminium Presisi",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Inspeksi Visual & Pengujian Tekuk",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Konstruksi Tangki Tekan Baja",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Kajian Gambar Proyek Konstruksi Las",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan TIG Paduan Nikel",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Inspeksi & Pengujian Sambungan Las",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pengelasan GTAW Paduan Aluminium",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Kaji Cacat Las Macrograph & Bending",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-1-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Perencanaan WPS Pengelasan Bejana",
+      "teacher": "Budi Santoso, S.T",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan Sambungan Sudut GTAW 3F",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Inspeksi Visual Mutu Sambungan Las",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pengelasan Busur Terendam Otomatis",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Kewirausahaan Fabrikasi Bengkel Las",
+      "teacher": "Nurlina, S.E",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Pengujian Metalurgi Makro Sambungan",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-1-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-tl-1-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Pengelasan Sambungan Pipa TIG 1G",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Kewirausahaan Jasa Bengkel Las",
+      "teacher": "Nurlina, S.E",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Review Standar WPS Pengelasan AWS",
+      "teacher": "Budi Santoso, S.T",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "Budi Santoso, S.T",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Juru Las Profesional Moilong Welding",
+      "teacher": "Agus Prasetyo, S.T",
+      "room": "R. Teori XII TL 1"
+    },
+    {
+      "id": "subj-xii-tl-1-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan GTAW Pipa Posisi 2G",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengujian Mutu Sambungan Las Bending",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-1-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Fabrikasi Konstruksi Baja Berat IWF",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Pengelasan GTAW (TIG)"
+    },
+    {
+      "id": "subj-xii-tl-1-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Projek Kreatif PKK: Fabrikasi Pagar Ornamen",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xii-tl-1-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Analisis Biaya Material Pengelasan Fabrikasi",
+      "teacher": "Budi Santoso, S.T",
+      "room": "R. Teori XII TL 1"
+    }
+  ],
+  "xii-tl-2": [
+    {
+      "id": "subj-xii-tl-2-1-0700",
+      "day": 1,
+      "slot": "Upacara Bendera",
+      "timeStart": "07:00",
+      "timeEnd": "07:45",
+      "name": "Upacara Bendera & Apel Pagi Terpadu",
+      "teacher": "Pembina Upacara",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-tl-2-1-0745",
+      "day": 1,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:45",
+      "timeEnd": "09:15",
+      "name": "Pengelasan Pipa SMAW & GTAW 5G",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-1-0915",
+      "day": 1,
+      "slot": "Jam 3 - 4",
+      "timeStart": "09:15",
+      "timeEnd": "10:00",
+      "name": "Pengujian Cacat Las NDT Penetrant",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-2-1-1020",
+      "day": 1,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pendidikan Agama & Budi Pekerti",
+      "teacher": "Hj. Maryam, S.Ag",
+      "room": "R. Teori XII TL 2"
+    },
+    {
+      "id": "subj-xii-tl-2-1-1235",
+      "day": 1,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pengelasan Pipa Posisi 6G",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-1-1405",
+      "day": 1,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Metalurgi Fisik & Perlakuan Panas",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori XII TL 2"
+    },
+    {
+      "id": "subj-xii-tl-2-2-0700",
+      "day": 2,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan Pipa Sambungan 6G",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-2-0830",
+      "day": 2,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Uji Ultrasonik & Radiografi Las",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-2-2-1020",
+      "day": 2,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pengelasan Sambungan Bevel Pipa",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-2-1235",
+      "day": 2,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Laporan Uji Mutu Sambungan Las",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-2-2-1405",
+      "day": 2,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Simulasi Tes Sertifikasi Las Migas",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-3-0700",
+      "day": 3,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengujian Cacat Las NDT Ultrasonic",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-2-3-0830",
+      "day": 3,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengelasan Pipa Sambungan 2G & 5G",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-3-1020",
+      "day": 3,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Pengelasan Root Run & Hot Pass Pipa",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-3-1235",
+      "day": 3,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Pengelasan Sambungan Flange Pipa",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-3-1405",
+      "day": 3,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Simulasi Sertifikasi Las Migas 6G",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-4-0700",
+      "day": 4,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan Pipa Gas Bertekanan Tinggi",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-4-0830",
+      "day": 4,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Uji Radiografi Sinar X Sambungan Las",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-2-4-1020",
+      "day": 4,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Kualifikasi Juru Las Standar ASME IX",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-4-1235",
+      "day": 4,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Evaluasi Mutu Hasil Las Standar AWS D1.1",
+      "teacher": "Budi Santoso, S.T",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-2-4-1405",
+      "day": 4,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Praktik Fabrikasi Tangki Stainless Steel",
+      "teacher": "Joko Susilo, S.T",
+      "room": "Bengkel Fabrikasi Logam"
+    },
+    {
+      "id": "subj-xii-tl-2-5-0645",
+      "day": 5,
+      "slot": "Senam / Rohani",
+      "timeStart": "06:45",
+      "timeEnd": "07:15",
+      "name": "Senam Pagi Kebugaran & Pembinaan Karakter Siswa",
+      "teacher": "Tim Kesiswaan SMKN 1",
+      "room": "Lapangan Utama SMKN 1 Moilong"
+    },
+    {
+      "id": "subj-xii-tl-2-5-0715",
+      "day": 5,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:15",
+      "timeEnd": "08:35",
+      "name": "Pengelasan Sambungan Pipa SMAW 2G",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-5-0835",
+      "day": 5,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:35",
+      "timeEnd": "09:55",
+      "name": "Inspeksi Sambungan Las Fluorescent Penetrant",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-2-5-1015",
+      "day": 5,
+      "slot": "Jam 5",
+      "timeStart": "10:15",
+      "timeEnd": "11:15",
+      "name": "Persiapan Uji Kompetensi BNSP Pengelasan",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-5-1300",
+      "day": 5,
+      "slot": "Projek P5",
+      "timeStart": "13:00",
+      "timeEnd": "14:15",
+      "name": "Projek Penguatan Profil Pelajar Pancasila (P5: Kebekerjaan & Gaya Hidup Berkelanjutan)",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "R. Teori XII TL 2"
+    },
+    {
+      "id": "subj-xii-tl-2-5-1415",
+      "day": 5,
+      "slot": "Ekstrakurikuler",
+      "timeStart": "14:15",
+      "timeEnd": "15:30",
+      "name": "Klub Otomotif & Fabrikasi Kustom",
+      "teacher": "Ir. Bambang Sutrisno",
+      "room": "R. Teori XII TL 2"
+    },
+    {
+      "id": "subj-xii-tl-2-6-0700",
+      "day": 6,
+      "slot": "Jam 1 - 2",
+      "timeStart": "07:00",
+      "timeEnd": "08:30",
+      "name": "Pengelasan Pipa Sambungan 5G SMAW",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-6-0830",
+      "day": 6,
+      "slot": "Jam 3 - 4",
+      "timeStart": "08:30",
+      "timeEnd": "10:00",
+      "name": "Pengelasan Pipa Sambungan Posisi 6G",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-6-1020",
+      "day": 6,
+      "slot": "Jam 5 - 6",
+      "timeStart": "10:20",
+      "timeEnd": "11:50",
+      "name": "Laporan Analisis Cacat Las Radiografi",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Lab Uji Cacat Las NDT"
+    },
+    {
+      "id": "subj-xii-tl-2-6-1235",
+      "day": 6,
+      "slot": "Jam 7 - 8",
+      "timeStart": "12:35",
+      "timeEnd": "14:05",
+      "name": "Projek Kreatif PKK: Fabrikasi Tangki Stainless",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    },
+    {
+      "id": "subj-xii-tl-2-6-1405",
+      "day": 6,
+      "slot": "Jam 9 - 10",
+      "timeStart": "14:05",
+      "timeEnd": "15:30",
+      "name": "Sertifikasi BNSP Pengelasan Pipa Final",
+      "teacher": "M. Taufik, S.Pd",
+      "room": "Bengkel Pengelasan Pipa"
+    }
+  ]
+}
