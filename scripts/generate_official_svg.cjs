@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" width="100%" height="100%">
+const fs = require('fs');
+
+const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 520" width="100%" height="100%">
   <defs>
     <!-- Filter for crisp drop-shadow -->
     <filter id="logo-shadow" x="-10%" y="-10%" width="120%" height="120%">
@@ -111,4 +113,8 @@
   <text fill="#ffffff" font-family="'Plus Jakarta Sans', 'Arial Black', sans-serif" font-weight="900" font-size="24" letter-spacing="4" text-anchor="middle">
     <textPath href="#bottom-curve" startOffset="50%">KABUPATEN BANGGAI</textPath>
   </text>
-</svg>
+</svg>`;
+
+fs.writeFileSync('public/logo-smkn1-moilong.svg', svgContent);
+fs.writeFileSync('public/icon.svg', svgContent);
+console.log('Crisp official SVG logo generated successfully at public/logo-smkn1-moilong.svg and public/icon.svg!');
