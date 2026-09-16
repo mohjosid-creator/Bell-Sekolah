@@ -4,7 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bel Otomatis & Jadwal Pelajaran SMKN 1 MOILONG (07:00 - 15:30)</title>
-  <meta name="description" content="Aplikasi Bel Otomatis Sekolah, Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (AKL, DKV, TL 07:00 - 15:30), Dashboard Monitoring KBM Live, Banner Slider 5 Foto, Tulisan Berjalan, dan Manajemen Penambahan Jadwal Guru & Mapel." />
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <meta name="theme-color" content="#2563eb">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Bel Moilong">
+  <meta name="description" content="Aplikasi Bel Otomatis Sekolah, Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (AKL, DKV, TL 07:00 - 15:30), Dashboard Monitoring KBM Live, Banner Slider 5 Foto, Tulisan Berjalan, Manajemen Master Data (Edit & Hapus Guru, Mapel, Kelas), Menu Auto-Hide Sebelah Kanan, dan Fitur Autorun Startup Windows." />
   <!--
   =============================================================================
   APLIKASI BEL OTOMATIS SEKOLAH - STANDALONE SINGLE FILE (HTML5, CSS3, ES6+)
@@ -1541,6 +1549,301 @@
       border: 1px solid rgba(239, 68, 68, 0.3);
     }
 
+
+    /* =========================================================================
+       AUTO-HIDE RIGHT MENU / DOCK (SEBELAH KANAN)
+       ========================================================================= */
+    .right-autohide-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(3px);
+      z-index: 1040;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .right-autohide-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .right-autohide-wrapper {
+      position: fixed;
+      top: 140px;
+      right: 0;
+      z-index: 1050;
+      display: flex;
+      align-items: flex-start;
+      pointer-events: none;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .right-autohide-wrapper.open {
+      transform: translateX(0);
+    }
+
+    /* Floating Tab / Handle di sebelah kanan layar */
+    .right-autohide-handle {
+      pointer-events: auto;
+      background: linear-gradient(135deg, var(--primary), #1d4ed8);
+      color: #ffffff;
+      padding: 0.85rem 0.55rem;
+      border-radius: 12px 0 0 12px;
+      box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.22);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 800;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      user-select: none;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-right: none;
+      transition: all 0.25s ease;
+      letter-spacing: 0.08em;
+    }
+    .right-autohide-handle:hover {
+      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
+      box-shadow: -6px 8px 25px rgba(37, 99, 235, 0.4);
+      padding-right: 0.75rem;
+    }
+    .right-autohide-handle .handle-icon {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      display: inline-block;
+      transform: rotate(180deg);
+    }
+
+    /* Panel Konten Menu Kanan */
+    .right-autohide-panel {
+      pointer-events: auto;
+      width: 320px;
+      max-height: calc(100vh - 160px);
+      overflow-y: auto;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-right: none;
+      border-radius: 16px 0 0 16px;
+      box-shadow: -12px 12px 35px rgba(0, 0, 0, 0.2);
+      padding: 1.15rem;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .right-autohide-wrapper.open .right-autohide-panel {
+      transform: translateX(0);
+    }
+
+    .right-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .right-panel-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .right-section-title {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.15rem;
+    }
+    .right-menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .right-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.6rem 0.75rem;
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      text-decoration: none;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      width: 100%;
+      text-align: left;
+    }
+    .right-menu-item:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateX(-2px);
+    }
+    .right-menu-item .rmi-icon {
+      font-size: 1.15rem;
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .right-menu-item .rmi-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .right-menu-item .rmi-title {
+      font-weight: 700;
+      line-height: 1.25;
+    }
+    .right-menu-item .rmi-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .right-menu-item .rmi-badge {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* MASTER DATA MODAL & TABLE STYLES */
+    .master-data-tabs {
+      display: flex;
+      gap: 0.35rem;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .master-data-tab-btn {
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+    }
+    .master-data-tab-btn:hover {
+      color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+    .master-data-tab-btn.active {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      background: var(--primary-light);
+    }
+    .master-table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+    }
+    .master-data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      text-align: left;
+    }
+    .master-data-table th {
+      background: var(--bg-card-hover);
+      padding: 0.65rem 0.85rem;
+      font-weight: 700;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      white-space: nowrap;
+    }
+    .master-data-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+    .master-data-table tr:hover {
+      background: var(--bg-card-hover);
+    }
+    .badge-grade {
+      display: inline-block;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+    }
+
+    /* AUTORUN STARTUP WINDOWS STYLES */
+    .badge-autorun-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #2563eb;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(37, 99, 235, 0.3);
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      letter-spacing: 0.02em;
+    }
+    .autorun-nav-tabs {
+      display: flex;
+      gap: 0.35rem;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .autorun-tab-btn {
+      padding: 0.5rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border-bottom: 2px solid transparent;
+    }
+    .autorun-tab-btn:hover {
+      color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+    .autorun-tab-btn.active {
+      color: var(--primary);
+      background: var(--bg-card-hover);
+      border-bottom: 2px solid var(--primary);
+    }
+    .autorun-tab-pane {
+      display: none;
+    }
+    .autorun-tab-pane.active {
+      display: block;
+      animation: fadeIn 0.25s ease;
+    }
+
+
     /* SITE FOOTER */
     .site-footer {
       margin-top: 3rem;
@@ -1618,24 +1921,22 @@
       </div>
 
       <div class="header-actions">
-        <!-- Theme Toggle -->
+        <!-- Master Data Sekolah (Guru, Mapel, Kelas) -->
+        <button class="btn btn-outline btn-sm" onclick="openMasterDataModal('teachers')" title="Kelola Master Data Guru, Mata Pelajaran & Kelas (Edit / Hapus)" style="border-color: rgba(37,99,235,0.4); background: rgba(37,99,235,0.08); font-weight: 700; color: var(--primary);">
+          ⚙️ Kelola Guru, Mapel & Kelas
+        </button>
+
+        <!-- Tombol Buka Menu Auto-Hide Sebelah Kanan -->
+        <button class="btn btn-primary btn-sm" id="btn-open-right-menu" onclick="toggleRightAutohideMenu(true)" title="Buka Menu Aksi & Alat (Auto-Hide di Sebelah Kanan)">
+          <span>⚙️ Menu Alat</span> <span style="font-size: 0.75rem;">›</span>
+        </button>
+
+        <!-- Theme Toggle Cepat -->
         <button class="btn btn-outline btn-sm" id="btn-theme-toggle" title="Ganti Tema Gelap / Terang">
           <span id="theme-icon">🌙</span> <span id="theme-text">Mode Gelap</span>
         </button>
 
-        <!-- Ekspor / Impor -->
-        <button class="btn btn-outline btn-sm" id="btn-export-json" title="Simpan Cadangan Jadwal ke File JSON">
-          💾 Cadangan JSON
-        </button>
-        <button class="btn btn-outline btn-sm" id="btn-import-json-trigger" title="Pulihkan Jadwal dari File JSON">
-          📥 Pulihkan JSON
-        </button>
         <input type="file" id="file-import-json" accept=".json" style="display: none;">
-
-        <!-- Unduh Standalone Single HTML -->
-        <button class="btn btn-primary btn-sm" id="btn-download-html" title="Unduh berkas .html ini ke komputer agar bisa dibuka tanpa server">
-          ⬇️ Unduh Berkas HTML
-        </button>
       </div>
     </header>
 
@@ -1917,6 +2218,36 @@
       </button>
     </div>
 
+    <!-- AUTORUN STARTUP WINDOWS QUICK CARD -->
+    <div class="card card-autorun-banner no-print" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(16,185,129,0.05)); border: 1px solid rgba(37,99,235,0.25);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.85rem;">
+          <div style="width: 42px; height: 42px; border-radius: var(--radius-sm); background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(37,99,235,0.25);">
+            🚀
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+              <span style="font-size: 0.98rem; font-weight: 800; color: var(--text-main);">
+                Autorun Startup Windows
+              </span>
+              <span class="badge-autorun-pill">Otomatisasi PC Operator</span>
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.15rem 0 0; line-height: 1.4;">
+              Jalankan Bel Otomatis SMKN 1 Moilong secara langsung setiap kali komputer sekolah dinyalakan tanpa perlu membuka browser secara manual.
+            </p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-primary btn-sm" onclick="downloadWindowsBatchInstaller()" title="Unduh script .bat untuk pasang instan">
+            ⬇️ Unduh Script Pasang (.bat)
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="openAutorunWindowsModal()" title="Buka menu konfigurasi lengkap">
+            ⚙️ Pengaturan & Panduan
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- MAIN DASHBOARD -->
     <div class="dashboard-grid">
       <!-- CLOCK CARD -->
@@ -2113,42 +2444,25 @@
     <!-- CLASS SELECTION PILLS (15 CLASSES) -->
     <div class="class-pills-container">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.35rem;">
-        <h3 style="font-size: 1.05rem; font-weight: 800; display: flex; align-items: center; gap: 0.4rem;">
-          🏫 Jadwal Pelajaran SMKN 1 MOILONG (15 Rombongan Belajar • Jam 07:00 - 15:30)
-        </h3>
+        <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+          <h3 style="font-size: 1.05rem; font-weight: 800; display: flex; align-items: center; gap: 0.4rem; margin: 0;">
+            🏫 Jadwal Pelajaran SMKN 1 MOILONG (<span id="total-classes-pill-count">15</span> Rombongan Belajar)
+          </h3>
+          <button type="button" class="btn btn-outline btn-xs" onclick="openMasterDataModal('classes')" title="Kelola, Edit, dan Hapus Daftar Rombel Kelas" style="font-weight: 700; color: var(--primary);">
+            ⚙️ Kelola Kelas
+          </button>
+          <button type="button" class="btn btn-primary btn-xs" onclick="openAddClassModal()" title="Tambah Rombel Kelas Baru">
+            ➕ Tambah Kelas
+          </button>
+        </div>
         <span style="font-size: 0.78rem; color: var(--text-muted);">
           Tahun Ajaran 2024/2025 • Waktu Belajar 07:00 s.d. 15:30 WITA/WIB • Kurikulum Merdeka
         </span>
       </div>
 
-      <!-- TINGKAT X -->
-      <div class="grade-row">
-        <span class="grade-badge">KELAS X</span>
-        <button type="button" class="class-btn active" data-class="x-ak-1" onclick="selectClass('x-ak-1')">X AK 1</button>
-        <button type="button" class="class-btn" data-class="x-ak-2" onclick="selectClass('x-ak-2')">X AK 2</button>
-        <button type="button" class="class-btn" data-class="x-dkv" onclick="selectClass('x-dkv')">X DKV</button>
-        <button type="button" class="class-btn" data-class="x-tl-1" onclick="selectClass('x-tl-1')">X TL 1</button>
-        <button type="button" class="class-btn" data-class="x-tl-2" onclick="selectClass('x-tl-2')">X TL 2</button>
-      </div>
-
-      <!-- TINGKAT XI -->
-      <div class="grade-row">
-        <span class="grade-badge">KELAS XI</span>
-        <button type="button" class="class-btn" data-class="xi-ak-1" onclick="selectClass('xi-ak-1')">XI AK 1</button>
-        <button type="button" class="class-btn" data-class="xi-ak-2" onclick="selectClass('xi-ak-2')">XI AK 2</button>
-        <button type="button" class="class-btn" data-class="xi-dkv" onclick="selectClass('xi-dkv')">XI DKV</button>
-        <button type="button" class="class-btn" data-class="xi-tl-1" onclick="selectClass('xi-tl-1')">XI TL 1</button>
-        <button type="button" class="class-btn" data-class="xi-tl-2" onclick="selectClass('xi-tl-2')">XI TL 2</button>
-      </div>
-
-      <!-- TINGKAT XII -->
-      <div class="grade-row">
-        <span class="grade-badge">KELAS XII</span>
-        <button type="button" class="class-btn" data-class="xii-ak-1" onclick="selectClass('xii-ak-1')">XII AK 1</button>
-        <button type="button" class="class-btn" data-class="xii-ak-2" onclick="selectClass('xii-ak-2')">XII AK 2</button>
-        <button type="button" class="class-btn" data-class="xii-dkv" onclick="selectClass('xii-dkv')">XII DKV</button>
-        <button type="button" class="class-btn" data-class="xii-tl-1" onclick="selectClass('xii-tl-1')">XII TL 1</button>
-        <button type="button" class="class-btn" data-class="xii-tl-2" onclick="selectClass('xii-tl-2')">XII TL 2</button>
+      <!-- DYNAMIC CLASS PILLS (KELAS X, XI, XII & KELAS BARU) -->
+      <div id="dynamic-class-pills-rows">
+        <!-- Rendered dynamically by renderClassPills() -->
       </div>
     </div>
 
@@ -2172,7 +2486,13 @@
         </div>
 
         <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;" class="no-print">
-          <button type="button" class="btn btn-outline btn-sm" onclick="auditAllSchedulesUI()" title="Audit dan deteksi apakah ada guru, ruangan, atau jam bentrok di seluruh 15 kelas">
+          <button type="button" class="btn btn-outline btn-sm" onclick="openEditClassModal(currentSelectedClassId)" title="Edit Nama, Tingkat, Wali Kelas, dan Ruangan Kelas Ini" style="color: var(--primary); font-weight: 700;">
+            ✏️ Edit Kelas
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="promptDeleteClass(currentSelectedClassId)" title="Hapus Rombel Kelas Ini" style="color: var(--danger); border-color: rgba(239,68,68,0.35);">
+            🗑️ Hapus Kelas
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="auditAllSchedulesUI()" title="Audit dan deteksi apakah ada guru, ruangan, atau jam bentrok di seluruh kelas">
             🛡️ Audit Bentrok
           </button>
           <button type="button" class="btn btn-outline btn-sm" onclick="openSubjectModal()" title="Tambah mata pelajaran baru ke kelas ini">
@@ -2228,8 +2548,13 @@
           <div class="footer-subtitle">Sistem Bel Otomatis & Monitoring Jadwal Pelajaran (07:00 - 15:30 WITA) • 15 Rombel Terintegrasi</div>
         </div>
       </div>
-      <div class="footer-copyright" id="footer-copyright-text">
-        TIM IT SMKN 1 MOILONG @Asiacomptech 2026
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <button type="button" class="btn btn-outline btn-xs" onclick="openAutorunWindowsModal()" style="font-weight: 600;">
+          🚀 Setup Autorun Windows
+        </button>
+        <div class="footer-copyright" id="footer-copyright-text">
+          TIM IT SMKN 1 MOILONG @Asiacomptech 2026
+        </div>
       </div>
     </div>
   </footer>
@@ -2674,6 +2999,481 @@
           ⚡ Terapkan Master Jadwal Bebas Bentrok (15 Kelas)
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL: AUTORUN STARTUP WINDOWS -->
+  <div class="modal-backdrop" id="modal-autorun-windows">
+    <div class="modal" style="max-width: 720px; max-height: 92vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.4rem;">🚀</span>
+          <div>
+            <h3 style="font-size: 1.15rem; margin: 0; font-weight: 800;">
+              Pengaturan Autorun Startup Windows
+            </h3>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.15rem 0 0;">
+              Sistem Bel Otomatis SMKN 1 Moilong langsung aktif setiap kali PC/Laptop dinyalakan
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeAutorunWindowsModal()">✕</button>
+      </div>
+
+      <div class="modal-body" style="overflow-y: auto; flex: 1; padding: 1.25rem;">
+        <!-- PENGATURAN PARAMETER PELUNCURAN -->
+        <div style="background-color: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.9rem; margin-bottom: 1.25rem;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.35rem;">
+            <span>⚙️</span> Parameter Peluncuran Otomatis (Auto-Config):
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.75rem;">
+            <!-- URL Target Input -->
+            <div>
+              <label style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">
+                Target URL / Alamat Aplikasi:
+              </label>
+              <input type="text" id="autorun-target-url" style="width: 100%; padding: 0.45rem 0.65rem; font-size: 0.82rem; font-family: var(--font-mono); border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <div style="display: flex; gap: 0.35rem; margin-top: 0.3rem;">
+                <button type="button" class="btn btn-outline btn-xs" onclick="setAutorunUrlCurrent()">🌐 URL Saat Ini</button>
+                <button type="button" class="btn btn-outline btn-xs" onclick="setAutorunUrlLocalhost()">💻 Localhost:3000</button>
+              </div>
+            </div>
+
+            <!-- Mode Tampilan Browser -->
+            <div>
+              <label style="font-size: 0.78rem; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 0.25rem;">
+                Mode Tampilan Jendela:
+              </label>
+              <select id="autorun-launch-mode" style="width: 100%; padding: 0.45rem 0.65rem; font-size: 0.82rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="app" selected>🖥️ Mode App Windowed (Rekomendasi - Mirip Desktop App)</option>
+                <option value="kiosk">📺 Mode Kiosk (Layar Penuh / Fullscreen TV Display)</option>
+                <option value="standard">🌐 Mode Tab Browser Standar</option>
+              </select>
+              <label style="display: flex; align-items: center; gap: 0.4rem; font-size: 0.76rem; color: var(--text-main); margin-top: 0.45rem; cursor: pointer;">
+                <input type="checkbox" id="autorun-autoplay-bypass" checked>
+                <span>Bypass Blokir Audio (--autoplay-policy=no-user-gesture-required)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABS METODE PEMASANGAN -->
+        <div class="autorun-nav-tabs">
+          <button type="button" class="autorun-tab-btn active" id="btn-atab-bat" onclick="switchAutorunTab('bat')">
+            ⚡ 1-Klik Script (.bat)
+          </button>
+          <button type="button" class="autorun-tab-btn" id="btn-atab-vbs" onclick="switchAutorunTab('vbs')">
+            🤫 Silent VBScript
+          </button>
+          <button type="button" class="autorun-tab-btn" id="btn-atab-pwa" onclick="switchAutorunTab('pwa')">
+            📱 Chrome / Edge PWA
+          </button>
+          <button type="button" class="autorun-tab-btn" id="btn-atab-manual" onclick="switchAutorunTab('manual')">
+            📁 Folder shell:startup
+          </button>
+        </div>
+
+        <!-- ISI TAB 1: 1-KLIK SCRIPT .BAT -->
+        <div class="autorun-tab-pane active" id="pane-atab-bat">
+          <div style="background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.25); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1rem;">
+            <div style="font-weight: 700; color: var(--primary); font-size: 0.9rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>🏆</span> Metode Tercepat & Paling Praktis (Cukup 1-Klik)
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-main); margin: 0; line-height: 1.45;">
+              Script batch Windows ini secara cerdas mendeteksi Google Chrome atau Microsoft Edge di komputer sekolah, membuat shortcut di folder <code>Startup</code> Windows Anda, dan mengonfigurasi izin audio bel tanpa perlu interaksi manual.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem;">
+            <button type="button" class="btn btn-primary" onclick="downloadWindowsBatchInstaller()" style="padding: 0.65rem 1.15rem; font-weight: 700; flex: 1; min-width: 240px;">
+              ⬇️ Unduh Pasang-Autorun-Bel-Moilong.bat
+            </button>
+            <button type="button" class="btn btn-outline" onclick="downloadWindowsBatchUninstaller()" title="Hapus autorun jika tidak ingin bel berjalan otomatis lagi" style="color: var(--danger); border-color: rgba(239,68,68,0.35);">
+              🗑️ Unduh Script Hapus (.bat)
+            </button>
+          </div>
+
+          <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.85rem;">
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem;">📝 Langkah Pemakaian di Windows:</div>
+            <ol style="margin: 0; padding-left: 1.25rem; font-size: 0.82rem; line-height: 1.6; color: var(--text-main);">
+              <li>Klik tombol <strong>"Unduh Pasang-Autorun-Bel-Moilong.bat"</strong> di atas.</li>
+              <li>Buka folder <em>Downloads</em> di laptop/PC Windows Anda.</li>
+              <li>Klik dua kali (double-click) pada file <strong>Pasang-Autorun-Bel-Moilong.bat</strong>. <em>(Jika muncul Windows SmartScreen, klik "More info" / "Info selengkapnya", lalu pilih "Run anyway" / "Tetap jalankan").</em></li>
+              <li>Jendela otomatis membuat shortcut dan menampilkan notifikasi <strong>[SUKSES]</strong>.</li>
+              <li>Selesai! Saat komputer dinyalakan, Bel Otomatis SMKN 1 Moilong akan langsung terbuka otomatis.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ISI TAB 2: SILENT VBSCRIPT -->
+        <div class="autorun-tab-pane" id="pane-atab-vbs">
+          <div style="background: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1rem;">
+            <div style="font-weight: 700; color: var(--text-main); font-size: 0.9rem; margin-bottom: 0.35rem;">
+              🤫 Peluncur Senyap (Tanpa Jendela Hitam Command Prompt)
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0; line-height: 1.45;">
+              File VBScript ringan (Visual Basic Script) yang langsung meluncurkan browser secara hening di latar belakang saat pengguna login ke Windows.
+            </p>
+          </div>
+
+          <div style="margin-bottom: 1rem;">
+            <button type="button" class="btn btn-primary" onclick="downloadWindowsSilentVbs()" style="padding: 0.65rem 1.15rem; font-weight: 700;">
+              ⬇️ Unduh Bel-Sekolah-Startup.vbs
+            </button>
+          </div>
+
+          <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.85rem;">
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem;">📝 Cara Memasang File .vbs:</div>
+            <ol style="margin: 0; padding-left: 1.25rem; font-size: 0.82rem; line-height: 1.6; color: var(--text-main);">
+              <li>Unduh file <strong>Bel-Sekolah-Startup.vbs</strong> di atas.</li>
+              <li>Tekan tombol <kbd style="background: var(--border-color); padding: 0.15rem 0.35rem; border-radius: 4px; font-family: var(--font-mono);">Win + R</kbd> di keyboard.</li>
+              <li>Ketik <strong style="color: var(--primary);">shell:startup</strong> lalu tekan <strong>Enter</strong>. Folder Startup Windows akan terbuka.</li>
+              <li>Pindahkan (Cut/Paste) file <code>Bel-Sekolah-Startup.vbs</code> ke dalam folder tersebut.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ISI TAB 3: BROWSER PWA (CHROME / EDGE) -->
+        <div class="autorun-tab-pane" id="pane-atab-pwa">
+          <div style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.25); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1rem;">
+            <div style="font-weight: 700; color: var(--success); font-size: 0.9rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem;">
+              <span>📱</span> PWA Native OS Integration (Chrome 91+ & Edge)
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-main); margin: 0; line-height: 1.45;">
+              Aplikasi telah dilengkapi Web App Manifest resmi dengan kapabilitas <code>run_on_os_login</code> sehingga browser Chrome dan Edge dapat mengelolanya langsung di pengaturan startup Windows.
+            </p>
+          </div>
+
+          <!-- API TOGGLE IF SUPPORTED -->
+          <div id="pwa-api-support-box" style="margin-bottom: 1rem; padding: 0.85rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-color);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+              <div>
+                <strong style="font-size: 0.85rem; display: block;">Status Run On OS Login (Browser API):</strong>
+                <span id="pwa-api-status-text" style="font-size: 0.8rem; color: var(--text-muted);">Memeriksa kapabilitas browser...</span>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm" id="btn-toggle-run-on-os-login" onclick="togglePwaRunOnOsLogin()" style="display: none;">
+                Ubah Status Startup
+              </button>
+            </div>
+          </div>
+
+          <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.85rem;">
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem;">📝 Cara Pasang via Chrome / Edge:</div>
+            <ol style="margin: 0; padding-left: 1.25rem; font-size: 0.82rem; line-height: 1.6; color: var(--text-main);">
+              <li>Di Google Chrome atau Microsoft Edge, klik ikon <strong>Install / Pasang Aplikasi</strong> di ujung kanan address bar (sebelah kanan bintang bookmark).</li>
+              <li>Atau klik menu titik tiga <kbd style="background: var(--border-color); padding: 0.15rem 0.35rem; border-radius: 4px;">⋮</kbd> &rarr; <strong>Simpan dan Bagikan</strong> &rarr; <strong>Pasang Bel Otomatis SMKN 1 Moilong</strong>.</li>
+              <li>Setelah terpasang, jendela konfirmasi akan menanyakan: centang kotak <strong>"Mulai otomatis saat Anda masuk ke komputer"</strong> (*Start app when you sign in*).</li>
+              <li>Aplikasi akan langsung muncul di daftar Startup Task Manager Windows.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ISI TAB 4: MANUAL SHELL:STARTUP & SHORTCUT -->
+        <div class="autorun-tab-pane" id="pane-atab-manual">
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="downloadWindowsShortcutUrl()">
+              ⬇️ Unduh Shortcut Windows (.url)
+            </button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="copyShellStartupCommand()">
+              📋 Salin "shell:startup"
+            </button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="copyPowershellCommand()">
+              📋 Salin Script PowerShell 1-Baris
+            </button>
+          </div>
+
+          <div style="background-color: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.85rem;">
+            <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem;">📝 Langkah Membuka Folder Startup Windows:</div>
+            <div style="font-size: 0.82rem; line-height: 1.6; color: var(--text-main);">
+              <p style="margin: 0 0 0.5rem;">
+                Folder Startup Windows terletak di path:<br>
+                <code style="background: var(--bg-card-hover); padding: 0.2rem 0.45rem; border-radius: 4px; font-family: var(--font-mono); color: var(--primary); font-weight: 600;">%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup</code>
+              </p>
+              <p style="margin: 0;">
+                Segala file shortcut (<code>.lnk</code>), script (<code>.bat</code> / <code>.vbs</code>), atau tautan (<code>.url</code>) yang diletakkan di dalam folder tersebut akan dijalankan secara otomatis oleh sistem operasi Windows setiap kali pengguna melakukan login atau menyalakan PC.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <span style="font-size: 0.78rem; color: var(--text-muted);">
+          Tips: Gunakan mode App Windowed untuk tampilan layar bersih tanpa address bar.
+        </span>
+        <button type="button" class="btn btn-primary btn-sm" onclick="closeAutorunWindowsModal()">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL: KELOLA MASTER DATA (GURU, MATA PELAJARAN, KELAS) -->
+  <div class="modal-backdrop" id="modal-master-data">
+    <div class="modal" style="max-width: 900px; max-height: 92vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.4rem;">⚙️</span>
+          <div>
+            <h3 style="font-size: 1.15rem; margin: 0; font-weight: 800;">
+              Manajemen Master Data Sekolah
+            </h3>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.15rem 0 0;">
+              Kelola daftar Guru, Mata Pelajaran, dan Kelas (Rombel) SMKN 1 Moilong dengan fitur Edit & Hapus
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeMasterDataModal()">✕</button>
+      </div>
+
+      <!-- TABS MASTER DATA -->
+      <div style="padding: 0 1.25rem; margin-top: 0.75rem;">
+        <div class="master-data-tabs">
+          <button type="button" class="master-data-tab-btn active" id="btn-md-tab-teachers" onclick="switchMasterDataTab('teachers')">
+            👨‍🏫 Data Guru (<span id="md-tab-count-teachers">0</span>)
+          </button>
+          <button type="button" class="master-data-tab-btn" id="btn-md-tab-subjects" onclick="switchMasterDataTab('subjects')">
+            📖 Data Mata Pelajaran (<span id="md-tab-count-subjects">0</span>)
+          </button>
+          <button type="button" class="master-data-tab-btn" id="btn-md-tab-classes" onclick="switchMasterDataTab('classes')">
+            🏫 Data Kelas / Rombel (<span id="md-tab-count-classes">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-body" style="overflow-y: auto; flex: 1; padding: 0 1.25rem 1.25rem;">
+        <!-- TAB PANE 1: GURU -->
+        <div id="pane-md-teachers" class="master-data-pane">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 240px;">
+              <input type="text" id="search-master-teachers" placeholder="🔍 Cari nama guru / bidang studi..." oninput="onSearchMasterTeachers(this.value)" style="width: 100%; padding: 0.45rem 0.75rem; font-size: 0.82rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddTeacherModal()">
+              ➕ Tambah Guru Baru
+            </button>
+          </div>
+
+          <div class="master-table-wrapper">
+            <table class="master-data-table">
+              <thead>
+                <tr>
+                  <th style="width: 40px; text-align: center;">No</th>
+                  <th>Nama Lengkap & Gelar</th>
+                  <th>Bidang Studi / Mapel Pengampu</th>
+                  <th style="width: 130px; text-align: center;">Jam Mengajar</th>
+                  <th style="width: 130px; text-align: center;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-master-teachers">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB PANE 2: MATA PELAJARAN -->
+        <div id="pane-md-subjects" class="master-data-pane" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 240px; flex-wrap: wrap;">
+              <input type="text" id="search-master-subjects" placeholder="🔍 Cari mata pelajaran..." oninput="onSearchMasterSubjects(this.value)" style="flex: 1; min-width: 160px; padding: 0.45rem 0.75rem; font-size: 0.82rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <select id="filter-master-subject-category" onchange="onCategoryFilterMasterSubjects(this.value)" style="padding: 0.45rem 0.75rem; font-size: 0.82rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="ALL">Semua Kategori Mapel</option>
+                <option value="Muatan Nasional & Umum (Semua Jurusan)">Umum (Nasional)</option>
+                <option value="Konsentrasi Keahlian Akuntansi (AKL)">Kejuruan AKL</option>
+                <option value="Konsentrasi Keahlian Desain Komunikasi Visual (DKV)">Kejuruan DKV</option>
+                <option value="Konsentrasi Keahlian Teknik Las (TL)">Kejuruan TL</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddSubjectModal()">
+              ➕ Tambah Mapel Baru
+            </button>
+          </div>
+
+          <div class="master-table-wrapper">
+            <table class="master-data-table">
+              <thead>
+                <tr>
+                  <th style="width: 40px; text-align: center;">No</th>
+                  <th>Kategori / Konsentrasi Keahlian</th>
+                  <th>Nama Mata Pelajaran</th>
+                  <th style="width: 120px; text-align: center;">Di Jadwal</th>
+                  <th style="width: 130px; text-align: center;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-master-subjects">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- TAB PANE 3: KELAS / ROMBEL -->
+        <div id="pane-md-classes" class="master-data-pane" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.85rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 240px;">
+              <input type="text" id="search-master-classes" placeholder="🔍 Cari nama kelas, jurusan, wali kelas..." oninput="onSearchMasterClasses(this.value)" style="width: 100%; padding: 0.45rem 0.75rem; font-size: 0.82rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+            <button type="button" class="btn btn-primary btn-sm" onclick="openAddClassModal()">
+              ➕ Tambah Kelas Baru
+            </button>
+          </div>
+
+          <div class="master-table-wrapper">
+            <table class="master-data-table">
+              <thead>
+                <tr>
+                  <th style="width: 70px;">Kode</th>
+                  <th>Nama Rombel / Kelas</th>
+                  <th>Tingkat</th>
+                  <th>Konsentrasi Keahlian</th>
+                  <th>Wali Kelas</th>
+                  <th>Ruang Teori / Bengkel</th>
+                  <th style="width: 90px; text-align: center;">Mapel</th>
+                  <th style="width: 130px; text-align: center;">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="tbody-master-classes">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <span style="font-size: 0.78rem; color: var(--text-muted);">
+          Semua perubahan tersimpan secara otomatis di browser dan tercakup dalam Cadangan JSON.
+        </span>
+        <button type="button" class="btn btn-primary btn-sm" onclick="closeMasterDataModal()">
+          Selesai
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUB-MODAL: FORM TAMBAH / EDIT GURU -->
+  <div class="modal-backdrop" id="modal-form-teacher">
+    <div class="modal" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;" id="modal-teacher-form-title">Tambah Guru Baru</h3>
+        <button type="button" class="btn-icon" onclick="closeTeacherFormModal()">✕</button>
+      </div>
+      <form id="form-teacher-edit" onsubmit="saveTeacherForm(event); return false;">
+        <input type="hidden" id="teacher-edit-original-index" value="-1">
+        <input type="hidden" id="teacher-edit-original-name" value="">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="teacher-input-name">Nama Lengkap & Gelar Guru:</label>
+            <input type="text" id="teacher-input-name" required placeholder="Contoh: Dra. Hj. Siti Aminah, M.Pd" style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="teacher-input-subject">Bidang Studi / Mapel Pengampu:</label>
+            <input type="text" id="teacher-input-subject" required placeholder="Contoh: Akuntansi & Keuangan" style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+          </div>
+          <div id="teacher-sync-schedule-box" style="display: none; padding: 0.6rem; background: var(--bg-card-hover); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+            <label style="display: flex; align-items: flex-start; gap: 0.45rem; font-size: 0.8rem; color: var(--text-main); cursor: pointer;">
+              <input type="checkbox" id="teacher-sync-schedule-check" checked style="margin-top: 0.15rem;">
+              <span>Perbarui juga nama guru ini di seluruh jadwal pelajaran yang sedang memakai nama sebelumnya</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+          <button type="button" class="btn btn-outline" onclick="closeTeacherFormModal()">Batal</button>
+          <button type="submit" class="btn btn-primary">💾 Simpan Data Guru</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SUB-MODAL: FORM TAMBAH / EDIT MATA PELAJARAN -->
+  <div class="modal-backdrop" id="modal-form-subject">
+    <div class="modal" style="max-width: 500px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;" id="modal-subject-form-title">Tambah Mata Pelajaran</h3>
+        <button type="button" class="btn-icon" onclick="closeSubjectFormModal()">✕</button>
+      </div>
+      <form id="form-subject-edit" onsubmit="saveSubjectForm(event); return false;">
+        <input type="hidden" id="subject-edit-original-cat" value="">
+        <input type="hidden" id="subject-edit-original-index" value="-1">
+        <input type="hidden" id="subject-edit-original-name" value="">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="subject-input-category">Kategori / Konsentrasi Keahlian:</label>
+            <select id="subject-input-category" required style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+              <option value="Muatan Nasional & Umum (Semua Jurusan)">Muatan Nasional & Umum (Semua Jurusan)</option>
+              <option value="Konsentrasi Keahlian Akuntansi (AKL)">Konsentrasi Keahlian Akuntansi (AKL)</option>
+              <option value="Konsentrasi Keahlian Desain Komunikasi Visual (DKV)">Konsentrasi Keahlian Desain Komunikasi Visual (DKV)</option>
+              <option value="Konsentrasi Keahlian Teknik Las (TL)">Konsentrasi Keahlian Teknik Las (TL)</option>
+              <option value="Muatan Lokal & Ekstrakurikuler">Muatan Lokal & Ekstrakurikuler</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="subject-input-name">Nama Mata Pelajaran:</label>
+            <input type="text" id="subject-input-name" required placeholder="Contoh: Praktikum Akuntansi Lembaga" style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+          </div>
+          <div id="subject-sync-schedule-box" style="display: none; padding: 0.6rem; background: var(--bg-card-hover); border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+            <label style="display: flex; align-items: flex-start; gap: 0.45rem; font-size: 0.8rem; color: var(--text-main); cursor: pointer;">
+              <input type="checkbox" id="subject-sync-schedule-check" checked style="margin-top: 0.15rem;">
+              <span>Perbarui juga nama mapel ini di seluruh jadwal pelajaran yang sudah terdaftar</span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+          <button type="button" class="btn btn-outline" onclick="closeSubjectFormModal()">Batal</button>
+          <button type="submit" class="btn btn-primary">💾 Simpan Mata Pelajaran</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SUB-MODAL: FORM TAMBAH / EDIT KELAS / ROMBEL -->
+  <div class="modal-backdrop" id="modal-form-class">
+    <div class="modal" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;" id="modal-class-form-title">Tambah Kelas / Rombel Baru</h3>
+        <button type="button" class="btn-icon" onclick="closeClassFormModal()">✕</button>
+      </div>
+      <form id="form-class-edit" onsubmit="saveClassForm(event); return false;">
+        <input type="hidden" id="class-edit-is-new" value="false">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="class-input-id">Kode ID Kelas (Huruf kecil tanpa spasi):</label>
+            <input type="text" id="class-input-id" required pattern="[a-z0-9\-]+" placeholder="Contoh: x-ak-3 atau xi-dkv-2" style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main); font-family: var(--font-mono);">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="class-input-name">Nama Lengkap Kelas:</label>
+            <input type="text" id="class-input-name" required placeholder="Contoh: Kelas X AK 3" style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div class="form-group">
+              <label class="form-label" for="class-input-grade">Tingkat Kelas:</label>
+              <select id="class-input-grade" required style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+                <option value="X">Kelas X</option>
+                <option value="XI">Kelas XI</option>
+                <option value="XII">Kelas XII</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="class-input-major">Konsentrasi Keahlian:</label>
+              <input type="text" id="class-input-major" required placeholder="Contoh: Akuntansi & Keuangan Lembaga (AKL)" style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="class-input-teacher">Wali Kelas:</label>
+            <input type="text" id="class-input-teacher" required placeholder="Nama Wali Kelas & Gelar" style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="class-input-room">Ruang Utama / Teori / Bengkel:</label>
+            <input type="text" id="class-input-room" required placeholder="Contoh: R. Teori X AK 3 atau Lab Komputer" style="width: 100%; padding: 0.55rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-main);">
+          </div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: flex-end; gap: 0.5rem;">
+          <button type="button" class="btn btn-outline" onclick="closeClassFormModal()">Batal</button>
+          <button type="submit" class="btn btn-primary">💾 Simpan Data Kelas</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -4108,7 +4908,10 @@
         exportedAt: new Date().toISOString(),
         activeProfileId,
         profiles,
-        timetables: allClassTimetables
+        timetables: allClassTimetables,
+        teachers: MOILONG_TEACHERS,
+        subjects: MOILONG_SUBJECTS_CATALOG,
+        classes: MOILONG_CLASSES
       };
       const jsonString = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(backupData, null, 2));
       const downloadAnchor = document.createElement('a');
@@ -4140,6 +4943,22 @@
               saveClassTimetables();
               renderClassTimetable();
             }
+            if (parsed.teachers && Array.isArray(parsed.teachers)) {
+              MOILONG_TEACHERS = parsed.teachers;
+              saveMasterTeachers();
+            }
+            if (parsed.subjects && typeof parsed.subjects === 'object') {
+              MOILONG_SUBJECTS_CATALOG = parsed.subjects;
+              saveMasterSubjects();
+            }
+            if (parsed.classes && typeof parsed.classes === 'object') {
+              MOILONG_CLASSES = parsed.classes;
+              saveMasterClasses();
+            }
+            populateTeacherAndSubjectDropdowns();
+            renderClassPills();
+            renderLiveDashboardCards();
+            updateMasterDataCounts();
             saveState();
             renderProfileSelect();
             renderScheduleTable();
@@ -6660,6 +7479,365 @@ function buildAllSchedules() {
       return null;
     }
 
+    // =========================================================================
+    // MODUL AUTORUN STARTUP WINDOWS (SMKN 1 MOILONG)
+    // =========================================================================
+
+    function openAutorunWindowsModal() {
+      const modal = document.getElementById('modal-autorun-windows');
+      if (!modal) return;
+
+      const urlInput = document.getElementById('autorun-target-url');
+      if (urlInput) {
+        if (!urlInput.value) {
+          urlInput.value = window.location.href;
+        }
+      }
+
+      checkPwaRunOnOsLogin();
+      modal.classList.add('open');
+    }
+
+    function closeAutorunWindowsModal() {
+      const modal = document.getElementById('modal-autorun-windows');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function setAutorunUrlCurrent() {
+      const urlInput = document.getElementById('autorun-target-url');
+      if (urlInput) {
+        urlInput.value = window.location.href;
+        showToast('Target URL diatur ke URL saat ini.', 'info');
+      }
+    }
+
+    function setAutorunUrlLocalhost() {
+      const urlInput = document.getElementById('autorun-target-url');
+      if (urlInput) {
+        urlInput.value = 'http://localhost:3000';
+        showToast('Target URL diatur ke http://localhost:3000.', 'info');
+      }
+    }
+
+    function switchAutorunTab(tabKey) {
+      const tabs = ['bat', 'vbs', 'pwa', 'manual'];
+      tabs.forEach(k => {
+        const btn = document.getElementById('btn-atab-' + k);
+        const pane = document.getElementById('pane-atab-' + k);
+        if (btn) btn.classList.toggle('active', k === tabKey);
+        if (pane) {
+          pane.style.display = (k === tabKey) ? 'block' : 'none';
+          pane.classList.toggle('active', k === tabKey);
+        }
+      });
+    }
+
+    function getAutorunConfig() {
+      const urlInput = document.getElementById('autorun-target-url');
+      const modeSelect = document.getElementById('autorun-launch-mode');
+      const bypassCheck = document.getElementById('autorun-autoplay-bypass');
+
+      let targetUrl = urlInput && urlInput.value.trim() ? urlInput.value.trim() : window.location.href;
+      let mode = modeSelect ? modeSelect.value : 'app';
+      let autoplayBypass = bypassCheck ? bypassCheck.checked : true;
+
+      return { targetUrl, mode, autoplayBypass };
+    }
+
+    function downloadFileBlob(filename, content, mimeType = 'text/plain;charset=utf-8') {
+      const blob = new Blob([content], { type: mimeType });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadWindowsBatchInstaller() {
+      const { targetUrl, mode, autoplayBypass } = getAutorunConfig();
+      const flagArg = mode === 'app' ? '--app=' : (mode === 'kiosk' ? '--kiosk=' : '');
+      const autoplayFlag = autoplayBypass ? '--autoplay-policy=no-user-gesture-required' : '';
+
+      const batContent = `@echo off
+chcp 65001 >nul
+title Installer Autorun Bel Otomatis SMKN 1 Moilong
+color 1F
+
+echo ===============================================================================
+echo        SISTEM BEL OTOMATIS & MONITORING KBM - SMKN 1 MOILONG
+echo             PEMASANG AUTORUN STARTUP WINDOWS (VERSI OTOMATIS)
+echo ===============================================================================
+echo.
+echo Sedang mendeteksi direktori Startup Windows...
+set "STARTUP_DIR=%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+
+if not exist "%STARTUP_DIR%" (
+    echo [ERROR] Folder Startup Windows tidak ditemukan!
+    pause
+    exit /b 1
+)
+
+echo [OK] Folder Startup: %STARTUP_DIR%
+echo.
+echo Sedang mendeteksi Google Chrome atau Microsoft Edge...
+
+set "BROWSER_EXE="
+set "BROWSER_NAME="
+
+if exist "%ProgramFiles%\\Google\\Chrome\\Application\\chrome.exe" (
+    set "BROWSER_EXE=%ProgramFiles%\\Google\\Chrome\\Application\\chrome.exe"
+    set "BROWSER_NAME=Google Chrome"
+) else if exist "%ProgramFiles(x86)%\\Google\\Chrome\\Application\\chrome.exe" (
+    set "BROWSER_EXE=%ProgramFiles(x86)%\\Google\\Chrome\\Application\\chrome.exe"
+    set "BROWSER_NAME=Google Chrome (x86)"
+) else if exist "%LocalAppData%\\Google\\Chrome\\Application\\chrome.exe" (
+    set "BROWSER_EXE=%LocalAppData%\\Google\\Chrome\\Application\\chrome.exe"
+    set "BROWSER_NAME=Google Chrome (User)"
+) else if exist "%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe" (
+    set "BROWSER_EXE=%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe"
+    set "BROWSER_NAME=Microsoft Edge"
+) else if exist "%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe" (
+    set "BROWSER_EXE=%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe"
+    set "BROWSER_NAME=Microsoft Edge"
+)
+
+set "TARGET_URL=${targetUrl}"
+set "FLAG_ARG=${flagArg}"
+set "AUTOPLAY_FLAG=${autoplayFlag}"
+
+echo.
+if defined BROWSER_EXE (
+    echo [OK] Ditemukan %BROWSER_NAME%
+    echo Lokasi: "%BROWSER_EXE%"
+) else (
+    echo [INFO] Chrome/Edge tidak terdeteksi di direktori standar. Menggunakan browser default.
+)
+
+echo.
+echo Membuat Shortcut Startup Bel Otomatis SMKN 1 Moilong...
+
+set "VBS_SCRIPT=%TEMP%\\create_bel_shortcut_%RANDOM%.vbs"
+
+echo Set oWS = WScript.CreateObject("WScript.Shell") > "%VBS_SCRIPT%"
+echo sLinkFile = "%STARTUP_DIR%\\Bel-Sekolah-SMKN1-Moilong.lnk" >> "%VBS_SCRIPT%"
+echo Set oLink = oWS.CreateShortcut(sLinkFile) >> "%VBS_SCRIPT%"
+
+if defined BROWSER_EXE (
+    echo oLink.TargetPath = "%BROWSER_EXE%" >> "%VBS_SCRIPT%"
+    if "${flagArg}"=="" (
+        echo oLink.Arguments = """%TARGET_URL%"" %AUTOPLAY_FLAG%" >> "%VBS_SCRIPT%"
+    ) else (
+        echo oLink.Arguments = "%FLAG_ARG%""%TARGET_URL%"" %AUTOPLAY_FLAG%" >> "%VBS_SCRIPT%"
+    )
+) else (
+    echo oLink.TargetPath = "%TARGET_URL%" >> "%VBS_SCRIPT%"
+)
+
+echo oLink.Description = "Bel Otomatis Sekolah SMKN 1 Moilong" >> "%VBS_SCRIPT%"
+echo oLink.WindowStyle = 1 >> "%VBS_SCRIPT%"
+echo oLink.Save >> "%VBS_SCRIPT%"
+
+cscript //nologo "%VBS_SCRIPT%"
+del "%VBS_SCRIPT%" 2>nul
+
+:: Buat juga launcher Silent VBS sebagai alternatif terpercaya
+set "DIRECT_VBS=%STARTUP_DIR%\\Bel-Sekolah-Silent.vbs"
+(
+echo Set WshShell = CreateObject("WScript.Shell"^)
+if defined BROWSER_EXE (
+    if "${flagArg}"=="" (
+        echo WshShell.Run """%BROWSER_EXE%"" ""%TARGET_URL%"" %AUTOPLAY_FLAG%", 1, False
+    ) else (
+        echo WshShell.Run """%BROWSER_EXE%"" %FLAG_ARG%""%TARGET_URL%"" %AUTOPLAY_FLAG%", 1, False
+    )
+) else (
+    echo WshShell.Run "rundll32 url.dll,FileProtocolHandler ""%TARGET_URL%""", 1, False
+)
+) > "%DIRECT_VBS%"
+
+echo.
+echo ===============================================================================
+echo   [SUKSES] AUTORUN STARTUP WINDOWS BERHASIL DIPASANG!
+echo ===============================================================================
+echo   1. Shortcut telah dibuat di folder Startup Windows:
+echo      %STARTUP_DIR%\\Bel-Sekolah-SMKN1-Moilong.lnk
+echo   2. Bel Otomatis SMKN 1 Moilong akan langsung terbuka setiap kali komputer
+echo      dinyalakan atau setelah restart.
+echo   3. Kebijakan audio telah diaktifkan agar bel otomatis berbunyi tepat waktu!
+echo ===============================================================================
+echo.
+echo Tekan sembarang tombol untuk menutup...
+pause >nul
+exit /b 0
+`;
+
+      downloadFileBlob('Pasang-Autorun-Bel-Moilong.bat', batContent, 'application/x-bat');
+      showToast('File "Pasang-Autorun-Bel-Moilong.bat" berhasil diunduh. Silakan klik 2x di Windows!', 'success');
+    }
+
+    function downloadWindowsBatchUninstaller() {
+      const batContent = `@echo off
+chcp 65001 >nul
+title Hapus Autorun Bel Otomatis SMKN 1 Moilong
+color 4F
+
+echo ===============================================================================
+echo      MENGHAPUS AUTORUN BEL OTOMATIS SMKN 1 MOILONG DARI STARTUP
+echo ===============================================================================
+echo.
+set "STARTUP_DIR=%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"
+
+del /f /q "%STARTUP_DIR%\\Bel-Sekolah-SMKN1-Moilong.*" 2>nul
+del /f /q "%STARTUP_DIR%\\Bel-Sekolah-Silent.*" 2>nul
+
+echo [OK] Berkas autorun bel sekolah telah dihapus dari folder Startup Windows.
+echo Bel Otomatis SMKN 1 Moilong tidak akan lagi berjalan otomatis saat komputer menyala.
+echo.
+pause
+exit /b 0
+`;
+
+      downloadFileBlob('Hapus-Autorun-Bel-Moilong.bat', batContent, 'application/x-bat');
+      showToast('File uninstaller "Hapus-Autorun-Bel-Moilong.bat" berhasil diunduh.', 'info');
+    }
+
+    function downloadWindowsSilentVbs() {
+      const { targetUrl, mode, autoplayBypass } = getAutorunConfig();
+      const flagArg = mode === 'app' ? '--app=' : (mode === 'kiosk' ? '--kiosk=' : '');
+      const autoplayFlag = autoplayBypass ? ' --autoplay-policy=no-user-gesture-required' : '';
+
+      const vbsContent = `' =========================================================================
+' LAUNCHER SILENT STARTUP - BEL OTOMATIS SMKN 1 MOILONG
+' Letakkan file ini di folder Startup Windows (tekan Win+R -> ketik shell:startup)
+' =========================================================================
+Set WshShell = CreateObject("WScript.Shell")
+targetUrl = "${targetUrl}"
+
+chromePath = WshShell.ExpandEnvironmentStrings("%ProgramFiles%\\Google\\Chrome\\Application\\chrome.exe")
+If Not CreateObject("Scripting.FileSystemObject").FileExists(chromePath) Then
+    chromePath = WshShell.ExpandEnvironmentStrings("%ProgramFiles(x86)%\\Google\\Chrome\\Application\\chrome.exe")
+End If
+If Not CreateObject("Scripting.FileSystemObject").FileExists(chromePath) Then
+    chromePath = WshShell.ExpandEnvironmentStrings("%LocalAppData%\\Google\\Chrome\\Application\\chrome.exe")
+End If
+
+edgePath = WshShell.ExpandEnvironmentStrings("%ProgramFiles(x86)%\\Microsoft\\Edge\\Application\\msedge.exe")
+If Not CreateObject("Scripting.FileSystemObject").FileExists(edgePath) Then
+    edgePath = WshShell.ExpandEnvironmentStrings("%ProgramFiles%\\Microsoft\\Edge\\Application\\msedge.exe")
+End If
+
+flagArg = "${flagArg}"
+autoplayFlag = "${autoplayFlag}"
+
+If CreateObject("Scripting.FileSystemObject").FileExists(chromePath) Then
+    If flagArg <> "" Then
+        WshShell.Run """" & chromePath & """ " & flagArg & """" & targetUrl & """" & autoplayFlag, 1, False
+    Else
+        WshShell.Run """" & chromePath & """ """ & targetUrl & """" & autoplayFlag, 1, False
+    End If
+ElseIf CreateObject("Scripting.FileSystemObject").FileExists(edgePath) Then
+    If flagArg <> "" Then
+        WshShell.Run """" & edgePath & """ " & flagArg & """" & targetUrl & """" & autoplayFlag, 1, False
+    Else
+        WshShell.Run """" & edgePath & """ """ & targetUrl & """" & autoplayFlag, 1, False
+    End If
+Else
+    WshShell.Run "rundll32 url.dll,FileProtocolHandler """ & targetUrl & """", 1, False
+End If
+`;
+
+      downloadFileBlob('Bel-Sekolah-Startup.vbs', vbsContent, 'application/octet-stream');
+      showToast('File "Bel-Sekolah-Startup.vbs" berhasil diunduh. Letakkan di shell:startup!', 'success');
+    }
+
+    function downloadWindowsShortcutUrl() {
+      const { targetUrl } = getAutorunConfig();
+      const urlContent = `[InternetShortcut]
+URL=${targetUrl}
+IconIndex=0
+IconFile=shell32.dll
+HotKey=0
+`;
+      downloadFileBlob('Bel-Sekolah-SMKN1-Moilong.url', urlContent, 'application/internet-shortcut');
+      showToast('Shortcut ".url" berhasil diunduh.', 'success');
+    }
+
+    function copyShellStartupCommand() {
+      navigator.clipboard.writeText('shell:startup').then(() => {
+        showToast('Teks "shell:startup" berhasil disalin! Tekan Win+R lalu paste.', 'success');
+      }).catch(() => {
+        prompt('Salin perintah ini untuk Win + R:', 'shell:startup');
+      });
+    }
+
+    function copyPowershellCommand() {
+      const { targetUrl, mode, autoplayBypass } = getAutorunConfig();
+      const flag = mode === 'app' ? '--app=' : (mode === 'kiosk' ? '--kiosk=' : '');
+      const ap = autoplayBypass ? ' --autoplay-policy=no-user-gesture-required' : '';
+      const argStr = flag ? `${flag}\\\"${targetUrl}\\\"${ap}` : `\\\"${targetUrl}\\\"${ap}`;
+
+      const psCmd = `$s=(New-Object -COM WScript.Shell).CreateShortcut("$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Startup\\Bel-Sekolah-Moilong.lnk");$s.TargetPath='msedge.exe';$s.Arguments='${argStr}';$s.Save();Write-Host "Autorun Bel SMKN 1 Moilong Berhasil Dipasang!" -ForegroundColor Green`;
+
+      navigator.clipboard.writeText(psCmd).then(() => {
+        showToast('Perintah PowerShell 1-baris berhasil disalin ke clipboard!', 'success');
+      }).catch(() => {
+        prompt('Salin perintah PowerShell:', psCmd);
+      });
+    }
+
+    async function checkPwaRunOnOsLogin() {
+      const statusText = document.getElementById('pwa-api-status-text');
+      const toggleBtn = document.getElementById('btn-toggle-run-on-os-login');
+
+      if (!('runOnOsLogin' in navigator)) {
+        if (statusText) {
+          statusText.innerHTML = 'Browser ini belum mendukung Run on OS Login API langsung (gunakan Metode 1 Script .bat atau menu Install Chrome/Edge).';
+          statusText.style.color = 'var(--text-muted)';
+        }
+        if (toggleBtn) toggleBtn.style.display = 'none';
+        return;
+      }
+
+      try {
+        const state = await navigator.runOnOsLogin.get();
+        if (statusText) {
+          if (state === 'windowed' || state === 'minimized') {
+            statusText.innerHTML = '<strong style="color: #10b981;">✓ Aktif di Startup Windows (' + state + ')</strong>';
+          } else {
+            statusText.innerHTML = '<span style="color: #f59e0b;">Nonaktif di Startup OS (' + state + ')</span>';
+          }
+        }
+        if (toggleBtn) {
+          toggleBtn.style.display = 'inline-block';
+          toggleBtn.textContent = (state === 'windowed') ? 'Nonaktifkan Startup PWA' : 'Aktifkan Startup PWA';
+        }
+      } catch (e) {
+        if (statusText) {
+          statusText.textContent = 'Status PWA: Pasang aplikasi terlebih dahulu dari address bar.';
+        }
+      }
+    }
+
+    async function togglePwaRunOnOsLogin() {
+      if (!('runOnOsLogin' in navigator)) {
+        showToast('Fitur ini memerlukan aplikasi terinstal sebagai PWA di Chrome/Edge.', 'warning');
+        return;
+      }
+      try {
+        const current = await navigator.runOnOsLogin.get();
+        const nextMode = (current === 'windowed') ? 'not-run' : 'windowed';
+        await navigator.runOnOsLogin.set({ mode: nextMode });
+        showToast('Status Run on OS Login berhasil diubah ke: ' + nextMode, 'success');
+        checkPwaRunOnOsLogin();
+      } catch (err) {
+        showToast('Gagal mengubah status: ' + err.message, 'danger');
+      }
+    }
+
+
     // Kompatibilitas fungsi terdahulu
     function checkTeacherScheduleConflict(teacher, day, start, end, targetClassId) {
       const res = validateScheduleConflict(targetClassId, teacher, '', day, start, end);
@@ -6959,11 +8137,914 @@ function buildAllSchedules() {
       }
     }
 
+
+    // =========================================================================
+    // 13. MANAJEMEN MASTER DATA (GURU, MATA PELAJARAN, KELAS) & AUTO-HIDE RIGHT MENU
+    // =========================================================================
+    const STORAGE_KEY_MOILONG_TEACHERS = 'smkn1_moilong_teachers_v2';
+    const STORAGE_KEY_MOILONG_SUBJECTS = 'smkn1_moilong_subjects_v2';
+    const STORAGE_KEY_MOILONG_CLASSES = 'smkn1_moilong_classes_v2';
+    const STORAGE_KEY_AUTOHIDE_PREF = 'smkn1_moilong_autohide_pref';
+
+    let rightMenuAutohideTimer = null;
+
+    // --- AUTO-HIDE RIGHT MENU LOGIC ---
+    function isAutohideEnabled() {
+      const saved = localStorage.getItem(STORAGE_KEY_AUTOHIDE_PREF);
+      return saved === null ? true : saved === 'true';
+    }
+
+    function setAutohidePreference(enabled) {
+      localStorage.setItem(STORAGE_KEY_AUTOHIDE_PREF, String(enabled));
+      const check = document.getElementById('check-autohide-enabled');
+      if (check) check.checked = enabled;
+      if (!enabled) {
+        if (rightMenuAutohideTimer) clearTimeout(rightMenuAutohideTimer);
+      }
+    }
+
+    function toggleRightAutohideMenu(forceState = null) {
+      const wrapper = document.getElementById('right-autohide-wrapper');
+      const backdrop = document.getElementById('right-menu-backdrop');
+      if (!wrapper) return;
+
+      const willOpen = forceState !== null ? forceState : !wrapper.classList.contains('open');
+
+      if (willOpen) {
+        if (rightMenuAutohideTimer) clearTimeout(rightMenuAutohideTimer);
+        wrapper.classList.add('open');
+        if (backdrop && window.innerWidth <= 850) backdrop.classList.add('open');
+      } else {
+        wrapper.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('open');
+      }
+    }
+
+    function initRightAutohideMenu() {
+      const wrapper = document.getElementById('right-autohide-wrapper');
+      const check = document.getElementById('check-autohide-enabled');
+      if (check) check.checked = isAutohideEnabled();
+
+      if (wrapper) {
+        wrapper.addEventListener('mouseenter', () => {
+          if (isAutohideEnabled()) {
+            if (rightMenuAutohideTimer) clearTimeout(rightMenuAutohideTimer);
+            wrapper.classList.add('open');
+          }
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+          if (isAutohideEnabled()) {
+            if (rightMenuAutohideTimer) clearTimeout(rightMenuAutohideTimer);
+            rightMenuAutohideTimer = setTimeout(() => {
+              wrapper.classList.remove('open');
+            }, 800);
+          }
+        });
+      }
+    }
+
+    // --- MASTER DATA PERSISTENCE ---
+    function initMasterData() {
+      // 1. Load Teachers
+      try {
+        const savedT = localStorage.getItem(STORAGE_KEY_MOILONG_TEACHERS);
+        if (savedT) {
+          const parsed = JSON.parse(savedT);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            MOILONG_TEACHERS = parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('Gagal memuat master guru dari storage:', e);
+      }
+
+      // 2. Load Subjects
+      try {
+        const savedS = localStorage.getItem(STORAGE_KEY_MOILONG_SUBJECTS);
+        if (savedS) {
+          const parsed = JSON.parse(savedS);
+          if (typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+            MOILONG_SUBJECTS_CATALOG = parsed;
+          }
+        }
+      } catch (e) {
+        console.warn('Gagal memuat master mapel dari storage:', e);
+      }
+
+      // 3. Load Classes
+      try {
+        const savedC = localStorage.getItem(STORAGE_KEY_MOILONG_CLASSES);
+        if (savedC) {
+          const parsed = JSON.parse(savedC);
+          if (typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+            Object.assign(MOILONG_CLASSES, parsed);
+          }
+        }
+      } catch (e) {
+        console.warn('Gagal memuat master kelas dari storage:', e);
+      }
+
+      // Sync dropdowns & render pills
+      populateTeacherAndSubjectDropdowns();
+      renderClassPills();
+      updateMasterDataCounts();
+    }
+
+    function saveMasterTeachers() {
+      try {
+        localStorage.setItem(STORAGE_KEY_MOILONG_TEACHERS, JSON.stringify(MOILONG_TEACHERS));
+      } catch (e) {
+        console.warn('Error saving master teachers:', e);
+      }
+      populateTeacherAndSubjectDropdowns();
+      updateMasterDataCounts();
+    }
+
+    function saveMasterSubjects() {
+      try {
+        localStorage.setItem(STORAGE_KEY_MOILONG_SUBJECTS, JSON.stringify(MOILONG_SUBJECTS_CATALOG));
+      } catch (e) {
+        console.warn('Error saving master subjects:', e);
+      }
+      populateTeacherAndSubjectDropdowns();
+      updateMasterDataCounts();
+    }
+
+    function saveMasterClasses() {
+      try {
+        localStorage.setItem(STORAGE_KEY_MOILONG_CLASSES, JSON.stringify(MOILONG_CLASSES));
+      } catch (e) {
+        console.warn('Error saving master classes:', e);
+      }
+      renderClassPills();
+      renderLiveDashboardCards();
+      updateMasterDataCounts();
+    }
+
+    function updateMasterDataCounts() {
+      const teacherCount = MOILONG_TEACHERS.length;
+      let subjectCount = 0;
+      for (const list of Object.values(MOILONG_SUBJECTS_CATALOG)) {
+        if (Array.isArray(list)) subjectCount += list.length;
+      }
+      const classCount = Object.keys(MOILONG_CLASSES).length;
+
+      // Update badges
+      const bT = document.getElementById('badge-count-teachers');
+      const bS = document.getElementById('badge-count-subjects');
+      const bC = document.getElementById('badge-count-classes');
+      if (bT) bT.textContent = teacherCount;
+      if (bS) bS.textContent = subjectCount;
+      if (bC) bC.textContent = classCount;
+
+      const mT = document.getElementById('md-tab-count-teachers');
+      const mS = document.getElementById('md-tab-count-subjects');
+      const mC = document.getElementById('md-tab-count-classes');
+      if (mT) mT.textContent = teacherCount;
+      if (mS) mS.textContent = subjectCount;
+      if (mC) mC.textContent = classCount;
+
+      const pillCount = document.getElementById('total-classes-pill-count');
+      if (pillCount) pillCount.textContent = classCount;
+    }
+
+    // --- RENDER DYNAMIC CLASS PILLS ---
+    function renderClassPills() {
+      const container = document.getElementById('dynamic-class-pills-rows');
+      if (!container) return;
+
+      const grades = {};
+      Object.keys(MOILONG_CLASSES).forEach(classId => {
+        const cls = MOILONG_CLASSES[classId];
+        const g = cls.grade || 'Lainnya';
+        if (!grades[g]) grades[g] = [];
+        grades[g].push({ id: classId, ...cls });
+      });
+
+      const gradeOrder = ['X', 'XI', 'XII'];
+      const extraGrades = Object.keys(grades).filter(g => !gradeOrder.includes(g));
+      const sortedGrades = [...gradeOrder.filter(g => grades[g]), ...extraGrades];
+
+      let html = '';
+      sortedGrades.forEach(g => {
+        const list = grades[g];
+        if (!list || list.length === 0) return;
+        html += `
+          <div class="grade-row">
+            <span class="grade-badge">KELAS ${escapeHtml(g)}</span>
+            ${list.map(cls => {
+              const shortName = cls.name.replace(/^Kelas\s+/i, '');
+              const isActive = cls.id === currentSelectedClassId;
+              return `<button type="button" class="class-btn ${isActive ? 'active' : ''}" data-class="${cls.id}" onclick="selectClass('${cls.id}')">${escapeHtml(shortName)}</button>`;
+            }).join('')}
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // --- MODAL CONTROLLERS MASTER DATA ---
+    function openMasterDataModal(tabKey = 'teachers') {
+      const modal = document.getElementById('modal-master-data');
+      if (!modal) return;
+      switchMasterDataTab(tabKey);
+      modal.classList.add('open');
+    }
+
+    function closeMasterDataModal() {
+      const modal = document.getElementById('modal-master-data');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function switchMasterDataTab(tabKey) {
+      document.querySelectorAll('.master-data-tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.master-data-pane').forEach(pane => pane.style.display = 'none');
+
+      const btn = document.getElementById('btn-md-tab-' + tabKey);
+      const pane = document.getElementById('pane-md-' + tabKey);
+      if (btn) btn.classList.add('active');
+      if (pane) pane.style.display = 'block';
+
+      if (tabKey === 'teachers') {
+        renderMasterTeachersTable();
+      } else if (tabKey === 'subjects') {
+        renderMasterSubjectsTable();
+      } else if (tabKey === 'classes') {
+        renderMasterClassesTable();
+      }
+    }
+
+    // --- 13.1. CRUD GURU (TEACHERS) ---
+    function parseTeacherString(str) {
+      // Parses "Nama Guru, Gelar (Bidang Studi)"
+      const match = str.match(/^([^(]+)(?:\((.*)\))?$/);
+      if (match) {
+        return {
+          name: match[1].trim(),
+          subject: (match[2] || '').trim()
+        };
+      }
+      return { name: str.trim(), subject: '-' };
+    }
+
+    function formatTeacherString(name, subject) {
+      if (subject && subject.trim()) {
+        return `${name.trim()} (${subject.trim()})`;
+      }
+      return name.trim();
+    }
+
+    function countTeacherScheduledHours(teacherFullName) {
+      let count = 0;
+      const cleanTarget = parseTeacherString(teacherFullName).name.toLowerCase();
+      for (const list of Object.values(allClassTimetables)) {
+        if (Array.isArray(list)) {
+          list.forEach(item => {
+            if (item.teacher && item.teacher.toLowerCase().includes(cleanTarget)) {
+              count++;
+            }
+          });
+        }
+      }
+      return count;
+    }
+
+    function renderMasterTeachersTable(search = '') {
+      const tbody = document.getElementById('tbody-master-teachers');
+      if (!tbody) return;
+
+      const q = (search || '').toLowerCase().trim();
+      let list = MOILONG_TEACHERS.map((tStr, index) => {
+        const parsed = parseTeacherString(tStr);
+        return { index, raw: tStr, name: parsed.name, subject: parsed.subject };
+      });
+
+      if (q) {
+        list = list.filter(item => item.name.toLowerCase().includes(q) || item.subject.toLowerCase().includes(q));
+      }
+
+      if (list.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+              Tidak ditemukan data guru yang cocok.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = list.map((item, idx) => {
+        const hours = countTeacherScheduledHours(item.name);
+        return `
+          <tr>
+            <td style="text-align: center; color: var(--text-muted);">${idx + 1}</td>
+            <td>
+              <strong>${escapeHtml(item.name)}</strong>
+            </td>
+            <td>
+              <span style="color: var(--text-muted);">${escapeHtml(item.subject || '-')}</span>
+            </td>
+            <td style="text-align: center;">
+              ${hours > 0 ? `<span class="badge-grade" style="background: rgba(16,185,129,0.12); color: #10b981; border-color: rgba(16,185,129,0.3);">${hours} Jam</span>` : `<span style="color: var(--text-muted); font-size: 0.75rem;">0 Jam</span>`}
+            </td>
+            <td style="text-align: center;">
+              <div style="display: inline-flex; gap: 0.35rem;">
+                <button type="button" class="btn btn-outline btn-xs" onclick="openEditTeacherModal(${item.index})" title="Edit Nama & Bidang Studi Guru">
+                  ✏️ Edit
+                </button>
+                <button type="button" class="btn btn-outline btn-xs" onclick="deleteTeacher(${item.index})" style="color: var(--danger); border-color: rgba(239,68,68,0.35);" title="Hapus Guru">
+                  🗑️ Hapus
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function onSearchMasterTeachers(val) {
+      renderMasterTeachersTable(val);
+    }
+
+    function openAddTeacherModal() {
+      const modal = document.getElementById('modal-form-teacher');
+      const title = document.getElementById('modal-teacher-form-title');
+      const idxInput = document.getElementById('teacher-edit-original-index');
+      const nameInput = document.getElementById('teacher-input-name');
+      const subjInput = document.getElementById('teacher-input-subject');
+      const syncBox = document.getElementById('teacher-sync-schedule-box');
+
+      if (title) title.textContent = '➕ Tambah Guru Baru';
+      if (idxInput) idxInput.value = '-1';
+      if (nameInput) nameInput.value = '';
+      if (subjInput) subjInput.value = '';
+      if (syncBox) syncBox.style.display = 'none';
+
+      if (modal) modal.classList.add('open');
+      if (nameInput) setTimeout(() => nameInput.focus(), 100);
+    }
+
+    function openEditTeacherModal(index) {
+      if (!MOILONG_TEACHERS[index]) return;
+      const tStr = MOILONG_TEACHERS[index];
+      const parsed = parseTeacherString(tStr);
+
+      const modal = document.getElementById('modal-form-teacher');
+      const title = document.getElementById('modal-teacher-form-title');
+      const idxInput = document.getElementById('teacher-edit-original-index');
+      const origNameInput = document.getElementById('teacher-edit-original-name');
+      const nameInput = document.getElementById('teacher-input-name');
+      const subjInput = document.getElementById('teacher-input-subject');
+      const syncBox = document.getElementById('teacher-sync-schedule-box');
+
+      if (title) title.textContent = '✏️ Edit Data Guru';
+      if (idxInput) idxInput.value = String(index);
+      if (origNameInput) origNameInput.value = parsed.name;
+      if (nameInput) nameInput.value = parsed.name;
+      if (subjInput) subjInput.value = parsed.subject;
+      if (syncBox) syncBox.style.display = 'block';
+
+      if (modal) modal.classList.add('open');
+      if (nameInput) setTimeout(() => nameInput.focus(), 100);
+    }
+
+    function closeTeacherFormModal() {
+      const modal = document.getElementById('modal-form-teacher');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function saveTeacherForm(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const idxInput = document.getElementById('teacher-edit-original-index');
+      const origNameInput = document.getElementById('teacher-edit-original-name');
+      const nameInput = document.getElementById('teacher-input-name');
+      const subjInput = document.getElementById('teacher-input-subject');
+      const syncCheck = document.getElementById('teacher-sync-schedule-check');
+
+      const index = parseInt(idxInput.value, 10);
+      const newName = nameInput.value.trim();
+      const newSubj = subjInput.value.trim();
+      const origName = origNameInput ? origNameInput.value.trim() : '';
+      const shouldSync = syncCheck ? syncCheck.checked : false;
+
+      if (!newName) {
+        showToast('Nama guru wajib diisi!', 'warning');
+        return false;
+      }
+
+      const formatted = formatTeacherString(newName, newSubj);
+
+      if (index >= 0 && index < MOILONG_TEACHERS.length) {
+        // Mode Edit
+        MOILONG_TEACHERS[index] = formatted;
+
+        // Jika opsi sinkronisasi jadwal dicentang
+        if (shouldSync && origName && origName !== newName) {
+          let updatedCount = 0;
+          for (const list of Object.values(allClassTimetables)) {
+            if (Array.isArray(list)) {
+              list.forEach(item => {
+                if (item.teacher && item.teacher.includes(origName)) {
+                  item.teacher = item.teacher.replace(origName, newName);
+                  updatedCount++;
+                }
+              });
+            }
+          }
+          if (updatedCount > 0) {
+            saveClassTimetables();
+            renderClassTimetable();
+          }
+        }
+
+        saveMasterTeachers();
+        showToast(`Data guru "${newName}" berhasil diperbarui!`, 'success');
+      } else {
+        // Mode Tambah Baru
+        MOILONG_TEACHERS.push(formatted);
+        saveMasterTeachers();
+        showToast(`Guru baru "${newName}" berhasil ditambahkan!`, 'success');
+      }
+
+      closeTeacherFormModal();
+      renderMasterTeachersTable();
+      return false;
+    }
+
+    function deleteTeacher(index) {
+      if (!MOILONG_TEACHERS[index]) return;
+      const tStr = MOILONG_TEACHERS[index];
+      const parsed = parseTeacherString(tStr);
+      const hours = countTeacherScheduledHours(parsed.name);
+
+      let msg = `Hapus guru "${parsed.name}" dari daftar master guru?`;
+      if (hours > 0) {
+        msg = `Peringatan: Guru "${parsed.name}" saat ini memiliki ${hours} jam mengajar aktif di jadwal!\n\nYakin tetap ingin menghapus dari daftar master?`;
+      }
+
+      if (!confirm(msg)) return;
+
+      MOILONG_TEACHERS.splice(index, 1);
+      saveMasterTeachers();
+      renderMasterTeachersTable();
+      showToast(`Guru "${parsed.name}" berhasil dihapus.`, 'info');
+    }
+
+    // --- 13.2. CRUD MATA PELAJARAN (SUBJECTS) ---
+    function countSubjectScheduledHours(subjectName) {
+      let count = 0;
+      const cleanTarget = subjectName.toLowerCase().trim();
+      for (const list of Object.values(allClassTimetables)) {
+        if (Array.isArray(list)) {
+          list.forEach(item => {
+            if (item.name && item.name.toLowerCase().includes(cleanTarget)) {
+              count++;
+            }
+          });
+        }
+      }
+      return count;
+    }
+
+    function renderMasterSubjectsTable(search = '', category = 'ALL') {
+      const tbody = document.getElementById('tbody-master-subjects');
+      if (!tbody) return;
+
+      const q = (search || '').toLowerCase().trim();
+      const catFilter = category || 'ALL';
+
+      let items = [];
+      for (const [catName, subjects] of Object.entries(MOILONG_SUBJECTS_CATALOG)) {
+        if (catFilter !== 'ALL' && catName !== catFilter) continue;
+        if (Array.isArray(subjects)) {
+          subjects.forEach((sName, sIdx) => {
+            items.push({
+              category: catName,
+              index: sIdx,
+              name: sName
+            });
+          });
+        }
+      }
+
+      if (q) {
+        items = items.filter(it => it.name.toLowerCase().includes(q) || it.category.toLowerCase().includes(q));
+      }
+
+      if (items.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+              Tidak ditemukan mata pelajaran yang cocok.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = items.map((it, idx) => {
+        const hours = countSubjectScheduledHours(it.name);
+        return `
+          <tr>
+            <td style="text-align: center; color: var(--text-muted);">${idx + 1}</td>
+            <td>
+              <span class="badge-grade" style="font-size: 0.7rem;">${escapeHtml(it.category)}</span>
+            </td>
+            <td>
+              <strong>${escapeHtml(it.name)}</strong>
+            </td>
+            <td style="text-align: center;">
+              ${hours > 0 ? `<span class="badge-grade" style="background: rgba(37,99,235,0.12); color: var(--primary); border-color: rgba(37,99,235,0.3);">${hours} Jam</span>` : `<span style="color: var(--text-muted); font-size: 0.75rem;">0 Jam</span>`}
+            </td>
+            <td style="text-align: center;">
+              <div style="display: inline-flex; gap: 0.35rem;">
+                <button type="button" class="btn btn-outline btn-xs" onclick="openEditSubjectModal('${escapeHtml(it.category)}', ${it.index})" title="Edit Nama & Kategori Mapel">
+                  ✏️ Edit
+                </button>
+                <button type="button" class="btn btn-outline btn-xs" onclick="deleteSubjectCatalog('${escapeHtml(it.category)}', ${it.index})" style="color: var(--danger); border-color: rgba(239,68,68,0.35);" title="Hapus Mapel">
+                  🗑️ Hapus
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function onSearchMasterSubjects(val) {
+      const catSelect = document.getElementById('filter-master-subject-category');
+      const cat = catSelect ? catSelect.value : 'ALL';
+      renderMasterSubjectsTable(val, cat);
+    }
+
+    function onCategoryFilterMasterSubjects(cat) {
+      const searchInput = document.getElementById('search-master-subjects');
+      const q = searchInput ? searchInput.value : '';
+      renderMasterSubjectsTable(q, cat);
+    }
+
+    function openAddSubjectModal() {
+      const modal = document.getElementById('modal-form-subject');
+      const title = document.getElementById('modal-subject-form-title');
+      const catSelect = document.getElementById('subject-input-category');
+      const nameInput = document.getElementById('subject-input-name');
+      const idxInput = document.getElementById('subject-edit-original-index');
+      const origCatInput = document.getElementById('subject-edit-original-cat');
+      const syncBox = document.getElementById('subject-sync-schedule-box');
+
+      if (title) title.textContent = '➕ Tambah Mata Pelajaran Baru';
+      if (idxInput) idxInput.value = '-1';
+      if (origCatInput) origCatInput.value = '';
+      if (nameInput) nameInput.value = '';
+      if (syncBox) syncBox.style.display = 'none';
+
+      if (modal) modal.classList.add('open');
+      if (nameInput) setTimeout(() => nameInput.focus(), 100);
+    }
+
+    function openEditSubjectModal(category, index) {
+      if (!MOILONG_SUBJECTS_CATALOG[category] || !MOILONG_SUBJECTS_CATALOG[category][index]) return;
+      const sName = MOILONG_SUBJECTS_CATALOG[category][index];
+
+      const modal = document.getElementById('modal-form-subject');
+      const title = document.getElementById('modal-subject-form-title');
+      const catSelect = document.getElementById('subject-input-category');
+      const nameInput = document.getElementById('subject-input-name');
+      const idxInput = document.getElementById('subject-edit-original-index');
+      const origCatInput = document.getElementById('subject-edit-original-cat');
+      const origNameInput = document.getElementById('subject-edit-original-name');
+      const syncBox = document.getElementById('subject-sync-schedule-box');
+
+      if (title) title.textContent = '✏️ Edit Mata Pelajaran';
+      if (idxInput) idxInput.value = String(index);
+      if (origCatInput) origCatInput.value = category;
+      if (origNameInput) origNameInput.value = sName;
+      if (catSelect) catSelect.value = category;
+      if (nameInput) nameInput.value = sName;
+      if (syncBox) syncBox.style.display = 'block';
+
+      if (modal) modal.classList.add('open');
+      if (nameInput) setTimeout(() => nameInput.focus(), 100);
+    }
+
+    function closeSubjectFormModal() {
+      const modal = document.getElementById('modal-form-subject');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function saveSubjectForm(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const idxInput = document.getElementById('subject-edit-original-index');
+      const origCatInput = document.getElementById('subject-edit-original-cat');
+      const origNameInput = document.getElementById('subject-edit-original-name');
+      const catSelect = document.getElementById('subject-input-category');
+      const nameInput = document.getElementById('subject-input-name');
+      const syncCheck = document.getElementById('subject-sync-schedule-check');
+
+      const index = parseInt(idxInput.value, 10);
+      const origCat = origCatInput ? origCatInput.value : '';
+      const origName = origNameInput ? origNameInput.value.trim() : '';
+      const newCat = catSelect.value;
+      const newName = nameInput.value.trim();
+      const shouldSync = syncCheck ? syncCheck.checked : false;
+
+      if (!newName) {
+        showToast('Nama mata pelajaran wajib diisi!', 'warning');
+        return false;
+      }
+
+      if (!MOILONG_SUBJECTS_CATALOG[newCat]) {
+        MOILONG_SUBJECTS_CATALOG[newCat] = [];
+      }
+
+      if (index >= 0 && origCat) {
+        // Mode Edit
+        if (origCat === newCat) {
+          MOILONG_SUBJECTS_CATALOG[origCat][index] = newName;
+        } else {
+          // Pindah kategori
+          if (MOILONG_SUBJECTS_CATALOG[origCat]) {
+            MOILONG_SUBJECTS_CATALOG[origCat].splice(index, 1);
+          }
+          MOILONG_SUBJECTS_CATALOG[newCat].push(newName);
+        }
+
+        // Sinkronkan ke jadwal jika dicentang
+        if (shouldSync && origName && origName !== newName) {
+          let updatedCount = 0;
+          for (const list of Object.values(allClassTimetables)) {
+            if (Array.isArray(list)) {
+              list.forEach(item => {
+                if (item.name && item.name === origName) {
+                  item.name = newName;
+                  updatedCount++;
+                }
+              });
+            }
+          }
+          if (updatedCount > 0) {
+            saveClassTimetables();
+            renderClassTimetable();
+          }
+        }
+
+        saveMasterSubjects();
+        showToast(`Mata pelajaran "${newName}" berhasil diperbarui!`, 'success');
+      } else {
+        // Mode Tambah Baru
+        MOILONG_SUBJECTS_CATALOG[newCat].push(newName);
+        saveMasterSubjects();
+        showToast(`Mata pelajaran baru "${newName}" berhasil ditambahkan!`, 'success');
+      }
+
+      closeSubjectFormModal();
+      renderMasterSubjectsTable();
+      return false;
+    }
+
+    function deleteSubjectCatalog(category, index) {
+      if (!MOILONG_SUBJECTS_CATALOG[category] || !MOILONG_SUBJECTS_CATALOG[category][index]) return;
+      const sName = MOILONG_SUBJECTS_CATALOG[category][index];
+      const hours = countSubjectScheduledHours(sName);
+
+      let msg = `Hapus mapel "${sName}" dari katalog?`;
+      if (hours > 0) {
+        msg = `Peringatan: Mapel "${sName}" saat ini digunakan sebanyak ${hours} kali di jadwal kelas!\n\nYakin tetap ingin menghapus dari katalog?`;
+      }
+
+      if (!confirm(msg)) return;
+
+      MOILONG_SUBJECTS_CATALOG[category].splice(index, 1);
+      saveMasterSubjects();
+      renderMasterSubjectsTable();
+      showToast(`Mata pelajaran "${sName}" telah dihapus.`, 'info');
+    }
+
+    // --- 13.3. CRUD KELAS / ROMBEL (CLASSES) ---
+    function renderMasterClassesTable(search = '') {
+      const tbody = document.getElementById('tbody-master-classes');
+      if (!tbody) return;
+
+      const q = (search || '').toLowerCase().trim();
+      let classes = Object.keys(MOILONG_CLASSES).map(cid => ({
+        id: cid,
+        ...MOILONG_CLASSES[cid]
+      }));
+
+      if (q) {
+        classes = classes.filter(cls => {
+          return cls.name.toLowerCase().includes(q) ||
+                 cls.major.toLowerCase().includes(q) ||
+                 cls.teacher.toLowerCase().includes(q) ||
+                 cls.room.toLowerCase().includes(q) ||
+                 cls.id.toLowerCase().includes(q);
+        });
+      }
+
+      if (classes.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="8" style="text-align: center; padding: 2rem; color: var(--text-muted);">
+              Tidak ditemukan data kelas yang cocok.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = classes.map(cls => {
+        const schedCount = (allClassTimetables[cls.id] || []).length;
+        return `
+          <tr>
+            <td>
+              <code style="font-size: 0.78rem; background: var(--bg-card-hover); padding: 0.2rem 0.4rem; border-radius: 4px; border: 1px solid var(--border-color);">${escapeHtml(cls.id)}</code>
+            </td>
+            <td>
+              <strong>${escapeHtml(cls.name)}</strong>
+            </td>
+            <td>
+              <span class="badge-grade">Kelas ${escapeHtml(cls.grade || '-')}</span>
+            </td>
+            <td>
+              <span style="font-size: 0.78rem; color: var(--text-muted);">${escapeHtml(cls.major)}</span>
+            </td>
+            <td>
+              <span>${escapeHtml(cls.teacher || '-')}</span>
+            </td>
+            <td>
+              <span style="font-size: 0.78rem; color: var(--text-muted);">${escapeHtml(cls.room || '-')}</span>
+            </td>
+            <td style="text-align: center;">
+              ${schedCount > 0 ? `<span class="badge-grade" style="background: rgba(16,185,129,0.12); color: #10b981; border-color: rgba(16,185,129,0.3);">${schedCount}</span>` : `<span style="color: var(--text-muted); font-size: 0.75rem;">0</span>`}
+            </td>
+            <td style="text-align: center;">
+              <div style="display: inline-flex; gap: 0.35rem;">
+                <button type="button" class="btn btn-outline btn-xs" onclick="openEditClassModal('${cls.id}')" title="Edit Informasi Kelas">
+                  ✏️ Edit
+                </button>
+                <button type="button" class="btn btn-outline btn-xs" onclick="promptDeleteClass('${cls.id}')" style="color: var(--danger); border-color: rgba(239,68,68,0.35);" title="Hapus Kelas">
+                  🗑️ Hapus
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function onSearchMasterClasses(val) {
+      renderMasterClassesTable(val);
+    }
+
+    function openAddClassModal() {
+      const modal = document.getElementById('modal-form-class');
+      const title = document.getElementById('modal-class-form-title');
+      const isNewInput = document.getElementById('class-edit-is-new');
+      const idInput = document.getElementById('class-input-id');
+      const nameInput = document.getElementById('class-input-name');
+      const gradeInput = document.getElementById('class-input-grade');
+      const majorInput = document.getElementById('class-input-major');
+      const teacherInput = document.getElementById('class-input-teacher');
+      const roomInput = document.getElementById('class-input-room');
+
+      if (title) title.textContent = '➕ Tambah Kelas / Rombel Baru';
+      if (isNewInput) isNewInput.value = 'true';
+      if (idInput) {
+        idInput.value = '';
+        idInput.disabled = false;
+      }
+      if (nameInput) nameInput.value = '';
+      if (gradeInput) gradeInput.value = 'X';
+      if (majorInput) majorInput.value = '';
+      if (teacherInput) teacherInput.value = '';
+      if (roomInput) roomInput.value = '';
+
+      if (modal) modal.classList.add('open');
+      if (idInput) setTimeout(() => idInput.focus(), 100);
+    }
+
+    function openEditClassModal(classId) {
+      if (!MOILONG_CLASSES[classId]) return;
+      const cls = MOILONG_CLASSES[classId];
+
+      const modal = document.getElementById('modal-form-class');
+      const title = document.getElementById('modal-class-form-title');
+      const isNewInput = document.getElementById('class-edit-is-new');
+      const idInput = document.getElementById('class-input-id');
+      const nameInput = document.getElementById('class-input-name');
+      const gradeInput = document.getElementById('class-input-grade');
+      const majorInput = document.getElementById('class-input-major');
+      const teacherInput = document.getElementById('class-input-teacher');
+      const roomInput = document.getElementById('class-input-room');
+
+      if (title) title.textContent = `✏️ Edit Data ${cls.name}`;
+      if (isNewInput) isNewInput.value = 'false';
+      if (idInput) {
+        idInput.value = classId;
+        idInput.disabled = true; // Jangan ganti ID saat edit
+      }
+      if (nameInput) nameInput.value = cls.name;
+      if (gradeInput) gradeInput.value = cls.grade || 'X';
+      if (majorInput) majorInput.value = cls.major;
+      if (teacherInput) teacherInput.value = cls.teacher;
+      if (roomInput) roomInput.value = cls.room;
+
+      if (modal) modal.classList.add('open');
+      if (nameInput) setTimeout(() => nameInput.focus(), 100);
+    }
+
+    function closeClassFormModal() {
+      const modal = document.getElementById('modal-form-class');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function saveClassForm(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      const isNewInput = document.getElementById('class-edit-is-new');
+      const idInput = document.getElementById('class-input-id');
+      const nameInput = document.getElementById('class-input-name');
+      const gradeInput = document.getElementById('class-input-grade');
+      const majorInput = document.getElementById('class-input-major');
+      const teacherInput = document.getElementById('class-input-teacher');
+      const roomInput = document.getElementById('class-input-room');
+
+      const isNew = isNewInput.value === 'true';
+      const classId = idInput.value.trim().toLowerCase().replace(/[^a-z0-9\-]/g, '-');
+      const name = nameInput.value.trim();
+      const grade = gradeInput.value;
+      const major = majorInput.value.trim();
+      const teacher = teacherInput.value.trim();
+      const room = roomInput.value.trim();
+
+      if (!classId || !name) {
+        showToast('Kode ID dan Nama Kelas wajib diisi!', 'warning');
+        return false;
+      }
+
+      if (isNew && MOILONG_CLASSES[classId]) {
+        showToast(`Kode ID kelas "${classId}" sudah digunakan! Silakan gunakan kode lain.`, 'warning');
+        return false;
+      }
+
+      MOILONG_CLASSES[classId] = {
+        name,
+        grade,
+        major: major || 'Kejuruan',
+        teacher: teacher || 'Belum Ditentukan',
+        room: room || 'Ruang Teori'
+      };
+
+      if (!allClassTimetables[classId]) {
+        allClassTimetables[classId] = [];
+        saveClassTimetables();
+      }
+
+      saveMasterClasses();
+
+      // Pilih kelas yang baru dibuat atau diedit
+      selectClass(classId);
+
+      closeClassFormModal();
+      renderMasterClassesTable();
+      showToast(`Data kelas "${name}" berhasil disimpan!`, 'success');
+      return false;
+    }
+
+    function promptDeleteClass(classId) {
+      if (!MOILONG_CLASSES[classId]) return;
+      const cls = MOILONG_CLASSES[classId];
+      const schedCount = (allClassTimetables[classId] || []).length;
+
+      const confirmMsg = `PERINGATAN HAPUS KELAS:\n\nAnda yakin ingin menghapus "${cls.name}"?\nSemua ${schedCount} jadwal pelajaran pada kelas ini juga akan dihapus.\n\nLanjutkan penghapusan?`;
+
+      if (!confirm(confirmMsg)) return;
+
+      delete MOILONG_CLASSES[classId];
+      delete allClassTimetables[classId];
+
+      saveClassTimetables();
+      saveMasterClasses();
+
+      // Pilih kelas lain yang tersedia
+      const availableIds = Object.keys(MOILONG_CLASSES);
+      if (availableIds.length > 0) {
+        selectClass(availableIds[0]);
+      }
+
+      renderMasterClassesTable();
+      showToast(`Kelas "${cls.name}" telah dihapus.`, 'info');
+    }
+
     // --- 11. BOOTSTRAP INITIALIZATION ---
     window.addEventListener('DOMContentLoaded', async () => {
       initTheme();
       loadState();
       initClassTimetables();
+      initMasterData();
+      initRightAutohideMenu();
 
       try {
         await initIndexedDB();
@@ -7009,5 +9090,119 @@ function buildAllSchedules() {
       onClockTick();
     });
   </script>
+
+  <!-- AUTO-HIDE FLOATING RIGHT DOCK (SEBELAH KANAN) -->
+  <div class="right-autohide-backdrop no-print" id="right-menu-backdrop" onclick="toggleRightAutohideMenu(false)"></div>
+  <div class="right-autohide-wrapper no-print" id="right-autohide-wrapper">
+    <!-- Pegangan Tab / Handle yang selalu melayang di sisi kanan layar -->
+    <div class="right-autohide-handle" id="right-autohide-handle" onclick="toggleRightAutohideMenu()" title="Klik untuk Buka/Tutup Menu Alat">
+      <span class="handle-icon">⚙️</span>
+      <span class="handle-text">MENU ALAT</span>
+    </div>
+
+    <!-- Panel Menu yang Meluncur Keluar dari Kanan -->
+    <div class="right-autohide-panel" id="right-autohide-panel">
+      <div class="right-panel-header">
+        <div style="display: flex; align-items: center; gap: 0.45rem;">
+          <span style="font-size: 1.25rem;">⚙️</span>
+          <div>
+            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main);">Menu & Alat Sekolah</h4>
+            <span style="font-size: 0.72rem; color: var(--text-muted);">SMKN 1 MOILONG</span>
+          </div>
+        </div>
+        <button type="button" class="btn-icon btn-sm" onclick="toggleRightAutohideMenu(false)" title="Tutup Menu">✕</button>
+      </div>
+
+      <!-- Kategori 1: Master Data (Guru, Mapel, Kelas) -->
+      <div class="right-panel-section">
+        <div class="right-section-title">🗂️ MASTER DATA (EDIT & HAPUS)</div>
+        <div class="right-menu-list">
+          <button type="button" class="right-menu-item" onclick="openMasterDataModal('teachers'); toggleRightAutohideMenu(false);">
+            <span class="rmi-icon">👨‍🏫</span>
+            <div class="rmi-body">
+              <span class="rmi-title">Data Guru</span>
+              <span class="rmi-sub">Tambah, Edit & Hapus Guru</span>
+            </div>
+            <span class="rmi-badge" id="badge-count-teachers">0</span>
+          </button>
+          <button type="button" class="right-menu-item" onclick="openMasterDataModal('subjects'); toggleRightAutohideMenu(false);">
+            <span class="rmi-icon">📖</span>
+            <div class="rmi-body">
+              <span class="rmi-title">Data Mata Pelajaran</span>
+              <span class="rmi-sub">Katalog Mapel & Kurikulum</span>
+            </div>
+            <span class="rmi-badge" id="badge-count-subjects">0</span>
+          </button>
+          <button type="button" class="right-menu-item" onclick="openMasterDataModal('classes'); toggleRightAutohideMenu(false);">
+            <span class="rmi-icon">🏫</span>
+            <div class="rmi-body">
+              <span class="rmi-title">Data Kelas / Rombel</span>
+              <span class="rmi-sub">Kelola 15 Kelas & Wali</span>
+            </div>
+            <span class="rmi-badge" id="badge-count-classes">0</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Kategori 2: Operasional & Autorun -->
+      <div class="right-panel-section">
+        <div class="right-section-title">🚀 OTOMASI & TAMPILAN</div>
+        <div class="right-menu-list">
+          <button type="button" class="right-menu-item" onclick="openAutorunWindowsModal(); toggleRightAutohideMenu(false);">
+            <span class="rmi-icon">🚀</span>
+            <div class="rmi-body">
+              <span class="rmi-title">Autorun Windows</span>
+              <span class="rmi-sub">Startup Otomatis PC Operator</span>
+            </div>
+          </button>
+          <button type="button" class="right-menu-item" onclick="toggleTheme();">
+            <span class="rmi-icon" id="panel-theme-icon">🌙</span>
+            <div class="rmi-body">
+              <span class="rmi-title" id="panel-theme-text">Mode Gelap / Terang</span>
+              <span class="rmi-sub">Ganti Tema Antarmuka</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Kategori 3: Cadangan & Berkas -->
+      <div class="right-panel-section">
+        <div class="right-section-title">💾 CADANGAN & EKSPOR</div>
+        <div class="right-menu-list">
+          <button type="button" class="right-menu-item" onclick="exportBackupJSON(); toggleRightAutohideMenu(false);">
+            <span class="rmi-icon">💾</span>
+            <div class="rmi-body">
+              <span class="rmi-title">Cadangan JSON</span>
+              <span class="rmi-sub">Simpan Bel & Jadwal ke File</span>
+            </div>
+          </button>
+          <button type="button" class="right-menu-item" onclick="document.getElementById('file-import-json').click(); toggleRightAutohideMenu(false);">
+            <span class="rmi-icon">📥</span>
+            <div class="rmi-body">
+              <span class="rmi-title">Pulihkan JSON</span>
+              <span class="rmi-sub">Import Cadangan dari File</span>
+            </div>
+          </button>
+          <button type="button" class="right-menu-item" onclick="downloadSingleHTML(); toggleRightAutohideMenu(false);">
+            <span class="rmi-icon">⬇️</span>
+            <div class="rmi-body">
+              <span class="rmi-title">Unduh Berkas HTML</span>
+              <span class="rmi-sub">File Standalone 100% Offline</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Auto-hide setting -->
+      <div style="padding-top: 0.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+        <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.74rem; color: var(--text-muted); cursor: pointer;">
+          <input type="checkbox" id="check-autohide-enabled" checked onchange="setAutohidePreference(this.checked)">
+          <span>Auto-hide kursor keluar</span>
+        </label>
+        <button type="button" class="btn btn-outline btn-xs" onclick="toggleRightAutohideMenu(false)">Tutup ›</button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

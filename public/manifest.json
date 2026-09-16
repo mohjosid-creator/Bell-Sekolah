@@ -1,0 +1,35 @@
+{
+  "id": "/",
+  "name": "Bel Otomatis SMKN 1 Moilong",
+  "short_name": "Bel Moilong",
+  "description": "Sistem Bel Otomatis Sekolah, Jadwal Pelajaran 15 Rombel (07:00 - 15:30 WITA), dan Monitoring KBM SMKN 1 Moilong",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#2563eb",
+  "orientation": "any",
+  "run_on_os_login": {
+    "mode": "windowed"
+  },
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
