@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bel Otomatis & Jadwal Pelajaran SMKN 1 MOILONG (07:00 - 15:30)</title>
+  <title>Bel Otomatis & Jadwal Pelajaran SMKN 1 Moilong v4.0.0</title>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
@@ -1078,6 +1078,22 @@
       transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1;
       pointer-events: none;
+      background-color: #0b1120;
+    }
+    .slide-item[data-index="0"] {
+      background: linear-gradient(135deg, #0a192f 0%, #1e3a8a 50%, #0284c7 100%);
+    }
+    .slide-item[data-index="1"] {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%);
+    }
+    .slide-item[data-index="2"] {
+      background: linear-gradient(135deg, #431407 0%, #c2410c 50%, #ea580c 100%);
+    }
+    .slide-item[data-index="3"] {
+      background: linear-gradient(135deg, #18181b 0%, #1e1b4b 50%, #4338ca 100%);
+    }
+    .slide-item[data-index="4"] {
+      background: linear-gradient(135deg, #311042 0%, #6b21a8 50%, #9333ea 100%);
     }
     .slide-item.active {
       opacity: 1;
@@ -1558,14 +1574,15 @@
     .btn-gear-icon-header {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.42rem 0.95rem;
-      border-radius: 9999px;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border-radius: 50%;
       background: var(--bg-card);
       border: 1.5px solid var(--border-color);
       color: var(--text-main);
-      font-size: 0.86rem;
-      font-weight: 700;
+      font-size: 1.15rem;
       cursor: pointer;
       box-shadow: var(--shadow);
       transition: all 0.2s ease;
@@ -1579,26 +1596,12 @@
       box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
     }
     .btn-gear-icon-header .gear-anim-icon {
-      font-size: 1.15rem;
+      font-size: 1.25rem;
       display: inline-block;
       transition: transform 0.4s ease;
     }
     .btn-gear-icon-header:hover .gear-anim-icon {
       transform: rotate(90deg);
-    }
-    .btn-gear-icon-header .gear-header-label {
-      font-weight: 700;
-    }
-    @media (max-width: 540px) {
-      .btn-gear-icon-header .gear-header-label {
-        display: none;
-      }
-      .btn-gear-icon-header {
-        padding: 0.42rem;
-        width: 38px;
-        height: 38px;
-        justify-content: center;
-      }
     }
 
     /* PERMANENT LOGO & ICON DI POJOK KANAN ATAS FOTO SLIDE */
@@ -1692,87 +1695,89 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(3px);
-      z-index: 1040;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(2px);
+      z-index: 1090;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.25s ease;
     }
     .right-autohide-backdrop.open {
       opacity: 1;
       pointer-events: auto;
     }
 
-    .right-autohide-wrapper {
+    /* TOMBOL IKON MELAYANG (FLOATING DRAGGABLE ICON - BEBAS DIGESER/DIPINDAHKAN) */
+    .draggable-floating-btn {
       position: fixed;
-      top: 85px;
-      right: 0;
-      z-index: 1050;
-      display: flex;
-      align-items: flex-start;
-      pointer-events: none;
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .right-autohide-wrapper.open {
-      transform: translateX(0);
-    }
-
-    /* Floating Tab / Handle di sebelah kanan layar */
-    .right-autohide-handle {
-      pointer-events: auto;
-      background: linear-gradient(135deg, var(--primary), #1d4ed8);
-      color: #ffffff;
-      padding: 0.85rem 0.55rem;
-      border-radius: 12px 0 0 12px;
-      box-shadow: -4px 6px 20px rgba(0, 0, 0, 0.22);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.72rem;
-      font-weight: 800;
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
+      top: 140px;
+      right: 18px;
+      z-index: 1080;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      box-shadow: 0 8px 24px rgba(37, 99, 235, 0.45), 0 2px 6px rgba(0, 0, 0, 0.25);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      cursor: grab;
       user-select: none;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-right: none;
-      transition: all 0.25s ease;
-      letter-spacing: 0.08em;
+      touch-action: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .right-autohide-handle:hover {
-      background: linear-gradient(135deg, #1d4ed8, #1e3a8a);
-      box-shadow: -6px 8px 25px rgba(37, 99, 235, 0.4);
-      padding-right: 0.75rem;
+    .draggable-floating-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 12px 28px rgba(37, 99, 235, 0.6), 0 3px 8px rgba(0, 0, 0, 0.3);
     }
-    .right-autohide-handle .handle-icon {
-      font-size: 1rem;
-      margin-bottom: 0.2rem;
+    .draggable-floating-btn:active, .draggable-floating-btn.is-dragging {
+      cursor: grabbing;
+      transform: scale(0.95);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5);
+    }
+    .draggable-floating-btn .dfb-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .draggable-floating-btn .dfb-icon {
+      font-size: 1.5rem;
+      line-height: 1;
       display: inline-block;
-      transform: rotate(180deg);
+      transition: transform 0.3s ease;
+    }
+    .draggable-floating-btn:hover .dfb-icon {
+      transform: rotate(45deg);
     }
 
-    /* Panel Konten Menu Kanan */
+    /* Panel Konten Menu Kanan (Slide-over Drawer) */
     .right-autohide-panel {
-      pointer-events: auto;
-      width: 335px;
-      max-height: calc(100vh - 105px);
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 350px;
+      max-width: 90vw;
+      height: 100vh;
       overflow-y: auto;
       background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-right: none;
-      border-radius: 16px 0 0 16px;
-      box-shadow: -12px 12px 35px rgba(0, 0, 0, 0.22);
-      padding: 1.15rem;
-      transform: translateX(100%);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      border-left: 1px solid var(--border-color);
+      box-shadow: -8px 0 35px rgba(0, 0, 0, 0.28);
+      padding: 1.25rem 1.15rem;
+      transform: translateX(105%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
       gap: 0.9rem;
+      z-index: 1100;
+      pointer-events: auto;
     }
-    .right-autohide-wrapper.open .right-autohide-panel {
+    .right-autohide-panel.open {
       transform: translateX(0);
     }
 
@@ -2047,19 +2052,18 @@
     <header>
       <div class="brand">
         <div class="brand-icon" style="padding: 2px; background: #ffffff; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.2); width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-          <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; this.src='icon-512.png';">
+          <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
         </div>
         <div>
           <h1 class="brand-title" id="school-title-display">SMKN 1 MOILONG</h1>
-          <p class="brand-subtitle">Sistem Bel Otomatis & Jadwal Pelajaran 15 Kelas (Jam 07:00 - 15:30 • Offline Standalone)</p>
+          <p class="brand-subtitle">Sistem Bel Otomatis & Jadwal Pelajaran 15 Kelas (Jam 07:00 - 15:30 WITA • Versi 4.0.0)</p>
         </div>
       </div>
 
       <div class="header-actions">
         <!-- Tombol Tunggal Icon Gear / Alat untuk Buka Menu Auto-Hide Sebelah Kanan -->
-        <button type="button" class="btn-gear-icon-header" id="btn-header-gear" onclick="toggleRightAutohideMenu()" title="Buka Menu Alat & Pengaturan Lengkap (Auto-Hide)">
+        <button type="button" class="btn-gear-icon-header" id="btn-header-gear" onclick="toggleRightAutohideMenu()" title="Buka Menu Alat & Pengaturan (Auto-Hide)">
           <span class="gear-anim-icon">⚙️</span>
-          <span class="gear-header-label">Menu Alat</span>
         </button>
         <input type="file" id="file-import-json" accept=".json" style="display: none;">
       </div>
@@ -2102,7 +2106,7 @@
         <!-- LOGO & ICON PERMANEN DI POJOK KANAN ATAS FOTO SLIDE -->
         <div class="slider-permanent-brand no-print" id="slider-permanent-brand" title="SMK Negeri 1 Moilong - Kabupaten Banggai">
           <div class="slider-brand-logo-wrap">
-            <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" class="slider-brand-logo-img" onerror="this.onerror=null; this.src='icon-512.png';">
+            <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" class="slider-brand-logo-img" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
           </div>
           <div class="slider-brand-text-wrap">
             <span class="slider-brand-main-title">SMK NEGERI 1 MOILONG</span>
@@ -3609,6 +3613,174 @@
   </div>
 
   <!-- TOAST CONTAINER -->
+  
+  <!-- TOMBOL IKON MELAYANG BEBAS DIGESER / DIPINDAHKAN (FLOATING DRAGGABLE ICON) -->
+  <div class="draggable-floating-btn no-print" id="draggable-floating-menu-btn" title="Menu Alat Sekolah (Klik untuk membuka menu, seret/geser untuk memindah posisi)">
+    <div class="dfb-inner">
+      <span class="dfb-icon">⚙️</span>
+    </div>
+  </div>
+
+  <!-- BACKDROP & SLIDE-OUT PANEL MENU ALAT KANAN -->
+  <div class="right-autohide-backdrop no-print" id="right-menu-backdrop" onclick="toggleRightAutohideMenu(false)"></div>
+  <div class="right-autohide-panel no-print" id="right-autohide-panel">
+    <div class="right-panel-header">
+      <div style="display: flex; align-items: center; gap: 0.65rem;">
+        <div style="width: 38px; height: 38px; border-radius: 10px; overflow: hidden; background: #ffffff; padding: 2px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
+          <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
+        </div>
+        <div>
+          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main);">Menu & Alat Sekolah</h4>
+          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">SMKN 1 MOILONG • KAB. BANGGAI • VERSI 4.0.0</span>
+        </div>
+      </div>
+      <button type="button" class="btn-icon btn-sm" onclick="toggleRightAutohideMenu(false)" title="Tutup Menu">✕</button>
+    </div>
+
+    <!-- Tombol Aksi Utama: Tambah Jadwal Guru & Mapel -->
+    <button type="button" class="btn btn-primary" onclick="openAddScheduleTeacherSubjectModal(); toggleRightAutohideMenu(false);" style="width: 100%; justify-content: center; padding: 0.65rem; font-weight: 700; box-shadow: 0 4px 14px rgba(37,99,235,0.3); border-radius: var(--radius-sm);">
+      ➕ Tambah Jadwal Guru & Mapel
+    </button>
+
+    <!-- Kategori 1: Master Data (Guru, Mapel, Kelas) -->
+    <div class="right-panel-section">
+      <div class="right-section-title">🗂️ MASTER DATA (EDIT & HAPUS)</div>
+      <div class="right-menu-list">
+        <button type="button" class="right-menu-item" onclick="openMasterDataModal('teachers'); toggleRightAutohideMenu(false);" title="Kelola, Tambah, Edit, dan Hapus Data Guru">
+          <span class="rmi-icon">👨‍🏫</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Data Guru</span>
+            <span class="rmi-sub">Tambah, Edit & Hapus Guru</span>
+          </div>
+          <span class="rmi-badge" id="badge-count-teachers">0</span>
+        </button>
+        <button type="button" class="right-menu-item" onclick="openMasterDataModal('subjects'); toggleRightAutohideMenu(false);" title="Kelola, Tambah, Edit, dan Hapus Data Mata Pelajaran">
+          <span class="rmi-icon">📖</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Data Mata Pelajaran</span>
+            <span class="rmi-sub">Katalog Mapel & Kurikulum</span>
+          </div>
+          <span class="rmi-badge" id="badge-count-subjects">0</span>
+        </button>
+        <button type="button" class="right-menu-item" onclick="openMasterDataModal('classes'); toggleRightAutohideMenu(false);" title="Kelola, Tambah, Edit, dan Hapus Daftar Kelas">
+          <span class="rmi-icon">🏫</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Data Kelas / Rombel</span>
+            <span class="rmi-sub">Kelola 15 Kelas & Wali</span>
+          </div>
+          <span class="rmi-badge" id="badge-count-classes">0</span>
+        </button>
+        <button type="button" class="right-menu-item" onclick="openAddClassModal(); toggleRightAutohideMenu(false);" title="Tambah Rombel Kelas Baru">
+          <span class="rmi-icon">➕</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Tambah Kelas Baru</span>
+            <span class="rmi-sub">Rombongan Belajar Baru</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Kategori 2: Otomasi & KBM -->
+    <div class="right-panel-section">
+      <div class="right-section-title">🚀 OTOMASI & KBM SEKOLAH</div>
+      <div class="right-menu-list">
+        <button type="button" class="right-menu-item" onclick="openAutorunWindowsModal(); toggleRightAutohideMenu(false);" title="Buka Pengaturan Startup Autorun Windows">
+          <span class="rmi-icon">🚀</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Autorun Windows</span>
+            <span class="rmi-sub">Startup Otomatis PC Operator</span>
+          </div>
+        </button>
+        <button type="button" class="right-menu-item" onclick="auditAllSchedulesUI(); toggleRightAutohideMenu(false);" title="Audit seluruh jadwal 15 kelas untuk mendeteksi tumpang tindih waktu">
+          <span class="rmi-icon">🛡️</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Audit Bentrok Jadwal</span>
+            <span class="rmi-sub">Verifikasi Bebas Bentrok 15 Kelas</span>
+          </div>
+        </button>
+        <button type="button" class="right-menu-item" onclick="openRunningTextModal(); toggleRightAutohideMenu(false);" title="Edit Teks Berjalan Pengumuman">
+          <span class="rmi-icon">📢</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Tulisan Berjalan</span>
+            <span class="rmi-sub">Edit Pengumuman Sekolah</span>
+          </div>
+        </button>
+        <button type="button" class="right-menu-item" onclick="openSliderManagerModal(); toggleRightAutohideMenu(false);" title="Kelola 5 Foto Slide Banner">
+          <span class="rmi-icon">🖼️</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Kelola 5 Foto Slide</span>
+            <span class="rmi-sub">Ubah Foto Banner Beranda</span>
+          </div>
+        </button>
+        <button type="button" class="right-menu-item" onclick="playBellSound('standard', 'Uji Suara Bel Sekolah', 'Manual');" title="Uji Coba Bunyi Bel Standar">
+          <span class="rmi-icon">🔔</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Uji Coba Suara Bel</span>
+            <span class="rmi-sub">Bunyikan Bel Nada Standar</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Kategori 3: Tampilan & Cetak -->
+    <div class="right-panel-section">
+      <div class="right-section-title">🌓 TAMPILAN & CETAK</div>
+      <div class="right-menu-list">
+        <button type="button" class="right-menu-item" onclick="toggleTheme();" title="Ganti Tema Gelap / Terang">
+          <span class="rmi-icon" id="panel-theme-icon">🌙</span>
+          <div class="rmi-body">
+            <span class="rmi-title" id="panel-theme-text">Mode Gelap / Terang</span>
+            <span class="rmi-sub">Ganti Tema Antarmuka</span>
+          </div>
+        </button>
+        <button type="button" class="right-menu-item" onclick="window.print(); toggleRightAutohideMenu(false);" title="Cetak Jadwal Pelajaran">
+          <span class="rmi-icon">🖨️</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Cetak Jadwal Pelajaran</span>
+            <span class="rmi-sub">Cetak Kertas / Simpan PDF</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Kategori 4: Cadangan & Berkas -->
+    <div class="right-panel-section">
+      <div class="right-section-title">💾 CADANGAN & EKSPOR</div>
+      <div class="right-menu-list">
+        <button type="button" class="right-menu-item" onclick="exportBackupJSON(); toggleRightAutohideMenu(false);" title="Unduh Cadangan Lengkap Format JSON">
+          <span class="rmi-icon">💾</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Cadangan JSON</span>
+            <span class="rmi-sub">Simpan Bel & Jadwal ke File</span>
+          </div>
+        </button>
+        <button type="button" class="right-menu-item" onclick="document.getElementById('file-import-json').click(); toggleRightAutohideMenu(false);" title="Pulihkan Data dari Berkas JSON">
+          <span class="rmi-icon">📥</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Pulihkan JSON</span>
+            <span class="rmi-sub">Import Cadangan dari File</span>
+          </div>
+        </button>
+        <button type="button" class="right-menu-item" onclick="downloadSingleHTML(); toggleRightAutohideMenu(false);" title="Unduh Berkas HTML Mandiri untuk Offline 100%">
+          <span class="rmi-icon">⬇️</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Unduh Berkas HTML</span>
+            <span class="rmi-sub">File Standalone 100% Offline</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer Auto-hide setting -->
+    <div style="padding-top: 0.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
+      <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.74rem; color: var(--text-muted); cursor: pointer;">
+        <input type="checkbox" id="check-autohide-enabled" checked onchange="setAutohidePreference(this.checked)">
+        <span>Auto-hide kursor keluar</span>
+      </label>
+      <button type="button" class="btn btn-outline btn-xs" onclick="toggleRightAutohideMenu(false)">Tutup ›</button>
+    </div>
+  </div>
+
   <div id="toast-container"></div>
 
   <!-- APPLICATION JAVASCRIPT (VANILLA ES6+ STANDALONE) -->
@@ -6727,16 +6899,10 @@ function buildAllSchedules() {
     }
 
     function handleSlideImageError(imgEl, index) {
-      console.warn(`Slide image ${index} failed to load, applying graceful fallback.`);
-      const fallbacks = [
-        'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1400&q=80',
-        'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1400&q=80',
-        'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1400&q=80',
-        'https://images.unsplash.com/photo-1581092335397-9583fe92d232?w=1400&q=80',
-        'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80'
-      ];
+      console.warn(`Slide image ${index} tidak dapat dimuat daring, menampilkan latar gradien tematik.`);
       if (imgEl) {
-        imgEl.src = fallbacks[index % fallbacks.length];
+        imgEl.style.opacity = '0';
+        imgEl.style.display = 'none';
       }
     }
 
@@ -8329,44 +8495,144 @@ HotKey=0
     }
 
     function toggleRightAutohideMenu(forceState = null) {
-      const wrapper = document.getElementById('right-autohide-wrapper');
+      const panel = document.getElementById('right-autohide-panel');
       const backdrop = document.getElementById('right-menu-backdrop');
-      if (!wrapper) return;
+      if (!panel) return;
 
-      const willOpen = forceState !== null ? forceState : !wrapper.classList.contains('open');
+      const willOpen = forceState !== null ? forceState : !panel.classList.contains('open');
 
       if (willOpen) {
         if (rightMenuAutohideTimer) clearTimeout(rightMenuAutohideTimer);
-        wrapper.classList.add('open');
-        if (backdrop && window.innerWidth <= 850) backdrop.classList.add('open');
+        panel.classList.add('open');
+        if (backdrop) backdrop.classList.add('open');
       } else {
-        wrapper.classList.remove('open');
+        panel.classList.remove('open');
         if (backdrop) backdrop.classList.remove('open');
       }
     }
 
     function initRightAutohideMenu() {
-      const wrapper = document.getElementById('right-autohide-wrapper');
+      const panel = document.getElementById('right-autohide-panel');
       const check = document.getElementById('check-autohide-enabled');
       if (check) check.checked = isAutohideEnabled();
 
-      if (wrapper) {
-        wrapper.addEventListener('mouseenter', () => {
-          if (isAutohideEnabled()) {
-            if (rightMenuAutohideTimer) clearTimeout(rightMenuAutohideTimer);
-            wrapper.classList.add('open');
-          }
+      if (panel) {
+        panel.addEventListener('mouseenter', () => {
+          if (rightMenuAutohideTimer) clearTimeout(rightMenuAutohideTimer);
         });
 
-        wrapper.addEventListener('mouseleave', () => {
+        panel.addEventListener('mouseleave', () => {
           if (isAutohideEnabled()) {
             if (rightMenuAutohideTimer) clearTimeout(rightMenuAutohideTimer);
             rightMenuAutohideTimer = setTimeout(() => {
-              wrapper.classList.remove('open');
+              toggleRightAutohideMenu(false);
             }, 800);
           }
         });
       }
+    }
+
+    // --- DRAGGABLE FLOATING MENU BUTTON LOGIC (BEBAS DIGESER/DIPINDAH) ---
+    function initFloatingDraggableMenu() {
+      const btn = document.getElementById('draggable-floating-menu-btn');
+      if (!btn) return;
+
+      const btnSize = 52;
+      const STORAGE_KEY_FLOATING_POS = 'smkn1_floating_menu_pos_v4';
+
+      function applyPosition(x, y) {
+        const maxX = Math.max(8, window.innerWidth - btnSize - 8);
+        const maxY = Math.max(8, window.innerHeight - btnSize - 8);
+        const clampedX = Math.max(8, Math.min(maxX, x));
+        const clampedY = Math.max(8, Math.min(maxY, y));
+        btn.style.left = clampedX + 'px';
+        btn.style.top = clampedY + 'px';
+        btn.style.right = 'auto';
+        btn.style.bottom = 'auto';
+        return { x: clampedX, y: clampedY };
+      }
+
+      // Restore position or set default (floating on the right)
+      const savedPos = localStorage.getItem(STORAGE_KEY_FLOATING_POS);
+      if (savedPos) {
+        try {
+          const parsed = JSON.parse(savedPos);
+          if (typeof parsed.x === 'number' && typeof parsed.y === 'number') {
+            applyPosition(parsed.x, parsed.y);
+          } else {
+            applyPosition(window.innerWidth - btnSize - 18, 140);
+          }
+        } catch(e) {
+          applyPosition(window.innerWidth - btnSize - 18, 140);
+        }
+      } else {
+        applyPosition(window.innerWidth - btnSize - 18, 140);
+      }
+
+      // Keep inside bounds on resize
+      window.addEventListener('resize', () => {
+        const rect = btn.getBoundingClientRect();
+        applyPosition(rect.left, rect.top);
+      });
+
+      let isDown = false;
+      let hasMoved = false;
+      let startX = 0;
+      let startY = 0;
+      let startLeft = 0;
+      let startTop = 0;
+
+      btn.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0) return;
+        isDown = true;
+        hasMoved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = btn.getBoundingClientRect();
+        startLeft = rect.left;
+        startTop = rect.top;
+
+        try {
+          btn.setPointerCapture(e.pointerId);
+        } catch(err) {}
+        btn.classList.add('is-dragging');
+      });
+
+      btn.addEventListener('pointermove', (e) => {
+        if (!isDown) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        if (!hasMoved && Math.hypot(dx, dy) > 5) {
+          hasMoved = true;
+        }
+
+        if (hasMoved) {
+          applyPosition(startLeft + dx, startTop + dy);
+        }
+      });
+
+      const handlePointerUp = (e) => {
+        if (!isDown) return;
+        isDown = false;
+        btn.classList.remove('is-dragging');
+        try {
+          btn.releasePointerCapture(e.pointerId);
+        } catch(err) {}
+
+        if (hasMoved) {
+          const rect = btn.getBoundingClientRect();
+          const saved = applyPosition(rect.left, rect.top);
+          localStorage.setItem(STORAGE_KEY_FLOATING_POS, JSON.stringify(saved));
+        } else {
+          // Tap / Click without dragging -> open menu!
+          toggleRightAutohideMenu();
+        }
+        hasMoved = false;
+      };
+
+      btn.addEventListener('pointerup', handlePointerUp);
+      btn.addEventListener('pointercancel', handlePointerUp);
     }
 
     // --- MASTER DATA PERSISTENCE ---
@@ -9203,13 +9469,14 @@ HotKey=0
       showToast(`Kelas "${cls.name}" telah dihapus.`, 'info');
     }
 
-    // --- 11. BOOTSTRAP INITIALIZATION ---
-    window.addEventListener('DOMContentLoaded', async () => {
+    // --- 11. BOOTSTRAP INITIALIZATION (VERSI 4.0.0) ---
+    async function bootstrapApp() {
       initTheme();
       loadState();
       initClassTimetables();
       initMasterData();
       initRightAutohideMenu();
+      initFloatingDraggableMenu();
 
       try {
         await initIndexedDB();
@@ -9253,177 +9520,15 @@ HotKey=0
       initClockWorker();
       // Tick awal seketika
       onClockTick();
-    });
+    }
+
+    // Pastikan seluruh elemen muncul saat index dijalankan, baik saat DOMContentLoaded maupun siap pakai
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', bootstrapApp);
+    } else {
+      bootstrapApp();
+    }
   </script>
 
-  <!-- AUTO-HIDE FLOATING RIGHT DOCK (SEBELAH KANAN) -->
-  <div class="right-autohide-backdrop no-print" id="right-menu-backdrop" onclick="toggleRightAutohideMenu(false)"></div>
-  <div class="right-autohide-wrapper no-print" id="right-autohide-wrapper">
-    <!-- Pegangan Tab / Handle yang selalu melayang di sisi kanan layar -->
-    <div class="right-autohide-handle" id="right-autohide-handle" onclick="toggleRightAutohideMenu()" title="Klik untuk Buka/Tutup Menu Alat">
-      <span class="handle-icon">⚙️</span>
-      <span class="handle-text">MENU ALAT</span>
-    </div>
-
-    <!-- Panel Menu yang Meluncur Keluar dari Kanan -->
-    <div class="right-autohide-panel" id="right-autohide-panel">
-      <div class="right-panel-header">
-        <div style="display: flex; align-items: center; gap: 0.65rem;">
-          <div style="width: 38px; height: 38px; border-radius: 10px; overflow: hidden; background: #ffffff; padding: 2px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
-            <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; this.src='icon-512.png';">
-          </div>
-          <div>
-            <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main);">Menu & Alat Sekolah</h4>
-            <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">SMKN 1 MOILONG • KAB. BANGGAI</span>
-          </div>
-        </div>
-        <button type="button" class="btn-icon btn-sm" onclick="toggleRightAutohideMenu(false)" title="Tutup Menu">✕</button>
-      </div>
-
-      <!-- Tombol Aksi Utama: Tambah Jadwal Guru & Mapel -->
-      <button type="button" class="btn btn-primary" onclick="openAddScheduleTeacherSubjectModal(); toggleRightAutohideMenu(false);" style="width: 100%; justify-content: center; padding: 0.65rem; font-weight: 700; box-shadow: 0 4px 14px rgba(37,99,235,0.3); border-radius: var(--radius-sm);">
-        ➕ Tambah Jadwal Guru & Mapel
-      </button>
-
-      <!-- Kategori 1: Master Data (Guru, Mapel, Kelas) -->
-      <div class="right-panel-section">
-        <div class="right-section-title">🗂️ MASTER DATA (EDIT & HAPUS)</div>
-        <div class="right-menu-list">
-          <button type="button" class="right-menu-item" onclick="openMasterDataModal('teachers'); toggleRightAutohideMenu(false);" title="Kelola, Tambah, Edit, dan Hapus Data Guru">
-            <span class="rmi-icon">👨‍🏫</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Data Guru</span>
-              <span class="rmi-sub">Tambah, Edit & Hapus Guru</span>
-            </div>
-            <span class="rmi-badge" id="badge-count-teachers">0</span>
-          </button>
-          <button type="button" class="right-menu-item" onclick="openMasterDataModal('subjects'); toggleRightAutohideMenu(false);" title="Kelola, Tambah, Edit, dan Hapus Data Mata Pelajaran">
-            <span class="rmi-icon">📖</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Data Mata Pelajaran</span>
-              <span class="rmi-sub">Katalog Mapel & Kurikulum</span>
-            </div>
-            <span class="rmi-badge" id="badge-count-subjects">0</span>
-          </button>
-          <button type="button" class="right-menu-item" onclick="openMasterDataModal('classes'); toggleRightAutohideMenu(false);" title="Kelola, Tambah, Edit, dan Hapus Daftar Kelas">
-            <span class="rmi-icon">🏫</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Data Kelas / Rombel</span>
-              <span class="rmi-sub">Kelola 15 Kelas & Wali</span>
-            </div>
-            <span class="rmi-badge" id="badge-count-classes">0</span>
-          </button>
-          <button type="button" class="right-menu-item" onclick="openAddClassModal(); toggleRightAutohideMenu(false);" title="Tambah Rombel Kelas Baru">
-            <span class="rmi-icon">➕</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Tambah Kelas Baru</span>
-              <span class="rmi-sub">Rombongan Belajar Baru</span>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Kategori 2: Otomasi & KBM -->
-      <div class="right-panel-section">
-        <div class="right-section-title">🚀 OTOMASI & KBM SEKOLAH</div>
-        <div class="right-menu-list">
-          <button type="button" class="right-menu-item" onclick="openAutorunWindowsModal(); toggleRightAutohideMenu(false);" title="Buka Pengaturan Startup Autorun Windows">
-            <span class="rmi-icon">🚀</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Autorun Windows</span>
-              <span class="rmi-sub">Startup Otomatis PC Operator</span>
-            </div>
-          </button>
-          <button type="button" class="right-menu-item" onclick="auditAllSchedulesUI(); toggleRightAutohideMenu(false);" title="Audit seluruh jadwal 15 kelas untuk mendeteksi tumpang tindih waktu">
-            <span class="rmi-icon">🛡️</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Audit Bentrok Jadwal</span>
-              <span class="rmi-sub">Verifikasi Bebas Bentrok 15 Kelas</span>
-            </div>
-          </button>
-          <button type="button" class="right-menu-item" onclick="openRunningTextModal(); toggleRightAutohideMenu(false);" title="Edit Teks Berjalan Pengumuman">
-            <span class="rmi-icon">📢</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Tulisan Berjalan</span>
-              <span class="rmi-sub">Edit Pengumuman Sekolah</span>
-            </div>
-          </button>
-          <button type="button" class="right-menu-item" onclick="openSliderManagerModal(); toggleRightAutohideMenu(false);" title="Kelola 5 Foto Slide Banner">
-            <span class="rmi-icon">🖼️</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Kelola 5 Foto Slide</span>
-              <span class="rmi-sub">Ubah Foto Banner Beranda</span>
-            </div>
-          </button>
-          <button type="button" class="right-menu-item" onclick="playBellSound('standard', 'Uji Suara Bel Sekolah', 'Manual');" title="Uji Coba Bunyi Bel Standar">
-            <span class="rmi-icon">🔔</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Uji Coba Suara Bel</span>
-              <span class="rmi-sub">Bunyikan Bel Nada Standar</span>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Kategori 3: Tampilan & Cetak -->
-      <div class="right-panel-section">
-        <div class="right-section-title">🌓 TAMPILAN & CETAK</div>
-        <div class="right-menu-list">
-          <button type="button" class="right-menu-item" onclick="toggleTheme();" title="Ganti Tema Gelap / Terang">
-            <span class="rmi-icon" id="panel-theme-icon">🌙</span>
-            <div class="rmi-body">
-              <span class="rmi-title" id="panel-theme-text">Mode Gelap / Terang</span>
-              <span class="rmi-sub">Ganti Tema Antarmuka</span>
-            </div>
-          </button>
-          <button type="button" class="right-menu-item" onclick="window.print(); toggleRightAutohideMenu(false);" title="Cetak Jadwal Pelajaran">
-            <span class="rmi-icon">🖨️</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Cetak Jadwal Pelajaran</span>
-              <span class="rmi-sub">Cetak Kertas / Simpan PDF</span>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Kategori 4: Cadangan & Berkas -->
-      <div class="right-panel-section">
-        <div class="right-section-title">💾 CADANGAN & EKSPOR</div>
-        <div class="right-menu-list">
-          <button type="button" class="right-menu-item" onclick="exportBackupJSON(); toggleRightAutohideMenu(false);" title="Unduh Cadangan Lengkap Format JSON">
-            <span class="rmi-icon">💾</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Cadangan JSON</span>
-              <span class="rmi-sub">Simpan Bel & Jadwal ke File</span>
-            </div>
-          </button>
-          <button type="button" class="right-menu-item" onclick="document.getElementById('file-import-json').click(); toggleRightAutohideMenu(false);" title="Pulihkan Data dari Berkas JSON">
-            <span class="rmi-icon">📥</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Pulihkan JSON</span>
-              <span class="rmi-sub">Import Cadangan dari File</span>
-            </div>
-          </button>
-          <button type="button" class="right-menu-item" onclick="downloadSingleHTML(); toggleRightAutohideMenu(false);" title="Unduh Berkas HTML Mandiri untuk Offline 100%">
-            <span class="rmi-icon">⬇️</span>
-            <div class="rmi-body">
-              <span class="rmi-title">Unduh Berkas HTML</span>
-              <span class="rmi-sub">File Standalone 100% Offline</span>
-            </div>
-          </button>
-        </div>
-      </div>
-
-      <!-- Footer Auto-hide setting -->
-      <div style="padding-top: 0.5rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center;">
-        <label style="display: flex; align-items: center; gap: 0.35rem; font-size: 0.74rem; color: var(--text-muted); cursor: pointer;">
-          <input type="checkbox" id="check-autohide-enabled" checked onchange="setAutohidePreference(this.checked)">
-          <span>Auto-hide kursor keluar</span>
-        </label>
-        <button type="button" class="btn btn-outline btn-xs" onclick="toggleRightAutohideMenu(false)">Tutup ›</button>
-      </div>
-    </div>
-  </div>
-
-</body>
+  </body>
 </html>
