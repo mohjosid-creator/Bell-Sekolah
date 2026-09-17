@@ -1,5 +1,6 @@
 {
-  "name": "react-example",
+  "name": "bel-otomatis-smkn1-moilong",
+  "description": "Sistem Bel Otomatis & Jadwal Pelajaran 15 Rombel SMKN 1 Moilong (07:00 - 15:30 WITA)",
   "private": true,
   "version": "0.0.0",
   "type": "module",

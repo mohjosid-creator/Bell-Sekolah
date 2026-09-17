@@ -2414,7 +2414,7 @@
         </div>
 
         <div class="next-bell-info" id="next-bell-box">
-          <div class="next-bell-time" id="next-bell-time">--:-- WIB</div>
+          <div class="next-bell-time" id="next-bell-time">--:-- WITA</div>
           <div class="next-bell-title" id="next-bell-title">Tidak ada jadwal tersisa hari ini</div>
           <div class="countdown-timer" id="next-bell-countdown">
             <span>⏳ Menghitung waktu mundur...</span>
@@ -2587,7 +2587,7 @@
           </button>
         </div>
         <span style="font-size: 0.78rem; color: var(--text-muted);">
-          Tahun Ajaran 2024/2025 • Waktu Belajar 07:00 s.d. 15:30 WITA/WIB • Kurikulum Merdeka
+          Tahun Ajaran 2024/2025 • Waktu Belajar 07:00 s.d. 15:30 WITA • Kurikulum Merdeka
         </span>
       </div>
 
@@ -4240,11 +4240,11 @@
 
         const cdString = `${String(hRemaining).padStart(2, '0')}:${String(mRemaining).padStart(2, '0')}:${String(sRemaining).padStart(2, '0')}`;
 
-        if (timeEl) timeEl.textContent = `${nextSchedule.time} WIB`;
+        if (timeEl) timeEl.textContent = `${nextSchedule.time} WITA`;
         if (titleEl) titleEl.textContent = nextSchedule.title;
         if (cdEl) cdEl.innerHTML = `<span>⏳ <strong>${cdString}</strong> menuju bel berikutnya</span>`;
       } else {
-        if (timeEl) timeEl.textContent = '--:-- WIB';
+        if (timeEl) timeEl.textContent = '--:-- WITA';
         if (titleEl) titleEl.textContent = todaySchedules.length > 0 ? 'Semua bel hari ini telah selesai' : 'Tidak ada jadwal aktif untuk hari ini';
         if (cdEl) cdEl.innerHTML = '<span>✅ Selesai untuk hari ini</span>';
       }
@@ -4254,7 +4254,7 @@
       const timeEl = document.getElementById('next-bell-time');
       const titleEl = document.getElementById('next-bell-title');
       const cdEl = document.getElementById('next-bell-countdown');
-      if (timeEl) timeEl.textContent = '--:-- WIB';
+      if (timeEl) timeEl.textContent = '--:-- WITA';
       if (titleEl) titleEl.textContent = 'Belum ada jadwal tersimpan';
       if (cdEl) cdEl.innerHTML = '<span>Silakan tambah jadwal di bawah</span>';
     }
@@ -4490,7 +4490,7 @@
           <div>
             <strong>${escapeHtml(log.title)}</strong>
             <div style="font-size: 0.72rem; color: var(--text-muted);">
-              ${log.time} WIB • ${getSoundLabel(log.soundType)}
+              ${log.time} WITA • ${getSoundLabel(log.soundType)}
             </div>
           </div>
           <div style="text-align: right;">
@@ -4738,6 +4738,26 @@
           onClockTick();
         }
       });
+
+      // Pintasan keyboard: Tombol Escape untuk menutup modal dan menu alat samping
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          const openModals = document.querySelectorAll('.modal.open');
+          openModals.forEach(m => m.classList.remove('open'));
+          if (typeof toggleRightAutohideMenu === 'function') {
+            toggleRightAutohideMenu(false);
+          }
+        }
+      });
+
+      // Buka kunci AudioContext secara otomatis pada interaksi pertama pengguna
+      const unlockAudio = () => {
+        ensureAudioContext();
+        document.removeEventListener('pointerdown', unlockAudio);
+        document.removeEventListener('keydown', unlockAudio);
+      };
+      document.addEventListener('pointerdown', unlockAudio, { passive: true });
+      document.addEventListener('keydown', unlockAudio, { passive: true });
     }
 
     function activateSystemAudio() {
@@ -5120,7 +5140,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'aplikasi-bel-sekolah-standalone.html';
+      a.download = 'Bel-Otomatis-SMKN1-Moilong-Standalone.html';
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -6128,7 +6148,7 @@ function buildAllSchedules() {
 
       if (titleEl) titleEl.textContent = info.name;
       if (majorEl) majorEl.textContent = info.major;
-      if (detailsEl) detailsEl.textContent = `Wali Kelas: ${info.teacher} • Ruang: ${info.room} • Jam Belajar: 07:00 - 15:30 WITA/WIB`;
+      if (detailsEl) detailsEl.textContent = `Wali Kelas: ${info.teacher} • Ruang: ${info.room} • Jam Belajar: 07:00 - 15:30 WITA`;
     }
 
     function filterTimetableDay(day) {
@@ -6196,7 +6216,7 @@ function buildAllSchedules() {
             <div class="subject-card" id="subj-card-${item.id}" data-start="${item.timeStart}" data-end="${item.timeEnd}" data-day="${item.day}">
               <div class="subject-header">
                 <span class="subject-slot">${escapeHtml(item.slot || 'Jam Pelajaran')}</span>
-                <span class="subject-time">${item.timeStart} - ${item.timeEnd} WIB</span>
+                <span class="subject-time">${item.timeStart} - ${item.timeEnd} WITA</span>
               </div>
               <div class="subject-name">${escapeHtml(item.name)}</div>
               <div class="subject-meta">
@@ -6449,7 +6469,7 @@ function buildAllSchedules() {
 
       if (activeSubject) {
         statusPill.className = 'live-status-pill active-now';
-        statusText.innerHTML = `🟢 <strong>Sedang Berlangsung:</strong> ${escapeHtml(activeSubject.name)} (${activeSubject.timeStart} - ${activeSubject.timeEnd} WIB) • Guru: ${escapeHtml(activeSubject.teacher || '-')}`;
+        statusText.innerHTML = `🟢 <strong>Sedang Berlangsung:</strong> ${escapeHtml(activeSubject.name)} (${activeSubject.timeStart} - ${activeSubject.timeEnd} WITA) • Guru: ${escapeHtml(activeSubject.teacher || '-')}`;
         const cardEl = document.getElementById(`subj-card-${activeSubject.id}`);
         if (cardEl) {
           cardEl.classList.add('is-current-period');
@@ -6463,10 +6483,10 @@ function buildAllSchedules() {
 
           if (currentTime < firstStart) {
             statusPill.className = 'live-status-pill';
-            statusText.textContent = `Menunggu Jam Pertama: dimulai pukul ${firstStart} WIB`;
+            statusText.textContent = `Menunggu Jam Pertama: dimulai pukul ${firstStart} WITA`;
           } else if (currentTime >= lastEnd) {
             statusPill.className = 'live-status-pill';
-            statusText.textContent = `Pelajaran Hari Ini Selesai (${lastEnd} WIB) • Istirahat di Rumah`;
+            statusText.textContent = `Pelajaran Hari Ini Selesai (${lastEnd} WITA) • Istirahat di Rumah`;
           } else {
             statusPill.className = 'live-status-pill';
             statusText.textContent = `☕ Waktu Istirahat / Pergantian Jam Pelajaran`;
