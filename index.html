@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bel Otomatis & Jadwal Pelajaran SMKN 1 Moilong v4.0.0</title>
+  <title>Bel Otomatis & Jadwal Pelajaran SMKN 1 Moilong v4.0.1</title>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="icon" type="image/svg+xml" href="/icon.svg">
@@ -14,7 +14,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Bel Moilong">
-  <meta name="description" content="Aplikasi Bel Otomatis Sekolah, Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (AKL, DKV, TL 07:00 - 15:30), Dashboard Monitoring KBM Live, Banner Slider 5 Foto, Tulisan Berjalan, Manajemen Master Data (Edit & Hapus Guru, Mapel, Kelas), Menu Auto-Hide Sebelah Kanan, dan Fitur Autorun Startup Windows." />
+  <meta name="description" content="Aplikasi Bel Otomatis Sekolah, Jadwal Pelajaran SMKN 1 MOILONG untuk 15 kelas (AKL, DKV, TL 07:00 - 15:30 WITA), Dashboard Monitoring KBM Live, Banner Slider 5 Foto, Tulisan Berjalan, Manajemen Master Data (Edit & Hapus Guru, Mapel, Kelas), Menu Auto Shutdown Setelah Jadwal Berakhir, Menu Auto-Hide Sebelah Kanan, dan Fitur Autorun Startup Windows." />
   <!--
   =============================================================================
   APLIKASI BEL OTOMATIS SEKOLAH - STANDALONE SINGLE FILE (HTML5, CSS3, ES6+)
@@ -618,9 +618,15 @@
     /* MODAL */
     .modal-backdrop {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -631,6 +637,12 @@
       transition: opacity 0.2s ease;
     }
     .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+    .main-nav-btn {
+      margin-right: 0.25rem;
+    }
+    .main-nav-btn:last-child {
+      margin-right: 0;
+    }
     .modal {
       background-color: var(--bg-card);
       border: 1px solid var(--border-color);
@@ -1857,6 +1869,37 @@
       color: #fff;
       font-weight: 700;
     }
+    .right-menu-item .rmi-badge.badge-off {
+      background: var(--text-muted);
+      opacity: 0.85;
+    }
+    .right-menu-item .rmi-badge.badge-on {
+      background: #10b981;
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+    }
+
+    /* AUTO SHUTDOWN DIALOG & STYLES */
+    .shutdown-countdown-card {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(185, 28, 28, 0.05));
+      border: 2px solid #ef4444;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      text-align: center;
+      margin: 1rem 0;
+      animation: pulse-danger-border 2s infinite ease-in-out;
+    }
+    @keyframes pulse-danger-border {
+      0%, 100% { box-shadow: 0 0 0 rgba(239, 68, 68, 0); }
+      50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.35); }
+    }
+    .shutdown-timer-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ef4444;
+      line-height: 1;
+      margin: 0.5rem 0;
+      font-family: monospace, system-ui;
+    }
 
     /* MASTER DATA MODAL & TABLE STYLES */
     .master-data-tabs {
@@ -2056,7 +2099,7 @@
         </div>
         <div>
           <h1 class="brand-title" id="school-title-display">SMKN 1 MOILONG</h1>
-          <p class="brand-subtitle">Sistem Bel Otomatis & Jadwal Pelajaran 15 Kelas (Jam 07:00 - 15:30 WITA • Versi 4.0.0)</p>
+          <p class="brand-subtitle">Sistem Bel Otomatis & Jadwal Pelajaran 15 Kelas (Jam 07:00 - 15:30 WITA • Versi 4.0.1)</p>
         </div>
       </div>
 
@@ -2379,6 +2422,9 @@
           <button type="button" class="btn btn-outline btn-sm" onclick="openAutorunWindowsModal()" title="Buka menu konfigurasi lengkap">
             ⚙️ Pengaturan & Panduan
           </button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="openAutoShutdownModal()" title="Konfigurasi Auto Shutdown jika jadwal telah berakhir" style="font-weight: 700; border-color: rgba(239,68,68,0.4); color: #ef4444;">
+            🛑 Auto Shutdown
+          </button>
         </div>
       </div>
     </div>
@@ -2507,13 +2553,20 @@
       <input type="time" id="qa-time" required value="07:00" title="Jam Bel (24 jam)">
       <input type="text" id="qa-title" placeholder="Keterangan Bel (misal: Jam Ke-1 Mulai)" required style="flex: 1; min-width: 180px;">
       <select id="qa-sound" title="Pilih nada bel">
-        <option value="builtin:westminster">🔔 Westminster Chimes</option>
-        <option value="builtin:cheerful">🎵 Melodi Sekolah Ceria</option>
-        <option value="builtin:dingdong">🛎️ Ding-Dong</option>
-        <option value="builtin:tritone">🎶 Tri-Tone</option>
-        <option value="builtin:electric">⚡ Bel Elektrik (Buzzer)</option>
-        <option value="builtin:siren">🚨 Sirine Peringatan</option>
-        <option value="tts:title">🗣️ Pengucapan Suara (TTS)</option>
+        <optgroup label="Nada Bawaan (Web Audio API)">
+          <option value="builtin:westminster">🔔 Westminster Chimes</option>
+          <option value="builtin:cheerful">🎵 Melodi Sekolah Ceria</option>
+          <option value="builtin:dingdong">🛎️ Ding-Dong</option>
+          <option value="builtin:tritone">🎶 Tri-Tone</option>
+          <option value="builtin:electric">⚡ Bel Elektrik (Buzzer)</option>
+          <option value="builtin:siren">🚨 Sirine Peringatan</option>
+        </optgroup>
+        <optgroup label="Pengumuman Suara (TTS)">
+          <option value="tts:title">🗣️ Pengucapan Suara (TTS)</option>
+        </optgroup>
+        <optgroup label="Audio Kustom (IndexedDB)" id="optgroup-qa-custom-sounds">
+          <!-- Custom audio options dynamically filled -->
+        </optgroup>
       </select>
       <button type="submit" class="btn btn-primary btn-sm">➕ Tambahkan Bel</button>
     </form>
@@ -2572,7 +2625,7 @@
         </div>
       </div>
     </div>
-  </div> <!-- END OF TAB 1: tab-bel-sekolah -->
+  </div> <!-- END OF TAB: tab-bel-sekolah -->
 
   <!-- TAB 2: JADWAL PELAJARAN SMKN 1 MOILONG (15 KELAS) -->
   <div id="tab-jadwal-pelajaran" class="tab-content">
@@ -2672,6 +2725,7 @@
       <!-- Rendered dynamically -->
     </div>
   </div> <!-- END OF TAB 2: tab-jadwal-pelajaran -->
+  </div> <!-- END OF .container -->
 
   <!-- MAIN SITE FOOTER -->
   <footer class="site-footer no-print" id="main-site-footer">
@@ -2686,6 +2740,9 @@
       <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
         <button type="button" class="btn btn-outline btn-xs" onclick="openAutorunWindowsModal()" style="font-weight: 600;">
           🚀 Setup Autorun Windows
+        </button>
+        <button type="button" class="btn btn-outline btn-xs" onclick="openAutoShutdownModal()" style="font-weight: 600; color: #ef4444; border-color: rgba(239,68,68,0.4);">
+          🛑 Auto Shutdown
         </button>
         <div class="footer-copyright" id="footer-copyright-text">
           TIM IT SMKN 1 MOILONG @Asiacomptech 2026
@@ -2753,6 +2810,10 @@
               <button type="button" class="btn btn-outline btn-sm" id="btn-preview-modal-sound" onclick="previewModalSound()" title="Dengarkan suara yang dipilih">
                 🔊 Tes Suara
               </button>
+              <label class="btn btn-outline btn-sm" style="cursor: pointer; margin: 0; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.25rem;" title="Unggah file MP3 / WAV baru langsung ke pilihan">
+                📁 + Unggah Audio
+                <input type="file" id="modal-quick-audio-upload" accept="audio/*" style="display: none;" onchange="onQuickUploadAudioInModal(event)">
+              </label>
             </div>
           </div>
 
@@ -2951,22 +3012,22 @@
     <div class="modal" style="max-width: 680px; max-height: 90vh; display: flex; flex-direction: column;">
       <div class="modal-header">
         <h3 style="font-size: 1.15rem; display: flex; align-items: center; gap: 0.4rem;">
-          🖼️ Kelola & Ganti 5 Foto Banner Slideshow
+          🖼️ Kelola & Ganti Foto Banner Slideshow
         </h3>
         <button class="btn-icon" onclick="closeSliderManagerModal()">✕</button>
       </div>
       <div class="modal-body" style="overflow-y: auto; flex: 1;">
-        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1rem;">
-          Anda dapat mengganti foto, judul, dan keterangan untuk 5 slide banner sekolah. Anda dapat memasukkan URL gambar web atau langsung mengunggah foto dari HP/komputer Anda.
+        <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Kelola foto, judul, dan informasi slide banner sekolah. Anda dapat mengunggah foto langsung dari perangkat (otomatis dikompres sehingga aman disimpan), memasukkan link gambar, atau memilih preset jurusan SMKN 1 Moilong.
         </p>
 
-        <!-- Tabs Slide 1 - 5 -->
-        <div style="display: flex; gap: 0.4rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; overflow-x: auto;">
-          <button type="button" class="class-btn active" id="btn-slide-tab-0" onclick="switchSlideEditTab(0)">Slide 1 (Utama)</button>
-          <button type="button" class="class-btn" id="btn-slide-tab-1" onclick="switchSlideEditTab(1)">Slide 2 (AKL)</button>
-          <button type="button" class="class-btn" id="btn-slide-tab-2" onclick="switchSlideEditTab(2)">Slide 3 (DKV)</button>
-          <button type="button" class="class-btn" id="btn-slide-tab-3" onclick="switchSlideEditTab(3)">Slide 4 (TL)</button>
-          <button type="button" class="class-btn" id="btn-slide-tab-4" onclick="switchSlideEditTab(4)">Slide 5 (P5)</button>
+        <!-- Dynamic Slide Tabs with Add Slide Button -->
+        <div style="display: flex; gap: 0.4rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; overflow-x: auto; align-items: center;" id="slide-tabs-list">
+          <button type="button" class="class-btn active" id="btn-slide-tab-0" onclick="switchSlideEditTab(0)">Slide 1</button>
+          <button type="button" class="class-btn" id="btn-slide-tab-1" onclick="switchSlideEditTab(1)">Slide 2</button>
+          <button type="button" class="class-btn" id="btn-slide-tab-2" onclick="switchSlideEditTab(2)">Slide 3</button>
+          <button type="button" class="class-btn" id="btn-slide-tab-3" onclick="switchSlideEditTab(3)">Slide 4</button>
+          <button type="button" class="class-btn" id="btn-slide-tab-4" onclick="switchSlideEditTab(4)">Slide 5</button>
         </div>
 
         <!-- Slide Edit Forms Container -->
@@ -2976,11 +3037,11 @@
       </div>
       <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
         <button type="button" class="btn btn-outline btn-sm" onclick="resetSliderToDefaults()">
-          🔄 Reset 5 Foto Standar Sekolah
+          🔄 Reset Foto Standar Sekolah
         </button>
         <div style="display: flex; gap: 0.5rem;">
-          <button type="button" class="btn btn-outline" onclick="closeSliderManagerModal()">Tutup</button>
-          <button type="button" class="btn btn-primary" onclick="saveSliderPhotosFromModal()">💾 Terapkan Perubahan</button>
+          <button type="button" class="btn btn-outline" onclick="closeSliderManagerModal()">Batal</button>
+          <button type="button" class="btn btn-primary" onclick="saveSliderPhotosFromModal()">💾 Simpan & Terapkan</button>
         </div>
       </div>
     </div>
@@ -3345,6 +3406,141 @@
   </div>
 
 
+  <!-- MODAL: AUTO SHUTDOWN SETTINGS (VERSI 4.0.1) -->
+  <div class="modal-backdrop" id="modal-auto-shutdown">
+    <div class="modal" style="max-width: 640px; max-height: 90vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-size: 1.4rem;">🛑</span>
+          <div>
+            <h3 style="font-size: 1.15rem; margin: 0; font-weight: 800; color: var(--text-main);">
+              Menu Auto Shutdown Otomatis
+            </h3>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.15rem 0 0;">
+              Matikan PC / tutup aplikasi secara otomatis setelah seluruh jadwal bel sekolah hari ini berakhir
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeAutoShutdownModal()">✕</button>
+      </div>
+
+      <div class="modal-body" style="overflow-y: auto; padding: 1.25rem;">
+        <!-- Status Switch Banner -->
+        <div style="background: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+          <div>
+            <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-main);">
+              Status Fitur Auto Shutdown
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);" id="modal-autoshutdown-status-text">
+              Status saat ini: Tidak Aktif (OFF)
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <label style="position: relative; display: inline-block; width: 52px; height: 28px; margin: 0;">
+              <input type="checkbox" id="toggle-auto-shutdown" onchange="toggleAutoShutdownState(this.checked)" style="opacity: 0; width: 0; height: 0;">
+              <span id="slider-auto-shutdown" style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #94a3b8; transition: 0.3s; border-radius: 28px;">
+                <span id="knob-auto-shutdown" style="position: absolute; content: ''; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: 0.3s; border-radius: 50%;"></span>
+              </span>
+            </label>
+            <span id="label-toggle-autoshutdown" style="font-weight: 800; font-size: 0.88rem; color: var(--text-muted);">OFF</span>
+          </div>
+        </div>
+
+        <!-- Opsi Delay / Waktu Tunggu -->
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.35rem; display: block;" for="select-shutdown-delay">
+            ⏳ Jeda Waktu Menuju Shutdown Setelah Bel Terakhir:
+          </label>
+          <select id="select-shutdown-delay" class="form-control" onchange="saveAutoShutdownDelay(this.value)">
+            <option value="60">1 Menit setelah jadwal terakhir</option>
+            <option value="180">3 Menit setelah jadwal terakhir</option>
+            <option value="300" selected>5 Menit setelah jadwal terakhir (Disarankan)</option>
+            <option value="600">10 Menit setelah jadwal terakhir</option>
+            <option value="900">15 Menit setelah jadwal terakhir</option>
+            <option value="1800">30 Menit setelah jadwal terakhir</option>
+          </select>
+          <span style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.3rem;">
+            Memberikan waktu bagi operator untuk memastikan KBM tuntas atau membatalkan shutdown jika masih ada kegiatan tambahan di sekolah.
+          </span>
+        </div>
+
+        <!-- Opsi Aksi Shutdown -->
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label style="font-weight: 700; font-size: 0.85rem; margin-bottom: 0.35rem; display: block;" for="select-shutdown-action">
+            ⚙️ Mode Aksi Otomasi:
+          </label>
+          <select id="select-shutdown-action" class="form-control" onchange="saveAutoShutdownAction(this.value)">
+            <option value="close_and_script" selected>Tutup Aplikasi & Jalankan Script Shutdown Windows (.bat)</option>
+            <option value="close_window">Tutup Jendela Aplikasi Browser Saja</option>
+            <option value="prompt_operator">Tampilkan Peringatan Layar Penuh Konfirmasi Operator</option>
+          </select>
+        </div>
+
+        <!-- Banner Panduan Shutdown Windows PC Native -->
+        <div style="background: rgba(37,99,235,0.06); border: 1px dashed var(--primary); border-radius: var(--radius-sm); padding: 0.85rem; margin-bottom: 1rem;">
+          <div style="font-weight: 700; font-size: 0.82rem; color: var(--primary); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.4rem;">
+            <span>💻 Integrasi Shutdown PC Operator Windows:</span>
+          </div>
+          <p style="font-size: 0.76rem; color: var(--text-muted); margin: 0; line-height: 1.45;">
+            Karena batasan keamanan browser (sandbox), browser tidak dapat langsung mengeksekusi perintah <code>shutdown.exe /s /t 60</code> tanpa script pendamping. Anda dapat mengunduh script <strong>Auto Shutdown Watcher</strong> (.bat) sekali saja agar Windows otomatis mematikan komputer saat jadwal bel usai.
+          </p>
+          <div style="margin-top: 0.65rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-outline btn-xs" onclick="downloadAutoShutdownBatchScript()" style="font-weight: 700; color: var(--primary);">
+              ⬇️ Unduh Script Auto Shutdown (.bat)
+            </button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="testShutdownCountdownUI()" style="font-weight: 600;">
+              🧪 Uji Coba Tampilan Countdown
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <span style="font-size: 0.78rem; color: var(--text-muted);" id="modal-autoshutdown-summary">
+          Auto Shutdown: Non-aktif
+        </span>
+        <button type="button" class="btn btn-primary btn-sm" onclick="closeAutoShutdownModal()">
+          Simpan & Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL: WARNING & COUNTDOWN SHUTDOWN OTOMATIS LAYAR PENUH -->
+  <div class="modal-backdrop" id="modal-shutdown-countdown" style="z-index: 10000; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);">
+    <div class="modal" style="max-width: 520px; text-align: center; border: 2px solid #ef4444; box-shadow: 0 0 40px rgba(239,68,68,0.4);">
+      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🛑</div>
+      <h3 style="font-size: 1.35rem; font-weight: 900; margin: 0; color: #ef4444;">
+        PERINGATAN AUTO SHUTDOWN
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin: 0.4rem 0 1rem; line-height: 1.45;">
+        Semua jadwal bel sekolah hari ini telah selesai dilaksanakan. Komputer / Aplikasi akan ditutup secara otomatis dalam:
+      </p>
+
+      <div class="shutdown-countdown-card">
+        <div class="shutdown-timer-number" id="shutdown-countdown-seconds">60</div>
+        <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-main); text-transform: uppercase; letter-spacing: 0.05em;">
+          Detik Menuju Penutupan Sistem
+        </div>
+      </div>
+
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+        Klik tombol <strong>"Batalkan Shutdown"</strong> di bawah jika masih ada kegiatan belajar mengajar atau operator masih menggunakan PC.
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+        <button type="button" class="btn btn-danger" onclick="executeShutdownImmediate()" style="padding: 0.65rem 1.25rem; font-weight: 800; background: #dc2626;">
+          ⚡ Matikan / Tutup Sekarang
+        </button>
+        <button type="button" class="btn btn-outline" onclick="cancelAutoShutdownCountdown()" style="padding: 0.65rem 1.25rem; font-weight: 800; border-color: var(--border-color);">
+          ✕ Batalkan Shutdown Hari Ini
+        </button>
+      </div>
+    </div>
+  </div>
+
+
   <!-- MODAL: KELOLA MASTER DATA (GURU, MATA PELAJARAN, KELAS) -->
   <div class="modal-backdrop" id="modal-master-data">
     <div class="modal" style="max-width: 900px; max-height: 92vh; display: flex; flex-direction: column;">
@@ -3631,7 +3827,7 @@
         </div>
         <div>
           <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main);">Menu & Alat Sekolah</h4>
-          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">SMKN 1 MOILONG • KAB. BANGGAI • VERSI 4.0.0</span>
+          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">SMKN 1 MOILONG • KAB. BANGGAI • VERSI 4.0.1</span>
         </div>
       </div>
       <button type="button" class="btn-icon btn-sm" onclick="toggleRightAutohideMenu(false)" title="Tutup Menu">✕</button>
@@ -3684,6 +3880,14 @@
     <div class="right-panel-section">
       <div class="right-section-title">🚀 OTOMASI & KBM SEKOLAH</div>
       <div class="right-menu-list">
+        <button type="button" class="right-menu-item" onclick="openAutoShutdownModal(); toggleRightAutohideMenu(false);" title="Konfigurasi Auto Shutdown PC jika jadwal telah berakhir">
+          <span class="rmi-icon">🛑</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Auto Shutdown</span>
+            <span class="rmi-sub">Matikan PC Setelah Jadwal Selesai</span>
+          </div>
+          <span class="rmi-badge badge-off" id="rmi-autoshutdown-badge">OFF</span>
+        </button>
         <button type="button" class="right-menu-item" onclick="openAutorunWindowsModal(); toggleRightAutohideMenu(false);" title="Buka Pengaturan Startup Autorun Windows">
           <span class="rmi-icon">🚀</span>
           <div class="rmi-body">
@@ -3866,87 +4070,195 @@
     let activeProfileId = '';
     let activityLogs = [];
     let cachedCustomAudios = [];
+    const STORAGE_KEY_CUSTOM_AUDIOS_FALLBACK = 'smkn1_custom_audios_backup_v4';
 
-    // --- 2. INDEXED DB HELPER (OFFLINE CUSTOM AUDIO) ---
+    // --- 2. INDEXED DB HELPER (OFFLINE CUSTOM AUDIO DENGAN FALLBACK LOCALSTORAGE) ---
     function initIndexedDB() {
-      return new Promise((resolve, reject) => {
-        const req = indexedDB.open(DB_NAME, 1);
-        req.onupgradeneeded = (e) => {
-          const db = e.target.result;
-          if (!db.objectStoreNames.contains(DB_STORE_NAME)) {
-            db.createObjectStore(DB_STORE_NAME, { keyPath: 'id' });
-          }
-        };
-        req.onsuccess = (e) => {
-          dbInstance = e.target.result;
-          resolve(dbInstance);
-        };
-        req.onerror = (e) => {
-          console.error('IndexedDB Error:', e);
-          reject(e);
-        };
+      return new Promise((resolve) => {
+        if (!window.indexedDB) {
+          console.warn('IndexedDB tidak didukung oleh browser ini.');
+          resolve(null);
+          return;
+        }
+        try {
+          const req = indexedDB.open(DB_NAME, 1);
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains(DB_STORE_NAME)) {
+              db.createObjectStore(DB_STORE_NAME, { keyPath: 'id' });
+            }
+          };
+          req.onsuccess = (e) => {
+            dbInstance = e.target.result;
+            resolve(dbInstance);
+          };
+          req.onerror = (e) => {
+            console.warn('IndexedDB open error (beralih ke fallback):', e);
+            resolve(null);
+          };
+        } catch (err) {
+          console.warn('IndexedDB exception:', err);
+          resolve(null);
+        }
       });
     }
 
     async function loadCustomAudios() {
-      if (!dbInstance) return [];
-      return new Promise((resolve) => {
-        const tx = dbInstance.transaction(DB_STORE_NAME, 'readonly');
-        const store = tx.objectStore(DB_STORE_NAME);
-        const req = store.getAll();
-        req.onsuccess = () => {
-          cachedCustomAudios = req.result || [];
-          resolve(cachedCustomAudios);
-        };
-        req.onerror = () => resolve([]);
-      });
+      let audiosFromDB = [];
+      if (dbInstance) {
+        try {
+          audiosFromDB = await new Promise((resolve) => {
+            const tx = dbInstance.transaction(DB_STORE_NAME, 'readonly');
+            const store = tx.objectStore(DB_STORE_NAME);
+            const req = store.getAll();
+            req.onsuccess = () => resolve(req.result || []);
+            req.onerror = () => resolve([]);
+          });
+        } catch(e) {
+          console.warn('Gagal membaca IndexedDB:', e);
+        }
+      }
+
+      // Muat data cadangan dari localStorage jika ada
+      let audiosFromLS = [];
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_CUSTOM_AUDIOS_FALLBACK);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) audiosFromLS = parsed;
+        }
+      } catch(e) {}
+
+      // Gabungkan berdasarkan ID unik
+      const map = new Map();
+      audiosFromDB.forEach(a => { if (a && a.id) map.set(a.id, a); });
+      audiosFromLS.forEach(a => { if (a && a.id && !map.has(a.id)) map.set(a.id, a); });
+
+      cachedCustomAudios = Array.from(map.values());
+      return cachedCustomAudios;
     }
 
     async function saveCustomAudio(file) {
-      if (!dbInstance) return null;
-      const id = 'custom_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
-      const audioRecord = {
-        id,
-        name: file.name,
-        type: file.type,
-        size: file.size,
-        data: file, // Blob
-        uploadedAt: new Date().toISOString()
-      };
+      if (!file) return null;
+      const isAudio = file.type.startsWith('audio/') || /\.(mp3|wav|ogg|m4a|aac|opus)$/i.test(file.name);
+      if (!isAudio) {
+        showToast('Berkas harus berupa file audio (.mp3, .wav, .ogg, dll)', 'warning');
+        return null;
+      }
 
+      const id = 'custom_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+
+      // Baca sebagai Data URL agar bisa diputar offline di semua browser
       return new Promise((resolve, reject) => {
-        const tx = dbInstance.transaction(DB_STORE_NAME, 'readwrite');
-        const store = tx.objectStore(DB_STORE_NAME);
-        const req = store.add(audioRecord);
-        req.onsuccess = async () => {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+          const dataUrl = e.target.result;
+          const audioRecord = {
+            id,
+            name: file.name,
+            type: file.type || 'audio/mpeg',
+            size: file.size,
+            dataUrl: dataUrl,
+            uploadedAt: new Date().toISOString()
+          };
+
+          // Simpan ke IndexedDB jika tersedia
+          if (dbInstance) {
+            try {
+              await new Promise((res, rej) => {
+                const tx = dbInstance.transaction(DB_STORE_NAME, 'readwrite');
+                const store = tx.objectStore(DB_STORE_NAME);
+                const req = store.put(audioRecord);
+                req.onsuccess = () => res();
+                req.onerror = (err) => rej(err);
+              });
+            } catch(idbErr) {
+              console.warn('Simpan ke IndexedDB gagal, menggunakan cadangan localStorage:', idbErr);
+            }
+          }
+
+          // Simpan ke cadangan localStorage jika ukuran data wajar
+          try {
+            let backupList = [];
+            const saved = localStorage.getItem(STORAGE_KEY_CUSTOM_AUDIOS_FALLBACK);
+            if (saved) {
+              try { backupList = JSON.parse(saved); } catch(err){}
+            }
+            if (!Array.isArray(backupList)) backupList = [];
+            backupList = backupList.filter(a => a.id !== id);
+            if (dataUrl.length < 3500000) {
+              backupList.push(audioRecord);
+              localStorage.setItem(STORAGE_KEY_CUSTOM_AUDIOS_FALLBACK, JSON.stringify(backupList));
+            }
+          } catch(lsErr) {
+            console.warn('LocalStorage kuota terlampaui (tetap tersimpan di memory & IDB):', lsErr);
+          }
+
           await loadCustomAudios();
           renderCustomAudioList();
-          updateSoundSelectOptions();
-          showToast(`File audio "${file.name}" berhasil disimpan!`);
+          updateSoundSelectOptions(`custom:${id}`);
+          showToast(`File audio "${file.name}" berhasil disimpan!`, 'success');
           resolve(audioRecord);
         };
-        req.onerror = (err) => {
-          showToast('Gagal menyimpan file audio!', 'error');
+
+        reader.onerror = (err) => {
+          showToast('Gagal membaca berkas audio!', 'error');
           reject(err);
         };
+
+        reader.readAsDataURL(file);
       });
     }
 
     async function deleteCustomAudio(id) {
-      if (!dbInstance) return;
-      return new Promise((resolve) => {
-        const tx = dbInstance.transaction(DB_STORE_NAME, 'readwrite');
-        const store = tx.objectStore(DB_STORE_NAME);
-        const req = store.delete(id);
-        req.onsuccess = async () => {
-          await loadCustomAudios();
-          renderCustomAudioList();
-          updateSoundSelectOptions();
-          renderScheduleTable();
-          showToast('File audio dihapus.');
-          resolve();
-        };
-      });
+      if (dbInstance) {
+        try {
+          await new Promise((resolve) => {
+            const tx = dbInstance.transaction(DB_STORE_NAME, 'readwrite');
+            const store = tx.objectStore(DB_STORE_NAME);
+            const req = store.delete(id);
+            req.onsuccess = () => resolve();
+            req.onerror = () => resolve();
+          });
+        } catch(e){}
+      }
+
+      try {
+        let backupList = [];
+        const saved = localStorage.getItem(STORAGE_KEY_CUSTOM_AUDIOS_FALLBACK);
+        if (saved) backupList = JSON.parse(saved);
+        if (Array.isArray(backupList)) {
+          backupList = backupList.filter(a => a.id !== id);
+          localStorage.setItem(STORAGE_KEY_CUSTOM_AUDIOS_FALLBACK, JSON.stringify(backupList));
+        }
+      } catch(e){}
+
+      await loadCustomAudios();
+      renderCustomAudioList();
+      updateSoundSelectOptions();
+      renderScheduleTable();
+      showToast('File audio dihapus.');
+    }
+
+    async function onQuickUploadAudioInModal(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      try {
+        showToast('Sedang menyimpan audio kustom...', 'info');
+        const audioRec = await saveCustomAudio(file);
+        if (audioRec) {
+          const schedSoundEl = document.getElementById('sched-sound');
+          if (schedSoundEl) {
+            updateSoundSelectOptions(`custom:${audioRec.id}`);
+            schedSoundEl.value = `custom:${audioRec.id}`;
+          }
+          showToast(`Audio "${file.name}" tersimpan dan otomatis dipilih untuk jadwal ini!`, 'success');
+        }
+      } catch(err) {
+        console.error('Quick audio upload error:', err);
+      } finally {
+        event.target.value = '';
+      }
     }
 
     // --- 3. AUDIO ENGINE & SYNTHESIZER (WEB AUDIO API) ---
@@ -4176,35 +4488,55 @@
       }, 1400);
     }
 
-    // Play Custom Audio File (From IndexedDB Blob)
+    // Play Custom Audio File (From DataURL or IndexedDB Blob)
     async function playCustomAudioById(customId, fallbackTitle = 'Bel Sekolah') {
       const audioRec = cachedCustomAudios.find(a => a.id === customId);
-      if (!audioRec || !audioRec.data) {
+      if (!audioRec || (!audioRec.dataUrl && !audioRec.data)) {
         showToast('File audio kustom tidak ditemukan, memutar nada bawaan.', 'warning');
         playWestminsterChimes();
         return;
       }
 
-      ensureAudioContext();
       stopActiveAudio();
-      document.getElementById('btn-stop-audio').style.display = 'inline-flex';
+      const stopBtn = document.getElementById('btn-stop-audio');
+      if (stopBtn) stopBtn.style.display = 'inline-flex';
 
+      let objectUrl = null;
       try {
-        const objectUrl = URL.createObjectURL(audioRec.data);
-        const audio = new Audio(objectUrl);
-        const source = audioCtx.createMediaElementSource(audio);
-        source.connect(masterGainNode);
+        let src = audioRec.dataUrl;
+        if (!src && audioRec.data) {
+          objectUrl = URL.createObjectURL(audioRec.data);
+          src = objectUrl;
+        }
+
+        const audio = new Audio(src);
+        const savedVol = parseFloat(localStorage.getItem(STORAGE_KEY_VOLUME) || '0.85');
+        audio.volume = Math.max(0, Math.min(1, savedVol));
 
         audio.onended = () => {
-          URL.revokeObjectURL(objectUrl);
-          document.getElementById('btn-stop-audio').style.display = 'none';
+          if (objectUrl) URL.revokeObjectURL(objectUrl);
+          if (stopBtn) stopBtn.style.display = 'none';
+          if (activeAudioSource === audio) activeAudioSource = null;
+        };
+
+        audio.onerror = (e) => {
+          console.warn('Audio playback error, fallback to chimes:', e);
+          if (objectUrl) URL.revokeObjectURL(objectUrl);
+          if (stopBtn) stopBtn.style.display = 'none';
+          playWestminsterChimes();
         };
 
         activeAudioSource = audio;
-        await audio.play();
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(err => {
+            console.warn('Autoplay prevented or error:', err);
+            playWestminsterChimes();
+          });
+        }
       } catch (err) {
         console.error('Audio play error:', err);
-        // Fallback
+        if (objectUrl) URL.revokeObjectURL(objectUrl);
         playWestminsterChimes();
       }
     }
@@ -4418,7 +4750,26 @@
       } else {
         if (timeEl) timeEl.textContent = '--:-- WITA';
         if (titleEl) titleEl.textContent = todaySchedules.length > 0 ? 'Semua bel hari ini telah selesai' : 'Tidak ada jadwal aktif untuk hari ini';
-        if (cdEl) cdEl.innerHTML = '<span>✅ Selesai untuk hari ini</span>';
+        
+        if (todaySchedules.length > 0 && typeof isAutoShutdownEnabled === 'function' && isAutoShutdownEnabled()) {
+          const delaySec = getAutoShutdownDelaySec();
+          const lastSched = todaySchedules[todaySchedules.length - 1];
+          const triggerSec = lastSched.totalSec + delaySec;
+          const remainingUntilShutdown = triggerSec - currentSecondsNow;
+
+          if (remainingUntilShutdown > 0) {
+            const mLeft = Math.floor(remainingUntilShutdown / 60);
+            const sLeft = remainingUntilShutdown % 60;
+            if (cdEl) cdEl.innerHTML = `<span>✅ Selesai • 🛑 <strong>Auto Shutdown</strong> dlm ${mLeft}m ${sLeft}s</span>`;
+          } else {
+            if (cdEl) cdEl.innerHTML = '<span>✅ Selesai • 🛑 Menyiapkan Shutdown...</span>';
+          }
+
+          // Cek pemicuan otomatis
+          checkAutoShutdownCondition(now, todaySchedules, currentSecondsNow);
+        } else {
+          if (cdEl) cdEl.innerHTML = '<span>✅ Selesai untuk hari ini</span>';
+        }
       }
     }
 
@@ -4607,22 +4958,50 @@
       });
     }
 
-    function updateSoundSelectOptions() {
-      const optgroup = document.getElementById('optgroup-custom-sounds');
-      if (!optgroup) return;
-      optgroup.innerHTML = '';
-      if (cachedCustomAudios.length === 0) {
-        const emptyOpt = document.createElement('option');
-        emptyOpt.disabled = true;
-        emptyOpt.textContent = '(Belum ada audio kustom diunggah)';
-        optgroup.appendChild(emptyOpt);
-      } else {
-        cachedCustomAudios.forEach(item => {
-          const opt = document.createElement('option');
-          opt.value = `custom:${item.id}`;
-          opt.textContent = `📁 ${item.name}`;
-          optgroup.appendChild(opt);
-        });
+    function updateSoundSelectOptions(selectedSoundToPreserve = null) {
+      const modalGroup = document.getElementById('optgroup-custom-sounds');
+      const qaGroup = document.getElementById('optgroup-qa-custom-sounds');
+
+      const populateGroup = (group) => {
+        if (!group) return;
+        group.innerHTML = '';
+        if (cachedCustomAudios.length === 0) {
+          const emptyOpt = document.createElement('option');
+          emptyOpt.disabled = true;
+          emptyOpt.textContent = '(Belum ada audio kustom diunggah)';
+          group.appendChild(emptyOpt);
+        } else {
+          cachedCustomAudios.forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = `custom:${item.id}`;
+            opt.textContent = `📁 ${item.name}`;
+            group.appendChild(opt);
+          });
+        }
+      };
+
+      populateGroup(modalGroup);
+      populateGroup(qaGroup);
+
+      if (selectedSoundToPreserve) {
+        const schedSound = document.getElementById('sched-sound');
+        if (schedSound) {
+          let exists = false;
+          for (let i = 0; i < schedSound.options.length; i++) {
+            if (schedSound.options[i].value === selectedSoundToPreserve) {
+              exists = true;
+              break;
+            }
+          }
+          if (!exists && selectedSoundToPreserve.startsWith('custom:')) {
+            const customOpt = document.createElement('option');
+            customOpt.value = selectedSoundToPreserve;
+            customOpt.textContent = getSoundLabel(selectedSoundToPreserve);
+            if (modalGroup) modalGroup.appendChild(customOpt);
+            else schedSound.appendChild(customOpt);
+          }
+          schedSound.value = selectedSoundToPreserve;
+        }
       }
     }
 
@@ -4676,14 +5055,17 @@
 
     // --- 7. EVENT HANDLERS & MODALS ---
     function setupEventListeners() {
+      // Helper function to safely bind click
+      const safeBind = (id, event, handler) => {
+        const el = document.getElementById(id);
+        if (el) el.addEventListener(event, handler);
+      };
+
       // Tombol Aktivasi Audio Utama
-      const btnActivate = document.getElementById('btn-activate-audio');
-      if (btnActivate) {
-        btnActivate.addEventListener('click', () => {
-          activateSystemAudio();
-          showToast('Sistem bel telah aktif! Browser mengizinkan audio otomatis.', 'success');
-        });
-      }
+      safeBind('btn-activate-audio', 'click', () => {
+        activateSystemAudio();
+        showToast('Sistem bel telah aktif! Browser mengizinkan audio otomatis.', 'success');
+      });
 
       // Master Volume Slider
       const volSlider = document.getElementById('master-volume');
@@ -4700,48 +5082,58 @@
       }
 
       // Tombol Stop Suara
-      document.getElementById('btn-stop-audio').addEventListener('click', stopActiveAudio);
+      safeBind('btn-stop-audio', 'click', stopActiveAudio);
 
       // Soundboard Buttons (Uji Coba Cepat)
       document.querySelectorAll('.sound-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const sound = btn.getAttribute('data-sound');
+          const labelEl = btn.querySelector('.label');
+          const label = labelEl ? labelEl.textContent : 'Bel';
           playBellSound(sound, 'Uji Coba Bel Manual', 'Manual');
-          addActivityLog('Uji Coba Bel (' + btn.querySelector('.label').textContent + ')', '--:--', sound, 'Manual');
+          addActivityLog('Uji Coba Bel (' + label + ')', '--:--', sound, 'Manual');
         });
       });
 
       // Profil Switcher
-      document.getElementById('profile-select').addEventListener('change', (e) => {
-        activeProfileId = e.target.value;
-        saveState();
-        renderScheduleTable();
-        showToast(`Profil aktif diubah ke: ${getActiveProfile().name}`);
-      });
+      const profSelect = document.getElementById('profile-select');
+      if (profSelect) {
+        profSelect.addEventListener('change', (e) => {
+          activeProfileId = e.target.value;
+          saveState();
+          renderScheduleTable();
+          showToast(`Profil aktif diubah ke: ${getActiveProfile().name}`);
+        });
+      }
 
       // Urutkan Jam
-      document.getElementById('btn-sort-schedules').addEventListener('click', () => {
+      safeBind('btn-sort-schedules', 'click', () => {
         const active = getActiveProfile();
-        active.schedules.sort((a, b) => a.time.localeCompare(b.time));
-        saveState();
-        renderScheduleTable();
-        showToast('Daftar jadwal diurutkan berdasarkan jam.');
+        if (active && Array.isArray(active.schedules)) {
+          active.schedules.sort((a, b) => a.time.localeCompare(b.time));
+          saveState();
+          renderScheduleTable();
+          showToast('Daftar jadwal diurutkan berdasarkan jam.');
+        }
       });
 
       // Buka Modal Tambah Jadwal
-      document.getElementById('btn-add-schedule').addEventListener('click', () => {
+      safeBind('btn-add-schedule', 'click', () => {
         openScheduleModal();
       });
 
       // Form Submit Jadwal
-      document.getElementById('form-schedule').addEventListener('submit', (e) => {
-        e.preventDefault();
-        saveScheduleFromModal();
-      });
+      const formSched = document.getElementById('form-schedule');
+      if (formSched) {
+        formSched.addEventListener('submit', (e) => {
+          e.preventDefault();
+          saveScheduleFromModal();
+        });
+      }
 
       // Batal / Tutup Modal Jadwal
-      document.getElementById('btn-close-schedule-modal').addEventListener('click', closeScheduleModal);
-      document.getElementById('btn-cancel-schedule').addEventListener('click', closeScheduleModal);
+      safeBind('btn-close-schedule-modal', 'click', closeScheduleModal);
+      safeBind('btn-cancel-schedule', 'click', closeScheduleModal);
 
       // Day chips selector in modal
       document.querySelectorAll('#days-selector .day-chip').forEach(chip => {
@@ -4752,63 +5144,66 @@
 
       // Schedule Table Action Delegations
       const tbody = document.getElementById('schedule-tbody');
-      tbody.addEventListener('click', (e) => {
-        const toggleEl = e.target.closest('.toggle-schedule');
-        if (toggleEl) {
-          const id = toggleEl.getAttribute('data-id');
-          const active = getActiveProfile();
-          const item = active.schedules.find(s => s.id === id);
-          if (item) {
-            item.enabled = toggleEl.checked;
-            saveState();
-            renderScheduleTable();
-            showToast(`Status "${item.title}" diubah.`);
+      if (tbody) {
+        tbody.addEventListener('click', (e) => {
+          const toggleEl = e.target.closest('.toggle-schedule');
+          if (toggleEl) {
+            const id = toggleEl.getAttribute('data-id');
+            const active = getActiveProfile();
+            const item = active && active.schedules ? active.schedules.find(s => s.id === id) : null;
+            if (item) {
+              item.enabled = toggleEl.checked;
+              saveState();
+              renderScheduleTable();
+              showToast(`Status "${item.title}" diubah.`);
+            }
+            return;
           }
-          return;
-        }
 
-        const btnTest = e.target.closest('.btn-test-sched');
-        if (btnTest) {
-          const id = btnTest.getAttribute('data-id');
-          const active = getActiveProfile();
-          const item = active.schedules.find(s => s.id === id);
-          if (item) {
-            playBellSound(item.soundType, item.title, 'Manual');
-            addActivityLog(item.title, item.time, item.soundType, 'Manual');
+          const btnTest = e.target.closest('.btn-test-sched');
+          if (btnTest) {
+            const id = btnTest.getAttribute('data-id');
+            const active = getActiveProfile();
+            const item = active && active.schedules ? active.schedules.find(s => s.id === id) : null;
+            if (item) {
+              playBellSound(item.soundType, item.title, 'Manual');
+              addActivityLog(item.title, item.time, item.soundType, 'Manual');
+            }
+            return;
           }
-          return;
-        }
 
-        const btnEdit = e.target.closest('.btn-edit-sched');
-        if (btnEdit) {
-          const id = btnEdit.getAttribute('data-id');
-          const active = getActiveProfile();
-          const item = active.schedules.find(s => s.id === id);
-          if (item) openScheduleModal(item);
-          return;
-        }
-
-        const btnDel = e.target.closest('.btn-delete-sched');
-        if (btnDel) {
-          const id = btnDel.getAttribute('data-id');
-          const active = getActiveProfile();
-          const item = active.schedules.find(s => s.id === id);
-          if (item && confirm(`Hapus jadwal "${item.title}" (${item.time})?`)) {
-            active.schedules = active.schedules.filter(s => s.id !== id);
-            saveState();
-            renderScheduleTable();
-            showToast('Jadwal berhasil dihapus.');
+          const btnEdit = e.target.closest('.btn-edit-sched');
+          if (btnEdit) {
+            const id = btnEdit.getAttribute('data-id');
+            const active = getActiveProfile();
+            const item = active && active.schedules ? active.schedules.find(s => s.id === id) : null;
+            if (item) openScheduleModal(item);
+            return;
           }
-        }
-      });
+
+          const btnDel = e.target.closest('.btn-delete-sched');
+          if (btnDel) {
+            const id = btnDel.getAttribute('data-id');
+            const active = getActiveProfile();
+            const item = active && active.schedules ? active.schedules.find(s => s.id === id) : null;
+            if (item && confirm(`Hapus jadwal "${item.title}" (${item.time})?`)) {
+              active.schedules = active.schedules.filter(s => s.id !== id);
+              saveState();
+              renderScheduleTable();
+              showToast('Jadwal berhasil dihapus.');
+            }
+          }
+        });
+      }
 
       // Profil Management Modal
-      document.getElementById('btn-manage-profiles').addEventListener('click', openProfileModal);
-      document.getElementById('btn-close-profile-modal').addEventListener('click', closeProfileModal);
-      document.getElementById('btn-finish-profile-modal').addEventListener('click', closeProfileModal);
+      safeBind('btn-manage-profiles', 'click', openProfileModal);
+      safeBind('btn-close-profile-modal', 'click', closeProfileModal);
+      safeBind('btn-finish-profile-modal', 'click', closeProfileModal);
 
-      document.getElementById('btn-create-profile').addEventListener('click', () => {
+      safeBind('btn-create-profile', 'click', () => {
         const nameInput = document.getElementById('new-profile-name');
+        if (!nameInput) return;
         const name = nameInput.value.trim();
         if (!name) {
           showToast('Nama profil tidak boleh kosong.', 'warning');
@@ -4830,7 +5225,7 @@
       });
 
       // Clear Logs
-      document.getElementById('btn-clear-logs').addEventListener('click', () => {
+      safeBind('btn-clear-logs', 'click', () => {
         activityLogs = [];
         saveState();
         renderActivityLogs();
@@ -4838,71 +5233,71 @@
       });
 
       // Theme Toggle (Optional fallback)
-      const btnTheme = document.getElementById('btn-theme-toggle');
-      if (btnTheme) btnTheme.addEventListener('click', toggleTheme);
+      safeBind('btn-theme-toggle', 'click', toggleTheme);
 
-      // Export JSON (Optional button if present in DOM)
-      const btnExportJson = document.getElementById('btn-export-json');
-      if (btnExportJson) btnExportJson.addEventListener('click', exportBackupJSON);
+      // Export JSON
+      safeBind('btn-export-json', 'click', exportBackupJSON);
 
       // Import JSON trigger & file input
       const btnImportJsonTrigger = document.getElementById('btn-import-json-trigger');
-      if (btnImportJsonTrigger) {
-        btnImportJsonTrigger.addEventListener('click', () => {
-          const fileInput = document.getElementById('file-import-json');
-          if (fileInput) fileInput.click();
-        });
-      }
       const fileImportJson = document.getElementById('file-import-json');
-      if (fileImportJson) fileImportJson.addEventListener('change', importBackupJSON);
+      if (btnImportJsonTrigger && fileImportJson) {
+        btnImportJsonTrigger.addEventListener('click', () => fileImportJson.click());
+        fileImportJson.addEventListener('change', importBackupJSON);
+      } else if (fileImportJson) {
+        fileImportJson.addEventListener('change', importBackupJSON);
+      }
 
       // Download Standalone HTML Single File
-      const btnDownloadHtml = document.getElementById('btn-download-html');
-      if (btnDownloadHtml) btnDownloadHtml.addEventListener('click', downloadSingleHTML);
+      safeBind('btn-download-html', 'click', downloadSingleHTML);
 
       // Custom Audio Upload (Dropzone + Input)
       const dropzone = document.getElementById('audio-dropzone');
       const audioInput = document.getElementById('audio-file-input');
 
-      dropzone.addEventListener('click', () => audioInput.click());
-      audioInput.addEventListener('change', (e) => {
-        if (e.target.files && e.target.files[0]) {
-          saveCustomAudio(e.target.files[0]);
-          e.target.value = '';
-        }
-      });
+      if (dropzone && audioInput) {
+        dropzone.addEventListener('click', () => audioInput.click());
+        audioInput.addEventListener('change', (e) => {
+          if (e.target.files && e.target.files[0]) {
+            saveCustomAudio(e.target.files[0]);
+            e.target.value = '';
+          }
+        });
 
-      dropzone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropzone.classList.add('dragover');
-      });
-      dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
-      dropzone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dropzone.classList.remove('dragover');
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-          saveCustomAudio(e.dataTransfer.files[0]);
-        }
-      });
+        dropzone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          dropzone.classList.add('dragover');
+        });
+        dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
+        dropzone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          dropzone.classList.remove('dragover');
+          if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            saveCustomAudio(e.dataTransfer.files[0]);
+          }
+        });
+      }
 
       // Custom Audio List Play & Delete
       const audioList = document.getElementById('custom-audio-list');
-      audioList.addEventListener('click', (e) => {
-        const btnPlay = e.target.closest('.btn-play-custom');
-        if (btnPlay) {
-          const id = btnPlay.getAttribute('data-id');
-          playCustomAudioById(id);
-          return;
-        }
-
-        const btnDel = e.target.closest('.btn-del-custom');
-        if (btnDel) {
-          const id = btnDel.getAttribute('data-id');
-          if (confirm('Hapus file audio kustom ini dari penyimpanan browser?')) {
-            deleteCustomAudio(id);
+      if (audioList) {
+        audioList.addEventListener('click', (e) => {
+          const btnPlay = e.target.closest('.btn-play-custom');
+          if (btnPlay) {
+            const id = btnPlay.getAttribute('data-id');
+            playCustomAudioById(id);
+            return;
           }
-        }
-      });
+
+          const btnDel = e.target.closest('.btn-del-custom');
+          if (btnDel) {
+            const id = btnDel.getAttribute('data-id');
+            if (confirm('Hapus file audio kustom ini dari penyimpanan browser?')) {
+              deleteCustomAudio(id);
+            }
+          }
+        });
+      }
 
       // Resinkronisasi waktu ketika tab browser aktif kembali
       document.addEventListener('visibilitychange', () => {
@@ -4952,14 +5347,26 @@
       const title = document.getElementById('modal-schedule-title');
       const form = document.getElementById('form-schedule');
 
-      updateSoundSelectOptions();
+      updateSoundSelectOptions(item ? item.soundType : null);
 
       if (item) {
         title.textContent = 'Edit Jadwal Bel';
         document.getElementById('sched-id').value = item.id;
         document.getElementById('sched-time').value = item.time;
         document.getElementById('sched-title').value = item.title;
-        document.getElementById('sched-sound').value = item.soundType;
+        const soundSelect = document.getElementById('sched-sound');
+        if (soundSelect) {
+          soundSelect.value = item.soundType;
+          if (soundSelect.value !== item.soundType) {
+            const opt = document.createElement('option');
+            opt.value = item.soundType;
+            opt.textContent = getSoundLabel(item.soundType);
+            const customGroup = document.getElementById('optgroup-custom-sounds');
+            if (customGroup) customGroup.appendChild(opt);
+            else soundSelect.appendChild(opt);
+            soundSelect.value = item.soundType;
+          }
+        }
         document.getElementById('sched-enabled').checked = item.enabled;
 
         // Set day chips
@@ -8169,6 +8576,326 @@ HotKey=0
     }
 
 
+    // =========================================================================
+    // FITUR AUTO SHUTDOWN JIKA JADWAL SELESAI (VERSI 4.0.1)
+    // =========================================================================
+    const STORAGE_KEY_AUTOSHUTDOWN_ENABLED = 'moilong_autoshutdown_enabled';
+    const STORAGE_KEY_AUTOSHUTDOWN_DELAY = 'moilong_autoshutdown_delay_sec';
+    const STORAGE_KEY_AUTOSHUTDOWN_ACTION = 'moilong_autoshutdown_action';
+
+    let autoShutdownTimerId = null;
+    let autoShutdownCountdownRemaining = 60;
+    let autoShutdownAlreadyTriggeredDate = null; // Mencegah pemicuan ganda pada tanggal yang sama jika dibatalkan
+
+    function isAutoShutdownEnabled() {
+      return localStorage.getItem(STORAGE_KEY_AUTOSHUTDOWN_ENABLED) === 'true';
+    }
+
+    function getAutoShutdownDelaySec() {
+      const val = parseInt(localStorage.getItem(STORAGE_KEY_AUTOSHUTDOWN_DELAY) || '300', 10);
+      return isNaN(val) || val < 10 ? 300 : val;
+    }
+
+    function getAutoShutdownAction() {
+      return localStorage.getItem(STORAGE_KEY_AUTOSHUTDOWN_ACTION) || 'close_and_script';
+    }
+
+    function initAutoShutdownUI() {
+      const enabled = isAutoShutdownEnabled();
+      const delay = getAutoShutdownDelaySec();
+      const action = getAutoShutdownAction();
+
+      // Update toggle checkbox di modal
+      const toggleEl = document.getElementById('toggle-auto-shutdown');
+      const labelToggle = document.getElementById('label-toggle-autoshutdown');
+      const sliderEl = document.getElementById('slider-auto-shutdown');
+      const knobEl = document.getElementById('knob-auto-shutdown');
+      const statusText = document.getElementById('modal-autoshutdown-status-text');
+      const summaryText = document.getElementById('modal-autoshutdown-summary');
+
+      if (toggleEl) toggleEl.checked = enabled;
+      if (labelToggle) {
+        labelToggle.textContent = enabled ? 'ON' : 'OFF';
+        labelToggle.style.color = enabled ? '#10b981' : 'var(--text-muted)';
+      }
+      if (sliderEl) {
+        sliderEl.style.backgroundColor = enabled ? '#10b981' : '#94a3b8';
+      }
+      if (knobEl) {
+        knobEl.style.transform = enabled ? 'translateX(24px)' : 'translateX(0)';
+      }
+      if (statusText) {
+        statusText.innerHTML = enabled 
+          ? '<span style="color:#10b981; font-weight:700;">Aktif (ON)</span> - PC/Aplikasi akan otomatis dimatikan setelah jadwal berakhir.'
+          : 'Status saat ini: <span style="font-weight:700;">Tidak Aktif (OFF)</span>';
+      }
+      if (summaryText) {
+        summaryText.textContent = enabled 
+          ? `Auto Shutdown: Aktif (${Math.round(delay/60)} menit pasca bel)`
+          : 'Auto Shutdown: Non-aktif';
+      }
+
+      // Update dropdowns
+      const delaySelect = document.getElementById('select-shutdown-delay');
+      if (delaySelect) delaySelect.value = delay.toString();
+
+      const actionSelect = document.getElementById('select-shutdown-action');
+      if (actionSelect) actionSelect.value = action;
+
+      // Update badge di menu drawer sebelah kanan
+      const badgeEl = document.getElementById('rmi-autoshutdown-badge');
+      if (badgeEl) {
+        if (enabled) {
+          badgeEl.textContent = 'ON';
+          badgeEl.className = 'rmi-badge badge-on';
+        } else {
+          badgeEl.textContent = 'OFF';
+          badgeEl.className = 'rmi-badge badge-off';
+        }
+      }
+    }
+
+    function openAutoShutdownModal() {
+      initAutoShutdownUI();
+      const modal = document.getElementById('modal-auto-shutdown');
+      if (modal) modal.classList.add('active');
+    }
+
+    function closeAutoShutdownModal() {
+      const modal = document.getElementById('modal-auto-shutdown');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function toggleAutoShutdownState(checked) {
+      localStorage.setItem(STORAGE_KEY_AUTOSHUTDOWN_ENABLED, checked ? 'true' : 'false');
+      initAutoShutdownUI();
+      if (checked) {
+        showToast('Auto Shutdown DIAKTIFKAN. Komputer/Aplikasi akan otomatis mati setelah seluruh jadwal hari ini tuntas.', 'success');
+      } else {
+        cancelAutoShutdownCountdown();
+        showToast('Auto Shutdown DINONAKTIFKAN.', 'info');
+      }
+    }
+
+    function saveAutoShutdownDelay(val) {
+      localStorage.setItem(STORAGE_KEY_AUTOSHUTDOWN_DELAY, val);
+      initAutoShutdownUI();
+      showToast(`Jeda waktu Auto Shutdown disimpan: ${Math.round(parseInt(val, 10)/60)} menit.`, 'success');
+    }
+
+    function saveAutoShutdownAction(val) {
+      localStorage.setItem(STORAGE_KEY_AUTOSHUTDOWN_ACTION, val);
+      initAutoShutdownUI();
+      showToast('Mode aksi Auto Shutdown berhasil diperbarui.', 'success');
+    }
+
+    // Pengecekan Auto Shutdown yang dipanggil setiap tick saat seluruh jadwal selesai
+    function checkAutoShutdownCondition(now, todaySchedules, currentSecondsNow) {
+      if (!isAutoShutdownEnabled()) return;
+      if (!todaySchedules || todaySchedules.length === 0) return;
+
+      const todayStr = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`;
+      if (autoShutdownAlreadyTriggeredDate === todayStr) {
+        return; // Sudah pernah dipicu hari ini dan dibatalkan atau diproses
+      }
+
+      // Cari jadwal bel terakhir hari ini
+      const lastSchedule = todaySchedules[todaySchedules.length - 1];
+      if (!lastSchedule) return;
+
+      const delaySec = getAutoShutdownDelaySec();
+      const shutdownTriggerSec = lastSchedule.totalSec + delaySec;
+
+      // Jika waktu sekarang telah melampaui waktu jadwal terakhir + jeda delay
+      if (currentSecondsNow >= shutdownTriggerSec) {
+        triggerAutoShutdownCountdown(todayStr);
+      }
+    }
+
+    function triggerAutoShutdownCountdown(todayStr) {
+      // Pastikan dialog peringatan belum terbuka
+      const modal = document.getElementById('modal-shutdown-countdown');
+      if (modal && modal.classList.contains('active')) return;
+
+      autoShutdownAlreadyTriggeredDate = todayStr;
+      autoShutdownCountdownRemaining = 60; // 60 detik hitung mundur interaktif
+
+      const counterEl = document.getElementById('shutdown-countdown-seconds');
+      if (counterEl) counterEl.textContent = '60';
+
+      if (modal) modal.classList.add('active');
+
+      // Bunyikan nada peringatan jika audio context aktif
+      try {
+        if (audioCtx && audioCtx.state === 'running') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.8);
+        }
+      } catch (e) {
+        console.warn('Audio alert error:', e);
+      }
+
+      if (autoShutdownTimerId) clearInterval(autoShutdownTimerId);
+      autoShutdownTimerId = setInterval(() => {
+        autoShutdownCountdownRemaining--;
+        if (counterEl) counterEl.textContent = String(autoShutdownCountdownRemaining);
+
+        if (autoShutdownCountdownRemaining <= 0) {
+          clearInterval(autoShutdownTimerId);
+          autoShutdownTimerId = null;
+          executeShutdownAction();
+        }
+      }, 1000);
+    }
+
+    function cancelAutoShutdownCountdown() {
+      if (autoShutdownTimerId) {
+        clearInterval(autoShutdownTimerId);
+        autoShutdownTimerId = null;
+      }
+      const modal = document.getElementById('modal-shutdown-countdown');
+      if (modal) modal.classList.remove('active');
+      showToast('Proses Auto Shutdown telah dibatalkan untuk hari ini.', 'info');
+    }
+
+    function executeShutdownImmediate() {
+      if (autoShutdownTimerId) {
+        clearInterval(autoShutdownTimerId);
+        autoShutdownTimerId = null;
+      }
+      executeShutdownAction();
+    }
+
+    function executeShutdownAction() {
+      const action = getAutoShutdownAction();
+      const modal = document.getElementById('modal-shutdown-countdown');
+      if (modal) modal.classList.remove('active');
+
+      showToast('Melaksanakan perintah shutdown sistem...', 'warning');
+
+      if (action === 'prompt_operator') {
+        alert('Jadwal Bel SMKN 1 Moilong telah selesai hari ini. Komputer dapat dimatikan oleh operator sekarang.');
+        return;
+      }
+
+      // Download trigger flag jika mode script Windows
+      if (action === 'close_and_script') {
+        try {
+          const shutdownSignalBlob = new Blob(["SHUTDOWN_SIGNAL_MOILONG\nTIMESTAMP=" + new Date().toISOString()], { type: "text/plain" });
+          const signalUrl = URL.createObjectURL(shutdownSignalBlob);
+          const a = document.createElement("a");
+          a.href = signalUrl;
+          a.download = "shutdown_command.flag";
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+            URL.revokeObjectURL(signalUrl);
+          }, 1000);
+        } catch (err) {
+          console.warn('Could not trigger flag download:', err);
+        }
+      }
+
+      // Tutup aplikasi browser
+      setTimeout(() => {
+        try {
+          window.open('', '_self', '');
+          window.close();
+        } catch (e) {
+          console.warn('Window.close blocked by browser:', e);
+        }
+        // Fallback jika window.close dicegah browser non-popup
+        document.body.innerHTML = `
+          <div style="height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#0f172a; color:#f8fafc; font-family:sans-serif; text-align:center; padding:1.5rem;">
+            <div style="font-size:4rem; margin-bottom:1rem;">🛑</div>
+            <h1 style="font-size:1.8rem; font-weight:800; margin-bottom:0.5rem; color:#ef4444;">Jadwal Selesai - Sistem Ditutup</h1>
+            <p style="font-size:1rem; color:#94a3b8; max-width:480px; margin-bottom:1.5rem;">
+              Seluruh jadwal bel sekolah SMKN 1 Moilong hari ini telah tuntas. Anda dapat menutup tab ini atau mematikan komputer operator.
+            </p>
+            <button onclick="location.reload()" style="padding:0.75rem 1.5rem; border-radius:8px; background:#2563eb; color:white; border:none; font-weight:700; cursor:pointer;">
+              🔄 Muat Ulang Aplikasi Bel
+            </button>
+          </div>
+        `;
+      }, 1200);
+    }
+
+    function testShutdownCountdownUI() {
+      closeAutoShutdownModal();
+      autoShutdownAlreadyTriggeredDate = null;
+      triggerAutoShutdownCountdown('test-' + Date.now());
+      showToast('Memulai uji coba hitung mundur Auto Shutdown (60 detik). Anda dapat membatalkannya kapan saja.', 'info');
+    }
+
+    function downloadAutoShutdownBatchScript() {
+      const batContent = `@echo off
+:: ============================================================================
+:: SMKN 1 MOILONG - SCRIPT AUTO SHUTDOWN WATCHER PC OPERATOR
+:: Versi 4.0.1
+:: ============================================================================
+title Auto Shutdown Watcher - Bel SMKN 1 Moilong
+color 0C
+echo ======================================================================
+echo    SMKN 1 MOILONG - PENGAWAS SHUTDOWN OTOMATIS PC OPERATOR
+echo    Aplikasi Bel Otomatis Sekolah v4.0.1
+echo ======================================================================
+echo.
+echo Menunggu sinyal penutupan dari aplikasi Bel Otomatis...
+echo Catatan: Komputer akan otomatis mati (shutdown) jika terdeteksi file flag
+echo          atau jadwal selesai pada sore hari.
+echo.
+echo Tekan CTRL+C jika ingin membatalkan pengawasan.
+echo ======================================================================
+echo.
+
+:LOOP
+set FLAG_FILE="%USERPROFILE%\\Downloads\\shutdown_command.flag"
+
+if exist %FLAG_FILE% (
+    echo.
+    echo [TERDETEKSI] Sinyal Shutdown dari Aplikasi Bel diterima!
+    echo Menghapus file tanda...
+    del %FLAG_FILE%
+    echo.
+    echo ======================================================================
+    echo PERINGATAN: KOMPUTER AKAN MATI (SHUTDOWN) DALAM 60 DETIK!
+    echo ======================================================================
+    shutdown.exe /s /t 60 /c "Jadwal Bel SMKN 1 Moilong Hari Ini Selesai. Komputer operator dimatikan otomatis."
+    echo Tekan tombol apa saja untuk membatalkan shutdown darurat (shutdown /a)...
+    pause >nul
+    shutdown.exe /a
+    echo Shutdown berhasil dibatalkan.
+    goto LOOP
+)
+
+timeout /t 5 >nul
+goto LOOP
+`;
+
+      const blob = new Blob([batContent], { type: 'application/x-bat;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'SMKN1_Moilong_AutoShutdown_Watcher.bat';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }, 1000);
+      showToast('Script Auto Shutdown Watcher (.bat) berhasil diunduh.', 'success');
+    }
+
+
     // Kompatibilitas fungsi terdahulu
     function checkTeacherScheduleConflict(teacher, day, start, end, targetClassId) {
       const res = validateScheduleConflict(targetClassId, teacher, '', day, start, end);
@@ -9469,7 +10196,7 @@ HotKey=0
       showToast(`Kelas "${cls.name}" telah dihapus.`, 'info');
     }
 
-    // --- 11. BOOTSTRAP INITIALIZATION (VERSI 4.0.0) ---
+    // --- 11. BOOTSTRAP INITIALIZATION (VERSI 4.0.1) ---
     async function bootstrapApp() {
       initTheme();
       loadState();
@@ -9499,6 +10226,11 @@ HotKey=0
       // Inisialisasi Tulisan Berjalan & Banner Slider 5 Foto
       loadRunningText();
       loadSliderPhotos();
+
+      // Inisialisasi Status Menu Auto Shutdown (v4.0.1)
+      if (typeof initAutoShutdownUI === 'function') {
+        initAutoShutdownUI();
+      }
 
       // Dropdown Guru & Mapel
       populateTeacherAndSubjectDropdowns();
