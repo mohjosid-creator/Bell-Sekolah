@@ -2024,6 +2024,153 @@
       animation: fadeIn 0.25s ease;
     }
 
+    /* PENGATURAN PROFIL SEKOLAH & WAKTU SISTEM */
+    .time-calib-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.32rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: rgba(37, 99, 235, 0.08);
+      color: var(--primary);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 0.5rem;
+    }
+    .time-calib-pill:hover {
+      background: rgba(37, 99, 235, 0.16);
+      transform: translateY(-1px);
+    }
+    .time-calib-pill.calibrated {
+      background: rgba(245, 158, 11, 0.12);
+      color: #d97706;
+      border-color: rgba(245, 158, 11, 0.45);
+    }
+    .tz-badge {
+      display: inline-block;
+      padding: 0.18rem 0.5rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.76rem;
+      font-weight: 800;
+      background: #10b981;
+      color: white;
+      letter-spacing: 0.04em;
+    }
+    .jenjang-selector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 0.55rem;
+      margin-bottom: 1.1rem;
+    }
+    .jenjang-card-option {
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.45rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--bg-card);
+      position: relative;
+    }
+    .jenjang-card-option:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+      transform: translateY(-1px);
+    }
+    .jenjang-card-option.active {
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.08);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+    .jenjang-badge-icon {
+      font-size: 1.45rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .jenjang-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: block;
+    }
+    .jenjang-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 0.15rem;
+    }
+    .logo-preset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+      gap: 0.6rem;
+      margin: 0.65rem 0 1rem;
+    }
+    .logo-preset-tile {
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 0.55rem 0.35rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--bg-card);
+    }
+    .logo-preset-tile:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+    .logo-preset-tile.active {
+      border-color: var(--primary);
+      background: rgba(37, 99, 235, 0.08);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+    .logo-preset-img-wrap {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 0.35rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      border-radius: 8px;
+      padding: 3px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .logo-preset-img-wrap img, .logo-preset-img-wrap svg {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .time-offset-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .time-preview-big-card {
+      background: var(--bg-card-hover);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .time-preview-digits {
+      font-family: var(--font-mono);
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
 
     /* SITE FOOTER */
     .site-footer {
@@ -2095,15 +2242,21 @@
     <header>
       <div class="brand">
         <div class="brand-icon" style="padding: 2px; background: #ffffff; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.2); width: 48px; height: 48px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-          <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
+          <img id="school-logo-display" src="logo-smkn1-moilong.jpg" alt="Logo Sekolah" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
         </div>
         <div>
           <h1 class="brand-title" id="school-title-display">SMKN 1 MOILONG</h1>
-          <p class="brand-subtitle">Sistem Bel Otomatis & Jadwal Pelajaran 15 Kelas (Jam 07:00 - 15:30 WITA • Versi 4.0.1)</p>
+          <p class="brand-subtitle" id="school-subtitle-display">Sistem Bel Otomatis & Jadwal Pelajaran 15 Kelas (Jam 07:00 - 15:30 <span class="tz-label-display">WITA</span> • Versi 4.0.1)</p>
         </div>
       </div>
 
       <div class="header-actions">
+        <button type="button" class="btn btn-outline btn-xs no-print" onclick="openSchoolProfileModal()" title="Ubah Nama Sekolah, Jenjang (SD/SMP/SMA/SMK), Logo & Footer" style="font-weight: 700; border-radius: var(--radius-sm); padding: 0.4rem 0.65rem; display: inline-flex; align-items: center; gap: 0.3rem;">
+          <span>🏫</span> <span class="hide-xs">Profil</span>
+        </button>
+        <button type="button" class="btn btn-outline btn-xs no-print" onclick="openSystemTimeModal()" title="Pengaturan Waktu Sistem, Kalibrasi Koreksi Jam & Zona Waktu" style="font-weight: 700; border-radius: var(--radius-sm); padding: 0.4rem 0.65rem; display: inline-flex; align-items: center; gap: 0.3rem;">
+          <span>⏱️</span> <span class="hide-xs">Waktu</span>
+        </button>
         <!-- Tombol Tunggal Icon Gear / Alat untuk Buka Menu Auto-Hide Sebelah Kanan -->
         <button type="button" class="btn-gear-icon-header" id="btn-header-gear" onclick="toggleRightAutohideMenu()" title="Buka Menu Alat & Pengaturan (Auto-Hide)">
           <span class="gear-anim-icon">⚙️</span>
@@ -2147,13 +2300,13 @@
       <!-- BANNER SLIDESHOW 5 FOTO (BISA DIGANTI-GANTI) -->
       <div class="banner-slider-container" id="banner-slider-container">
         <!-- LOGO & ICON PERMANEN DI POJOK KANAN ATAS FOTO SLIDE -->
-        <div class="slider-permanent-brand no-print" id="slider-permanent-brand" title="SMK Negeri 1 Moilong - Kabupaten Banggai">
+        <div class="slider-permanent-brand no-print" id="slider-permanent-brand" title="Identitas Sekolah">
           <div class="slider-brand-logo-wrap">
-            <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" class="slider-brand-logo-img" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
+            <img id="slider-brand-logo-img" src="logo-smkn1-moilong.jpg" alt="Logo Sekolah" class="slider-brand-logo-img" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
           </div>
           <div class="slider-brand-text-wrap">
-            <span class="slider-brand-main-title">SMK NEGERI 1 MOILONG</span>
-            <span class="slider-brand-sub-title">KABUPATEN BANGGAI</span>
+            <span class="slider-brand-main-title" id="slider-brand-main-title">SMK NEGERI 1 MOILONG</span>
+            <span class="slider-brand-sub-title" id="slider-brand-sub-title">KABUPATEN BANGGAI</span>
           </div>
         </div>
 
@@ -2416,6 +2569,12 @@
           </div>
         </div>
         <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="openSchoolProfileModal()" title="Ubah Nama Sekolah, Logo & Footer" style="font-weight: 700;">
+            🏫 Profil Sekolah
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" onclick="openSystemTimeModal()" title="Pengaturan Waktu Sistem, Kalibrasi Koreksi Jam & Timezone" style="font-weight: 700;">
+            ⏱️ Waktu Sistem
+          </button>
           <button type="button" class="btn btn-primary btn-sm" onclick="downloadWindowsBatchInstaller()" title="Unduh script .bat untuk pasang instan">
             ⬇️ Unduh Script Pasang (.bat)
           </button>
@@ -2433,9 +2592,17 @@
     <div class="dashboard-grid">
       <!-- CLOCK CARD -->
       <div class="card clock-card">
-        <div class="date-display" id="clock-date">Memuat Tanggal...</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem;">
+          <div class="date-display" id="clock-date" style="margin: 0;">Memuat Tanggal...</div>
+          <span class="tz-badge" id="clock-tz-badge">WITA</span>
+        </div>
         <div class="clock-digits" id="clock-digits">
           <span id="c-hh">00</span><span class="colon" id="c-colon1">:</span><span id="c-mm">00</span><span class="colon" id="c-colon2">:</span><span id="c-ss">00</span>
+        </div>
+        <div style="text-align: center; margin-bottom: 0.5rem;">
+          <div class="time-calib-pill" id="time-calib-pill" onclick="openSystemTimeModal()" title="Klik untuk kalibrasi detik jam atau mengatur zona waktu">
+            <span>⏱️ Waktu Sistem:</span> <span id="time-calib-status-text">Normal (Sinkron)</span>
+          </div>
         </div>
         
         <div class="system-status-row">
@@ -2733,11 +2900,17 @@
       <div class="footer-brand">
         <span class="footer-icon">🏫</span>
         <div>
-          <div class="footer-title">SMKN 1 MOILONG</div>
-          <div class="footer-subtitle">Sistem Bel Otomatis & Monitoring Jadwal Pelajaran (07:00 - 15:30 WITA) • 15 Rombel Terintegrasi</div>
+          <div class="footer-title" id="footer-title-display">SMKN 1 MOILONG</div>
+          <div class="footer-subtitle" id="footer-subtitle-display">Sistem Bel Otomatis & Monitoring Jadwal Pelajaran (07:00 - 15:30 <span class="tz-label-display">WITA</span>) • Terintegrasi</div>
         </div>
       </div>
       <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <button type="button" class="btn btn-outline btn-xs" onclick="openSchoolProfileModal()" style="font-weight: 600;">
+          🏫 Profil Sekolah
+        </button>
+        <button type="button" class="btn btn-outline btn-xs" onclick="openSystemTimeModal()" style="font-weight: 600;">
+          ⏱️ Waktu Sistem
+        </button>
         <button type="button" class="btn btn-outline btn-xs" onclick="openAutorunWindowsModal()" style="font-weight: 600;">
           🚀 Setup Autorun Windows
         </button>
@@ -3541,7 +3714,396 @@
   </div>
 
 
-  <!-- MODAL: KELOLA MASTER DATA (GURU, MATA PELAJARAN, KELAS) -->
+  <!-- MODAL: PENGATURAN PROFIL & IDENTITAS SEKOLAH (SD/MI, SMP/MTS, SMA/MA, SMK) -->
+  <div class="modal-backdrop" id="modal-school-profile">
+    <div class="modal" style="max-width: 780px; max-height: 92vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.45rem;">🏫</span>
+          <div>
+            <h3 style="font-size: 1.15rem; margin: 0; font-weight: 800;">
+              Pengaturan Profil & Identitas Sekolah
+            </h3>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.15rem 0 0;">
+              Sesuaikan Nama Sekolah, Taraf Jenjang (SD/MI, SMP/MTs, SMA/MA, SMK), Logo dan Teks Footer
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeSchoolProfileModal()">✕</button>
+      </div>
+
+      <div class="modal-body" style="overflow-y: auto; padding: 1.25rem;">
+        <!-- Pilihan Taraf / Jenjang Sekolah (Template Cepat) -->
+        <label style="font-weight: 800; font-size: 0.85rem; margin-bottom: 0.45rem; display: block; color: var(--text-main);">
+          🎓 Pilih Taraf / Jenjang Sekolah (Template Cepat):
+        </label>
+        <div class="jenjang-selector-grid">
+          <div class="jenjang-card-option" id="jenjang-opt-sd" onclick="selectJenjangPreset('SD')">
+            <span class="jenjang-badge-icon">🎒</span>
+            <span class="jenjang-title">SD / MI</span>
+            <span class="jenjang-sub">Sekolah Dasar</span>
+          </div>
+          <div class="jenjang-card-option" id="jenjang-opt-smp" onclick="selectJenjangPreset('SMP')">
+            <span class="jenjang-badge-icon">📘</span>
+            <span class="jenjang-title">SMP / MTs</span>
+            <span class="jenjang-sub">Menengah Pertama</span>
+          </div>
+          <div class="jenjang-card-option" id="jenjang-opt-sma" onclick="selectJenjangPreset('SMA')">
+            <span class="jenjang-badge-icon">🎓</span>
+            <span class="jenjang-title">SMA / MA</span>
+            <span class="jenjang-sub">Menengah Atas</span>
+          </div>
+          <div class="jenjang-card-option active" id="jenjang-opt-smk" onclick="selectJenjangPreset('SMK')">
+            <span class="jenjang-badge-icon">⚙️</span>
+            <span class="jenjang-title">SMK / MAK</span>
+            <span class="jenjang-sub">Kejuruan (Vokasi)</span>
+          </div>
+          <div class="jenjang-card-option" id="jenjang-opt-custom" onclick="selectJenjangPreset('CUSTOM')">
+            <span class="jenjang-badge-icon">🏛️</span>
+            <span class="jenjang-title">Kustom</span>
+            <span class="jenjang-sub">Lembaga Lainnya</span>
+          </div>
+        </div>
+
+        <!-- IDENTITAS NAMA SEKOLAH -->
+        <div style="background: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.1rem;">
+          <div style="font-weight: 800; font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.35rem;">
+            <span>📋</span> Identitas & Nama Sekolah
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem; margin-bottom: 0.75rem;">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" for="profile-input-fullname" style="font-weight: 700; font-size: 0.82rem;">
+                Nama Lengkap Sekolah / Madrasah: <span style="color: var(--danger);">*</span>
+              </label>
+              <input type="text" id="profile-input-fullname" class="form-control" placeholder="Contoh: SMK NEGERI 1 MOILONG" value="SMK NEGERI 1 MOILONG" style="width: 100%;">
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" for="profile-input-shortname" style="font-weight: 700; font-size: 0.82rem;">
+                Nama Singkat / Inisial (Header Brand): <span style="color: var(--danger);">*</span>
+              </label>
+              <input type="text" id="profile-input-shortname" class="form-control" placeholder="Contoh: SMKN 1 MOILONG" value="SMKN 1 MOILONG" style="width: 100%;">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem;">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" for="profile-input-region" style="font-weight: 700; font-size: 0.82rem;">
+                Wilayah / Kabupaten / Kota:
+              </label>
+              <input type="text" id="profile-input-region" class="form-control" placeholder="Contoh: KABUPATEN BANGGAI" value="KABUPATEN BANGGAI" style="width: 100%;">
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" for="profile-input-subtitle" style="font-weight: 700; font-size: 0.82rem;">
+                Deskripsi Subtitle Header Aplikasi:
+              </label>
+              <input type="text" id="profile-input-subtitle" class="form-control" placeholder="Sistem Bel Otomatis & Jadwal Pelajaran" value="Sistem Bel Otomatis & Jadwal Pelajaran (Versi 4.0.1)" style="width: 100%;">
+            </div>
+          </div>
+        </div>
+
+        <!-- PENGATURAN LOGO SEKOLAH -->
+        <div style="background: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.1rem;">
+          <div style="font-weight: 800; font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.65rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+            <span style="display: flex; align-items: center; gap: 0.35rem;">
+              <span>🖼️</span> Pengaturan Logo Sekolah
+            </span>
+            <button type="button" class="btn btn-outline btn-xs" onclick="resetProfileLogoToDefault()" title="Kembalikan ke Logo Default SMKN 1 Moilong">
+              🔄 Reset Logo Default
+            </button>
+          </div>
+
+          <!-- Preview & Tipe Pilihan Logo -->
+          <div style="display: flex; gap: 1rem; align-items: flex-start; flex-wrap: wrap;">
+            <!-- Box Preview Logo -->
+            <div style="text-align: center; background: white; border: 2px dashed var(--border-color); border-radius: var(--radius-md); padding: 0.75rem; width: 110px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+              <div style="width: 76px; height: 76px; margin: 0 auto 0.4rem; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                <img id="profile-logo-preview" src="logo-smkn1-moilong.jpg" alt="Preview Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
+              </div>
+              <span style="font-size: 0.68rem; font-weight: 700; color: #475569; display: block;" id="profile-logo-preview-label">Logo Aktif</span>
+            </div>
+
+            <!-- Pilihan Metode Logo -->
+            <div style="flex: 1; min-width: 260px;">
+              <!-- Tab Pilihan Sumber Logo -->
+              <div style="display: flex; gap: 0.4rem; margin-bottom: 0.65rem; flex-wrap: wrap;">
+                <button type="button" class="btn btn-sm btn-outline active" id="btn-logo-src-upload" onclick="switchLogoSourceTab('upload')" style="font-weight: 700;">
+                  📁 Unggah File
+                </button>
+                <button type="button" class="btn btn-sm btn-outline" id="btn-logo-src-preset" onclick="switchLogoSourceTab('preset')" style="font-weight: 700;">
+                  🌟 Preset Logo Resmi
+                </button>
+                <button type="button" class="btn btn-sm btn-outline" id="btn-logo-src-url" onclick="switchLogoSourceTab('url')" style="font-weight: 700;">
+                  🔗 Tautan / URL Web
+                </button>
+              </div>
+
+              <!-- Pane 1: Unggah File Komputer -->
+              <div id="pane-logo-src-upload">
+                <input type="file" id="profile-input-file" accept="image/png,image/jpeg,image/webp,image/svg+xml" onchange="handleSchoolLogoUpload(this)" style="display: none;">
+                <div onclick="document.getElementById('profile-input-file').click()" style="border: 2px dashed var(--primary); border-radius: var(--radius-sm); padding: 0.85rem; text-align: center; cursor: pointer; background: rgba(37, 99, 235, 0.04); transition: 0.2s;">
+                  <span style="font-size: 1.35rem; display: block; margin-bottom: 0.2rem;">📤</span>
+                  <span style="font-weight: 700; font-size: 0.82rem; color: var(--primary); display: block;">Klik di sini untuk Unggah File Logo Sekolah</span>
+                  <span style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-top: 0.15rem;">Mendukung PNG, JPG, JPEG, WebP, atau SVG (Maks. 2 MB)</span>
+                </div>
+              </div>
+
+              <!-- Pane 2: Preset Logo Resmi -->
+              <div id="pane-logo-src-preset" style="display: none;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); font-weight: 600;">Pilih salah satu logo standar nasional:</span>
+                <div class="logo-preset-grid">
+                  <div class="logo-preset-tile" id="preset-logo-tutwuri" onclick="selectLogoPreset('tutwuri')" title="Logo Tut Wuri Handayani (Kemendikbud)">
+                    <div class="logo-preset-img-wrap" id="wrap-preset-tutwuri"></div>
+                    <span style="font-size: 0.72rem; font-weight: 700;">Tut Wuri</span>
+                    <span style="font-size: 0.65rem; color: var(--text-muted); display: block;">Kemendikbud</span>
+                  </div>
+                  <div class="logo-preset-tile" id="preset-logo-kemenag" onclick="selectLogoPreset('kemenag')" title="Logo Ikhlas Beramal (Kementerian Agama)">
+                    <div class="logo-preset-img-wrap" id="wrap-preset-kemenag"></div>
+                    <span style="font-size: 0.72rem; font-weight: 700;">Kemenag</span>
+                    <span style="font-size: 0.65rem; color: var(--text-muted); display: block;">MI / MTs / MA</span>
+                  </div>
+                  <div class="logo-preset-tile" id="preset-logo-smkbisa" onclick="selectLogoPreset('smkbisa')" title="Logo Vokasi SMK Bisa Hebat">
+                    <div class="logo-preset-img-wrap" id="wrap-preset-smkbisa"></div>
+                    <span style="font-size: 0.72rem; font-weight: 700;">SMK Bisa</span>
+                    <span style="font-size: 0.65rem; color: var(--text-muted); display: block;">Vokasi Hebat</span>
+                  </div>
+                  <div class="logo-preset-tile active" id="preset-logo-default" onclick="selectLogoPreset('default')" title="Logo Bawaan SMKN 1 Moilong">
+                    <div class="logo-preset-img-wrap">
+                      <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
+                    </div>
+                    <span style="font-size: 0.72rem; font-weight: 700;">SMKN 1</span>
+                    <span style="font-size: 0.65rem; color: var(--text-muted); display: block;">Default Asli</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pane 3: Masukkan URL Gambar -->
+              <div id="pane-logo-src-url" style="display: none;">
+                <div class="form-group" style="margin: 0;">
+                  <label class="form-label" for="profile-input-url" style="font-weight: 700; font-size: 0.82rem;">
+                    URL / Tautan Gambar Logo Online:
+                  </label>
+                  <div style="display: flex; gap: 0.4rem;">
+                    <input type="url" id="profile-input-url" class="form-control" placeholder="https://example.com/logo-sekolah.png" style="flex: 1;">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="applyLogoFromUrlInput()">
+                      🔍 Terapkan
+                    </button>
+                  </div>
+                  <span style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-top: 0.3rem;">
+                    Pastikan tautan dapat diakses secara publik (Direct Image URL).
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PENGATURAN TEKS FOOTER -->
+        <div style="background: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem;">
+          <div style="font-weight: 800; font-size: 0.88rem; color: var(--text-main); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.35rem;">
+            <span>📜</span> Pengaturan Teks Footer Halaman
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.75rem; margin-bottom: 0.75rem;">
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" for="profile-input-footer-title" style="font-weight: 700; font-size: 0.82rem;">
+                Judul Sekolah di Footer:
+              </label>
+              <input type="text" id="profile-input-footer-title" class="form-control" placeholder="SMKN 1 MOILONG" value="SMKN 1 MOILONG" style="width: 100%;">
+            </div>
+
+            <div class="form-group" style="margin: 0;">
+              <label class="form-label" for="profile-input-footer-copyright" style="font-weight: 700; font-size: 0.82rem;">
+                Teks Hak Cipta / Copyright:
+              </label>
+              <input type="text" id="profile-input-footer-copyright" class="form-control" placeholder="TIM IT @2026" value="TIM IT SMKN 1 MOILONG @Asiacomptech 2026" style="width: 100%;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin: 0;">
+            <label class="form-label" for="profile-input-footer-sub" style="font-weight: 700; font-size: 0.82rem;">
+              Keterangan / Subtitle Footer:
+            </label>
+            <input type="text" id="profile-input-footer-sub" class="form-control" placeholder="Sistem Bel Otomatis & Monitoring Jadwal Pelajaran" value="Sistem Bel Otomatis & Monitoring Jadwal Pelajaran Terintegrasi" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <button type="button" class="btn btn-outline btn-sm" onclick="resetSchoolProfileToFactory()" style="font-weight: 700; color: #dc2626; border-color: rgba(220,38,38,0.35);">
+          🔄 Reset Default SMKN 1 Moilong
+        </button>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeSchoolProfileModal()">Batal</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveSchoolProfileFromModal()" style="font-weight: 800;">
+            💾 Simpan & Terapkan Profil Sekolah
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL: PENGATURAN WAKTU SISTEM & KALIBRASI JAM -->
+  <div class="modal-backdrop" id="modal-system-time">
+    <div class="modal" style="max-width: 680px; max-height: 92vh; display: flex; flex-direction: column;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <span style="font-size: 1.45rem;">⏱️</span>
+          <div>
+            <h3 style="font-size: 1.15rem; margin: 0; font-weight: 800;">
+              Pengaturan Waktu Sistem & Kalibrasi Jam
+            </h3>
+            <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0.15rem 0 0;">
+              Koreksi jika jam komputer operator tidak pas, atur selisih detik/menit, dan tentukan zona waktu
+            </p>
+          </div>
+        </div>
+        <button type="button" class="btn-icon" onclick="closeSystemTimeModal()">✕</button>
+      </div>
+
+      <div class="modal-body" style="overflow-y: auto; padding: 1.25rem;">
+        <!-- KARTU PREVIEW WAKTU SISTEM TERKALIBRASI -->
+        <div class="time-preview-big-card">
+          <div>
+            <div style="font-size: 0.75rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+              Waktu Sistem Berjalan (Terkalibrasi):
+            </div>
+            <div class="time-preview-digits" id="modal-time-preview-digits">
+              00:00:00 <span style="font-size: 1.15rem; color: var(--text-muted);" id="modal-time-preview-tz">WITA</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem;" id="modal-time-raw-comparison">
+              Waktu Perangkat Lokal: 00:00:00 (Selisih: 0 detik)
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <span class="badge" id="modal-time-status-badge" style="background: #10b981; color: white; padding: 0.35rem 0.75rem; font-size: 0.82rem; font-weight: 800; border-radius: var(--radius-sm);">
+              ✅ Jam Normal (Sinkron)
+            </span>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.45rem;" id="modal-time-offset-summary">
+              Offset: +0 detik
+            </div>
+          </div>
+        </div>
+
+        <!-- 1. PENGATURAN ZONA WAKTU (TIMEZONE) -->
+        <div style="background: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.1rem;">
+          <label style="font-weight: 800; font-size: 0.85rem; margin-bottom: 0.5rem; display: block; color: var(--text-main);">
+            🌏 Pilih Zona Waktu Operasional Sekolah:
+          </label>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.5rem;">
+            <label style="border: 2px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; background: var(--bg-card); font-size: 0.82rem; font-weight: 700;" id="lbl-tz-wita">
+              <input type="radio" name="radio_timezone" value="WITA" onchange="onTimezoneChange(this.value)">
+              <span>🌴 WITA (UTC+8)</span>
+            </label>
+            <label style="border: 2px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; background: var(--bg-card); font-size: 0.82rem; font-weight: 700;" id="lbl-tz-wib">
+              <input type="radio" name="radio_timezone" value="WIB" onchange="onTimezoneChange(this.value)">
+              <span>🏛️ WIB (UTC+7)</span>
+            </label>
+            <label style="border: 2px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; background: var(--bg-card); font-size: 0.82rem; font-weight: 700;" id="lbl-tz-wit">
+              <input type="radio" name="radio_timezone" value="WIT" onchange="onTimezoneChange(this.value)">
+              <span>🌅 WIT (UTC+9)</span>
+            </label>
+            <label style="border: 2px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.6rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; background: var(--bg-card); font-size: 0.82rem; font-weight: 700;" id="lbl-tz-auto">
+              <input type="radio" name="radio_timezone" value="AUTO" onchange="onTimezoneChange(this.value)">
+              <span>💻 Perangkat Lokal</span>
+            </label>
+          </div>
+          <span style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-top: 0.4rem;">
+            * Default SMKN 1 Moilong (Kab. Banggai, Sulteng) menggunakan zona waktu WITA (Waktu Indonesia Tengah).
+          </span>
+        </div>
+
+        <!-- 2. KOREKSI / KALIBRASI DETIK & MENIT (MANUAL OFFSET) -->
+        <div style="background: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.1rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem;">
+            <label style="font-weight: 800; font-size: 0.85rem; color: var(--text-main); margin: 0;">
+              ⚙️ Koreksi Waktu Jam (Offset Detik):
+            </label>
+            <span style="font-size: 0.76rem; font-weight: 700; color: var(--primary);" id="calib-offset-display-label">
+              Offset Saat Ini: 0 Detik
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.65rem;">
+            <input type="number" id="input-time-offset-seconds" class="form-control" value="0" step="1" oninput="onManualOffsetInput(this.value)" style="width: 140px; font-weight: 800; font-family: var(--font-mono); font-size: 1rem; text-align: center;">
+            <span style="font-size: 0.82rem; font-weight: 600;">Detik</span>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">(Nilai positif = memajukan jam, negatif = memundurkan jam)</span>
+          </div>
+
+          <!-- Tombol Penyesuaian Cepat Detik & Menit -->
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.35rem;">
+            Tombol Pintas Koreksi Cepat:
+          </div>
+          <div class="time-offset-btn-group">
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(300)" style="color: #10b981; font-weight: 700;">+5 Menit</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(60)" style="color: #10b981; font-weight: 700;">+1 Menit</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(30)" style="color: #10b981; font-weight: 700;">+30 Detik</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(10)" style="color: #10b981; font-weight: 700;">+10 Detik</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(2)" style="color: #10b981; font-weight: 700;">+2 Detik</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="resetTimeOffsetToZero()" style="font-weight: 800; border-color: var(--primary); color: var(--primary);">0 (Reset)</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(-2)" style="color: #ef4444; font-weight: 700;">-2 Detik</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(-10)" style="color: #ef4444; font-weight: 700;">-10 Detik</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(-30)" style="color: #ef4444; font-weight: 700;">-30 Detik</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(-60)" style="color: #ef4444; font-weight: 700;">-1 Menit</button>
+            <button type="button" class="btn btn-outline btn-xs" onclick="adjustTimeOffsetSeconds(-300)" style="color: #ef4444; font-weight: 700;">-5 Menit</button>
+          </div>
+        </div>
+
+        <!-- 3. SINKRONISASI INSTAN DENGAN JAM DINDING SEKOLAH -->
+        <div style="background: var(--bg-card-hover); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; margin-bottom: 1.1rem;">
+          <div style="font-weight: 800; font-size: 0.85rem; color: var(--text-main); margin-bottom: 0.35rem;">
+            🎯 Samakan Otomatis dengan Jam Dinding / Acuan Sekolah:
+          </div>
+          <p style="font-size: 0.78rem; color: var(--text-muted); margin: 0 0 0.65rem; line-height: 1.45;">
+            Jika di ruang guru / TU ada jam dinding acuan, masukkan waktu yang tertera pada jam dinding saat ini. Sistem akan otomatis menghitung selisih dan menerapkan kalibrasi detik secara instan:
+          </p>
+          <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+            <input type="time" step="1" id="input-wall-clock-target" class="form-control" style="width: 150px; font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="syncWithWallClockInput()" style="font-weight: 700;">
+              🎯 Terapkan Jam Dinding Ini
+            </button>
+            <button type="button" class="btn btn-outline btn-sm" onclick="fetchInternetNTPTime()" id="btn-internet-sync" style="font-weight: 700;" title="Sinkronkan dengan jam server internet (WorldTimeAPI)">
+              🌐 Sinkronkan Jam Internet (NTP)
+            </button>
+          </div>
+          <div id="internet-sync-result" style="font-size: 0.75rem; margin-top: 0.4rem; display: none;"></div>
+        </div>
+
+        <!-- 4. MODE SIMULASI / FREEZE WAKTU UNTUK PENGUJIAN -->
+        <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.85rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+            <div>
+              <label style="display: flex; align-items: center; gap: 0.45rem; font-weight: 700; font-size: 0.82rem; cursor: pointer;">
+                <input type="checkbox" id="check-freeze-time" onchange="onToggleFreezeTime(this.checked)">
+                <span>❄️ Kunci / Bekukan Jam pada Waktu Tertentu (Mode Tes Jadwal Bel)</span>
+              </label>
+              <span style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-top: 0.15rem;">
+                Gunakan fitur ini jika Anda ingin menguji respon sistem dan bel tepat pada jam tertentu tanpa menunggu jam tersebut tiba.
+              </span>
+            </div>
+            <input type="time" step="1" id="input-freeze-time-val" class="form-control" value="06:59:55" style="width: 130px; font-family: var(--font-mono); font-size: 0.85rem;" disabled>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+        <button type="button" class="btn btn-outline btn-sm" onclick="resetAllTimeToHardwareDefault()" style="font-weight: 700; color: #dc2626; border-color: rgba(220,38,38,0.35);">
+          🔄 Reset ke Jam Asli Komputer (Offset 0)
+        </button>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn btn-outline btn-sm" onclick="closeSystemTimeModal()">Batal</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="saveSystemTimeFromModal()" style="font-weight: 800;">
+            💾 Simpan & Terapkan Waktu Sistem
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <div class="modal-backdrop" id="modal-master-data">
     <div class="modal" style="max-width: 900px; max-height: 92vh; display: flex; flex-direction: column;">
       <div class="modal-header">
@@ -3823,11 +4385,11 @@
     <div class="right-panel-header">
       <div style="display: flex; align-items: center; gap: 0.65rem;">
         <div style="width: 38px; height: 38px; border-radius: 10px; overflow: hidden; background: #ffffff; padding: 2px; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center;">
-          <img src="logo-smkn1-moilong.jpg" alt="Logo SMKN 1 Moilong" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
+          <img id="drawer-brand-logo-img" src="logo-smkn1-moilong.jpg" alt="Logo Sekolah" style="width: 100%; height: 100%; object-fit: contain;" onerror="this.onerror=null; if(this.src.indexOf('.jpg')!==-1){this.src='logo-smkn1-moilong.svg';}else{this.src='icon-512.png';}">
         </div>
         <div>
-          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main);">Menu & Alat Sekolah</h4>
-          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;">SMKN 1 MOILONG • KAB. BANGGAI • VERSI 4.0.1</span>
+          <h4 style="margin: 0; font-size: 0.95rem; font-weight: 800; color: var(--text-main);" id="drawer-school-name">SMKN 1 MOILONG</h4>
+          <span style="font-size: 0.72rem; color: var(--text-muted); font-weight: 600;" id="drawer-school-info">SMKN 1 MOILONG • KAB. BANGGAI • VERSI 4.0.1</span>
         </div>
       </div>
       <button type="button" class="btn-icon btn-sm" onclick="toggleRightAutohideMenu(false)" title="Tutup Menu">✕</button>
@@ -3837,6 +4399,29 @@
     <button type="button" class="btn btn-primary" onclick="openAddScheduleTeacherSubjectModal(); toggleRightAutohideMenu(false);" style="width: 100%; justify-content: center; padding: 0.65rem; font-weight: 700; box-shadow: 0 4px 14px rgba(37,99,235,0.3); border-radius: var(--radius-sm);">
       ➕ Tambah Jadwal Guru & Mapel
     </button>
+
+    <!-- Kategori 0: Profil Sekolah & Waktu Sistem -->
+    <div class="right-panel-section">
+      <div class="right-section-title">🏫 PROFIL SEKOLAH & WAKTU SISTEM</div>
+      <div class="right-menu-list">
+        <button type="button" class="right-menu-item" onclick="openSchoolProfileModal(); toggleRightAutohideMenu(false);" title="Ubah Nama Sekolah, Taraf Jenjang (SD/MI, SMP/MTs, SMA/MA, SMK), Logo dan Footer">
+          <span class="rmi-icon">🏫</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Profil & Logo Sekolah</span>
+            <span class="rmi-sub" id="rmi-profile-sub">Jenjang SD/SMP/SMA/SMK & Footer</span>
+          </div>
+          <span class="rmi-badge" id="rmi-school-jenjang-badge" style="background: var(--primary); color: white;">SMK</span>
+        </button>
+        <button type="button" class="right-menu-item" onclick="openSystemTimeModal(); toggleRightAutohideMenu(false);" title="Pengaturan Waktu Sistem, Kalibrasi Jam, Detik & Zona Waktu">
+          <span class="rmi-icon">⏱️</span>
+          <div class="rmi-body">
+            <span class="rmi-title">Pengaturan Waktu Sistem</span>
+            <span class="rmi-sub" id="rmi-time-status-sub">Koreksi Jam, Detik & Zona Waktu</span>
+          </div>
+          <span class="rmi-badge" id="rmi-timezone-badge" style="background: #10b981; color: white;">WITA</span>
+        </button>
+      </div>
+    </div>
 
     <!-- Kategori 1: Master Data (Guru, Mapel, Kelas) -->
     <div class="right-panel-section">
@@ -4615,12 +5200,17 @@
     const MONTHS_ID = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
     function onClockTick() {
-      const now = new Date();
+      const now = typeof getSystemDate === 'function' ? getSystemDate() : new Date();
       const h = String(now.getHours()).padStart(2, '0');
       const m = String(now.getMinutes()).padStart(2, '0');
       const s = String(now.getSeconds()).padStart(2, '0');
       const timeStr = `${h}:${m}`;
       const dayIdx = now.getDay();
+
+      // Update Live Preview jika modal pengaturan waktu sistem sedang terbuka
+      if (typeof updateSystemTimeModalLivePreview === 'function') {
+        updateSystemTimeModalLivePreview(now);
+      }
 
       // Update Digital Clock UI
       const hhEl = document.getElementById('c-hh');
@@ -10196,9 +10786,817 @@ goto LOOP
       showToast(`Kelas "${cls.name}" telah dihapus.`, 'info');
     }
 
+    // --- 12. PENGATURAN PROFIL SEKOLAH (SD/MI, SMP/MTS, SMA/MA, SMK) & WAKTU SISTEM ---
+    const STORAGE_KEY_SCHOOL_PROFILE = 'bell_school_profile_v4';
+    const STORAGE_KEY_SYSTEM_TIME = 'bell_system_time_config_v4';
+
+    // SVG Presets untuk Logo Pendidikan Nasional (Offline & Ringan)
+    const SVG_PRESET_TUTWURI = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%231e3a8a' stroke='%23facc15' stroke-width='3'/%3E%3Cpolygon points='50,15 61,38 85,38 66,54 73,78 50,64 27,78 34,54 15,38 39,38' fill='%23facc15'/%3E%3Cpath d='M30,68 C38,58 62,58 70,68 C65,74 35,74 30,68 Z' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='45' r='10' fill='%23dc2626'/%3E%3Cpath d='M47,38 L53,38 L50,46 Z' fill='%23facc15'/%3E%3Ctext x='50' y='92' font-size='9' font-weight='800' text-anchor='middle' fill='%23ffffff' font-family='sans-serif'%3ETUT WURI%3C/text%3E%3C/svg%3E";
+    const SVG_PRESET_KEMENAG = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23047857' stroke='%23facc15' stroke-width='3'/%3E%3Cpolygon points='50,14 62,35 85,38 68,56 72,80 50,68 28,80 32,56 15,38 38,35' fill='%23facc15'/%3E%3Ccircle cx='50' cy='50' r='22' fill='%23ffffff'/%3E%3Cpath d='M40,42 L60,42 L56,60 L44,60 Z' fill='%23047857'/%3E%3Ccircle cx='50' cy='36' r='4' fill='%23facc15'/%3E%3Ctext x='50' y='92' font-size='8' font-weight='800' text-anchor='middle' fill='%23ffffff' font-family='sans-serif'%3EIKHLAS BERAMAL%3C/text%3E%3C/svg%3E";
+    const SVG_PRESET_SMKBISA = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%232563eb' stroke='%23f97316' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='34' fill='%23f97316'/%3E%3Ccircle cx='50' cy='50' r='24' fill='%23ffffff'/%3E%3Cpolygon points='50,28 54,39 65,39 56,46 59,57 50,51 41,57 44,46 35,39 46,39' fill='%231e3a8a'/%3E%3Ctext x='50' y='88' font-size='10' font-weight='900' text-anchor='middle' fill='%23ffffff' font-family='sans-serif'%3ESMK BISA%3C/text%3E%3C/svg%3E";
+    const DEFAULT_LOGO_SMKN1 = 'logo-smkn1-moilong.jpg';
+
+    // Data Default Profil Sekolah
+    const DEFAULT_SCHOOL_PROFILE = {
+      jenjang: 'SMK',
+      fullName: 'SMK NEGERI 1 MOILONG',
+      shortName: 'SMKN 1 MOILONG',
+      region: 'KABUPATEN BANGGAI',
+      subtitle: 'Sistem Bel Otomatis & Monitoring Jadwal Pelajaran (Versi 4.0.1)',
+      logoUrl: DEFAULT_LOGO_SMKN1,
+      logoType: 'default',
+      footerTitle: 'SMKN 1 MOILONG',
+      footerCopyright: 'TIM IT SMKN 1 MOILONG @Asiacomptech 2026',
+      footerSubtitle: 'Sistem Bel Otomatis & Monitoring Jadwal Pelajaran (07:00 - 15:30 WITA) • Terintegrasi'
+    };
+
+    // Konfigurasi Preset per Jenjang Sekolah (SD, SMP, SMA, SMK, Kustom)
+    const JENJANG_PRESETS = {
+      SD: {
+        jenjang: 'SD',
+        fullName: 'SD NEGERI 1 TELADAN',
+        shortName: 'SDN 1 TELADAN',
+        region: 'KABUPATEN / KOTA',
+        subtitle: 'Sistem Bel Sekolah Otomatis Jenjang SD / Madrasah Ibtidaiyah',
+        logoUrl: SVG_PRESET_TUTWURI,
+        logoType: 'preset:tutwuri',
+        footerTitle: 'SDN 1 TELADAN',
+        footerCopyright: 'TIM IT SEKOLAH DASAR @2026',
+        footerSubtitle: 'Sistem Bel Otomatis & Jadwal Belajar Mengajar Taraf SD/MI'
+      },
+      SMP: {
+        jenjang: 'SMP',
+        fullName: 'SMP NEGERI 1 NUSANTARA',
+        shortName: 'SMPN 1 NUSANTARA',
+        region: 'KABUPATEN / KOTA',
+        subtitle: 'Sistem Bel Sekolah Otomatis Jenjang SMP / Madrasah Tsanawiyah',
+        logoUrl: SVG_PRESET_TUTWURI,
+        logoType: 'preset:tutwuri',
+        footerTitle: 'SMPN 1 NUSANTARA',
+        footerCopyright: 'TIM IT SMPN 1 @2026',
+        footerSubtitle: 'Sistem Bel Otomatis & Monitoring Jadwal KBM Taraf SMP/MTs'
+      },
+      SMA: {
+        jenjang: 'SMA',
+        fullName: 'SMA NEGERI 1 UNGGULAN',
+        shortName: 'SMAN 1 UNGGULAN',
+        region: 'KABUPATEN / KOTA',
+        subtitle: 'Sistem Bel Sekolah Otomatis Jenjang SMA / Madrasah Aliyah',
+        logoUrl: SVG_PRESET_TUTWURI,
+        logoType: 'preset:tutwuri',
+        footerTitle: 'SMAN 1 UNGGULAN',
+        footerCopyright: 'TIM IT SMAN 1 @2026',
+        footerSubtitle: 'Sistem Bel Otomatis & Monitoring Jadwal Pelajaran Taraf SMA/MA'
+      },
+      SMK: {
+        jenjang: 'SMK',
+        fullName: 'SMK NEGERI 1 MOILONG',
+        shortName: 'SMKN 1 MOILONG',
+        region: 'KABUPATEN BANGGAI',
+        subtitle: 'Sistem Bel Otomatis & Monitoring Jadwal Pelajaran (Versi 4.0.1)',
+        logoUrl: DEFAULT_LOGO_SMKN1,
+        logoType: 'default',
+        footerTitle: 'SMKN 1 MOILONG',
+        footerCopyright: 'TIM IT SMKN 1 MOILONG @Asiacomptech 2026',
+        footerSubtitle: 'Sistem Bel Otomatis & Monitoring Jadwal Pelajaran (07:00 - 15:30 WITA) • Terintegrasi'
+      },
+      CUSTOM: {
+        jenjang: 'CUSTOM',
+        fullName: 'LEMBAGA PENDIDIKAN MANDIRI',
+        shortName: 'LEMBAGA PENDIDIKAN',
+        region: 'WILAYAH KAMPUS',
+        subtitle: 'Sistem Bel Otomatis & Jadwal Pembelajaran Terpadu',
+        logoUrl: SVG_PRESET_TUTWURI,
+        logoType: 'preset:tutwuri',
+        footerTitle: 'LEMBAGA PENDIDIKAN',
+        footerCopyright: 'TIM PENGELOLA SISTEM @2026',
+        footerSubtitle: 'Sistem Bel Otomatis & Monitoring Jadwal Pelajaran Terintegrasi'
+      }
+    };
+
+    let schoolProfile = Object.assign({}, DEFAULT_SCHOOL_PROFILE);
+    let tempSelectedLogoUrl = DEFAULT_LOGO_SMKN1;
+    let tempSelectedLogoType = 'default';
+
+    // --- PENGATURAN WAKTU SISTEM ---
+    const DEFAULT_SYSTEM_TIME_CONFIG = {
+      timezone: 'WITA', // 'WITA', 'WIB', 'WIT', 'AUTO'
+      offsetSeconds: 0,
+      freezeEnabled: false,
+      freezeTime: '06:59:55'
+    };
+
+    let systemTimeConfig = Object.assign({}, DEFAULT_SYSTEM_TIME_CONFIG);
+
+    // Hitung Waktu Terkalibrasi untuk Seluruh Sistem (Clock, Bel, Countdown, Jadwal)
+    function getSystemDate() {
+      // 1. Jika mode pembekuan waktu (freeze/simulasi) aktif
+      if (systemTimeConfig.freezeEnabled && systemTimeConfig.freezeTime) {
+        const parts = systemTimeConfig.freezeTime.split(':').map(Number);
+        const frozen = new Date();
+        frozen.setHours(parts[0] || 0, parts[1] || 0, parts[2] || 0, 0);
+        return frozen;
+      }
+
+      // 2. Waktu lokal perangkat
+      const base = new Date();
+      let targetMs = base.getTime() + ((systemTimeConfig.offsetSeconds || 0) * 1000);
+
+      // 3. Konversi Zona Waktu Indonesia jika dipilih (WITA = UTC+8, WIB = UTC+7, WIT = UTC+9)
+      if (systemTimeConfig.timezone && systemTimeConfig.timezone !== 'AUTO') {
+        const tzOffsets = { 'WIB': 7, 'WITA': 8, 'WIT': 9 };
+        const targetHours = tzOffsets[systemTimeConfig.timezone];
+        if (typeof targetHours === 'number') {
+          // Selisih menit komputer lokal terhadap UTC (-getTimezoneOffset)
+          const localOffsetMin = -base.getTimezoneOffset();
+          const targetOffsetMin = targetHours * 60;
+          const diffMs = (targetOffsetMin - localOffsetMin) * 60 * 1000;
+          targetMs += diffMs;
+        }
+      }
+
+      return new Date(targetMs);
+    }
+
+    // Inisialisasi Profil Sekolah
+    function initSchoolProfile() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_SCHOOL_PROFILE);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          schoolProfile = Object.assign({}, DEFAULT_SCHOOL_PROFILE, parsed);
+        }
+      } catch (err) {
+        console.warn('Gagal memuat profil sekolah dari storage:', err);
+      }
+      applySchoolProfileToDOM(schoolProfile);
+      renderPresetLogoThumbnails();
+    }
+
+    // Terapkan Profil Sekolah ke Seluruh Komponen DOM
+    function applySchoolProfileToDOM(profile) {
+      if (!profile) return;
+
+      // 1. Title Dokumen Browser
+      document.title = `${profile.shortName || 'Bel Sekolah'} - Bel Otomatis & Monitoring Jadwal`;
+
+      // 2. Header Brand
+      const headerTitle = document.getElementById('header-brand-title');
+      const headerSub = document.getElementById('header-brand-subtitle');
+      const headerLogo = document.getElementById('header-brand-logo-img');
+      const headerJenjangBadge = document.getElementById('header-jenjang-badge');
+
+      if (headerTitle) headerTitle.textContent = profile.shortName || 'BEL SEKOLAH';
+      if (headerSub) headerSub.textContent = profile.subtitle || 'Sistem Bel Otomatis';
+      if (headerLogo && profile.logoUrl) {
+        headerLogo.src = profile.logoUrl;
+      }
+      if (headerJenjangBadge) {
+        headerJenjangBadge.textContent = profile.jenjang || 'SMK';
+      }
+
+      // 3. Banner Slider Permanent Brand (Pojok Kanan Atas Foto Slide)
+      const sliderMainTitle = document.getElementById('slider-brand-main-title');
+      const sliderSubTitle = document.getElementById('slider-brand-sub-title');
+      const sliderLogo = document.getElementById('slider-brand-logo-img');
+
+      if (sliderMainTitle) sliderMainTitle.textContent = profile.fullName || 'SEKOLAH INDONESIA';
+      if (sliderSubTitle) sliderSubTitle.textContent = profile.region || 'KABUPATEN / KOTA';
+      if (sliderLogo && profile.logoUrl) {
+        sliderLogo.src = profile.logoUrl;
+      }
+
+      // 4. Menu Drawer Kanan (Slide-Out Panel)
+      const drawerSchoolName = document.getElementById('drawer-school-name');
+      const drawerSchoolInfo = document.getElementById('drawer-school-info');
+      const drawerLogo = document.getElementById('drawer-brand-logo-img');
+      const drawerJenjangBadge = document.getElementById('rmi-school-jenjang-badge');
+      const drawerProfileSub = document.getElementById('rmi-profile-sub');
+
+      if (drawerSchoolName) drawerSchoolName.textContent = profile.shortName || 'BEL SEKOLAH';
+      if (drawerSchoolInfo) drawerSchoolInfo.textContent = `${profile.shortName} • ${profile.region || 'INDONESIA'} • VERSI 4.0.1`;
+      if (drawerLogo && profile.logoUrl) {
+        drawerLogo.src = profile.logoUrl;
+      }
+      if (drawerJenjangBadge) drawerJenjangBadge.textContent = profile.jenjang || 'SMK';
+      if (drawerProfileSub) drawerProfileSub.textContent = `Jenjang ${profile.jenjang || 'SMK'} • ${profile.shortName}`;
+
+      // 5. Site Footer
+      const footerTitle = document.getElementById('footer-title-display');
+      const footerSub = document.getElementById('footer-subtitle-display');
+      const footerCopyright = document.getElementById('footer-copyright-text');
+
+      if (footerTitle) footerTitle.textContent = profile.footerTitle || profile.shortName || 'BEL SEKOLAH';
+      if (footerSub) {
+        const tzLabel = systemTimeConfig.timezone === 'AUTO' ? 'Lokal' : systemTimeConfig.timezone;
+        footerSub.innerHTML = `${profile.footerSubtitle || 'Sistem Bel Otomatis & Jadwal Pelajaran'} (${tzLabel})`;
+      }
+      if (footerCopyright) footerCopyright.textContent = profile.footerCopyright || 'TIM IT SEKOLAH @2026';
+    }
+
+    // Render thumbnail logo SVG di dalam modal preset
+    function renderPresetLogoThumbnails() {
+      const wrapTutwuri = document.getElementById('wrap-preset-tutwuri');
+      const wrapKemenag = document.getElementById('wrap-preset-kemenag');
+      const wrapSmkbisa = document.getElementById('wrap-preset-smkbisa');
+
+      if (wrapTutwuri) wrapTutwuri.innerHTML = `<img src="${SVG_PRESET_TUTWURI}" alt="Tut Wuri" style="width: 100%; height: 100%; object-fit: contain;">`;
+      if (wrapKemenag) wrapKemenag.innerHTML = `<img src="${SVG_PRESET_KEMENAG}" alt="Kemenag" style="width: 100%; height: 100%; object-fit: contain;">`;
+      if (wrapSmkbisa) wrapSmkbisa.innerHTML = `<img src="${SVG_PRESET_SMKBISA}" alt="SMK Bisa" style="width: 100%; height: 100%; object-fit: contain;">`;
+    }
+
+    // Buka Modal Profil Sekolah
+    function openSchoolProfileModal() {
+      renderPresetLogoThumbnails();
+
+      // Isi nilai form
+      document.getElementById('profile-input-fullname').value = schoolProfile.fullName || '';
+      document.getElementById('profile-input-shortname').value = schoolProfile.shortName || '';
+      document.getElementById('profile-input-region').value = schoolProfile.region || '';
+      document.getElementById('profile-input-subtitle').value = schoolProfile.subtitle || '';
+      document.getElementById('profile-input-footer-title').value = schoolProfile.footerTitle || schoolProfile.shortName || '';
+      document.getElementById('profile-input-footer-copyright').value = schoolProfile.footerCopyright || '';
+      document.getElementById('profile-input-footer-sub').value = schoolProfile.footerSubtitle || '';
+
+      tempSelectedLogoUrl = schoolProfile.logoUrl || DEFAULT_LOGO_SMKN1;
+      tempSelectedLogoType = schoolProfile.logoType || 'default';
+
+      updateProfileLogoPreviewUI(tempSelectedLogoUrl, tempSelectedLogoType);
+      highlightActiveJenjangCard(schoolProfile.jenjang || 'SMK');
+
+      const modal = document.getElementById('modal-school-profile');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeSchoolProfileModal() {
+      const modal = document.getElementById('modal-school-profile');
+      if (modal) modal.classList.remove('open');
+    }
+
+    // Sorot Kartu Jenjang Aktif
+    function highlightActiveJenjangCard(jenjangKey) {
+      const keys = ['sd', 'smp', 'sma', 'smk', 'custom'];
+      keys.forEach(k => {
+        const el = document.getElementById(`jenjang-opt-${k}`);
+        if (el) {
+          if (k.toUpperCase() === String(jenjangKey).toUpperCase()) {
+            el.classList.add('active');
+          } else {
+            el.classList.remove('active');
+          }
+        }
+      });
+    }
+
+    // Pilih Template Jenjang Sekolah (SD, SMP, SMA, SMK, Kustom)
+    function selectJenjangPreset(jenjangKey) {
+      highlightActiveJenjangCard(jenjangKey);
+      const preset = JENJANG_PRESETS[jenjangKey];
+      if (!preset) return;
+
+      document.getElementById('profile-input-fullname').value = preset.fullName;
+      document.getElementById('profile-input-shortname').value = preset.shortName;
+      document.getElementById('profile-input-region').value = preset.region;
+      document.getElementById('profile-input-subtitle').value = preset.subtitle;
+      document.getElementById('profile-input-footer-title').value = preset.footerTitle;
+      document.getElementById('profile-input-footer-copyright').value = preset.footerCopyright;
+      document.getElementById('profile-input-footer-sub').value = preset.footerSubtitle;
+
+      tempSelectedLogoUrl = preset.logoUrl;
+      tempSelectedLogoType = preset.logoType;
+      updateProfileLogoPreviewUI(tempSelectedLogoUrl, tempSelectedLogoType);
+
+      showToast(`Template ${jenjangKey} dimuat. Anda dapat mengubah teks dan logo secara manual.`, 'info');
+    }
+
+    // Ganti Tab Sumber Logo (Upload, Preset, URL)
+    function switchLogoSourceTab(tabKey) {
+      const tabs = ['upload', 'preset', 'url'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`btn-logo-src-${t}`);
+        const pane = document.getElementById(`pane-logo-src-${t}`);
+        if (btn && pane) {
+          if (t === tabKey) {
+            btn.classList.add('active');
+            pane.style.display = 'block';
+          } else {
+            btn.classList.remove('active');
+            pane.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    // Handler Unggah File Gambar Logo
+    function handleSchoolLogoUpload(inputEl) {
+      if (!inputEl || !inputEl.files || !inputEl.files[0]) return;
+      const file = inputEl.files[0];
+
+      if (file.size > 2.5 * 1024 * 1024) {
+        showToast('Ukuran file maksimal 2.5 MB. Mohon gunakan file yang lebih kecil.', 'warning');
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const dataUrl = e.target.result;
+        tempSelectedLogoUrl = dataUrl;
+        tempSelectedLogoType = 'upload';
+        updateProfileLogoPreviewUI(tempSelectedLogoUrl, tempSelectedLogoType);
+        showToast('Logo berhasil diunggah! Klik "Simpan & Terapkan Profil Sekolah".', 'success');
+      };
+      reader.onerror = function() {
+        showToast('Gagal membaca file gambar.', 'danger');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Pilih Preset Logo Resmi
+    function selectLogoPreset(presetKey) {
+      const presetTiles = ['tutwuri', 'kemenag', 'smkbisa', 'default'];
+      presetTiles.forEach(p => {
+        const tile = document.getElementById(`preset-logo-${p}`);
+        if (tile) {
+          if (p === presetKey) tile.classList.add('active');
+          else tile.classList.remove('active');
+        }
+      });
+
+      if (presetKey === 'tutwuri') {
+        tempSelectedLogoUrl = SVG_PRESET_TUTWURI;
+        tempSelectedLogoType = 'preset:tutwuri';
+      } else if (presetKey === 'kemenag') {
+        tempSelectedLogoUrl = SVG_PRESET_KEMENAG;
+        tempSelectedLogoType = 'preset:kemenag';
+      } else if (presetKey === 'smkbisa') {
+        tempSelectedLogoUrl = SVG_PRESET_SMKBISA;
+        tempSelectedLogoType = 'preset:smkbisa';
+      } else {
+        tempSelectedLogoUrl = DEFAULT_LOGO_SMKN1;
+        tempSelectedLogoType = 'default';
+      }
+
+      updateProfileLogoPreviewUI(tempSelectedLogoUrl, tempSelectedLogoType);
+    }
+
+    // Terapkan Logo dari Input URL Web
+    function applyLogoFromUrlInput() {
+      const urlInput = document.getElementById('profile-input-url');
+      const url = urlInput ? urlInput.value.trim() : '';
+      if (!url) {
+        showToast('Masukkan URL gambar terlebih dahulu!', 'warning');
+        return;
+      }
+      tempSelectedLogoUrl = url;
+      tempSelectedLogoType = 'url';
+      updateProfileLogoPreviewUI(tempSelectedLogoUrl, tempSelectedLogoType);
+      showToast('Tautan logo diterapkan di pratinjau.', 'info');
+    }
+
+    // Reset Logo ke Default SMKN 1 Moilong
+    function resetProfileLogoToDefault() {
+      selectLogoPreset('default');
+      showToast('Logo dikembalikan ke default SMKN 1 Moilong.', 'info');
+    }
+
+    // Update UI Preview Logo
+    function updateProfileLogoPreviewUI(url, type) {
+      const previewImg = document.getElementById('profile-logo-preview');
+      const previewLabel = document.getElementById('profile-logo-preview-label');
+      if (previewImg) {
+        previewImg.src = url || DEFAULT_LOGO_SMKN1;
+      }
+      if (previewLabel) {
+        if (type === 'upload') previewLabel.textContent = 'File Diunggah';
+        else if (type.startsWith('preset:')) previewLabel.textContent = 'Preset Resmi';
+        else if (type === 'url') previewLabel.textContent = 'URL Eksternal';
+        else previewLabel.textContent = 'Bawaan SMKN 1';
+      }
+    }
+
+    // Simpan Pengaturan Profil Sekolah
+    function saveSchoolProfileFromModal() {
+      const fullName = document.getElementById('profile-input-fullname').value.trim();
+      const shortName = document.getElementById('profile-input-shortname').value.trim();
+      const region = document.getElementById('profile-input-region').value.trim();
+      const subtitle = document.getElementById('profile-input-subtitle').value.trim();
+      const footerTitle = document.getElementById('profile-input-footer-title').value.trim();
+      const footerCopyright = document.getElementById('profile-input-footer-copyright').value.trim();
+      const footerSubtitle = document.getElementById('profile-input-footer-sub').value.trim();
+
+      if (!fullName || !shortName) {
+        showToast('Nama Lengkap dan Nama Singkat Sekolah wajib diisi!', 'warning');
+        return;
+      }
+
+      // Deteksi jenjang dari kartu yang aktif
+      let activeJenjang = 'SMK';
+      const activeCard = document.querySelector('.jenjang-card-option.active');
+      if (activeCard && activeCard.id) {
+        const raw = activeCard.id.replace('jenjang-opt-', '').toUpperCase();
+        activeJenjang = raw;
+      }
+
+      schoolProfile = {
+        jenjang: activeJenjang,
+        fullName: fullName,
+        shortName: shortName,
+        region: region || 'KABUPATEN / KOTA',
+        subtitle: subtitle || 'Sistem Bel Otomatis & Jadwal Pelajaran',
+        logoUrl: tempSelectedLogoUrl || DEFAULT_LOGO_SMKN1,
+        logoType: tempSelectedLogoType || 'default',
+        footerTitle: footerTitle || shortName,
+        footerCopyright: footerCopyright || 'TIM IT SEKOLAH @2026',
+        footerSubtitle: footerSubtitle || 'Sistem Bel Otomatis & Monitoring Jadwal Pelajaran'
+      };
+
+      try {
+        localStorage.setItem(STORAGE_KEY_SCHOOL_PROFILE, JSON.stringify(schoolProfile));
+      } catch (err) {
+        console.warn('Gagal menyimpan profil sekolah ke localStorage:', err);
+      }
+
+      applySchoolProfileToDOM(schoolProfile);
+      closeSchoolProfileModal();
+      showToast(`Profil sekolah "${shortName}" berhasil disimpan dan diterapkan!`, 'success');
+    }
+
+    // Kembalikan ke Standar Pabrik SMKN 1 Moilong
+    function resetSchoolProfileToFactory() {
+      if (!confirm('Apakah Anda yakin ingin mengembalikan seluruh profil, nama sekolah, logo, dan footer ke bawaan asli SMKN 1 MOILONG?')) {
+        return;
+      }
+      schoolProfile = Object.assign({}, DEFAULT_SCHOOL_PROFILE);
+      try {
+        localStorage.removeItem(STORAGE_KEY_SCHOOL_PROFILE);
+      } catch (err) {}
+      applySchoolProfileToDOM(schoolProfile);
+      closeSchoolProfileModal();
+      showToast('Profil sekolah telah direset ke bawaan SMKN 1 Moilong.', 'info');
+    }
+
+    // --- INISIALISASI & FUNGSI PENGATURAN WAKTU SISTEM ---
+    function initSystemTime() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_SYSTEM_TIME);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          systemTimeConfig = Object.assign({}, DEFAULT_SYSTEM_TIME_CONFIG, parsed);
+        }
+      } catch (err) {
+        console.warn('Gagal memuat konfigurasi waktu:', err);
+      }
+      updateTimeCalibrationBadge();
+    }
+
+    function saveSystemTimeConfig() {
+      try {
+        localStorage.setItem(STORAGE_KEY_SYSTEM_TIME, JSON.stringify(systemTimeConfig));
+      } catch (err) {}
+      updateTimeCalibrationBadge();
+    }
+
+    function updateTimeCalibrationBadge() {
+      const tzBadge = document.getElementById('clock-tz-badge');
+      const rmiTzBadge = document.getElementById('rmi-timezone-badge');
+      const rmiSub = document.getElementById('rmi-time-status-sub');
+      const calibPill = document.getElementById('time-calib-pill');
+      const calibStatusText = document.getElementById('time-calib-status-text');
+
+      const tzDisplay = systemTimeConfig.timezone === 'AUTO' ? 'Lokal' : systemTimeConfig.timezone;
+      if (tzBadge) tzBadge.textContent = tzDisplay;
+      if (rmiTzBadge) rmiTzBadge.textContent = tzDisplay;
+
+      // Label di semua elemen footer
+      const tzDisplays = document.querySelectorAll('.tz-label-display');
+      tzDisplays.forEach(el => { el.textContent = tzDisplay; });
+
+      const offset = systemTimeConfig.offsetSeconds || 0;
+      if (calibPill && calibStatusText) {
+        if (systemTimeConfig.freezeEnabled) {
+          calibPill.classList.add('calibrated');
+          calibStatusText.textContent = `❄️ Waktu Dibekukan (${systemTimeConfig.freezeTime || 'Tes'})`;
+        } else if (offset !== 0) {
+          calibPill.classList.add('calibrated');
+          const sign = offset > 0 ? '+' : '';
+          calibStatusText.textContent = `⚠️ Terkalibrasi (${sign}${offset} detik • ${tzDisplay})`;
+        } else {
+          calibPill.classList.remove('calibrated');
+          calibStatusText.textContent = `Normal (Sinkron • ${tzDisplay})`;
+        }
+      }
+
+      if (rmiSub) {
+        if (systemTimeConfig.freezeEnabled) {
+          rmiSub.textContent = `❄️ Kunci: ${systemTimeConfig.freezeTime}`;
+        } else if (offset !== 0) {
+          const sign = offset > 0 ? '+' : '';
+          rmiSub.textContent = `Offset: ${sign}${offset}s • ${tzDisplay}`;
+        } else {
+          rmiSub.textContent = `Normal (Offset 0s • ${tzDisplay})`;
+        }
+      }
+    }
+
+    // Buka Modal Waktu Sistem
+    function openSystemTimeModal() {
+      // Set pilihan radio timezone
+      const tz = systemTimeConfig.timezone || 'WITA';
+      const radios = document.querySelectorAll('input[name="radio_timezone"]');
+      radios.forEach(r => {
+        r.checked = (r.value === tz);
+      });
+      highlightActiveTimezoneLabel(tz);
+
+      // Set input offset detik
+      const offsetInput = document.getElementById('input-time-offset-seconds');
+      if (offsetInput) offsetInput.value = systemTimeConfig.offsetSeconds || 0;
+      updateOffsetLabelDisplay(systemTimeConfig.offsetSeconds || 0);
+
+      // Set freeze time checkbox & value
+      const freezeCheck = document.getElementById('check-freeze-time');
+      const freezeVal = document.getElementById('input-freeze-time-val');
+      if (freezeCheck) freezeCheck.checked = !!systemTimeConfig.freezeEnabled;
+      if (freezeVal) {
+        freezeVal.value = systemTimeConfig.freezeTime || '06:59:55';
+        freezeVal.disabled = !systemTimeConfig.freezeEnabled;
+      }
+
+      // Pre-fill target jam dinding dengan waktu saat ini
+      const now = getSystemDate();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      const wallInput = document.getElementById('input-wall-clock-target');
+      if (wallInput) wallInput.value = `${h}:${m}:${s}`;
+
+      // Update preview langsung
+      updateSystemTimeModalLivePreview(now);
+
+      const modal = document.getElementById('modal-system-time');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeSystemTimeModal() {
+      const modal = document.getElementById('modal-system-time');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function highlightActiveTimezoneLabel(activeTz) {
+      const list = ['wita', 'wib', 'wit', 'auto'];
+      list.forEach(item => {
+        const lbl = document.getElementById(`lbl-tz-${item}`);
+        if (lbl) {
+          if (item.toUpperCase() === String(activeTz).toUpperCase()) {
+            lbl.style.borderColor = 'var(--primary)';
+            lbl.style.background = 'rgba(37, 99, 235, 0.08)';
+          } else {
+            lbl.style.borderColor = 'var(--border-color)';
+            lbl.style.background = 'var(--bg-card)';
+          }
+        }
+      });
+    }
+
+    function onTimezoneChange(tz) {
+      systemTimeConfig.timezone = tz;
+      highlightActiveTimezoneLabel(tz);
+      const previewTz = document.getElementById('modal-time-preview-tz');
+      if (previewTz) previewTz.textContent = tz === 'AUTO' ? 'Lokal' : tz;
+      updateSystemTimeModalLivePreview(getSystemDate());
+    }
+
+    function onManualOffsetInput(val) {
+      const sec = parseInt(val, 10);
+      systemTimeConfig.offsetSeconds = isNaN(sec) ? 0 : sec;
+      updateOffsetLabelDisplay(systemTimeConfig.offsetSeconds);
+      updateSystemTimeModalLivePreview(getSystemDate());
+    }
+
+    function adjustTimeOffsetSeconds(delta) {
+      let current = systemTimeConfig.offsetSeconds || 0;
+      current += delta;
+      systemTimeConfig.offsetSeconds = current;
+
+      const offsetInput = document.getElementById('input-time-offset-seconds');
+      if (offsetInput) offsetInput.value = current;
+      updateOffsetLabelDisplay(current);
+      updateSystemTimeModalLivePreview(getSystemDate());
+    }
+
+    function resetTimeOffsetToZero() {
+      systemTimeConfig.offsetSeconds = 0;
+      const offsetInput = document.getElementById('input-time-offset-seconds');
+      if (offsetInput) offsetInput.value = 0;
+      updateOffsetLabelDisplay(0);
+      updateSystemTimeModalLivePreview(getSystemDate());
+      showToast('Koreksi offset detik dikembalikan ke 0.', 'info');
+    }
+
+    function updateOffsetLabelDisplay(sec) {
+      const lbl = document.getElementById('calib-offset-display-label');
+      if (lbl) {
+        const sign = sec > 0 ? '+' : '';
+        lbl.textContent = `Offset Saat Ini: ${sign}${sec} Detik`;
+      }
+    }
+
+    // Samakan Otomatis dengan Jam Dinding Sekolah
+    function syncWithWallClockInput() {
+      const wallInput = document.getElementById('input-wall-clock-target');
+      if (!wallInput || !wallInput.value) {
+        showToast('Masukkan format jam dinding [HH:mm:ss] terlebih dahulu!', 'warning');
+        return;
+      }
+
+      const parts = wallInput.value.split(':').map(Number);
+      if (parts.length < 2) {
+        showToast('Format jam dinding tidak valid.', 'warning');
+        return;
+      }
+      const targetH = parts[0] || 0;
+      const targetM = parts[1] || 0;
+      const targetS = parts[2] || 0;
+
+      // Hitung detik saat ini dari jam lokal
+      const localNow = new Date();
+      const localH = localNow.getHours();
+      const localM = localNow.getMinutes();
+      const localS = localNow.getSeconds();
+
+      const targetTotalSec = (targetH * 3600) + (targetM * 60) + targetS;
+      const localTotalSec = (localH * 3600) + (localM * 60) + localS;
+
+      let diffSec = targetTotalSec - localTotalSec;
+
+      // Koreksi jika melewati pergantian tengah malam
+      if (diffSec > 43200) diffSec -= 86400;
+      if (diffSec < -43200) diffSec += 86400;
+
+      systemTimeConfig.offsetSeconds = diffSec;
+
+      const offsetInput = document.getElementById('input-time-offset-seconds');
+      if (offsetInput) offsetInput.value = diffSec;
+      updateOffsetLabelDisplay(diffSec);
+      updateSystemTimeModalLivePreview(getSystemDate());
+
+      const sign = diffSec >= 0 ? '+' : '';
+      showToast(`Jam disinkronkan dengan jam dinding (${sign}${diffSec} detik).`, 'success');
+    }
+
+    // Ambil Waktu Resmi Internet (NTP via World Time API)
+    async function fetchInternetNTPTime() {
+      const btn = document.getElementById('btn-internet-sync');
+      const resultDiv = document.getElementById('internet-sync-result');
+
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Menghubungi Server NTP...';
+      }
+      if (resultDiv) {
+        resultDiv.style.display = 'block';
+        resultDiv.style.color = 'var(--text-muted)';
+        resultDiv.textContent = 'Menghubungkan ke server waktu internet terdekat...';
+      }
+
+      try {
+        // Query API waktu NTP internet
+        const tzParam = systemTimeConfig.timezone === 'WIB' ? 'Asia/Jakarta' : (systemTimeConfig.timezone === 'WIT' ? 'Asia/Jayapura' : 'Asia/Makassar');
+        const res = await fetch(`https://worldtimeapi.org/api/timezone/${tzParam}`, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        if (!data || !data.datetime) throw new Error('Data tidak lengkap');
+
+        const internetDate = new Date(data.datetime);
+        const localNow = new Date();
+        const diffMs = internetDate.getTime() - localNow.getTime();
+        const diffSec = Math.round(diffMs / 1000);
+
+        systemTimeConfig.offsetSeconds = diffSec;
+        const offsetInput = document.getElementById('input-time-offset-seconds');
+        if (offsetInput) offsetInput.value = diffSec;
+        updateOffsetLabelDisplay(diffSec);
+        updateSystemTimeModalLivePreview(getSystemDate());
+
+        if (resultDiv) {
+          resultDiv.style.color = '#10b981';
+          const sign = diffSec >= 0 ? '+' : '';
+          resultDiv.textContent = `✅ Berhasil tersinkronisasi dengan WorldTimeAPI (${tzParam}). Selisih waktu: ${sign}${diffSec} detik.`;
+        }
+        showToast(`Sinkronisasi internet berhasil (${diffSec}s).`, 'success');
+      } catch (err) {
+        console.warn('NTP sync failed:', err);
+        if (resultDiv) {
+          resultDiv.style.color = '#ef4444';
+          resultDiv.textContent = 'Gagal mengambil waktu internet (Offline/Firewall). Silakan gunakan input jam dinding di samping.';
+        }
+        showToast('Tidak dapat menghubungi server internet. Gunakan koreksi jam dinding manual.', 'warning');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = '🌐 Sinkronkan Jam Internet (NTP)';
+        }
+      }
+    }
+
+    function onToggleFreezeTime(checked) {
+      systemTimeConfig.freezeEnabled = !!checked;
+      const freezeVal = document.getElementById('input-freeze-time-val');
+      if (freezeVal) {
+        freezeVal.disabled = !checked;
+        systemTimeConfig.freezeTime = freezeVal.value || '06:59:55';
+      }
+      updateSystemTimeModalLivePreview(getSystemDate());
+    }
+
+    function resetAllTimeToHardwareDefault() {
+      if (!confirm('Kembalikan waktu sistem ke jam asli perangkat komputer (Offset 0 detik & Normal)?')) return;
+      systemTimeConfig.offsetSeconds = 0;
+      systemTimeConfig.freezeEnabled = false;
+      systemTimeConfig.timezone = 'WITA';
+
+      const offsetInput = document.getElementById('input-time-offset-seconds');
+      if (offsetInput) offsetInput.value = 0;
+      const freezeCheck = document.getElementById('check-freeze-time');
+      if (freezeCheck) freezeCheck.checked = false;
+
+      highlightActiveTimezoneLabel('WITA');
+      updateOffsetLabelDisplay(0);
+      saveSystemTimeConfig();
+      closeSystemTimeModal();
+      showToast('Waktu sistem kembali ke jam asli komputer.', 'info');
+    }
+
+    function saveSystemTimeFromModal() {
+      const offsetInput = document.getElementById('input-time-offset-seconds');
+      const freezeCheck = document.getElementById('check-freeze-time');
+      const freezeVal = document.getElementById('input-freeze-time-val');
+
+      const sec = offsetInput ? parseInt(offsetInput.value, 10) : 0;
+      systemTimeConfig.offsetSeconds = isNaN(sec) ? 0 : sec;
+      systemTimeConfig.freezeEnabled = freezeCheck ? freezeCheck.checked : false;
+      if (freezeVal && freezeVal.value) {
+        systemTimeConfig.freezeTime = freezeVal.value;
+      }
+
+      saveSystemTimeConfig();
+      closeSystemTimeModal();
+      onClockTick(); // langsung perbarui jam layar utama
+      showToast('Pengaturan waktu sistem berhasil disimpan dan diterapkan!', 'success');
+    }
+
+    // Update Tampilan Jam Modal saat Tik Berlangsung
+    function updateSystemTimeModalLivePreview(calibratedNow) {
+      const digitsEl = document.getElementById('modal-time-preview-digits');
+      const tzEl = document.getElementById('modal-time-preview-tz');
+      const compEl = document.getElementById('modal-time-raw-comparison');
+      const badgeEl = document.getElementById('modal-time-status-badge');
+      const summaryEl = document.getElementById('modal-time-offset-summary');
+
+      if (!digitsEl) return;
+
+      const ch = String(calibratedNow.getHours()).padStart(2, '0');
+      const cm = String(calibratedNow.getMinutes()).padStart(2, '0');
+      const cs = String(calibratedNow.getSeconds()).padStart(2, '0');
+
+      const rawNow = new Date();
+      const rh = String(rawNow.getHours()).padStart(2, '0');
+      const rm = String(rawNow.getMinutes()).padStart(2, '0');
+      const rs = String(rawNow.getSeconds()).padStart(2, '0');
+
+      const tzStr = systemTimeConfig.timezone === 'AUTO' ? 'Lokal' : systemTimeConfig.timezone;
+      digitsEl.innerHTML = `${ch}:${cm}:${cs} <span style="font-size: 1.15rem; color: var(--text-muted);">${tzStr}</span>`;
+
+      const offset = systemTimeConfig.offsetSeconds || 0;
+      if (compEl) {
+        const sign = offset >= 0 ? '+' : '';
+        compEl.textContent = `Waktu Komputer Asli: ${rh}:${rm}:${rs} (Selisih Koreksi: ${sign}${offset} detik)`;
+      }
+
+      if (badgeEl && summaryEl) {
+        if (systemTimeConfig.freezeEnabled) {
+          badgeEl.style.background = '#3b82f6';
+          badgeEl.textContent = '❄️ Mode Kunci Waktu';
+          summaryEl.textContent = `Dibekukan pada ${systemTimeConfig.freezeTime}`;
+        } else if (offset !== 0) {
+          badgeEl.style.background = '#f59e0b';
+          badgeEl.textContent = '⚠️ Waktu Terkalibrasi';
+          const sign = offset > 0 ? '+' : '';
+          summaryEl.textContent = `Offset: ${sign}${offset} detik (${tzStr})`;
+        } else {
+          badgeEl.style.background = '#10b981';
+          badgeEl.textContent = '✅ Jam Normal (Sinkron)';
+          summaryEl.textContent = `Offset: 0 detik (${tzStr})`;
+        }
+      }
+    }
+
     // --- 11. BOOTSTRAP INITIALIZATION (VERSI 4.0.1) ---
     async function bootstrapApp() {
       initTheme();
+      initSchoolProfile();
+      initSystemTime();
       loadState();
       initClassTimetables();
       initMasterData();

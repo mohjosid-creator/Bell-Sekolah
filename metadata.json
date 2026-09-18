@@ -1,6 +1,6 @@
 {
   "name": "Bel Otomatis & Jadwal Pelajaran SMKN 1 MOILONG (07:00 - 15:30)",
-  "description": "Aplikasi Bel Otomatis & Jadwal Pelajaran SMKN 1 MOILONG Versi 4.0.1 untuk 15 kelas (AKL, DKV, TL 07:00 - 15:30 WITA), Dashboard Monitoring KBM Live, Banner Slider 5 Foto, Tulisan Berjalan Pengumuman, Icon Menu Melayang Draggable (Bebas Digeser), Menu Auto Shutdown Setelah Jadwal Berakhir, Slide-Over Drawer Lengkap, Master Data Guru/Mapel/Kelas, dan Autorun Startup Windows.",
+  "description": "Aplikasi Bel Otomatis & Jadwal Pelajaran SMKN 1 MOILONG Versi 4.0.1 dengan Pengaturan Profil Sekolah Universal (SD/MI, SMP/MTs, SMA/MA, SMK, Logo & Footer Kustom), Pengaturan Waktu Sistem & Kalibrasi Jam/Detik/Timezone, Auto Shutdown Setelah Jadwal Berakhir, Dashboard Monitoring KBM 15 Kelas Live, Banner Slider 5 Foto, Tulisan Berjalan, Menu Melayang Bebas Digeser, Master Data Guru/Mapel/Kelas, dan Autorun Startup Windows.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
